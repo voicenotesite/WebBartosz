@@ -337,7 +337,7 @@ footer a:hover{color:var(--accent)}
 
 <!-- ─── HERO ─── -->
 <section class="hero">
-  <div class="label r r1 v"><span class="pulse"></span> 6 dni · 11 projektów · zero mocków</div>
+  <div class="label r r1 v"><span class="pulse"></span> 6 dni · 12 projektów · zero mocków</div>
   <h1 class="r r2 v">Ghost · Architect · Builder</h1>
   <div class="hooks r r3 v" id="hooks"></div>
   <div class="tags r r4 v">
@@ -351,12 +351,12 @@ footer a:hover{color:var(--accent)}
     <span>PostgreSQL</span>
     <span>AI/LLM</span>
   </div>
-  <div class="stats r r5 v">
-    <div><div class="num">11</div><div class="lbl">projektów</div></div>
-    <div><div class="num">18</div><div class="lbl">modeli AI</div></div>
-    <div><div class="num">8</div><div class="lbl">technologii</div></div>
-    <div><div class="num">140</div><div class="lbl">raportów</div></div>
-  </div>
+   <div class="stats r r5 v">
+     <div><div class="num">12</div><div class="lbl">projektów</div></div>
+     <div><div class="num">18</div><div class="lbl">modeli AI</div></div>
+     <div><div class="num">8</div><div class="lbl">technologii</div></div>
+     <div><div class="num">140</div><div class="lbl">raportów</div></div>
+   </div>
   <div class="scrolly" aria-hidden="true"></div>
 </section>
 
@@ -367,8 +367,8 @@ footer a:hover{color:var(--accent)}
     <p>11 projektów · każdy z Dockerem · każdy z CI/CD · każdy w produkcji</p>
   </div>
 
-  <div class="cat-label r">API Layer <span>7 serwisów · FastAPI + Docker + CI/CD</span></div>
-  <div class="grid">
+   <div class="cat-label r">API Layer <span>8 serwisów · FastAPI + Docker + CI/CD</span></div>
+   <div class="grid">
 
     <div class="card r r1" data-project="linkshort">
       <div class="glow"></div>
@@ -416,6 +416,14 @@ footer a:hover{color:var(--accent)}
       <p>Upload PDF → TF-IDF search → odpowiedź. FastAPI + pypdf + numpy + Docker.</p>
       <div class="tech"><span>FastAPI</span><span>TF-IDF</span><span>pypdf</span><span>numpy</span><span>Docker</span></div>
       <div class="lnk"><a class="git" href="https://github.com/voicenotesite/rag-qa" target="_blank">GitHub</a></div>
+    </div>
+
+    <div class="card r r1" data-project="search-engine">
+      <div class="glow"></div>
+      <div class="top"><h3>Search Engine</h3><span class="badge live">Live</span></div>
+      <p>Wyszukiwarka clearnet + darknet z filtrem nielegalnego contentu.</p>
+      <div class="tech"><span>FastAPI</span><span>Playwright</span><span>BeautifulSoup</span><span>Docker</span></div>
+      <div class="lnk"><a class="demo" href="https://search-engine-l2zt.onrender.com" target="_blank">Demo</a><a class="git" href="https://github.com/voicenotesite/search-engine" target="_blank">GitHub</a></div>
     </div>
 
     <div class="card r r1" data-project="chat-proxy-light">
@@ -478,7 +486,7 @@ footer a:hover{color:var(--accent)}
     <p>jak to wszystko do siebie pasuje</p>
   </div>
   <div class="eco r r1">
-    <div class="eco-row"><span class="eco-label">API Layer</span><div class="eco-nodes"><span>LinkShort</span><span>GraphQL Blog</span><span>AI Chat</span><span>Unified API</span><span>Task Queue</span><span>RAG PDF</span><span>Chat Light</span></div></div>
+    <div class="eco-row"><span class="eco-label">API Layer</span><div class="eco-nodes"><span>LinkShort</span><span>GraphQL Blog</span><span>AI Chat</span><span>Unified API</span><span>Task Queue</span><span>RAG PDF</span><span>Chat Light</span><span>Search Engine</span></div></div>
     <div class="eco-arrow">↓</div>
     <div class="eco-row"><span class="eco-label">Frontend</span><div class="eco-nodes"><span>Reports</span><span>CV MAKER</span><span>WebBartosz Hub</span></div></div>
     <div class="eco-arrow">↓</div>
@@ -496,12 +504,13 @@ footer a:hover{color:var(--accent)}
       Kliknij endpoint — zapytanie leci do żywego API. Żadnego mocka, żadnego CRUDa.
     </p>
     <div class="playground">
-      <div class="tabs">
-        <button class="active" data-url="https://fastapiurl.onrender.com/health" data-method="GET">URL Shortener</button>
-        <button data-url="https://graphql-blog-lxjy.onrender.com/health" data-method="GET">GraphQL Blog</button>
-        <button data-url="https://ai-chat-proxy-twj4.onrender.com/health" data-method="GET">AI Chat</button>
-        <button data-url="https://python-portfolio-y0z8.onrender.com/health" data-method="GET">Unified API</button>
-      </div>
+<div class="tabs">
+  <button class="active" data-url="https://fastapiurl.onrender.com/health" data-method="GET">URL Shortener</button>
+  <button data-url="https://graphql-blog-lxjy.onrender.com/health" data-method="GET">GraphQL Blog</button>
+  <button data-url="https://ai-chat-proxy-twj4.onrender.com/health" data-method="GET">AI Chat</button>
+  <button data-url="https://python-portfolio-y0z8.onrender.com/health" data-method="GET">Unified API</button>
+  <button data-url="https://search-engine-l2zt.onrender.com/health" data-method="GET">Search Engine</button>
+</div>
       <div class="body">
         <div class="pg-top">
           <div class="ping">
@@ -542,7 +551,7 @@ footer a:hover{color:var(--accent)}
         <li>Każdy projekt = inna warstwa stacka — od bazy po frontend</li>
         <li>Docker + CI/CD w każdym projekcie — ani jednego bez</li>
         <li>Zero kosztów utrzymania — Render free tier + GitHub Pages</li>
-        <li>11 projektów od zera do produkcji — samodzielnie</li>
+        <li>12 projektów od zera do produkcji — samodzielnie</li>
         <li>140 raportów AI dokumentujących architekturę i kod</li>
       </ul>
       <h3 style="margin-top:1.25rem;font-size:.85rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px">🔗 Links</h3>
@@ -577,7 +586,7 @@ footer a:hover{color:var(--accent)}
 
 <footer>
   <div class="footer-content">
-    <p>Bartosz Web · <a href="https://github.com/voicenotesite">GitHub</a> · Python · FastAPI · 11 projektów</p>
+    <p>Bartosz Web · <a href="https://github.com/voicenotesite">GitHub</a> · Python · FastAPI · 12 projektów</p>
     <div class="footer-branding">
       <span class="eco-badge">API Layer</span>
       <span class="eco-badge">Frontend</span>
@@ -735,7 +744,8 @@ const PROJECTS_DATA = {
   reports:{name:'Reports',desc:'141 raportów PDF+MD wygenerowanych przez AI. Każdy projekt ma 20 dokumentów: architektura, security, performance, testy, deployment i więcej.',imgs:['screenshots/reports-1.jpg','screenshots/reports-2.jpg','screenshots/reports-3.jpg'],url:'https://voicenotesite.github.io/reports/',git:'https://github.com/voicenotesite/reports',rep:null},
   'cv-maker':{name:'CV MAKER',desc:'Full-stack builder CV z drag-and-drop, job scraperem 50+ źródeł i analizą rynku pracy. React + Express + libSQL + Docker.',imgs:['screenshots/cv-maker-1.jpg','screenshots/cv-maker-2.jpg'],url:null,git:'https://github.com/voicenotesite/CV-MAKER',rep:'https://voicenotesite.github.io/reports/#cv-maker'},
   'web-bartosz':{name:'WebBartosz',desc:'Portfolio hub. Live monitoring 5 serwisów, 11 projektów, API playground i ecosystem topology. Ta strona — centralny punkt portfolio.',imgs:['screenshots/web-bartosz-1.jpg','screenshots/web-bartosz-2.jpg','screenshots/web-bartosz-3.jpg'],url:'https://voicenotesite.github.io/WebBartosz/',git:'https://github.com/voicenotesite/WebBartosz',rep:'https://voicenotesite.github.io/reports/#WebBartosz'},
-  'portfolio-daemon':{name:'Portfolio Daemon',desc:'Service manager w tle — auto-start backendów, health monitoring, SSH tunnels. GUI w tkinter, serce w asyncio + asyncssh.',imgs:['screenshots/portfolio-daemon-1.jpg','screenshots/portfolio-daemon-2.jpg'],url:null,git:'https://github.com/voicenotesite/portfolio-daemon',rep:'https://voicenotesite.github.io/reports/#portfolio-daemon'},
+   'portfolio-daemon':{name:'Portfolio Daemon',desc:'Service manager w tle — auto-start backendów, health monitoring, SSH tunnels. GUI w tkinter, serce w asyncio + asyncssh.',imgs:['screenshots/portfolio-daemon-1.jpg','screenshots/portfolio-daemon-2.jpg'],url:null,git:'https://github.com/voicenotesite/portfolio-daemon',rep:'https://voicenotesite.github.io/reports/#portfolio-daemon'},
+   'search-engine':{name:'Search Engine',desc:'Wyszukiwarka clearnet + darknet (.onion) z filtrem bezpieczeństwa. Używa DuckDuckGo i Ahmia przez Playwright do wyszukiwania w darknecie.',imgs:['screenshots/search-engine-1.jpg','screenshots/search-engine-2.jpg'],url:'https://search-engine-l2zt.onrender.com',git:'https://github.com/voicenotesite/search-engine',rep:null},
 };
 const modal = document.getElementById('modal');
 const carouselTrack = document.getElementById('carouselTrack');
