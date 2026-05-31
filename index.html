@@ -28,6 +28,22 @@
   --space: 24px;
   --font: 'Inter', system-ui, -apple-system, sans-serif;
   --mono: 'JetBrains Mono', monospace;
+  
+  /* Enhanced animations */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+  
+  /* Enhanced shadows */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.15);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.2);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.25);
+  --shadow-xl: 0 12px 48px rgba(0,0,0,0.3);
+  
+  /* Enhanced gradients */
+  --gradient-primary: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  --gradient-secondary: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+  --gradient-accent: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
@@ -170,6 +186,38 @@ footer{border-top:1px solid var(--border);padding:2rem var(--space);text-align:c
 footer a{color:var(--accent2);text-decoration:none;transition:color .2s}
 footer a:hover{color:var(--accent)}
 
+/* Consistent branding elements */
+.eco-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(108,92,231,.1);
+  border:1px solid rgba(108,92,231,.2);
+  color:var(--accent2);
+  font-size:.65rem;
+  font-weight:500;
+  padding:2px 10px;
+  border-radius:12px;
+  margin:0 4px;
+  transition:all .2s var(--ease-out);
+}
+.eco-badge:hover{
+  background:rgba(108,92,231,.2);
+  border-color:rgba(108,92,231,.3);
+  transform:translateY(-2px);
+}
+.footer-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin-top:16px;
+}
+.footer-content p{
+  margin:0;
+  font-size:.78rem;
+}
+
 /* ─── Modal ─── */
 .modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s var(--ease-out)}
 .modal-overlay.open{opacity:1;pointer-events:auto}
@@ -210,6 +258,46 @@ footer a:hover{color:var(--accent)}
 .r5{transition-delay:400ms}
 .r6{transition-delay:480ms}
 .r7{transition-delay:560ms}
+
+/* Enhanced animations */
+.hover-lift{transition:transform var(--transition-normal) var(--ease-out),box-shadow var(--transition-normal) var(--ease-out)}
+.hover-lift:hover{transform:translateY(-4px) scale(1.02);box-shadow:var(--shadow-lg)}
+.hover-lift:active{transform:translateY(-2px) scale(1.01)}
+
+.pulse-slow{animation:pulse-slow 3s ease-in-out infinite}
+@keyframes pulse-slow{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+}
+
+.float{animation:float 6s ease-in-out infinite}
+@keyframes float{
+  0%,100%{transform:translateY(0px);}
+  50%{transform:translateY(-10px);}
+}
+
+.shimmer{background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);background-size:200% 100%;animation:shimmer 3s infinite}
+@keyframes shimmer{
+  0%{background-position:-200% 0;}
+  100%{background-position:200% 0;}
+}
+
+/* Glass morphism effect */
+.glass{
+  background:rgba(17,17,34,0.3);
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+/* Improved card hover effects */
+.card:hover{
+  background:var(--card-hover);
+  border-color:var(--border-active);
+  transform:translateY(-2px) scale(1.01);
+  box-shadow:0 12px 40px rgba(0,0,0,.35);
+}
+.card:hover .glow{opacity:1}
 
 @media(max-width:480px){
   .hero{min-height:auto;padding:4rem 0 2rem}
@@ -316,7 +404,7 @@ footer a:hover{color:var(--accent)}
 
     <div class="card r r5" data-project="task-queue">
       <div class="glow"></div>
-      <div class="top"><h3>Task Queue</h3><span class="badge live">Live</span></div>
+      <div class="top"><h3>Task Queue</h3><span class="badge cli">Coming Soon</span></div>
       <p>Async task queue z WebSocket, real-time progress barem, asyncio. Z Dockerem i CI/CD.</p>
       <div class="tech"><span>FastAPI</span><span>WebSocket</span><span>asyncio</span><span>Docker</span></div>
       <div class="lnk"><a class="git" href="https://github.com/voicenotesite/task-queue" target="_blank">GitHub</a></div>
@@ -488,7 +576,14 @@ footer a:hover{color:var(--accent)}
 </div>
 
 <footer>
-  <p>Bartosz Web · <a href="https://github.com/voicenotesite">GitHub</a> · Python · FastAPI · 11 projektów</p>
+  <div class="footer-content">
+    <p>Bartosz Web · <a href="https://github.com/voicenotesite">GitHub</a> · Python · FastAPI · 11 projektów</p>
+    <div class="footer-branding">
+      <span class="eco-badge">API Layer</span>
+      <span class="eco-badge">Frontend</span>
+      <span class="eco-badge">Dev Tooling</span>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -500,14 +595,20 @@ const SITES = [
   { url: 'https://python-portfolio-y0z8.onrender.com/health', id: 's-portfolio' },
 ];
 let checkedCount = 0;
+let checkTimeout = null;
 function check(){
+  // Clear any existing timeout
+  if (checkTimeout) clearTimeout(checkTimeout);
+  
   checkedCount = 0;
   let ok = 0;
   const total = SITES.length;
+  let completed = 0;
+  
   SITES.forEach(s => {
     const dot = document.getElementById(s.id);
     const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), 10000);
+    const t = setTimeout(() => ctrl.abort(), 8000); // Reduced from 10000ms
     fetch(s.url, { signal: ctrl.signal })
       .then(r => { clearTimeout(t);
         if (r.ok) { dot.className = 'd on'; ok++; }
@@ -515,12 +616,15 @@ function check(){
       })
       .catch(() => { clearTimeout(t); dot.className = 'd off'; })
       .finally(() => {
-        checkedCount++;
-        if (checkedCount === total) {
+        completed++;
+        if (completed === total) {
           document.getElementById('summary').textContent = ok === total ? `● ${ok}/${total} online` : `◐ ${ok}/${total} online`;
         }
       });
   });
+  
+  // Schedule next check in 2 minutes (120000ms) instead of 1 minute
+  checkTimeout = setTimeout(check, 120000);
 }
 
 /* ─── Typewriter hooks ─── */
@@ -532,19 +636,23 @@ const phrases = [
 ];
 let pi = 0, ci = 0, isDeleting = false;
 const typer = document.getElementById('hooks');
+let typeTimeout = null;
+
 function typeLoop(){
   const current = phrases[pi];
   if (!isDeleting) {
     ci++;
     typer.textContent = current.slice(0, ci) + '▌';
-    if (ci >= current.length) { isDeleting = true; setTimeout(typeLoop, 2800); return; }
+    if (ci >= current.length) { isDeleting = true; typeTimeout = setTimeout(typeLoop, 2000); return; }
   } else {
     ci--;
     typer.textContent = current.slice(0, ci) + '▌';
-    if (ci <= 0) { isDeleting = false; pi = (pi + 1) % phrases.length; setTimeout(typeLoop, 400); return; }
+    if (ci <= 0) { isDeleting = false; pi = (pi + 1) % phrases.length; typeTimeout = setTimeout(typeLoop, 300); return; }
   }
-  setTimeout(typeLoop, isDeleting ? 18 : 35);
+  typeTimeout = setTimeout(typeLoop, isDeleting ? 15 : 30); // Slightly optimized timing
 }
+
+// Initialize typewriter effect
 typeLoop();
 
 /* ─── API Playground ─── */
