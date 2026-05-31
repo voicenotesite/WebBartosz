@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bartosz Web · 11 projektów w 6 dni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06060e;
+  --surface: #0c0c1a;
+  --card: #111122;
+  --card-hover: #16162a;
+  --border: #1c1c34;
+  --border-active: #2a2a50;
+  --text: #eaeaf2;
+  --text-sec: #8888b0;
+  --text-ter: #55557a;
+  --accent: #6c5ce7;
+  --accent2: #a29bfe;
+  --accent-dim: rgba(108,92,231,.12);
+  --green: #22c55e;
+  --red: #ef4444;
+  --orange: #f59e0b;
+  --radius: 14px;
+  --ease-out: cubic-bezier(0.22,1,0.36,1);
+  --space: 24px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+::selection{background:var(--accent);color:#fff}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border-active);border-radius:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+/* ─── BG ─── */
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(108,92,231,.04) 1px,transparent 0),radial-gradient(ellipse at 20% 50%,rgba(108,92,231,.04) 0,transparent 50%);background-size:48px 48px,100% 100%}
+
+/* ─── Layout ─── */
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 var(--space)}
+
+/* ─── Header ─── */
+header{position:sticky;top:0;z-index:100;background:rgba(6,6,14,.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.header-inner{display:flex;align-items:center;gap:12px;padding-block:10px;max-width:1120px;margin:0 auto;padding:10px 24px}
+header .logo{font-weight:800;font-size:.9rem;color:var(--text);letter-spacing:-.3px;flex-shrink:0}
+header .logo span{color:var(--accent2)}
+.status-group{display:flex;gap:2px 16px;flex-wrap:wrap;font-size:.72rem;flex:1;justify-content:center}
+.status-group .sv{display:inline-flex;align-items:center;gap:5px;color:var(--text-ter);font-weight:500}
+.status-group .sv .d{width:5px;height:5px;border-radius:50%;flex-shrink:0;transition:background .4s var(--ease-out),box-shadow .4s var(--ease-out)}
+.status-group .sv .d.on{background:var(--green);box-shadow:0 0 6px var(--green)}
+.status-group .sv .d.off{background:var(--red);box-shadow:0 0 6px var(--red)}
+.status-group .sv .d.cli{background:var(--text-ter)}
+.status-group .sv .name{color:var(--text-sec)}
+header .summary{font-size:.68rem;color:var(--text-ter);font-family:var(--mono);flex-shrink:0;margin-left:auto}
+
+/* ─── Hero ─── */
+.hero{min-height:80vh;display:flex;flex-direction:column;justify-content:center;padding:6rem 0 5rem;position:relative}
+.hero .label{display:inline-flex;align-items:center;gap:6px;background:var(--accent-dim);border:1px solid rgba(108,92,231,.2);padding:5px 14px;border-radius:20px;font-size:.75rem;color:var(--accent2);font-weight:600;margin-bottom:1.25rem;width:fit-content}
+.hero .label .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s var(--ease-out) infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(2.5rem,7vw,4.5rem);font-weight:900;letter-spacing:-2px;line-height:1.05;
+  background:linear-gradient(135deg,#eaeaf2 10%,#6c5ce7 50%,#a29bfe 90%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .hooks{font-size:clamp(1rem,2vw,1.2rem);color:var(--text-sec);margin-top:.75rem;max-width:580px;line-height:1.6;min-height:3.4em;font-weight:400}
+.hero .hooks .cursor{display:inline-block;width:2px;height:1.1em;background:var(--accent2);margin-left:2px;vertical-align:text-bottom;animation:blink .85s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero .tags{display:flex;gap:5px;margin-top:1.5rem;flex-wrap:wrap}
+.hero .tags span{padding:3px 10px;border-radius:6px;font-size:.7rem;font-weight:500;background:var(--card);border:1px solid var(--border);color:var(--text-sec);font-family:var(--mono)}
+.hero .tags span.hl{border-color:rgba(108,92,231,.3);color:var(--accent2);background:var(--accent-dim)}
+.hero .stats{display:flex;gap:2.5rem;margin-top:2.5rem}
+.hero .stats div{text-align:center}
+.hero .stats div .num{font-size:2rem;font-weight:800;letter-spacing:-1px;color:var(--text);font-variant-numeric:tabular-nums}
+.hero .stats div .lbl{font-size:.72rem;color:var(--text-ter);font-weight:500;margin-top:2px}
+.hero .scrolly{position:absolute;bottom:2rem;left:50%;translate:-50%;width:20px;height:30px;border:1.5px solid var(--border);border-radius:10px;opacity:.4;transition:opacity .3s}
+.hero .scrolly::after{content:'';position:absolute;top:5px;left:50%;translate:-50%;width:2px;height:6px;background:var(--text-ter);border-radius:1px;animation:scrollHint 2s var(--ease-out) infinite}
+@keyframes scrollHint{0%,100%{opacity:1;transform:translate(-50%,0)}50%{opacity:.3;transform:translate(-50%,6px)}}
+
+/* ─── Section ─── */
+.sec{padding:4rem 0}
+.sec h2{display:flex;align-items:center;gap:12px;font-size:.75rem;font-weight:700;color:var(--text-sec);text-transform:uppercase;letter-spacing:1px}
+.sec h2 .line{flex:1;height:1px;background:var(--border)}
+.sec-header{margin-bottom:2rem}
+.sec-header p{font-size:.85rem;color:var(--text-ter);margin-top:4px}
+
+/* ─── Grid ─── */
+.grid{display:grid;gap:10px}
+@media(min-width:600px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.25rem 1.1rem;transition:all .3s var(--ease-out);position:relative;display:flex;flex-direction:column;cursor:pointer}
+.card:hover{background:var(--card-hover);border-color:var(--border-active);transform:translateY(-2px) scale(1.01);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.card .glow{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .5s var(--ease-out)}
+.card:hover .glow{opacity:1}
+.card .top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
+.card .top h3{font-size:.95rem;font-weight:700;letter-spacing:-.2px}
+.card .badge{font-size:.6rem;font-weight:600;padding:2px 8px;border-radius:5px;text-transform:uppercase;letter-spacing:.4px;flex-shrink:0;margin-left:8px}
+.card .badge.live{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.15)}
+.card .badge.cli{background:rgba(136,136,176,.1);color:var(--text-ter);border:1px solid rgba(136,136,176,.15)}
+.card .badge.hub{background:var(--accent-dim);color:var(--accent2);border:1px solid rgba(108,92,231,.2)}
+.card p{font-size:.78rem;color:var(--text-sec);line-height:1.55;margin:6px 0 10px;flex:1}
+.card .tech{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:8px}
+.card .tech span{font-size:.62rem;padding:2px 6px;border-radius:4px;background:rgba(136,136,176,.08);color:var(--text-ter);font-weight:500;font-family:var(--mono)}
+.card .lnk{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.card .lnk a{font-size:.7rem;font-weight:600;padding:5px 12px;border-radius:6px;text-decoration:none;transition:all .2s var(--ease-out);display:inline-flex;align-items:center;gap:4px}
+.card .lnk .demo{background:var(--accent);color:#fff}
+.card .lnk .demo:hover{background:#5a4cd6}
+.card .lnk .git{background:rgba(136,136,176,.08);color:var(--text-sec);border:1px solid var(--border)}
+.card .lnk .git:hover{background:rgba(136,136,176,.15);color:var(--text)}
+.card .lnk .reports{background:rgba(108,92,231,.08);color:var(--accent2);border:1px solid rgba(108,92,231,.2)}
+.card .lnk .reports:hover{background:rgba(108,92,231,.18);color:var(--accent2)}
+.card.featured{border-color:rgba(108,92,231,.2);background:linear-gradient(135deg,var(--card),rgba(108,92,231,.04))}
+.card.featured:hover{border-color:rgba(108,92,231,.4);box-shadow:0 12px 40px rgba(108,92,231,.12)}
+.card.double{grid-column:span 3}@media(min-width:600px){.card.double{grid-column:span 2}}
+.cat-label{font-size:.72rem;font-weight:700;color:var(--text-ter);text-transform:uppercase;letter-spacing:1px;margin-bottom:.75rem;display:flex;align-items:center;gap:8px;padding-inline:2px}
+.cat-label span{font-weight:400;text-transform:none;letter-spacing:0;color:rgba(136,136,176,.5);font-size:.68rem}
+
+/* ─── Ecosystem ─── */
+.eco{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;display:flex;flex-direction:column;align-items:center;gap:10px}
+.eco-row{display:flex;align-items:center;gap:12px;width:100%;justify-content:center;flex-wrap:wrap}
+.eco-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-ter);flex-shrink:0}
+.eco-nodes{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.eco-nodes span{padding:5px 12px;border-radius:20px;font-size:.72rem;font-weight:500;background:rgba(136,136,176,.06);border:1px solid var(--border);color:var(--text-sec);transition:all .2s var(--ease-out)}
+.eco-nodes span:hover{background:var(--accent-dim);border-color:rgba(108,92,231,.3);color:var(--accent2)}
+.eco-arrow{font-size:.85rem;color:var(--text-ter);opacity:.4}
+
+/* ─── Live API Playground ─── */
+.playground{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.playground .tabs{display:flex;gap:0;border-bottom:1px solid var(--border);overflow-x:auto}
+.playground .tabs button{padding:10px 18px;border:none;background:transparent;color:var(--text-ter);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s var(--ease-out);font-family:var(--font);white-space:nowrap;border-bottom:2px solid transparent}
+.playground .tabs button:hover{color:var(--text-sec);background:rgba(136,136,176,.04)}
+.playground .tabs button.active{color:var(--accent2);border-bottom-color:var(--accent)}
+.playground .body{padding:16px}
+.playground .body .url{font-family:var(--mono);font-size:.78rem;color:var(--text-ter);margin-bottom:10px;word-break:break-all}
+.playground .body .url .method{display:inline-block;padding:1px 6px;border-radius:3px;font-size:.65rem;font-weight:700;margin-right:6px}
+.playground .body .url .method.get{background:rgba(34,197,94,.1);color:var(--green)}
+.playground .body .pg-top{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.playground .body .pg-top .ping{display:flex;gap:8px;flex:1}
+.playground .body .pg-top .ping input{flex:1;padding:7px 10px;border-radius:6px;border:1px solid var(--border);background:rgba(0,0,0,.2);color:var(--text);font-size:.78rem;font-family:var(--mono);outline:none;transition:border-color .2s}
+.playground .body .pg-top .ping input:focus{border-color:var(--accent)}
+.playground .body .pg-top .ping button{padding:7px 14px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:.75rem;font-weight:600;cursor:pointer;transition:opacity .2s}
+.playground .body .pg-top .ping button:hover{opacity:.85}
+.playground .body .pg-top .ping button:disabled{opacity:.4;cursor:wait}
+.playground .body .pg-top .cpy{padding:7px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-ter);font-size:.7rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px;flex-shrink:0}
+.playground .body .pg-top .cpy:hover{background:rgba(136,136,176,.08);color:var(--text-sec);border-color:var(--border-active)}
+.playground .body .pg-top .cpy.copied{color:var(--green);border-color:rgba(34,197,94,.3)}
+.playground .body pre{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:6px;padding:12px 14px;font-family:var(--mono);font-size:.75rem;color:var(--text-sec);overflow-x:auto;min-height:60px;line-height:1.55;max-height:320px;overflow-y:auto}
+.playground .body pre .string{color:#6c5ce7}
+.playground .body pre .key{color:#a29bfe}
+.playground .body pre .bool{color:#22c55e}
+.playground .body pre .num{color:#f59e0b}
+.playground .body pre .null{color:var(--text-ter);font-style:italic}
+
+/* ─── About ─── */
+.about-grid{display:grid;gap:2.5rem}
+@media(min-width:640px){.about-grid{grid-template-columns:1fr 1fr}}
+.about-grid .col h3{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.about-grid .col{border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem}
+.about-grid ul{list-style:none}
+.about-grid ul li{padding:4px 0;font-size:.82rem;color:var(--text-sec);display:flex;align-items:center;gap:6px}
+.about-grid ul li::before{content:'→';color:var(--accent);font-weight:700;font-size:.75rem;flex-shrink:0}
+.about-grid ul li a{color:var(--accent2);text-decoration:none}
+.about-grid ul li a:hover{text-decoration:underline}
+
+/* ─── Footer ─── */
+footer{border-top:1px solid var(--border);padding:2rem var(--space);text-align:center;font-size:.78rem;color:var(--text-ter);position:relative;z-index:1}
+footer a{color:var(--accent2);text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--accent)}
+
+/* ─── Modal ─── */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s var(--ease-out)}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);max-width:880px;width:100%;max-height:85vh;overflow-y:auto;display:flex;flex-direction:column;transform:translateY(20px) scale(.97);transition:transform .35s var(--ease-out)}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:8px;border:none;background:rgba(136,136,176,.1);color:var(--text-ter);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
+.modal-close:hover{background:rgba(136,136,176,.2);color:var(--text)}
+.modal-carousel{position:relative;width:100%;height:240px;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0;flex-shrink:0;background:var(--card)}
+.modal-carousel .track{display:flex;height:100%;transition:transform .45s var(--ease-out)}
+.modal-carousel .track img{width:100%;height:100%;flex-shrink:0;object-fit:cover;object-position:top}
+.modal-carousel .arrow{position:absolute;top:50%;translate:0 -50%;width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,.5);color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2;backdrop-filter:blur(4px)}
+.modal-carousel .arrow:hover{background:rgba(108,92,231,.7)}
+.modal-carousel .arrow-left{left:8px}
+.modal-carousel .arrow-right{right:8px}
+.modal-carousel .arrow.hidden{opacity:0;pointer-events:none}
+.modal-carousel .dots{position:absolute;bottom:8px;left:50%;translate:-50%;display:flex;gap:5px;z-index:2}
+.modal-carousel .dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .2s}
+.modal-carousel .dots span.active{background:#fff;width:18px;border-radius:3px}
+.modal-body{padding:1.5rem;display:flex;flex-direction:column;gap:1rem;position:relative}
+.modal-body h2{font-size:1.3rem;font-weight:800;letter-spacing:-.5px}
+.modal-body p{font-size:.85rem;color:var(--text-sec);line-height:1.6}
+.modal-acts{display:flex;gap:8px;flex-wrap:wrap}
+.modal-acts a{padding:8px 18px;border-radius:8px;font-size:.78rem;font-weight:600;text-decoration:none;transition:all .2s var(--ease-out);display:inline-flex;align-items:center;gap:5px}
+.modal-acts .m-demo{background:var(--accent);color:#fff}
+.modal-acts .m-demo:hover{background:#5a4cd6}
+.modal-acts .m-git{background:rgba(136,136,176,.08);color:var(--text-sec);border:1px solid var(--border)}
+.modal-acts .m-git:hover{background:rgba(136,136,176,.15);color:var(--text)}
+.modal-acts .m-rep{background:rgba(108,92,231,.08);color:var(--accent2);border:1px solid rgba(108,92,231,.2)}
+.modal-acts .m-rep:hover{background:rgba(108,92,231,.18)}
+
+/* ─── Animations ─── */
+.r{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.r.v{opacity:1;transform:translateY(0)}
+.r1{transition-delay:80ms}
+.r2{transition-delay:160ms}
+.r3{transition-delay:240ms}
+.r4{transition-delay:320ms}
+.r5{transition-delay:400ms}
+.r6{transition-delay:480ms}
+.r7{transition-delay:560ms}
+
+@media(max-width:480px){
+  .hero{min-height:auto;padding:4rem 0 2rem}
+  .hero .stats{gap:1.25rem}
+  .hero .stats div .num{font-size:1.4rem}
+  .hero .scrolly{display:none}
+  .header-inner{padding:8px 16px;flex-wrap:wrap;gap:6px}
+  .status-group{font-size:.65rem;gap:2px 10px;order:3;width:100%;justify-content:flex-start}
+  header .summary{font-size:.6rem;margin-left:0}
+  .wrap{padding:0 16px}
+  .sec{padding:2.5rem 0}
+  .playground .tabs button{padding:8px 12px;font-size:.72rem}
+  .playground .body .pg-top{flex-direction:column}
+  .playground .body .pg-top .cpy{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-mesh"></div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">Bartosz<span>.</span>web</div>
+    <div class="status-group">
+      <span class="sv"><span class="d" id="s-url"></span><span class="name">URL Shortener</span></span>
+      <span class="sv"><span class="d" id="s-blog"></span><span class="name">GraphQL Blog</span></span>
+      <span class="sv"><span class="d" id="s-chat"></span><span class="name">AI Chat</span></span>
+      <span class="sv"><span class="d" id="s-portfolio"></span><span class="name">Unified API</span></span>
+      <span class="sv"><span class="d cli"></span><span class="name" style="color:var(--text-ter)">Daemon</span></span>
+    </div>
+    <span class="summary" id="summary">⏳</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="label r r1 v"><span class="pulse"></span> 6 dni · 11 projektów · zero mocków</div>
+  <h1 class="r r2 v">Ghost · Architect · Builder</h1>
+  <div class="hooks r r3 v" id="hooks"></div>
+  <div class="tags r r4 v">
+    <span class="hl">Python 3.12</span>
+    <span class="hl">FastAPI</span>
+    <span class="hl">GraphQL</span>
+    <span class="hl">React</span>
+    <span>Docker</span>
+    <span>CI/CD</span>
+    <span>WebSocket</span>
+    <span>PostgreSQL</span>
+    <span>AI/LLM</span>
+  </div>
+  <div class="stats r r5 v">
+    <div><div class="num">11</div><div class="lbl">projektów</div></div>
+    <div><div class="num">18</div><div class="lbl">modeli AI</div></div>
+    <div><div class="num">8</div><div class="lbl">technologii</div></div>
+    <div><div class="num">140</div><div class="lbl">raportów</div></div>
+  </div>
+  <div class="scrolly" aria-hidden="true"></div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section class="sec">
+  <div class="sec-header r">
+    <h2><span>Projekty</span><span class="line"></span></h2>
+    <p>11 projektów · każdy z Dockerem · każdy z CI/CD · każdy w produkcji</p>
+  </div>
+
+  <div class="cat-label r">API Layer <span>7 serwisów · FastAPI + Docker + CI/CD</span></div>
+  <div class="grid">
+
+    <div class="card r r1" data-project="linkshort">
+      <div class="glow"></div>
+      <div class="top"><h3>LinkShort</h3><span class="badge live">Live</span></div>
+      <p>URL shortener z JWT auth, click trackingiem, dashboardem React + Tailwind.</p>
+      <div class="tech"><span>FastAPI</span><span>React</span><span>JWT</span><span>PostgreSQL</span><span>Docker</span></div>
+      <div class="lnk"><a class="demo" href="https://fastapiurl.onrender.com" target="_blank">Demo</a><a class="git" href="https://github.com/voicenotesite/FastAPI-url" target="_blank">GitHub</a><a class="reports" href="https://voicenotesite.github.io/reports/nodynamic/fastapiurl.html" target="_blank">📋 Raporty</a></div>
+    </div>
+
+    <div class="card r r2" data-project="graphql-blog">
+      <div class="glow"></div>
+      <div class="top"><h3>GraphQL Blog</h3><span class="badge live">Live</span></div>
+      <p>Blog API z postami, komentarzami, auth JWT i interaktywnym playgroundiem GraphQL.</p>
+      <div class="tech"><span>FastAPI</span><span>Strawberry</span><span>GraphQL</span><span>JWT</span><span>Docker</span></div>
+      <div class="lnk"><a class="demo" href="https://graphql-blog-lxjy.onrender.com/graphql" target="_blank">Playground</a><a class="git" href="https://github.com/voicenotesite/graphql-blog" target="_blank">GitHub</a><a class="reports" href="https://voicenotesite.github.io/reports/nodynamic/graphql-blog.html" target="_blank">📋 Raporty</a></div>
+    </div>
+
+    <div class="card r r3" data-project="ai-chat-proxy">
+      <div class="glow"></div>
+      <div class="top"><h3>AI Chat Proxy</h3><span class="badge live">Live</span></div>
+      <p>Multi-provider proxy: Groq, Mistral, NVIDIA, Gemini, Together. 18 modeli, streaming SSE, rate limiter.</p>
+      <div class="tech"><span>FastAPI</span><span>SSE</span><span>Groq</span><span>Mistral</span><span>NVIDIA</span></div>
+      <div class="lnk"><a class="demo" href="https://ai-chat-proxy-twj4.onrender.com" target="_blank">Demo</a><a class="git" href="https://github.com/voicenotesite/ai-chat-proxy" target="_blank">GitHub</a><a class="reports" href="https://voicenotesite.github.io/reports/nodynamic/ai-chat-proxy.html" target="_blank">📋 Raporty</a></div>
+    </div>
+
+    <div class="card r r4" data-project="unified-api">
+      <div class="glow"></div>
+      <div class="top"><h3>Unified Portfolio API</h3><span class="badge live">Live</span></div>
+      <p>5 modułów w jednym API — URL shortener, blog, chat, task queue, RAG. Wspólna auth JWT.</p>
+      <div class="tech"><span>FastAPI</span><span>GraphQL</span><span>WebSocket</span><span>TF-IDF</span><span>Docker</span></div>
+      <div class="lnk"><a class="demo" href="https://python-portfolio-y0z8.onrender.com" target="_blank">Demo</a><a class="git" href="https://github.com/voicenotesite/python-portfolio" target="_blank">GitHub</a><a class="reports" href="https://voicenotesite.github.io/reports/nodynamic/python-portfolio.html" target="_blank">📋 Raporty</a></div>
+    </div>
+
+    <div class="card r r5" data-project="task-queue">
+      <div class="glow"></div>
+      <div class="top"><h3>Task Queue</h3><span class="badge live">Live</span></div>
+      <p>Async task queue z WebSocket, real-time progress barem, asyncio. Z Dockerem i CI/CD.</p>
+      <div class="tech"><span>FastAPI</span><span>WebSocket</span><span>asyncio</span><span>Docker</span></div>
+      <div class="lnk"><a class="git" href="https://github.com/voicenotesite/task-queue" target="_blank">GitHub</a></div>
+    </div>
+
+    <div class="card r r6" data-project="rag-pdf">
+      <div class="glow"></div>
+      <div class="top"><h3>RAG PDF Q&A</h3><span class="badge live">Live</span></div>
+      <p>Upload PDF → TF-IDF search → odpowiedź. FastAPI + pypdf + numpy + Docker.</p>
+      <div class="tech"><span>FastAPI</span><span>TF-IDF</span><span>pypdf</span><span>numpy</span><span>Docker</span></div>
+      <div class="lnk"><a class="git" href="https://github.com/voicenotesite/rag-qa" target="_blank">GitHub</a></div>
+    </div>
+
+    <div class="card r r1" data-project="chat-proxy-light">
+      <div class="glow"></div>
+      <div class="top"><h3>Chat Proxy Light</h3><span class="badge live">Live</span></div>
+      <p>Minimalny Groq proxy — jeden provider, streaming, zero zależności. 50 linii backendu.</p>
+      <div class="tech"><span>FastAPI</span><span>Groq</span><span>SSE</span><span>Docker</span></div>
+      <div class="lnk"><a class="git" href="https://github.com/voicenotesite/chat-proxy" target="_blank">GitHub</a></div>
+    </div>
+
+  </div>
+
+  <div class="cat-label r" style="margin-top:2.5rem">Frontend &middot; Content <span>3 serwisy + hub</span></div>
+  <div class="grid">
+
+    <div class="card r r2" data-project="reports">
+      <div class="glow"></div>
+      <div class="top"><h3>Reports</h3><span class="badge live">Live</span></div>
+      <p>140 raportów PDF+MD wygenerowanych przez AI. Architektura, security, performance, testy.</p>
+      <div class="tech"><span>Python</span><span>AI</span><span>PDF</span><span>GitHub Pages</span></div>
+      <div class="lnk"><a class="demo" href="https://voicenotesite.github.io/reports/" target="_blank">Live</a><a class="git" href="https://github.com/voicenotesite/reports" target="_blank">GitHub</a></div>
+    </div>
+
+    <div class="card r r3" data-project="cv-maker">
+      <div class="glow"></div>
+      <div class="top"><h3>CV MAKER</h3><span class="badge live">Live</span></div>
+      <p>Full-stack builder CV — drag-and-drop, job scraper 50 źródeł, analiza rynku. React + Express + libSQL.</p>
+      <div class="tech"><span>React</span><span>Express</span><span>libSQL</span><span>Docker</span><span>Tailwind</span></div>
+      <div class="lnk"><a class="git" href="https://github.com/voicenotesite/CV-MAKER" target="_blank">GitHub</a><a class="reports" href="https://voicenotesite.github.io/reports/nodynamic/cv-maker.html" target="_blank">📋 Raporty</a></div>
+    </div>
+
+    <div class="card featured r r4 double" data-project="web-bartosz">
+      <div class="glow"></div>
+      <div class="top"><h3>WebBartosz</h3><span class="badge hub">Hub</span></div>
+      <p>Ta strona — portfolio hub z live monitoringiem 5 serwisów, 11 projektami i API playgroundiem.</p>
+      <div class="tech"><span>HTML</span><span>CSS</span><span>JS</span><span>GitHub Pages</span></div>
+      <div class="lnk"><a class="git" href="https://github.com/voicenotesite/WebBartosz" target="_blank">GitHub</a><a class="reports" href="https://voicenotesite.github.io/reports/nodynamic/WebBartosz.html" target="_blank">📋 Raporty</a></div>
+    </div>
+
+  </div>
+
+  <div class="cat-label r" style="margin-top:2.5rem">Dev Tooling <span>lokalne narzędzia</span></div>
+  <div class="grid">
+
+    <div class="card r r5" data-project="portfolio-daemon">
+      <div class="glow"></div>
+      <div class="top"><h3>Portfolio Daemon</h3><span class="badge cli">CLI</span></div>
+      <p>Service manager — auto-start backendów, health monitoring, SSH tunnels. GUI w tkinter.</p>
+      <div class="tech"><span>Python</span><span>asyncio</span><span>asyncssh</span><span>tkinter</span></div>
+      <div class="lnk"><a class="git" href="https://github.com/voicenotesite/portfolio-daemon" target="_blank">GitHub</a><a class="reports" href="https://voicenotesite.github.io/reports/nodynamic/portfolio-daemon.html" target="_blank">📋 Raporty</a></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── ECOSYSTEM ─── -->
+<section class="sec">
+  <div class="sec-header r">
+    <h2><span>Ecosystem</span><span class="line"></span></h2>
+    <p>jak to wszystko do siebie pasuje</p>
+  </div>
+  <div class="eco r r1">
+    <div class="eco-row"><span class="eco-label">API Layer</span><div class="eco-nodes"><span>LinkShort</span><span>GraphQL Blog</span><span>AI Chat</span><span>Unified API</span><span>Task Queue</span><span>RAG PDF</span><span>Chat Light</span></div></div>
+    <div class="eco-arrow">↓</div>
+    <div class="eco-row"><span class="eco-label">Frontend</span><div class="eco-nodes"><span>Reports</span><span>CV MAKER</span><span>WebBartosz Hub</span></div></div>
+    <div class="eco-arrow">↓</div>
+    <div class="eco-row"><span class="eco-label">Tooling</span><div class="eco-nodes"><span>Portfolio Daemon</span></div></div>
+  </div>
+</section>
+
+<!-- ─── LIVE API PLAYGROUND ─── -->
+<section class="sec">
+  <div class="r">
+    <h2><span>Live API Playground</span><span class="line"></span></h2>
+  </div>
+  <div style="margin-top:1rem" class="r r1">
+    <p style="font-size:.85rem;color:var(--text-ter);margin-bottom:1rem">
+      Kliknij endpoint — zapytanie leci do żywego API. Żadnego mocka, żadnego CRUDa.
+    </p>
+    <div class="playground">
+      <div class="tabs">
+        <button class="active" data-url="https://fastapiurl.onrender.com/health" data-method="GET">URL Shortener</button>
+        <button data-url="https://graphql-blog-lxjy.onrender.com/health" data-method="GET">GraphQL Blog</button>
+        <button data-url="https://ai-chat-proxy-twj4.onrender.com/health" data-method="GET">AI Chat</button>
+        <button data-url="https://python-portfolio-y0z8.onrender.com/health" data-method="GET">Unified API</button>
+      </div>
+      <div class="body">
+        <div class="pg-top">
+          <div class="ping">
+            <input id="customUrl" placeholder="albo wklej własny URL..." spellcheck="false">
+            <button id="pingBtn">Ping</button>
+          </div>
+          <button class="cpy" id="copyBtn">📋 Copy</button>
+        </div>
+        <div class="url"><span class="method get" id="methodLabel">GET</span><span id="urlLabel">https://fastapiurl.onrender.com/health</span></div>
+        <pre id="responseBox"><span style="color:var(--text-ter)">Kliknij przycisk lub wpisz URL, żeby wysłać zapytanie...</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section class="sec">
+  <div class="r">
+    <h2><span>Stack &nbsp;→</span><span class="line"></span></h2>
+  </div>
+  <div class="about-grid" style="margin-top:1rem">
+    <div class="col r r1">
+      <h3>⚡ Technologie</h3>
+      <ul>
+        <li>Python 3.12+ · FastAPI · SQLAlchemy · Alembic</li>
+        <li>GraphQL · Strawberry · REST API</li>
+        <li>React 19 · Vite · TailwindCSS</li>
+        <li>PostgreSQL · SQLite · ChromaDB</li>
+        <li>WebSocket · SSE · asyncio</li>
+        <li>Docker · GitHub Actions · Render</li>
+        <li>Groq · Mistral · NVIDIA · Gemini · Together AI</li>
+      </ul>
+    </div>
+    <div class="col r r2">
+      <h3>📌 Podejście</h3>
+      <ul>
+        <li>0 frameworków enterprise — realne technologie w produkcji</li>
+        <li>Każdy projekt = inna warstwa stacka — od bazy po frontend</li>
+        <li>Docker + CI/CD w każdym projekcie — ani jednego bez</li>
+        <li>Zero kosztów utrzymania — Render free tier + GitHub Pages</li>
+        <li>11 projektów od zera do produkcji — samodzielnie</li>
+        <li>140 raportów AI dokumentujących architekturę i kod</li>
+      </ul>
+      <h3 style="margin-top:1.25rem;font-size:.85rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px">🔗 Links</h3>
+      <ul>
+        <li><a href="https://github.com/voicenotesite" target="_blank">GitHub: voicenotesite</a></li>
+        <li><a href="https://voicenotesite.github.io/reports/" target="_blank">Raporty: 140 dokumentów</a></li>
+        <li><a href="https://python-portfolio-y0z8.onrender.com" target="_blank">Unified API</a></li>
+        <li><a href="https://ai-chat-proxy-twj4.onrender.com" target="_blank">AI Chat</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-carousel" id="modalCarousel">
+      <div class="track" id="carouselTrack"></div>
+      <button class="arrow arrow-left hidden" id="carouselPrev">‹</button>
+      <button class="arrow arrow-right" id="carouselNext">›</button>
+      <div class="dots" id="carouselDots"></div>
+    </div>
+    <div class="modal-body">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <div class="modal-acts" id="modalActs"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Bartosz Web · <a href="https://github.com/voicenotesite">GitHub</a> · Python · FastAPI · 11 projektów</p>
+</footer>
+
+<script>
+/* ─── Status check ─── */
+const SITES = [
+  { url: 'https://fastapiurl.onrender.com/health', id: 's-url' },
+  { url: 'https://graphql-blog-lxjy.onrender.com/health', id: 's-blog' },
+  { url: 'https://ai-chat-proxy-twj4.onrender.com/health', id: 's-chat' },
+  { url: 'https://python-portfolio-y0z8.onrender.com/health', id: 's-portfolio' },
+];
+let checkedCount = 0;
+function check(){
+  checkedCount = 0;
+  let ok = 0;
+  const total = SITES.length;
+  SITES.forEach(s => {
+    const dot = document.getElementById(s.id);
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 10000);
+    fetch(s.url, { signal: ctrl.signal })
+      .then(r => { clearTimeout(t);
+        if (r.ok) { dot.className = 'd on'; ok++; }
+        else dot.className = 'd off';
+      })
+      .catch(() => { clearTimeout(t); dot.className = 'd off'; })
+      .finally(() => {
+        checkedCount++;
+        if (checkedCount === total) {
+          document.getElementById('summary').textContent = ok === total ? `● ${ok}/${total} online` : `◐ ${ok}/${total} online`;
+        }
+      });
+  });
+}
+
+/* ─── Typewriter hooks ─── */
+const phrases = [
+  'Bez spania. Bez bullshitu. Bez wymówek.',
+  '18 modeli AI · 4 deploye · 1 proxy',
+  'Docker · CI/CD · Produkcja. Zero mocków.',
+  'Sam. Od zera. W tydzień.',
+];
+let pi = 0, ci = 0, isDeleting = false;
+const typer = document.getElementById('hooks');
+function typeLoop(){
+  const current = phrases[pi];
+  if (!isDeleting) {
+    ci++;
+    typer.textContent = current.slice(0, ci) + '▌';
+    if (ci >= current.length) { isDeleting = true; setTimeout(typeLoop, 2800); return; }
+  } else {
+    ci--;
+    typer.textContent = current.slice(0, ci) + '▌';
+    if (ci <= 0) { isDeleting = false; pi = (pi + 1) % phrases.length; setTimeout(typeLoop, 400); return; }
+  }
+  setTimeout(typeLoop, isDeleting ? 18 : 35);
+}
+typeLoop();
+
+/* ─── API Playground ─── */
+let activeUrl = 'https://fastapiurl.onrender.com/health';
+const tabs = document.querySelectorAll('.playground .tabs button');
+const urlLabel = document.getElementById('urlLabel');
+const methodLabel = document.getElementById('methodLabel');
+const responseBox = document.getElementById('responseBox');
+const customUrl = document.getElementById('customUrl');
+const pingBtn = document.getElementById('pingBtn');
+
+tabs.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabs.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeUrl = btn.dataset.url;
+    urlLabel.textContent = activeUrl;
+    methodLabel.textContent = btn.dataset.method;
+    customUrl.value = '';
+  });
+});
+
+function formatJSON(obj) {
+  const str = JSON.stringify(obj, null, 2);
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"([^"]+)":/g,'<span class="key">"$1"</span>:')
+    .replace(/: "([^"]+)"/g,': <span class="string">"$1"</span>')
+    .replace(/: (\d+\.?\d*)/g,': <span class="num">$1</span>')
+    .replace(/: (true|false)/g,': <span class="bool">$1</span>')
+    .replace(/: (null)/g,': <span class="null">$1</span>');
+}
+
+async function ping(url) {
+  pingBtn.disabled = true;
+  responseBox.innerHTML = '<span style="color:var(--text-ter)">Łączenie...</span>';
+  const start = performance.now();
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    const data = await res.json();
+    const ms = (performance.now() - start).toFixed(0);
+    responseBox.innerHTML = `<span style="color:var(--text-ter);font-size:.65rem">// ${res.status} ${res.statusText} · ${ms}ms</span>\n` + formatJSON(data);
+  } catch (e) {
+    responseBox.innerHTML = `<span style="color:var(--red)">// Error: ${e.message}</span>`;
+  }
+  pingBtn.disabled = false;
+}
+
+pingBtn.addEventListener('click', () => {
+  const url = customUrl.value.trim();
+  if (url) { activeUrl = url; urlLabel.textContent = url; methodLabel.textContent = 'GET'; }
+  ping(activeUrl);
+});
+customUrl.addEventListener('keydown', e => { if (e.key === 'Enter') pingBtn.click(); });
+
+/* ─── Copy response ─── */
+const copyBtn = document.getElementById('copyBtn');
+copyBtn.addEventListener('click', async () => {
+  const text = responseBox.textContent.replace(/\/\/.*?\n/g, '').trim();
+  if (!text) return;
+  try {
+    await navigator.clipboard.writeText(text);
+    copyBtn.textContent = '✅ Copied';
+    copyBtn.classList.add('copied');
+    setTimeout(() => { copyBtn.textContent = '📋 Copy'; copyBtn.classList.remove('copied'); }, 2000);
+  } catch {}
+});
+
+// Auto-ping on load
+setTimeout(() => ping(activeUrl), 1000);
+
+/* ─── Project Modal ─── */
+const PROJECTS_DATA = {
+  linkshort:{name:'LinkShort',desc:'URL shortener z JWT auth, click trackingiem i dashboardem React + Tailwind. Wklejasz link, dostajesz krótszy. Dashboard pokazuje kliknięcia, referery i geolokalizację.',imgs:['screenshots/linkshort-1.jpg','screenshots/linkshort-2.jpg','screenshots/linkshort-3.jpg'],url:'https://fastapiurl.onrender.com',git:'https://github.com/voicenotesite/FastAPI-url',rep:'https://voicenotesite.github.io/reports/#fastapiurl'},
+  'graphql-blog':{name:'GraphQL Blog',desc:'Blog API z postami, komentarzami i auth JWT. Interaktywny GraphQL playground do testowania zapytań. Strawberry + PostgreSQL w produkcji.',imgs:['screenshots/graphql-blog-1.jpg','screenshots/graphql-blog-2.jpg','screenshots/graphql-blog-3.jpg'],url:'https://graphql-blog-lxjy.onrender.com/graphql',git:'https://github.com/voicenotesite/graphql-blog',rep:'https://voicenotesite.github.io/reports/#graphql-blog'},
+  'ai-chat-proxy':{name:'AI Chat Proxy',desc:'Multi-provider proxy do 18 modeli AI: Groq, Mistral, NVIDIA, Gemini, Together. Streaming SSE, rate limiter, własny API key. Jeden endpoint, 5 providerów.',imgs:['screenshots/ai-chat-proxy-1.jpg','screenshots/ai-chat-proxy-2.jpg','screenshots/ai-chat-proxy-3.jpg'],url:'https://ai-chat-proxy-twj4.onrender.com',git:'https://github.com/voicenotesite/ai-chat-proxy',rep:'https://voicenotesite.github.io/reports/#ai-chat-proxy'},
+  'unified-api':{name:'Unified Portfolio API',desc:'5 modułów w jednym API: URL shortener, blog, czat, task queue i RAG. Wspólna warstwa auth JWT, jeden deploy, jedna baza.',imgs:['screenshots/unified-api-1.jpg','screenshots/unified-api-2.jpg','screenshots/unified-api-3.jpg'],url:'https://python-portfolio-y0z8.onrender.com',git:'https://github.com/voicenotesite/python-portfolio',rep:'https://voicenotesite.github.io/reports/#python-portfolio'},
+  'task-queue':{name:'Task Queue',desc:'Async task queue z WebSocket i real-time progress barem. Wrzucasz task, dostajesz status na żywo przez websocket. asyncio + Docker.',imgs:['screenshots/task-queue-1.jpg','screenshots/task-queue-2.jpg'],url:null,git:'https://github.com/voicenotesite/task-queue',rep:null},
+  'rag-pdf':{name:'RAG PDF Q&A',desc:'Upload PDF → TF-IDF vector search → odpowiedź. Zero OpenAI, zero API — własny silnik wyszukiwania na TF-IDF i numpy.',imgs:['screenshots/rag-pdf-1.jpg','screenshots/rag-pdf-2.jpg'],url:null,git:'https://github.com/voicenotesite/rag-qa',rep:null},
+  'chat-proxy-light':{name:'Chat Proxy Light',desc:'Minimalny Groq proxy — jeden provider, streaming, zero zależności. 50 linii backendu, 200 linii frontendu. Lekki, szybki, prosty.',imgs:['screenshots/chat-proxy-light-1.jpg','screenshots/chat-proxy-light-2.jpg'],url:null,git:'https://github.com/voicenotesite/chat-proxy',rep:null},
+  reports:{name:'Reports',desc:'141 raportów PDF+MD wygenerowanych przez AI. Każdy projekt ma 20 dokumentów: architektura, security, performance, testy, deployment i więcej.',imgs:['screenshots/reports-1.jpg','screenshots/reports-2.jpg','screenshots/reports-3.jpg'],url:'https://voicenotesite.github.io/reports/',git:'https://github.com/voicenotesite/reports',rep:null},
+  'cv-maker':{name:'CV MAKER',desc:'Full-stack builder CV z drag-and-drop, job scraperem 50+ źródeł i analizą rynku pracy. React + Express + libSQL + Docker.',imgs:['screenshots/cv-maker-1.jpg','screenshots/cv-maker-2.jpg'],url:null,git:'https://github.com/voicenotesite/CV-MAKER',rep:'https://voicenotesite.github.io/reports/#cv-maker'},
+  'web-bartosz':{name:'WebBartosz',desc:'Portfolio hub. Live monitoring 5 serwisów, 11 projektów, API playground i ecosystem topology. Ta strona — centralny punkt portfolio.',imgs:['screenshots/web-bartosz-1.jpg','screenshots/web-bartosz-2.jpg','screenshots/web-bartosz-3.jpg'],url:'https://voicenotesite.github.io/WebBartosz/',git:'https://github.com/voicenotesite/WebBartosz',rep:'https://voicenotesite.github.io/reports/#WebBartosz'},
+  'portfolio-daemon':{name:'Portfolio Daemon',desc:'Service manager w tle — auto-start backendów, health monitoring, SSH tunnels. GUI w tkinter, serce w asyncio + asyncssh.',imgs:['screenshots/portfolio-daemon-1.jpg','screenshots/portfolio-daemon-2.jpg'],url:null,git:'https://github.com/voicenotesite/portfolio-daemon',rep:'https://voicenotesite.github.io/reports/#portfolio-daemon'},
+};
+const modal = document.getElementById('modal');
+const carouselTrack = document.getElementById('carouselTrack');
+const carouselPrev = document.getElementById('carouselPrev');
+const carouselNext = document.getElementById('carouselNext');
+const carouselDots = document.getElementById('carouselDots');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalActs = document.getElementById('modalActs');
+const modalClose = document.getElementById('modalClose');
+let carouselIdx = 0, carouselImgs = [];
+function buildCarousel(imgs){
+  carouselImgs = imgs; carouselIdx = 0;
+  carouselTrack.innerHTML = imgs.map(s => `<img src="${s}" alt="" loading="lazy">`).join('');
+  carouselDots.innerHTML = imgs.map((_, i) => `<span class="${i===0?'active':''}"></span>`).join('');
+  updateCarousel();
+}
+function updateCarousel(){
+  carouselTrack.style.transform = `translateX(-${carouselIdx * 100}%)`;
+  carouselPrev.classList.toggle('hidden', carouselIdx === 0);
+  carouselNext.classList.toggle('hidden', carouselIdx >= carouselImgs.length - 1);
+  carouselDots.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === carouselIdx));
+}
+carouselPrev.addEventListener('click', () => { if (carouselIdx > 0) { carouselIdx--; updateCarousel(); } });
+carouselNext.addEventListener('click', () => { if (carouselIdx < carouselImgs.length - 1) { carouselIdx++; updateCarousel(); } });
+carouselDots.addEventListener('click', e => {
+  const idx = Array.from(carouselDots.children).indexOf(e.target);
+  if (idx >= 0) { carouselIdx = idx; updateCarousel(); }
+});
+document.querySelectorAll('[data-project]').forEach(el => {
+  el.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    const p = PROJECTS_DATA[el.dataset.project];
+    if (!p) return;
+    buildCarousel(p.imgs);
+    modalTitle.textContent = p.name;
+    modalDesc.textContent = p.desc;
+    modalActs.innerHTML = '';
+    if (p.url) modalActs.innerHTML += `<a class="m-demo" href="${p.url}" target="_blank">🌐 Website</a>`;
+    if (p.git) modalActs.innerHTML += `<a class="m-git" href="${p.git}" target="_blank">🐙 GitHub</a>`;
+    if (p.rep) modalActs.innerHTML += `<a class="m-rep" href="${p.rep}" target="_blank">📋 Behind the Scenes</a>`;
+    modal.classList.add('open');
+  });
+});
+modalClose.addEventListener('click', () => modal.classList.remove('open'));
+modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') modal.classList.remove('open');
+  if (modal.classList.contains('open')) {
+    if (e.key === 'ArrowLeft') { carouselPrev.click(); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { carouselNext.click(); e.preventDefault(); }
+  }
+});
+
+/* ─── Scroll observer ─── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+}, { threshold: .06 });
+document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+/* ─── Init ─── */
+check();
+setInterval(check, 60000);
+</script>
+</body>
+</html>
