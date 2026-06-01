@@ -1496,8 +1496,8 @@ function check(){
       });
   });
   
-  // Schedule next check in 2 minutes (120000ms) instead of 1 minute
-  checkTimeout = setTimeout(check, 120000);
+   // Schedule next check in 30 seconds (30000ms) to match README
+   checkTimeout = setTimeout(check, 30000);
 }
 
 /* ─── Typewriter hooks ─── */
@@ -1597,20 +1597,32 @@ copyBtn.addEventListener('click', async () => {
 setTimeout(() => ping(activeUrl), 1000);
 
 /* ─── Project Modal ─── */
-const PROJECTS_DATA = {
-  linkshort:{name:'LinkShort',desc:'URL shortener z JWT auth, click trackingiem i dashboardem React + Tailwind. Wklejasz link, dostajesz krótszy. Dashboard pokazuje kliknięcia, referery i geolokalizację.',imgs:['screenshots/linkshort-1.jpg','screenshots/linkshort-2.jpg','screenshots/linkshort-3.jpg'],url:'https://fastapiurl.onrender.com',git:'https://github.com/voicenotesite/FastAPI-url',rep:'https://voicenotesite.github.io/reports/#fastapiurl'},
-  'graphql-blog':{name:'GraphQL Blog',desc:'Blog API z postami, komentarzami i auth JWT. Interaktywny GraphQL playground do testowania zapytań. Strawberry + PostgreSQL w produkcji.',imgs:['screenshots/graphql-blog-1.jpg','screenshots/graphql-blog-2.jpg','screenshots/graphql-blog-3.jpg'],url:'https://graphql-blog-lxjy.onrender.com/graphql',git:'https://github.com/voicenotesite/graphql-blog',rep:'https://voicenotesite.github.io/reports/#graphql-blog'},
-  'ai-chat-proxy':{name:'AI Chat Proxy',desc:'Multi-provider proxy do 18 modeli AI: Groq, Mistral, NVIDIA, Gemini, Together. Streaming SSE, rate limiter, własny API key. Jeden endpoint, 5 providerów.',imgs:['screenshots/ai-chat-proxy-1.jpg','screenshots/ai-chat-proxy-2.jpg','screenshots/ai-chat-proxy-3.jpg'],url:'https://ai-chat-proxy-twj4.onrender.com',git:'https://github.com/voicenotesite/ai-chat-proxy',rep:'https://voicenotesite.github.io/reports/#ai-chat-proxy'},
-  'unified-api':{name:'Unified Portfolio API',desc:'5 modułów w jednym API: URL shortener, blog, czat, task queue i RAG. Wspólna warstwa auth JWT, jeden deploy, jedna baza.',imgs:['screenshots/unified-api-1.jpg','screenshots/unified-api-2.jpg','screenshots/unified-api-3.jpg'],url:'https://python-portfolio-y0z8.onrender.com',git:'https://github.com/voicenotesite/python-portfolio',rep:'https://voicenotesite.github.io/reports/#python-portfolio'},
-  'task-queue':{name:'Task Queue',desc:'Async task queue z WebSocket i real-time progress barem. Wrzucasz task, dostajesz status na żywo przez websocket. asyncio + Docker.',imgs:['screenshots/task-queue-1.jpg','screenshots/task-queue-2.jpg'],url:null,git:'https://github.com/voicenotesite/task-queue',rep:null},
-  'rag-pdf':{name:'RAG PDF Q&A',desc:'Upload PDF → TF-IDF vector search → odpowiedź. Zero OpenAI, zero API — własny silnik wyszukiwania na TF-IDF i numpy.',imgs:['screenshots/rag-pdf-1.jpg','screenshots/rag-pdf-2.jpg'],url:null,git:'https://github.com/voicenotesite/rag-qa',rep:null},
-  'chat-proxy-light':{name:'Chat Proxy Light',desc:'Minimalny Groq proxy — jeden provider, streaming, zero zależności. 50 linii backendu, 200 linii frontendu. Lekki, szybki, prosty.',imgs:['screenshots/chat-proxy-light-1.jpg','screenshots/chat-proxy-light-2.jpg'],url:null,git:'https://github.com/voicenotesite/chat-proxy',rep:null},
-  reports:{name:'Reports',desc:'141 raportów PDF+MD wygenerowanych przez AI. Każdy projekt ma 20 dokumentów: architektura, security, performance, testy, deployment i więcej.',imgs:['screenshots/reports-1.jpg','screenshots/reports-2.jpg','screenshots/reports-3.jpg'],url:'https://voicenotesite.github.io/reports/',git:'https://github.com/voicenotesite/reports',rep:null},
-  'cv-maker':{name:'CV MAKER',desc:'Full-stack builder CV z drag-and-drop, job scraperem 50+ źródeł i analizą rynku pracy. React + Express + libSQL + Docker.',imgs:['screenshots/cv-maker-1.jpg','screenshots/cv-maker-2.jpg'],url:null,git:'https://github.com/voicenotesite/CV-MAKER',rep:'https://voicenotesite.github.io/reports/#cv-maker'},
-  'web-bartosz':{name:'WebBartosz',desc:'Portfolio hub. Live monitoring 5 serwisów, 11 projektów, API playground i ecosystem topology. Ta strona — centralny punkt portfolio.',imgs:['screenshots/web-bartosz-1.jpg','screenshots/web-bartosz-2.jpg','screenshots/web-bartosz-3.jpg'],url:'https://voicenotesite.github.io/WebBartosz/',git:'https://github.com/voicenotesite/WebBartosz',rep:'https://voicenotesite.github.io/reports/#WebBartosz'},
-   'portfolio-daemon':{name:'Portfolio Daemon',desc:'Service manager w tle — auto-start backendów, health monitoring, SSH tunnels. GUI w tkinter, serce w asyncio + asyncssh.',imgs:['screenshots/portfolio-daemon-1.jpg','screenshots/portfolio-daemon-2.jpg'],url:null,git:'https://github.com/voicenotesite/portfolio-daemon',rep:'https://voicenotesite.github.io/reports/#portfolio-daemon'},
-   'search-engine':{name:'Search Engine',desc:'Wyszukiwarka clearnet + darknet (.onion) z filtrem bezpieczeństwa. Używa DuckDuckGo i Ahmia przez Playwright do wyszukiwania w darknecie.',imgs:['screenshots/search-engine-1.jpg','screenshots/search-engine-2.jpg'],url:'https://search-engine-l2zt.onrender.com',git:'https://github.com/voicenotesite/search-engine',rep:null},
-};
+let PROJECTS_DATA = {};
+
+// Load projects data from external JSON file
+async function loadProjectsData() {
+    try {
+        const response = await fetch('data/projects.json');
+        PROJECTS_DATA = await response.json();
+    } catch (error) {
+        console.error('Failed to load projects data:', error);
+        // Fallback to embedded data if needed
+        PROJECTS_DATA = {
+            linkshort:{name:'LinkShort',desc:'URL shortener z JWT auth, click trackingiem i dashboardem React + Tailwind. Wklejasz link, dostajesz krótszy. Dashboard pokazuje kliknięcia, referery i geolokalizację.',imgs:['screenshots/linkshort-1.jpg','screenshots/linkshort-2.jpg','screenshots/linkshort-3.jpg'],url:'https://fastapiurl.onrender.com',git:'https://github.com/voicenotesite/FastAPI-url',rep:'https://voicenotesite.github.io/reports/#fastapiurl'},
+            'graphql-blog':{name:'GraphQL Blog',desc:'Blog API z postami, komentarzami i auth JWT. Interaktywny GraphQL playground do testowania zapytań. Strawberry + PostgreSQL w produkcji.',imgs:['screenshots/graphql-blog-1.jpg','screenshots/graphql-blog-2.jpg','screenshots/graphql-blog-3.jpg'],url:'https://graphql-blog-lxjy.onrender.com/graphql',git:'https://github.com/voicenotesite/graphql-blog',rep:'https://voicenotesite.github.io/reports/#graphql-blog'},
+            'ai-chat-proxy':{name:'AI Chat Proxy',desc:'Multi-provider proxy do 18 modeli AI: Groq, Mistral, NVIDIA, Gemini, Together. Streaming SSE, rate limiter, własny API key. Jeden endpoint, 5 providerów.',imgs:['screenshots/ai-chat-proxy-1.jpg','screenshots/ai-chat-proxy-2.jpg','screenshots/ai-chat-proxy-3.jpg'],url:'https://ai-chat-proxy-twj4.onrender.com',git:'https://github.com/voicenotesite/ai-chat-proxy',rep:'https://voicenotesite.github.io/reports/#ai-chat-proxy'},
+            'unified-api':{name:'Unified Portfolio API',desc:'5 modułów w jednym API: URL shortener, blog, czat, task queue i RAG. Wspólna warstwa auth JWT, jeden deploy, jedna baza.',imgs:['screenshots/unified-api-1.jpg','screenshots/unified-api-2.jpg','screenshots/unified-api-3.jpg'],url:'https://python-portfolio-y0z8.onrender.com',git:'https://github.com/voicenotesite/python-portfolio',rep:'https://voicenotesite.github.io/reports/#python-portfolio'},
+            'task-queue':{name:'Task Queue',desc:'Async task queue z WebSocket i real-time progress barem. Wrzucasz task, dostajesz status na żywo przez websocket. asyncio + Docker.',imgs:['screenshots/task-queue-1.jpg','screenshots/task-queue-2.jpg'],url:null,git:'https://github.com/voicenotesite/task-queue',rep:null},
+            'rag-pdf':{name:'RAG PDF Q&A',desc:'Upload PDF → TF-IDF vector search → odpowiedź. Zero OpenAI, zero API — własny silnik wyszukiwania na TF-IDF i numpy.',imgs:['screenshots/rag-pdf-1.jpg','screenshots/rag-pdf-2.jpg'],url:null,git:'https://github.com/voicenotesite/rag-qa',rep:null},
+            'chat-proxy-light':{name:'Chat Proxy Light',desc:'Minimalny Groq proxy — jeden provider, streaming, zero zależności. 50 linii backendu, 200 linii frontendu. Lekki, szybki, prosty.',imgs:['screenshots/chat-proxy-light-1.jpg','screenshots/chat-proxy-light-2.jpg'],url:null,git:'https://github.com/voicenotesite/chat-proxy',rep:null},
+            reports:{name:'Reports',desc:'141 raportów PDF+MD wygenerowanych przez AI. Każdy projekt ma 20 dokumentów: architektura, security, performance, testy, deployment i więcej.',imgs:['screenshots/reports-1.jpg','screenshots/reports-2.jpg','screenshots/reports-3.jpg'],url:'https://voicenotesite.github.io/reports/',git:'https://github.com/voicenotesite/reports',rep:null},
+            'cv-maker':{name:'CV MAKER',desc:'Full-stack builder CV z drag-and-drop, job scraperem 50+ źródeł i analizą rynku pracy. React + Express + libSQL + Docker.',imgs:['screenshots/cv-maker-1.jpg','screenshots/cv-maker-2.jpg'],url:null,git:'https://github.com/voicenotesite/CV-MAKER',rep:'https://voicenotesite.github.io/reports/#cv-maker'},
+            'web-bartosz':{name:'WebBartosz',desc:'Portfolio hub. Live monitoring 5 serwisów, 11 projektów, API playground i ecosystem topology. Ta strona — centralny punkt portfolio.',imgs:['screenshots/web-bartosz-1.jpg','screenshots/web-bartosz-2.jpg','screenshots/web-bartosz-3.jpg'],url:'https://voicenotesite.github.io/WebBartosz/',git:'https://github.com/voicenotesite/WebBartosz',rep:'https://voicenotesite.github.io/reports/#WebBartosz'},
+            'portfolio-daemon':{name:'Portfolio Daemon',desc:'Service manager w tle — auto-start backendów, health monitoring, SSH tunnels. GUI w tkinter, serce w asyncio + asyncssh.',imgs:['screenshots/portfolio-daemon-1.jpg','screenshots/portfolio-daemon-2.jpg'],url:null,git:'https://github.com/voicenotesite/portfolio-daemon',rep:'https://voicenotesite.github.io/reports/#portfolio-daemon'},
+            'search-engine':{name:'Search Engine',desc:'Wyszukiwarka clearnet + darknet (.onion) z filtrem bezpieczeństwa. Używa DuckDuckGo i Ahmia przez Playwright do wyszukiwania w darknecie.',imgs:['screenshots/search-engine-1.jpg','screenshots/search-engine-2.jpg'],url:'https://search-engine-l2zt.onrender.com',git:'https://github.com/voicenotesite/search-engine',rep:null},
+        };
+    }
+}
 const modal = document.getElementById('modal');
 const carouselTrack = document.getElementById('carouselTrack');
 const carouselPrev = document.getElementById('carouselPrev');
@@ -1671,8 +1683,28 @@ const obs = new IntersectionObserver(entries => {
 document.querySelectorAll('.r').forEach(el => obs.observe(el));
 
 /* ─── Init ─── */
-check();
-setInterval(check, 60000);
+// Load projects data first, then initialize everything else
+loadProjectsData().then(() => {
+    // Initialize project modal event listeners after data is loaded
+    document.querySelectorAll('[data-project]').forEach(el => {
+        el.addEventListener('click', e => {
+            if (e.target.closest('a')) return;
+            const p = PROJECTS_DATA[el.dataset.project];
+            if (!p) return;
+            buildCarousel(p.imgs);
+            modalTitle.textContent = p.name;
+            modalDesc.textContent = p.desc;
+            modalActs.innerHTML = '';
+            if (p.url) modalActs.innerHTML += `<a class="m-demo" href="${p.url}" target="_blank">🌐 Website</a>`;
+            if (p.git) modalActs.innerHTML += `<a class="m-git" href="${p.git}" target="_blank">🐙 GitHub</a>`;
+            if (p.rep) modalActs.innerHTML += `<a class="m-rep" href="${p.rep}" target="_blank">📋 Behind the Scenes</a>`;
+            modal.classList.add('open');
+        });
+    });
+    
+    check();
+    setInterval(check, 30000); // 30 seconds to match README
+});
 
 /* ─── AI Assistant ─── */
 const aiAssistantBtn = document.getElementById('aiAssistantBtn');
@@ -1743,26 +1775,27 @@ function addMessage(content, type) {
 }
 
 function getAIResponse(message) {
-  const lowerMessage = message.toLowerCase();
-  
-  // Simple rule-based responses for demo purposes
-  if (lowerMessage.includes('strona') || lowerMessage.includes('słabo') || lowerMessage.includes('co to')) {
-    return "Ta strona to portfolio Bartosza pokazujące 12 projektów stworzonych w 6 dni. Zawiera projekty takie jak URL Shortener, GraphQL Blog, AI Chat Proxy i wiele innych. Każdy projekt ma live demo, kod źródłowy na GitHubie oraz szczegółowe raporty.";
-  } else if (lowerMessage.includes('projekt') || lowerMessage.includes('linkshort') || lowerMessage.includes('url')) {
-    return "LinkShort to URL shortener z JWT auth, click trackingiem i dashboardem React + Tailwind. Projekt wykorzystuje FastAPI, React, JWT, PostgreSQL i Docker. Możesz zobaczyć live demo pod adresem https://fastapiurl.onrender.com";
-  } else if (lowerMessage.includes('blog') || lowerMessage.includes('graphql')) {
-    return "GraphQL Blog to API blogowe z postami, komentarzami i auth JWT. Wykorzystuje FastAPI, Strawberry GraphQL, JWT i PostgreSQL. Posiada interaktywny GraphQL playground do testowania zapytań. Live demo: https://graphql-blog-lxjy.onrender.com/graphql";
-  } else if (lowerMessage.includes('ai') || lowerMessage.includes('chat') || lowerMessage.includes('proxy')) {
-    return "AI Chat Proxy to multi-provider proxy do 18 modeli AI: Groq, Mistral, NVIDIA, Gemini, Together. Oferuje streaming SSE, rate limiter oraz możliwość używania własnych kluczy API. Live demo: https://ai-chat-proxy-twj4.onrender.com";
-  } else if (lowerMessage.includes('unified') || lowerMessage.includes('portfolio')) {
-    return "Unified Portfolio API łączy 5 modułów w jednym API: URL shortener, blog, czat, task queue i RAG. Wspólna warstwa auth JWT, jeden deploy, jedna baza. Live demo: https://python-portfolio-y0z8.onrender.com";
-  } else if (lowerMessage.includes('technolog') || lowerMessage.includes('stack') || lowerMessage.includes('użyte')) {
-    return "Strona wykorzystuje: Python 3.12+, FastAPI, React 19, Vite, TailwindCSS, PostgreSQL, Docker, GitHub Actions, Render, oraz różne modele AI takie jak Groq, Mistral, NVIDIA, Gemini i Together AI.";
-  } else if (lowerMessage.includes('raport') || lowerMessage.includes('dokument')) {
-    return "Wygenerowano 140 raportów AI dokumentujących architekturę i kod wszystkich projektów. Raporty są dostępne pod adresem https://voicenotesite.github.io/reports/ i zawierają analizę architektury, security, performance oraz testów.";
-  } else if (lowerMessage.contains('docker') || lowerMessage.contains('ci/cd')) {
-    return "Każdy projekt posiada Dockerfile oraz konfigurację CI/CD poprzez GitHub Actions. Wszystkie projekty są deployowane na Render (dla backendów) i GitHub Pages (dla frontendów i raportów).";
-  } else {
-    return "Interesujące pytanie! Jako asystent AI tej strony, mogę pomóc Ci zrozumieć projekty, technologie oraz architekturę. Spróbuj zapytać o konkretne projekty (np. LinkShort, GraphQL Blog), technologie wykorzystane w projekcie lub szczegóły dotyczące deployowania i architektury.";
-  }
-}
+   const lowerMessage = message.toLowerCase();
+   
+   // Enhanced rule-based responses with more detailed information
+   if (lowerMessage.includes('strona') || lowerMessage.includes('słabo') || lowerMessage.includes('co to')) {
+     return "Ta strona to portfolio Bartosza prezentujące 12 projektów full-stack stworzonych w ciągu 6 dni intensywnej pracy. Portfolio zawiera: URL Shortener z pełnym uwierzytelnianiem JWT i śledzeniem kliknięć, GraphQL Blog z interaktywnym playgroundiem, AI Chat Proxy obsługujący 18 modeli AI z 5 dostawców, Unified API łączący 5 modułów w jednym deployie, oraz narzędzia devopsowe takie jak Portfolio Daemon. Każdy projekt posiada live demo na Render, kod źródłowy na GitHubie oraz szczegółowe raporty techniczne wygenerowane przez AI.";
+   } else if (lowerMessage.includes('projekt') || lowerMessage.includes('linkshort') || lowerMessage.includes('url')) {
+     return "LinkShort to zaawansowany URL shortener zbudowany z FastAPI na backendzie oraz React z TailwindCSS na froncie. Implementuje uwierzytelnianie JWT dla bezpiecznego dostępu do dashboardu, kompleksowe śledzenie kliknięć z analizą refererów i geolokalizacją, oraz panel administracyjny pokazujący statystyki w czasie rzeczywistym. Technologie: Python 3.12, FastAPI, React 19, Vite, TailwindCSS, PostgreSQL, Docker, GitHub Actions. Live demo: https://fastapiurl.onrender.com";
+   } else if (lowerMessage.includes('blog') || lowerMessage.includes('graphql')) {
+     return "GraphQL Blog to nowoczesne API blogowe wykorzystujące Strawberry GraphQL zamiast tradycyjnego REST. Posiada pełną obsługę postów, komentarzy z zagnieżdżonymi odpowiedziami, uwierzytelnianie JWT oraz interaktywny GraphQL IDE (Playground) do testowania złożonych zapytań. Backend: FastAPI, Strawberry, SQLAlchemy, Alembic dla migracji bazy, PostgreSQL. Frontend: React z Apollo Client. Live demo: https://graphql-blog-lxjy.onrender.com/graphql";
+   } else if (lowerMessage.includes('ai') || lowerMessage.includes('chat') || lowerMessage.includes('proxy')) {
+     return "AI Chat Proxy to inteligentny pośrednik umożliwiający dostęp do 18 różnych modeli AI od 5 dostawców: Groq (Llama3, Mixtral), Mistral (Mixtral-8x7b), NVIDIA (Nemotron), Gemini (Pro 1.5), oraz Together AI (różne modele LLM). Charakteryzuje się streamingiem odpowiedzi poprzez Server-Sent Events (SSE), inteligentnym rate limitingiem na poziomie użytkownika, możliwością używania własnych kluczy API dla personalizacji, oraz buforowaniem odpowiedzi dla optymalizacji kosztów. Backend: FastAPI, Python 3.12, asyncio. Live demo: https://ai-chat-proxy-twj4.onrender.com";
+   } else if (lowerMessage.includes('unified') || lowerMessage.includes('portfolio')) {
+     return "Unified Portfolio API to architektoniczne dzieło łączące pięć niezależnych modułów w jednej spójnej aplikacji: URL Shortener, GraphQL Blog, AI Chat Proxy, Async Task Queue oraz RAG PDF Q&A. Wszystkie moduły dzielą wspólną warstwę uwierzytelniania JWT, są deployowane jako jedna usługa na Render, używają jednej bazy danych PostgreSQL z oddzielnymi schematami dla każdego modułu, oraz posiadają zentralizowaną konfigurację i monitoring. To demonstracja mikrousług w praktyce bez złożoności operacyjnej. Live demo: https://python-portfolio-y0z8.onrender.com";
+   } else if (lowerMessage.includes('technolog') || lowerMessage.includes('stack') || lowerMessage.includes('użyte')) {
+     return "Stos technologiczny portfolio obejmuje: Backend: Python 3.12, FastAPI, Strawberry GraphQL, SQLAlchemy 2.0, Alembic, PostgreSQL; Frontend: React 19, Vite 5, TailwindCSS 3.4, Framer Motion; DevOps: Docker, GitHub Actions (CI/CD), Render (hosting backendów), GitHub Pages (frontend i raporty); AI/ML: Integracja z 18 modelami AI poprzez Groq, Mistral, NVIDIA, Gemini i Together AI; Inne: WebSocket dla real-time komunikacji, JWT dla bezpieczeństwa, SSE dla streamingu, Redis (planowany) dla cache'owania. Wszystkie projekty są napisane od zera bez użycia generatorów szablonów czy frameworków enterprise.";
+   } else if (lowerMessage.includes('raport') || lowerMessage.includes('dokument')) {
+     return "Wygenerowano ponad 140 szczegółowych raportów technicznych dokumentujących każdy aspekt projektów portfolio. Raporty są podzielone na kategorie: Architektura (wzory projektowe, decyzje techniczne, diagramy komponentów), Security (analiza podatności, implementacja uwierzytelniania i autoryzacji, szyfrowanie danych), Performance (testy obciążeniowe, optymalizacja zapytań, analiza zużycia zasobów), Testy (jednostkowe, integracyjne, end-to-end, pokrycie kodu), Deployment (konfiguracja CI/CD, strategie wersjonowania, monitoring produkcji), oraz Dane (modele danych, migracje schematu, optymalizacja zapytań). Raporty są dostępne w formacie PDF i Markdown pod adresem https://voicenotesite.github.io/reports/.";
+   } else if (lowerMessage.includes('docker') || lowerMessage.includes('ci/cd')) {
+     return "Każdy projekt w portfolio posiada spersonalizowany Dockerfile zoptymalizowany pod kątem wielkości obrazu i czasu budowy, wieloetapowe budowanie dla bezpieczeństwa, oraz konfigurację docker-compose do lokalnego rozwoju. CI/CD jest zaimplementowane poprzez GitHub Actions z workflowami obejmującymi: automatyczne testowanie przy każdym pushu, budowanie obrazów Docker, przesyłanie do Docker Hub (dla backendów), deploy na Render poprzez webhooki, oraz aktualizacja GitHub Pages dla frontendów i raportów. Pipeline obejmuje również skanowanie bezpieczeństwa kodepozytoru i zależności oraz powiadomienia o stanie deployu.";
+   } else if (lowerMessage.includes('daemon') || lowerMessage.includes('menedżer') || lowerMessage.includes('menedżer')) {
+     return "Portfolio Daemon to zaawansowany menedżer usług stworzony w Pythonie z asyncio i tkinter, który automatyzuje zarządzanie wszystkimi backendami portfolio. Charakteryzuje się: automatycznym wykrywaniem i uruchamianiem usług przy starcie systemu, health monitoringiem wszystkich endpointów z automatycznym restartem przy awariach, zarządzaniem SSH tunnelami dla bezpiecznego dostępu do usług lokalnych, kompletnym GUI do ręcznego kontrolowania usług, logowaniem wszystkich operacji w czasie rzeczywistym, oraz integracją z menedżerem portfolio poprzez własny API. Daemon działa w tle jako usługa systemowa i komunikuje się przez lokalny REST API na porcie 19876.";
+   }
+   return "Interesujące pytanie! Portfolio Bartosza to zbiór 12 projektów full-stack pokazujących praktyczne zastosowanie nowoczesnych technologii webowych. Każdy projekt został stworzony od zera, posiada pełną dokumentację, live demo oraz kod źródłowy na GitHubie. Aby uzyskać więcej szczegółów o konkretnym projekcie lub technologii, zapytaj o URL Shortener, GraphQL Blog, AI Chat Proxy, Unified API, stos technologiczny, raporty, Docker/CI/CD lub Portfolio Daemon.";
+ }
