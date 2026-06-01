@@ -484,39 +484,7 @@ header .summary:hover{
   margin-top:0;
   letter-spacing:0.5px;
 }
-.hero .scrolly{
-  position:absolute;
-  bottom:var(--spacing-4);
-  left:50%;
-  translate:-50%;
-  width:24px;
-  height:36px;
-  border:2px solid var(--border);
-  border-radius:12px;
-  opacity:0.6;
-  transition:all 0.4s ease;
-}
-.hero .scrolly:hover{
-  opacity:0.9;
-  transform:translate(-50%, calc(-50% + 2px));
-}
-.hero .scrolly::after{
-  content:'';
-  position:absolute;
-  top:8px;
-  left:50%;
-  translate:-50%;
-  width:3px;
-  height:12px;
-  background:var(--text-ter);
-  border-radius:1.5px;
-  animation:scrollHint 2.5s var(--ease-out) infinite;
-}
-@keyframes scrollHint{
-  0%,100%{opacity:0.6;transform:translate(-50%,0);}
-  50%{opacity:1;transform:translate(-50%,6px);}
-  100%{opacity:0.6;transform:translate(-50%,0);}
-}
+
 
 /* ─── Section ─── */
 .sec{
@@ -1024,7 +992,6 @@ footer a:hover{color:var(--accent)}
   .hero{min-height:auto;padding:4rem 0 2rem}
   .hero .stats{gap:1.25rem}
   .hero .stats div .num{font-size:1.4rem}
-  .hero .scrolly{display:none}
   .header-inner{padding:8px 16px;flex-wrap:wrap;gap:6px}
   .status-group{font-size:.65rem;gap:2px 10px;order:3;width:100%;justify-content:flex-start}
   header .summary{font-size:.6rem;margin-left:0}
@@ -1078,7 +1045,7 @@ footer a:hover{color:var(--accent)}
      <div><div class="num">8</div><div class="lbl">technologii</div></div>
      <div><div class="num">140</div><div class="lbl">raportów</div></div>
    </div>
-  <div class="scrolly" aria-hidden="true"></div>
+  
 </section>
 
 <!-- ─── PROJECTS ─── -->
