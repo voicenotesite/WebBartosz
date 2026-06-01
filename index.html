@@ -988,6 +988,182 @@ footer a:hover{color:var(--accent)}
 }
 .card:hover .glow{opacity:1}
 
+/* AI Assistant Styles */
+.ai-assistant-btn{
+  position:fixed;
+  bottom:var(--spacing-6);
+  right:var(--spacing-6);
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  font-size:1.5rem;
+  cursor:pointer;
+  box-shadow:var(--shadow-md);
+  transition:all 0.3s ease;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.ai-assistant-btn:hover{
+  background:var(--accent2);
+  transform:scale(1.1);
+  box-shadow:var(--shadow-lg);
+}
+.ai-assistant-btn:active{
+  transform:scale(0.95);
+}
+
+.ai-modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:1001;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(5px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s ease;
+}
+.ai-modal-overlay.open{
+  opacity:1;
+  pointer-events:auto;
+}
+.ai-modal{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  max-width:400px;
+  width:90%;
+  max-height:80vh;
+  display:flex;
+  flex-direction:column;
+  transform:translateY(20px) scale(0.97);
+  transition:transform 0.35s var(--ease-out);
+  box-shadow:var(--shadow-xl);
+}
+.ai-modal-overlay.open .ai-modal{
+  transform:translateY(0) scale(1);
+}
+.ai-modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:var(--spacing-3) var(--spacing-4);
+  border-bottom:1px solid var(--border);
+}
+.ai-modal-header h3{
+  margin:0;
+  font-size:var(--fs-lg);
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  gap:var(--spacing-2);
+}
+.ai-modal-header h3::before{
+  content:'🤖';
+  font-size:1.2rem;
+}
+.ai-modal-close{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:none;
+  background:rgba(136,136,176,.1);
+  color:var(--text-ter);
+  font-size:1.1rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .2s;
+}
+.ai-modal-close:hover{
+  background:rgba(136,136,176,.2);
+  color:var(--text);
+}
+.ai-modal-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  padding:var(--spacing-3);
+}
+.ai-chat-messages{
+  flex:1;
+  overflow-y:auto;
+  padding:var(--spacing-2) 0;
+  margin-bottom:var(--spacing-3);
+}
+.ai-message{
+  margin-bottom:var(--spacing-3);
+  max-width:80%;
+}
+.ai-bot-message{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:var(--spacing-2) var(--spacing-3);
+  margin-left:auto;
+}
+.ai-user-message{
+  background:var(--accent-dim);
+  border:1px solid rgba(108,92,231,0.3);
+  border-radius:var(--radius);
+  padding:var(--spacing-2) var(--spacing-3);
+  margin-left:auto;
+  margin-right:0;
+}
+.ai-chat-input{
+  display:flex;
+  gap:var(--spacing-2);
+}
+.ai-chat-input input{
+  flex:1;
+  padding:var(--spacing-2) var(--spacing-3);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:rgba(0,0,0,.2);
+  color:var(--text);
+  font-family:var(--font);
+  outline:none;
+}
+.ai-chat-input input:focus{
+  border-color:var(--accent);
+}
+.ai-chat-input button{
+  padding:var(--spacing-2) var(--spacing-3);
+  border:none;
+  background:var(--accent);
+  color:#fff;
+  border-radius:var(--radius);
+  cursor:pointer;
+  font-weight:600;
+  transition:all .2s ease;
+}
+.ai-chat-input button:hover{
+  background:var(--accent2);
+  transform:translateY(-1px);
+}
+.ai-chat-input button:active{
+  transform:translateY(0);
+}
+
+/* Responsive adjustments */
+@media(max-width:480px){
+  .ai-assistant-btn{
+    width:48px;
+    height:48px;
+    font-size:1.25rem;
+    bottom:var(--spacing-4);
+    right:var(--spacing-4);
+  }
+}
+
 @media(max-width:480px){
   .hero{min-height:auto;padding:4rem 0 2rem}
   .hero .stats{gap:1.25rem}
@@ -1497,6 +1673,96 @@ document.querySelectorAll('.r').forEach(el => obs.observe(el));
 /* ─── Init ─── */
 check();
 setInterval(check, 60000);
-</script>
-</body>
-</html>
+
+/* ─── AI Assistant ─── */
+const aiAssistantBtn = document.getElementById('aiAssistantBtn');
+const aiModalOverlay = document.getElementById('aiModalOverlay');
+const aiModalClose = document.getElementById('aiModalClose');
+const aiChatMessages = document.getElementById('aiChatMessages');
+const aiChatInput = document.getElementById('aiChatInput');
+const aiChatSend = document.getElementById('aiChatSend');
+
+// Open AI assistant modal
+aiAssistantBtn.addEventListener('click', () => {
+  aiModalOverlay.classList.add('open');
+  aiChatInput.focus();
+});
+
+// Close AI assistant modal
+aiModalClose.addEventListener('click', () => {
+  aiModalOverlay.classList.remove('open');
+});
+
+// Close modal when clicking outside
+aiModalOverlay.addEventListener('click', (e) => {
+  if (e.target === aiModalOverlay) {
+    aiModalOverlay.classList.remove('open');
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    aiModalOverlay.classList.remove('open');
+  }
+});
+
+// Send message on button click
+aiChatSend.addEventListener('click', sendMessage);
+
+// Send message on Enter key
+aiChatInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    sendMessage();
+  }
+});
+
+function sendMessage() {
+  const message = aiChatInput.value.trim();
+  if (!message) return;
+  
+  // Add user message
+  addMessage(message, 'user');
+  
+  // Clear input
+  aiChatInput.value = '';
+  
+  // Simulate AI response (in a real app, this would call an AI API)
+  setTimeout(() => {
+    const botResponse = getAIResponse(message);
+    addMessage(botResponse, 'bot');
+  }, 500);
+}
+
+function addMessage(content, type) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `ai-message ai-${type}-message`;
+  messageDiv.textContent = content;
+  aiChatMessages.appendChild(messageDiv);
+  aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+}
+
+function getAIResponse(message) {
+  const lowerMessage = message.toLowerCase();
+  
+  // Simple rule-based responses for demo purposes
+  if (lowerMessage.includes('strona') || lowerMessage.includes('słabo') || lowerMessage.includes('co to')) {
+    return "Ta strona to portfolio Bartosza pokazujące 12 projektów stworzonych w 6 dni. Zawiera projekty takie jak URL Shortener, GraphQL Blog, AI Chat Proxy i wiele innych. Każdy projekt ma live demo, kod źródłowy na GitHubie oraz szczegółowe raporty.";
+  } else if (lowerMessage.includes('projekt') || lowerMessage.includes('linkshort') || lowerMessage.includes('url')) {
+    return "LinkShort to URL shortener z JWT auth, click trackingiem i dashboardem React + Tailwind. Projekt wykorzystuje FastAPI, React, JWT, PostgreSQL i Docker. Możesz zobaczyć live demo pod adresem https://fastapiurl.onrender.com";
+  } else if (lowerMessage.includes('blog') || lowerMessage.includes('graphql')) {
+    return "GraphQL Blog to API blogowe z postami, komentarzami i auth JWT. Wykorzystuje FastAPI, Strawberry GraphQL, JWT i PostgreSQL. Posiada interaktywny GraphQL playground do testowania zapytań. Live demo: https://graphql-blog-lxjy.onrender.com/graphql";
+  } else if (lowerMessage.includes('ai') || lowerMessage.includes('chat') || lowerMessage.includes('proxy')) {
+    return "AI Chat Proxy to multi-provider proxy do 18 modeli AI: Groq, Mistral, NVIDIA, Gemini, Together. Oferuje streaming SSE, rate limiter oraz możliwość używania własnych kluczy API. Live demo: https://ai-chat-proxy-twj4.onrender.com";
+  } else if (lowerMessage.includes('unified') || lowerMessage.includes('portfolio')) {
+    return "Unified Portfolio API łączy 5 modułów w jednym API: URL shortener, blog, czat, task queue i RAG. Wspólna warstwa auth JWT, jeden deploy, jedna baza. Live demo: https://python-portfolio-y0z8.onrender.com";
+  } else if (lowerMessage.includes('technolog') || lowerMessage.includes('stack') || lowerMessage.includes('użyte')) {
+    return "Strona wykorzystuje: Python 3.12+, FastAPI, React 19, Vite, TailwindCSS, PostgreSQL, Docker, GitHub Actions, Render, oraz różne modele AI takie jak Groq, Mistral, NVIDIA, Gemini i Together AI.";
+  } else if (lowerMessage.includes('raport') || lowerMessage.includes('dokument')) {
+    return "Wygenerowano 140 raportów AI dokumentujących architekturę i kod wszystkich projektów. Raporty są dostępne pod adresem https://voicenotesite.github.io/reports/ i zawierają analizę architektury, security, performance oraz testów.";
+  } else if (lowerMessage.contains('docker') || lowerMessage.contains('ci/cd')) {
+    return "Każdy projekt posiada Dockerfile oraz konfigurację CI/CD poprzez GitHub Actions. Wszystkie projekty są deployowane na Render (dla backendów) i GitHub Pages (dla frontendów i raportów).";
+  } else {
+    return "Interesujące pytanie! Jako asystent AI tej strony, mogę pomóc Ci zrozumieć projekty, technologie oraz architekturę. Spróbuj zapytać o konkretne projekty (np. LinkShort, GraphQL Blog), technologie wykorzystane w projekcie lub szczegóły dotyczące deployowania i architektury.";
+  }
+}
