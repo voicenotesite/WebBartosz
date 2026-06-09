@@ -6,21 +6,16 @@
 <title>Bartosz Osiej</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#000;
-  --text:#00ff88;
-  --font:monospace;
-}
+:root{--bg:#000;--text:#00ff88;--font:monospace}
 *{transition:none!important}
 body{font-family:var(--font);background:var(--bg);color:var(--text);overflow:hidden;height:100vh}
-
 #terminal{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999}
 #terminal .wrap{max-width:600px;width:90%;text-align:center}
 #terminal h2{font-size:1.5rem;margin-bottom:20px;color:#00ff88;overflow:hidden;border-right:2px solid #00ff88;white-space:nowrap;animation:typing 2s steps(25,start)}
-#terminal .err{color:#ff4444;margin:20px 0;opacity:0;transition:opacity 0.3s}
+#terminal .err{color:#ff4444;margin:20px 0;opacity:0}
 #terminal .err.on{opacity:1;animation:errorFlicker 0.4s step-end}
 @keyframes typing{width:0}
-@keyframes errorFlicker{0%,10%,20%,30%,40%,50%,60%,70%,80%,90%,100%{opacity:1}3%,6%,9%,12%,15%,18%,21%,24%,27%,30%{opacity:0}}
+@keyframes errorFlicker{0%,8%,16%,24%,32%,40%,48%,56%,64%,72%,80%,88%,96%,100%{opacity:1}4%,12%,20%,28%,36%,44%,52%,60%,68%,76%,84%,92%,96%{opacity:0}}
 #site{display:none}
 header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9);border-bottom:1px solid #00ff88;display:flex;align-items:center;z-index:100}
 .logo{font-weight:700;font-size:1.25rem;padding:20px;font-family:monospace;color:#00ff88}
@@ -45,7 +40,6 @@ header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9
 <div style="color:#a0a0c0" id="prompt">$ access denied</div>
 </div>
 </div>
-
 <div id="site">
 <header><span class="logo">&gt; bartosz@portfolio:~$ whoami</span></header>
 <section class="hero">
@@ -62,7 +56,6 @@ header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9
 <p>© 2025 Bartosz Osiej | <a href="admin/.secret.html">Admin</a></p>
 </div>
 </div>
-
 <script>
 const defaults={name:'Bartosz Osiej',title:'AI Systems Engineer',hero1:'Building Systems That Work',hero2:'',heroDesc:'',projects:[
   {name:'LinkShort',url:'https://fastapiurl.onrender.com',desc:'JWT URL shortener'},
@@ -71,9 +64,10 @@ const defaults={name:'Bartosz Osiej',title:'AI Systems Engineer',hero1:'Building
 ]};
 let d=Object.assign({},defaults);
 function load(){const s=localStorage.getItem('adminData');if(s)d=Object.assign({},defaults,JSON.parse(s))}
-function render(){const g=document.getElementById('grid');g.innerHTML='';(d.projects||defaults.projects).forEach(p=>{const el=document.createElement('div');el.className='project';el.innerHTML=`<h3>${p.name}</h3><p>${p.desc}</p>`;g.appendChild(el)})}
-document.title=d.name;document.querySelector('.logo').textContent='> '+d.name+' ~$';document.querySelector('.hero h1').textContent=d.hero1+(d.hero2?' '+d.hero2:'');document.querySelector('.hero p').textContent=d.heroDesc||d.title;
-
-function go(){load();render();document.getElementById('err').classList.add('on');setTimeout(()=>{document.getElementById('err').classList.remove('on');setTimeout(()=>{document.getElementById('terminal').style.display='none';document.getElementById('site').style.display='block';document.body.style.overflow='auto'},300)},400)}
-
-setTimeout(go,1800);
+function renderProjects(){const g=document.getElementById('grid');g.innerHTML='';(d.projects||defaults.projects).forEach(p=>{const el=document.createElement('div');el.className='project';el.innerHTML=`<h3>${p.name}</h3><p>${p.desc}</p>`;g.appendChild(el)})}
+function applyData(){document.title=d.name;document.querySelector('.logo').textContent='> '+d.name+' ~$';document.querySelector('.hero h1').textContent=d.hero1+(d.hero2?' '+d.hero2:'');document.querySelector('.hero p').textContent=d.heroDesc||d.title;}
+function go(){load();applyData();renderProjects();document.getElementById('err').classList.add('on');setTimeout(()=>{document.getElementById('terminal').style.opacity='0';setTimeout(()=>{document.getElementById('terminal').style.display='none';document.getElementById('site').style.display='block';document.body.style.overflow='auto'},400)},500)}
+setTimeout(go,1500);
+</script>
+</body>
+</html>
