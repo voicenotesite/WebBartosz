@@ -132,7 +132,7 @@ footer a{color:var(--accent-grad);text-decoration:none}
   <div class="wrap">
     <div class="grid">
       <div class="card r" data-project="linkshort">
-        <div class="img" style="height:120px;background:url('https://voicenotesite.github.io/reports/screenshots/linkshort-1.jpg');background-size:cover;border-radius:8px;margin-bottom:12px"></div>
+        <div style="height:120px;background:linear-gradient(135deg,#6c5ce7,#a29bfe);border-radius:8px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:#fff">LinkShort</div>
         <h3>LinkShort <span class="badge live">Live</span></h3>
         <p>URL shortener z JWT auth, click trackingiem i dashboardem React + Tailwind.</p>
         <div class="tech"><span>FastAPI</span><span>React</span><span>Tailwind</span><span>JWT</span></div>
@@ -236,7 +236,25 @@ footer a{color:var(--accent-grad);text-decoration:none}
 </section>
 
 <footer>
-  <div class="wrap">Bartosz Osiej · <a href="https://github.com/voicenotesite">GitHub</a> · <a href="mailto:mmc29213@gmail.com">Contact</a></div>
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:32px">
+      <div>
+        <h4 style="margin-bottom:16px">Bartosz Osiej</h4>
+        <p style="color:var(--text-dim)">Full-stack developer specjalizujący się w FastAPI, React i AI integration.</p>
+      </div>
+      <div>
+        <h4 style="margin-bottom:16px">Linki</h4>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <a href="https://github.com/voicenotesite" style="color:var(--accent-grad)">GitHub</a>
+          <a href="https://voicenotesite.github.io/reports/" style="color:var(--accent-grad)">Reports</a>
+          <a href="mailto:mmc29213@gmail.com" style="color:var(--accent-grad)">Kontakt</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:24px;color:var(--text-dim)">
+      <p>Bartosz Osiej © 2025 | All rights reserved</p>
+    </div>
+  </div>
 </footer>
 
 <div class="sec" style="padding:4rem 0">
@@ -253,6 +271,20 @@ footer a{color:var(--accent-grad);text-decoration:none}
     </div>
   </div>
 </div>
+
+<section class="sec" style="background:rgba(10,10,20,0.3);padding:5rem 0">
+  <div class="sec-header wrap">
+    <h2><span>Screenshoty</span><span class="line"></span></h2>
+  </div>
+  <div class="wrap">
+    <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:2rem">
+      <div style="height:150px;background:linear-gradient(135deg,#6c5ce7,#a29bfe);border-radius:12px"></div>
+      <div style="height:150px;background:linear-gradient(135deg,#00b894,#00cec9);border-radius:12px"></div>
+      <div style="height:150px;background:linear-gradient(135deg,#6c5ce7,#fdcb6e);border-radius:12px"></div>
+      <div style="height:150px;background:linear-gradient(135deg,#2d3436,#636e72);border-radius:12px"></div>
+    </div>
+  </div>
+</section>
 
 <script>
 // Reveal on scroll
