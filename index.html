@@ -81,18 +81,7 @@ header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9
 </section>
 
 <section class="projects" id="projects">
-<div class="project">
-<h3>LinkShort</h3>
-<p>JWT URL shortener with analytics dashboard.</p>
-</div>
-<div class="project">
-<h3>AI Chat Proxy</h3>
-<p>Unified proxy for 18+ AI models.</p>
-</div>
-<div class="project">
-<h3>GraphQL Blog</h3>
-<p>Blog API with authentication.</p>
-</div>
+<div id="projects-grid"></div>
 </section>
 
 <section class="experience" id="experience">
@@ -110,9 +99,27 @@ header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9
 </div>
 
 <script>
+async function loadProjects(){
+  try{
+    const res=await fetch('data/projects.json');
+    const projects=await res.json();
+    const grid=document.getElementById('projects-grid');
+    grid.innerHTML='';
+    projects.forEach(p=>{
+      const d=document.createElement('div');
+      d.className='project';
+      d.innerHTML=`<h3>${p.name}</h3><p>${p.desc}</p>`;
+      grid.appendChild(d);
+    });
+  }catch(e){
+    document.getElementById('projects-grid').innerHTML='<div class="project"><h3>Projects loaded from admin panel</h3></div>';
+  }
+}
+
 setTimeout(()=>{
   document.getElementById('terminal').style.display='none';
   document.getElementById('site').style.display='block';
+  loadProjects();
 },2500);
 </script>
 </body>

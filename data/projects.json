@@ -1,0 +1,7 @@
+[
+  {"id":1,"name":"LinkShort","url":"https://fastapiurl.onrender.com","desc":"JWT URL shortener with click analytics","tags":["FastAPI","React","JWT"]},
+  {"id":2,"name":"AI Chat Proxy","url":"https://ai-chat-proxy-twj4.onrender.com","desc":"Unified proxy for 18+ AI models","tags":["FastAPI","SSE","Groq"]},
+  {"id":3,"name":"GraphQL Blog","url":"https://graphql-blog-lxjy.onrender.com/graphql","desc":"Blog API with posts and comments","tags":["FastAPI","Strawberry","GraphQL"]},
+  {"id":4,"name":"Unified Portfolio API","url":"https://python-portfolio-y0z8.onrender.com","desc":"5 modules in single architecture","tags":["FastAPI","PostgreSQL","JWT"]},
+  {"id":5,"name":"Task Queue","url":"https://github.com/voicenotesite/task-queue","desc":"Async task queue with WebSocket","tags":["FastAPI","WebSocket","Redis"]}
+]

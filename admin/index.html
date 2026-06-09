@@ -41,6 +41,10 @@ header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9
 .form-group label{display:block;color:#888;margin-bottom:5px;font-family:monospace}
 .form-group input{width:100%;padding:10px;background:#111;border:1px solid #333;color:#ff4444;font-family:monospace}
 .btn{background:#ff4444;color:#000;border:none;padding:12px 24px;font-weight:bold;font-family:monospace;cursor:pointer}
+.projects-list{margin-top:30px}
+.project-item{display:flex;gap:10px;align-items:center;background:#111;padding:10px;margin-bottom:10px;border:1px solid #333}
+.project-item input{flex:1;background:#000;color:#ff4444;border:none;padding:8px}
+.del{background:#333;color:#ff4444;border:none;padding:5px 10px;cursor:pointer;font-family:monospace}
 </style>
 </head>
 <body>
@@ -78,13 +82,40 @@ header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9
 <label>URL</label>
 <input type="text" placeholder="https://...">
 </div>
-<button class="btn">Add Project</button>
+<button class="btn" onclick="addProject()">Add Project</button>
+<div class="projects-list" id="projectsList"></div>
+<button class="btn" onclick="saveProjects()">Save to JSON File</button>
+<textarea id="jsonOutput" style="width:100%;height:200px;background:#000;color:#ff4444;font-family:monospace;margin-top:20px"></textarea>
 </div>
 </div>
 </div>
 </div>
 
 <script>
+let projects=[];
+const form={name:'',url:'',desc:'',tags:''};
+
+function addProject(){
+  const d=document.createElement('div');
+  d.className='project-item';
+  d.innerHTML=`
+    <input placeholder="Name" value="New Project">
+    <input placeholder="URL">
+    <input placeholder="Description">
+    <button class="del" onclick="this.parentElement.remove()">X</button>`;
+  document.getElementById('projectsList').appendChild(d);
+}
+
+function saveProjects(){
+  const items=document.querySelectorAll('.project-item');
+  const arr=[];
+  items.forEach((it,idx)=>{
+    const inp=it.querySelectorAll('input');
+    arr.push({id:idx+1,name:inp[0].value,url:inp[1].value,desc:inp[2].value,tags:inp[3]?inp[3].value.split(',').map(x=>x.trim()):[]});
+  });
+  document.getElementById('jsonOutput').value=JSON.stringify(arr,null,2);
+}
+
 setTimeout(()=>{
   document.getElementById('terminal').style.display='none';
   document.getElementById('site').style.display='block';
