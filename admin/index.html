@@ -15,161 +15,133 @@
   --text:#F0F4FF;
   --text-dim:#94A3B8;
 }
-*{transition:none!important}
 body{font-family:system-ui;background:var(--bg);color:var(--text);min-height:100vh}
-header{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--border);padding:20px;z-index:100}
-.header-inner{display:flex;align-items:center;justify-content:space-between}
-.logo{font-weight:700;color:var(--cyan)}
-main{max-width:1400px;margin:0 auto;padding:20px}
-h2{color:var(--cyan);margin-bottom:20px;font-size:1.5rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+header{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--border);padding:16px;z-index:100}
+.logo{font-weight:700;color:var(--cyan);font-size:1.2rem}
+main{max-width:1200px;margin:0 auto;padding:16px}
+section{margin-bottom:32px}
+h2{color:var(--cyan);margin-bottom:16px;font-size:1.3rem}
 .field{margin-bottom:20px}
 .field label{display:block;color:var(--text-dim);margin-bottom:6px;font-size:0.85rem}
 .field input,.field textarea,.field select{width:100%;padding:12px;background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:6px;font-family:inherit}
-.field textarea{min-height:100px;resize:vertical}
-.btn{background:var(--cyan);color:#000;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:600}
+.field textarea{min-height:80px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.row{display:flex;gap:12px;align-items:center}
+.btn{background:var(--cyan);color:#000;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.9rem}
 .btn:hover{opacity:0.9}
 .btn-secondary{background:var(--violet);color:#fff}
-.preview{margin-top:30px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px}
-.preview h3{color:var(--text);margin-bottom:10px}
-.del{color:#ff6b6b;background:rgba(255,107,107,0.1);padding:6px 10px;border-radius:4px;margin-left:10px}
-.social-item{display:flex;gap:10px;align-items:center;margin-bottom:10px}
-.social-item input{flex:1}
+.list{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:8px;max-height:200px;overflow-y:auto}
+.item{background:rgba(255,255,255,0.03);padding:10px;margin-bottom:8px;border-radius:4px;display:flex;gap:8px;align-items:center}
+.item input{flex:1;background:rgba(0,0,0,0.2);border:none;padding:6px;color:var(--text)}
+.del{color:#ff6b6b;background:rgba(255,107,107,0.1);border:none;padding:6px 10px;border-radius:4px;cursor:pointer;font-size:0.8rem}
+.preview{margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px}
+.preview h3{color:var(--cyan);margin-bottom:12px}
+.preview-content{font-family:monospace;font-size:0.75rem;color:var(--text-dim);word-break:break-all}
 @media(max-width:768px){
+  main{padding:12px}
   .grid{grid-template-columns:1fr}
-  main{padding:10px}
+  h2{font-size:1.1rem}
 }
 </style>
 </head>
 <body>
-<header>
-<div class="header-inner">
-<span class="logo">ADMIN PANEL</span>
-<div><button class="btn" onclick="saveAll()">Save All</button></div>
-</div>
-</header>
+<header><div class="logo">ADMIN PANEL</div></header>
 <main>
-<h2>Site Settings</h2>
+<section><h2>Identity</h2>
 <div class="grid">
-<div class="field">
-<label>Site Title</label>
-<input id="siteTitle" placeholder="My Portfolio">
-</div>
-<div class="field">
-<label>Your Name</label>
-<input id="authorName" placeholder="Jan Kowalski">
-</div>
-<div class="field">
-<label>Description</label>
-<textarea id="siteDesc" placeholder="What this site is about"></textarea>
-</div>
-</div>
+<div class="field"><label>Name</label><input id="name" placeholder="Bartosz Osiej"></div>
+<div class="field"><label>Job Title</label><input id="title" placeholder="AI Systems Engineer"></div>
+<div class="field"><label>Profile Image URL</label><input id="avatar" placeholder="https://..."></div>
+</div></div>
+</section>
 
-<h2 style="margin-top:30px">Hero Section</h2>
-<div class="grid">
-<div class="field">
-<label>Hero Title (line 1)</label>
-<input id="heroTitle1" placeholder="Cześć, jestem">
-</div>
-<div class="field">
-<label>Hero Title (line 2)</label>
-<input id="heroTitle2" placeholder="Jan Kowalski">
-</div>
-<div class="field">
-<label>Hero Description</label>
-<textarea id="heroDesc" placeholder="Your description"></textarea>
-</div>
-</div>
+<section><h2>Hero</h2>
+<div class="field"><label>Title Line 1</label><input id="hero1" placeholder="Building Systems That Work"></div>
+<div class="field"><label>Title Line 2</label><input id="hero2" placeholder=""></div>
+<div class="field"><label>Description</label><input id="heroDesc" placeholder="AI infrastructure, scalable backends"></div>
+</section>
 
-<h2>Social Links</h2>
-<div id="socialList">
-<div class="social-item">
-<select onchange="addSocial(this.value)">
-<option value="">+ Add Social</option>
-<option value="github">GitHub</option>
-<option value="linkedin">LinkedIn</option>
-<option value="twitter">Twitter</option>
-<option value="email">Email</option>
-</select>
-</div>
-</div>
-<div id="socialFields"></div>
+<section><h2>Social Links</h2>
+<div id="socialList" class="list"></div>
+<button class="btn btn-secondary" onclick="addSocial()">+ Add Social</button>
+</section>
 
-<h2>Projects</h2>
-<div id="projectList">
-<div class="field">
-<label>Project 1</label>
-<input placeholder="Project name">
-</div>
-</div>
+<section><h2>Projects</h2>
+<div id="projectList" class="list"></div>
 <button class="btn btn-secondary" onclick="addProject()">+ Add Project</button>
+</section>
 
-<h2>Sections Order</h2>
-<div id="sectionOrder">
-<label><input type="checkbox" checked> About</label><br>
-<label><input type="checkbox" checked> Projects</label><br>
-<label><input type="checkbox" checked> Experience</label><br>
-<label><input type="checkbox" checked> Contact</label><br>
-</div>
+<section><h2>Experience</h2>
+<div id="expList" class="list"></div>
+<button class="btn btn-secondary" onclick="addExp()">+ Add Experience</button>
+</section>
 
-<h2>Preview</h2>
-<div class="preview">
-<div id="previewContent"></div>
-</div>
+<section><h2>Tech Stack</h2>
+<div id="techList" class="list"></div>
+<button class="btn btn-secondary" onclick="addTech()">+ Add Tech</button>
+</section>
+
+<section><h2>Footer</h2>
+<div class="field"><label>Copyright Text</label><input id="copyright" placeholder="© 2025 Bartosz Osiej"></div>
+</section>
+
+<section><h2>Actions</h2>
+<div class="row"><button class="btn" onclick="save()">Save</button><button class="btn btn-secondary" onclick="exportJSON()">Export JSON</button></div>
+<textarea id="exportBox" style="display:none"></textarea>
+</section>
+
+<section><h2>Preview</h2>
+<div class="preview"><div id="preview" class="preview-content"></div></div>
+</section>
 </main>
 
 <script>
-let settings={
-  title:"Bartosz Osiej Portfolio",
-  name:"Bartosz Osiej",
-  desc:"AI Systems Engineer",
-  heroTitle1:"Building Systems That Work",
-  heroTitle2:"",
-  heroDesc:"AI infrastructure & scalable backends",
-  socials:{github:"https://github.com/voicenotesite",linkedin:"",twitter:"",email:""},
-  projects:[]
-};
+let data={name:'Bartosz Osiej',title:'AI Systems Engineer',avatar:'',hero1:'Building Systems That Work',hero2:'',heroDesc:'Production APIs & AI infrastructure',social:{},projects:[],exp:[],tech:[],copyright:'© 2025 Bartosz Osiej'};
+const socialTemplates=['github','linkedin','twitter','email'];
 
-function addSocial(type){
-  if(!type)return;
-  const d=document.createElement('div');
-  d.className='social-item';
-  d.innerHTML=`
-    <select onchange="updateSocialType(this,${Date.now()})">
-      <option value="github" ${type==='github'?'selected':''}>GitHub</option>
-      <option value="linkedin" ${type==='linkedin'?'selected':''}>LinkedIn</option>
-      <option value="twitter" ${type==='twitter'?'selected':''}>Twitter</option>
-      <option value="email" ${type==='email'?'selected':''}>Email</option>
-    </select>
-    <input placeholder="URL" value="${settings.socials[type]||''}">
-    <button class="del" onclick="this.parentElement.remove()">×</button>`;
-  document.getElementById('socialFields').appendChild(d);
+function addSocial(){const k=Object.keys(data.social).length;data.social['s'+k]='';render();}
+function addProject(){data.projects.push({name:'',url:'',desc:'',tags:''});render();}
+function addExp(){data.exp.push({role:'',company:'',date:'',desc:''});render();}
+function addTech(){data.tech.push({name:'',level:50});render();}
+
+function render(){
+  document.getElementById('name').value=data.name;
+  document.getElementById('title').value=data.title;
+  document.getElementById('avatar').value=data.avatar;
+  document.getElementById('hero1').value=data.hero1;
+  document.getElementById('hero2').value=data.hero2;
+  document.getElementById('heroDesc').value=data.heroDesc;
+  document.getElementById('copyright').value=data.copyright;
+
+  const sl=document.getElementById('socialList');sl.innerHTML='';
+  Object.entries(data.social).forEach(([k,v])=>{
+    const d=document.createElement('div');d.className='item';
+    d.innerHTML=`<input value="${v}" onchange="data.social['${k}']=this.value" placeholder="URL"><select onchange="data.social['${k}']=this.value"><option ${v.includes('github')?'selected':''}>github</option><option ${v.includes('linkedin')?'selected':''}>linkedin</option><option ${v.includes('twitter')?'selected':''}>twitter</option><option ${v.includes('email')?'selected':''}>email</option></select><button class="del" onclick="deleteSocial('${k}')">×</button>`;
+    sl.appendChild(d);
+  });
+
+  const pl=document.getElementById('projectList');pl.innerHTML='';
+  data.projects.forEach((p,i)=>{
+    const d=document.createElement('div');d.className='item';
+    d.innerHTML=`<input value="${p.name||''}" onchange="data.projects[${i}].name=this.value" placeholder="Name"><input value="${p.url||''}" onchange="data.projects[${i}].url=this.value" placeholder="URL">`;
+    pl.appendChild(d);
+  });
+
+  const el=document.getElementById('expList');el.innerHTML='';
+  data.exp.forEach((e,i)=>{
+    const d=document.createElement('div');d.className='item';
+    d.innerHTML=`<input value="${e.role||''}" onchange="data.exp[${i}].role=this.value" placeholder="Role">`;
+    el.appendChild(d);
+  });
+
+  document.getElementById('preview').textContent=`Name: ${data.name} | ${data.title} | ${data.hero1}`;
 }
 
-function addProject(){
-  const d=document.createElement('div');
-  d.className='field';
-  d.innerHTML='<label>Project</label><input placeholder="Project name URL tags">';
-  document.getElementById('projectList').appendChild(d);
-}
+function save(){localStorage.setItem('site_data',JSON.stringify(data));alert('Saved');}
+function exportJSON(){document.getElementById('exportBox').value=JSON.stringify(data,null,2);document.getElementById('exportBox').style.display='block';}
+function load(){const s=localStorage.getItem('site_data');if(s)data=JSON.parse(s);}
 
-function saveAll(){
-  localStorage.setItem('portfolio_settings',JSON.stringify(settings));
-  alert('Settings saved!');
-}
-
-function loadAll(){
-  const s=localStorage.getItem('portfolio_settings');
-  if(s)settings=JSON.parse(s);
-  document.getElementById('siteTitle').value=settings.title||'';
-  document.getElementById('authorName').value=settings.name||'';
-  document.getElementById('siteDesc').value=settings.desc||'';
-  document.getElementById('heroTitle1').value=settings.heroTitle1||'';
-  document.getElementById('heroTitle2').value=settings.heroTitle2||'';
-  document.getElementById('heroDesc').value=settings.heroDesc||'';
-}
-
-window.onload=function(){loadAll()};
+load();render();
 </script>
 </body>
 </html>
