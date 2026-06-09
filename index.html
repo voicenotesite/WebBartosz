@@ -87,52 +87,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 ::-webkit-scrollbar-thumb{background:var(--border-active);border-radius:2px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 
-/* ─── BG ─── */
-.bg-mesh{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  background-image: 
-    radial-gradient(rgba(108,92,231,.03) 1px,transparent 0),
-    radial-gradient(ellipse at 20% 50%,rgba(108,92,231,.03) 0,transparent 50%),
-    radial-gradient(ellipse at 80% 50%,rgba(108,92,231,.02) 0,transparent 50%);
-  background-size: 
-    calc(0.6vw + 0.6vh) calc(0.6vw + 0.6vh),
-    calc(0.8vw + 0.8vh) calc(0.8vw + 0.8vh),
-    calc(0.4vw + 0.4vh) calc(0.4vw + 0.4vh);
-  animation: bgShift 20s ease-in-out infinite;
-  opacity: 0.8;
-}
-
-@keyframes bgShift {
-  0%, 100% {
-    background-position: 0 0, 0 0, 0 0;
-  }
-  33% {
-    background-position: 10% 10%, -10% -10%, 5% -5%;
-  }
-  66% {
-    background-position: -10% 10%, 10% -10%, -5% 5%;
-  }
-}
-
-@keyframes heroBgShift {
-   0%, 100% {
-     background-position: 0% 0%;
-   }
-   50% {
-     background-position: 100% 100%;
-   }
-   100% {
-     background-position: 0% 0%;
-   }
- }
- @keyframes heroPulse {
-   0% { opacity: 0.5; }
-   100% { opacity: 0.8; }
- }
-
 /* ─── Layout ─── */
 .wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 var(--space-6)}
 
@@ -221,7 +175,7 @@ header .summary:hover{
 
 /* ─── Hero ─── */
 .hero{
-   min-height:85vh;
+   min-height:100vh;
    display:flex;
    flex-direction:column;
    justify-content:center;
@@ -229,90 +183,39 @@ header .summary:hover{
    text-align:center;
    padding:var(--spacing-8) var(--spacing-6) var(--spacing-7);
    position:relative;
-   overflow:hidden;
-   isolation:isolate;
+   background:
+     radial-gradient(circle at 20% 80%, rgba(108,92,231,0.04) 0, transparent 35%),
+     radial-gradient(circle at 80% 20%, rgba(162,155,254,0.03) 0, transparent 30%);
  }
- .hero .orb{
-   position:absolute;
-   border-radius:50%;
-   filter:blur(100px);
-   animation:orbFloat 20s ease-in-out infinite;
-   z-index:-2;
- }
- .hero .orb-1{
-   top:10%;
-   left:20%;
-   width:200px;
-   height:200px;
-   background:radial-gradient(circle, rgba(108,92,231,0.3), transparent);
-   animation-duration:20s;
- }
- .hero .orb-2{
-   top:70%;
-   left:80%;
-   width:150px;
-   height:150px;
-   background:radial-gradient(circle, rgba(162,155,254,0.25), transparent);
-   animation-duration:25s;
-   animation-direction:reverse;
- }
- .hero .orb-3{
-   top:40%;
-   left:70%;
-   width:100px;
-   height:100px;
-   background:radial-gradient(circle, rgba(34,197,94,0.2), transparent);
-   animation-duration:15s;
- }
- @keyframes orbFloat {
-   0%, 100% { transform:translate(0,0) scale(1); }
-   25% { transform:translate(20px,-20px) scale(1.1); }
-   50% { transform:translate(-20px,20px) scale(0.9); }
-   75% { transform:translate(10px,-10px) scale(1.05); }
- }
- .hero::before{
-   content:'';
-   position:absolute;
-   top:0;
-   left:0;
-   right:0;
-   bottom:0;
-   background:radial-gradient(ellipse at center, rgba(108,92,231,0.15) 0%, transparent 60%),
-             linear-gradient(135deg, rgba(6,6,14,0.25) 0%, rgba(12,12,26,0.15) 30%, rgba(6,6,14,0.2) 50%, rgba(12,12,26,0.15) 70%, rgba(6,6,14,0.25) 100%);
-   z-index:-1;
-   background-size: 300% 300%;
-   animation: heroBgShift 30s ease infinite, heroPulse 8s ease-in-out infinite alternate;
-   opacity: 0.7;
-}
 .hero .label{
-  display:inline-flex;
-  align-items:center;
-  gap:var(--spacing-2);
-  background:rgba(108,92,231,0.1);
-  border:1px solid rgba(108,92,231,0.2);
-  color:var(--accent2);
-  font-size:var(--fs-sm);
-  font-weight:600;
-  padding:var(--spacing-1) var(--spacing-4);
-  border-radius:50px;
-  margin-bottom:var(--spacing-5);
-  width:fit-content;
-  position:relative;
-  overflow:hidden;
-  transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.hero .label:hover{
-  background:rgba(108,92,231,0.15);
-  transform:translateY(-2px);
-  box-shadow:0 4px 12px rgba(108,92,231,0.2);
-}
-.hero .label .pulse{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--green);
-  animation:pulse-slow 3s ease-in-out infinite;
-}
+   display:inline-flex;
+   align-items:center;
+   gap:var(--spacing-2);
+   background:rgba(108,92,231,0.1);
+   border:1px solid rgba(108,92,231,0.2);
+   color:var(--accent2);
+   font-size:var(--fs-sm);
+   font-weight:600;
+   padding:var(--spacing-1) var(--spacing-4);
+   border-radius:50px;
+   margin-bottom:var(--spacing-5);
+   width:fit-content;
+   position:relative;
+   overflow:hidden;
+   transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ }
+ .hero .label:hover{
+   background:rgba(108,92,231,0.15);
+   transform:translateY(-2px);
+   box-shadow:0 4px 12px rgba(108,92,231,0.2);
+ }
+ .hero .label .pulse{
+   width:8px;
+   height:8px;
+   border-radius:50%;
+   background:var(--green);
+   animation:pulse-slow 3s ease-in-out infinite;
+ }
 .hero h1{
   font-size:clamp(2.75rem,8vw,4.75rem);
   font-weight:900;
@@ -464,15 +367,13 @@ header .summary:hover{
   background:var(--accent-dim);
 }
 .hero .stats{
-  perspective: 1000px;
-  transform-style: preserve-3d;
-}  display:flex;
-  gap:var(--spacing-6);
-  margin-bottom:var(--spacing-6);
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.hero .stats div{
+   display:flex;
+   gap:var(--spacing-6);
+   margin-bottom:var(--spacing-6);
+   flex-wrap:wrap;
+   justify-content:center;
+ }
+ .hero .stats div{
   text-align:center;
   min-width:100px;
 }
@@ -847,66 +748,6 @@ header .summary:hover{
    font-size:var(--fs-sm);
  }
 
- /* ─── Achievements ─── */
- .achievements-grid{
-   display:grid;
-   grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
-   gap:var(--spacing-4);
-   max-width:800px;
-   margin:0 auto;
- }
- .achievement-card{
-   background:var(--card);
-   border:1px solid var(--border);
-   border-radius:var(--radius);
-   padding:var(--spacing-5);
-   text-align:center;
-   transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-   position:relative;
-   overflow:hidden;
- }
- .achievement-card::before{
-   content:'';
-   position:absolute;
-   top:0;
-   left:0;
-   width:100%;
-   height:2px;
-   background:linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
-   opacity:0;
-   transition:opacity 0.4s ease;
- }
- .achievement-card:hover::before{
-   opacity:1;
- }
- .achievement-card:hover{
-   transform:translateY(-8px) scale(1.05);
-   box-shadow:var(--neon-glow), 0 15px 35px rgba(0, 0, 0, 0.3);
-   border-color:rgba(108, 92, 231, 0.4);
- }
- .achievement-icon{
-   font-size:2.5rem;
-   margin-bottom:var(--spacing-2);
-   filter:drop-shadow(0 0 10px rgba(108, 92, 231, 0.3));
- }
- .achievement-number{
-   font-size:var(--fs-4xl);
-   font-weight:900;
-   font-family:var(--mono);
-   letter-spacing:-1px;
-   background:linear-gradient(135deg, var(--accent), var(--accent2));
-   -webkit-background-clip:text;
-   -webkit-text-fill-color:transparent;
-   background-clip:text;
- }
- .achievement-label{
-   font-size:var(--fs-sm);
-   color:var(--text-ter);
-   font-weight:500;
-   text-transform:uppercase;
-   letter-spacing:0.5px;
- }
-
 /* ─── Ecosystem ─── */
 .eco{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;display:flex;flex-direction:column;align-items:center;gap:10px}
 .eco-row{display:flex;align-items:center;gap:12px;width:100%;justify-content:center;flex-wrap:wrap}
@@ -1259,133 +1100,11 @@ footer a:hover{color:var(--accent)}
   .sec{padding:2.5rem 0}
   .playground .tabs button{padding:8px 12px;font-size:.72rem}
   .playground .body .pg-top{flex-direction:column}
-  .playground .body .pg-top .cpy{width:100%;justify-content:center}
- @media(max-width:640px){.achievements-grid{grid-template-columns:repeat(2, 1fr)}}
- @media(max-width:480px){.achievements-grid{grid-template-columns:repeat(2, 1fr);gap:var(--spacing-3)}}
- @media(max-width:360px){.achievements-grid{grid-template-columns:1fr}}
-}
+.playground .body .pg-top .cpy{width:100%;justify-content:center}
+ }
 </style>
-</head>
-<body>
-
-<canvas id="particleCanvas"></canvas>
-
-<script>
-// WebGL Particle System
-const canvas = document.getElementById('particleCanvas');
-const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-
-if (gl) {
-    canvas.style.position = 'fixed';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.zIndex = '0';
-    canvas.style.pointerEvents = 'none';
-    
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        gl.viewport(0, 0, canvas.width, canvas.height);
-    }
-    window.addEventListener('resize', resize);
-    resize();
-    
-    const vertShader = gl.createShader(gl.VERTEX_SHADER);
-    gl.shaderSource(vertShader, `
-        attribute vec2 a_position;
-        attribute vec2 a_velocity;
-        varying vec2 v_velocity;
-        void main() {
-            gl_Position = vec4(a_position, 0, 1);
-            v_velocity = a_velocity;
-            gl_PointSize = 2.0 + length(v_velocity) * 8.0;
-        }
-    `);
-    gl.compileShader(vertShader);
-    
-    const fragShader = gl.createShader(gl.FRAGMENT_SHADER);
-    gl.shaderSource(fragShader, `
-        precision mediump float;
-        varying vec2 v_velocity;
-        void main() {
-            float alpha = 1.0 - length(gl_PointCoord - vec2(0.5)) * 2.0;
-            alpha = max(0.0, alpha);
-            vec3 color = vec3(0.45, 0.42, 0.95) + vec3(length(v_velocity) * 0.3);
-            gl_FragColor = vec4(color, alpha * 0.6);
-        }
-    `);
-    gl.compileShader(fragShader);
-    
-    const program = gl.createProgram();
-    gl.attachShader(program, vertShader);
-    gl.attachShader(program, fragShader);
-    gl.linkProgram(program);
-    gl.useProgram(program);
-    
-    const positions = [];
-    const velocities = [];
-    const mouse = { x: 0, y: 0 };
-    
-    window.addEventListener('mousemove', e => {
-        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    });
-    
-    for (let i = 0; i < 120; i++) {
-        positions.push(Math.random() * 2 - 1, Math.random() * 2 - 1);
-        velocities.push((Math.random() - 0.5) * 0.002, (Math.random() - 0.5) * 0.002);
-    }
-    
-    const posBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
-    
-    const velBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, velBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(velocities), gl.STATIC_DRAW);
-    
-    const posLoc = gl.getAttribLocation(program, 'a_position');
-    const velLoc = gl.getAttribLocation(program, 'a_velocity');
-    
-    gl.enableVertexAttribArray(posLoc);
-    gl.enableVertexAttribArray(velLoc);
-    
-    function animate() {
-        const velArray = new Float32Array(velocities);
-        for (let i = 0; i < positions.length; i += 2) {
-            const dx = mouse.x - positions[i];
-            const dy = mouse.y - positions[i + 1];
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 0.5 && dist > 0) {
-                velArray[i] += dx * 0.0002;
-                velArray[i + 1] += dy * 0.0002;
-            }
-            positions[i] += velArray[i];
-            positions[i + 1] += velArray[i + 1];
-            if (positions[i] > 1) positions[i] = -1;
-            if (positions[i] < -1) positions[i] = 1;
-            if (positions[i + 1] > 1) positions[i + 1] = -1;
-            if (positions[i + 1] < -1) positions[i + 1] = 1;
-        }
-        
-        gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
-        gl.bindBuffer(gl.ARRAY_BUFFER, velBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, velArray, gl.STATIC_DRAW);
-        
-        gl.clearColor(0, 0, 0, 0);
-        gl.clear(gl.COLOR_BUFFER_BIT);
-        
-        gl.drawArrays(gl.POINTS, 0, positions.length / 2);
-        requestAnimationFrame(animate);
-    }
-    animate();
-}
-</script>
-
-<div class="bg-mesh"></div>
+ </head>
+ <body>
 
 <header>
   <div class="header-inner">
@@ -1405,10 +1124,7 @@ if (gl) {
 
 <!-- ─── HERO ─── -->
 <section class="hero">
-   <div class="orb orb-1"></div>
-   <div class="orb orb-2"></div>
-   <div class="orb orb-3"></div>
-   <div class="label r r1 v"><span class="pulse"></span> 6 dni · 12 projektów · zero mocków</div>
+    <div class="label r r1 v"><span class="pulse"></span> 6 dni · 12 projektów · zero mocków</div>
   <h1 class="r r2 v">Ghost · Architect · Builder</h1>
   <div class="hooks r r3 v" id="hooks"></div>
   <div class="tags r r4 v">
@@ -1597,36 +1313,7 @@ if (gl) {
    </div>
  </section>
 
- <!-- ─── ACHIEVEMENTS ─── -->
- <section class="sec">
-   <div class="r">
-     <h2><span>Achievements</span><span class="line"></span></h2>
-   </div>
-   <div style="margin-top:1.5rem" class="achievements-grid r r1">
-     <div class="achievement-card">
-       <div class="achievement-icon">🚀</div>
-       <div class="achievement-number" data-target="6">0</div>
-       <div class="achievement-label">dni nauki</div>
-     </div>
-     <div class="achievement-card">
-       <div class="achievement-icon">⚡</div>
-       <div class="achievement-number" data-target="12">0</div>
-       <div class="achievement-label">projektów</div>
-     </div>
-     <div class="achievement-card">
-       <div class="achievement-icon">🤖</div>
-       <div class="achievement-number" data-target="18">0</div>
-       <div class="achievement-label">modeli AI</div>
-     </div>
-     <div class="achievement-card">
-       <div class="achievement-icon">📋</div>
-       <div class="achievement-number" data-target="140">0</div>
-       <div class="achievement-label">raportów</div>
-     </div>
-   </div>
- </section>
-
- <!-- ─── ABOUT ─── -->
+<!-- ─── ABOUT ─── -->
 <section class="sec">
   <div class="r">
     <h2><span>Stack &nbsp;→</span><span class="line"></span></h2>
@@ -1737,44 +1424,16 @@ function animateCounters() {
       counter.textContent = current.toLocaleString();
       if (progress < 1) requestAnimationFrame(update);
     }
-    requestAnimationFrame(update);
-  });
-}
-
- /* ─── Achievements Counter Animation ─── */
-function animateAchievements() {
-  const obs = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const card = entry.target;
-        const target = parseInt(card.dataset.target);
-        let current = 0;
-        const duration = 1500;
-        const start = performance.now();
-        function update(now) {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          current = Math.floor(progress * target);
-          card.textContent = current.toLocaleString();
-          if (progress < 1) requestAnimationFrame(update);
-          else observer.unobserve(card);
-        }
-        requestAnimationFrame(update);
-      }
-    });
-  }, { threshold: 0.3 });
-  
-  document.querySelectorAll('.achievement-number').forEach(el => obs.observe(el));
-}
+requestAnimationFrame(update);
+   });
+ }
 
 /* ─── Card 3D Tilt Effect ─── */
 function initTilt() {
   document.querySelectorAll('.card').forEach(card => {
     let rect = card.getBoundingClientRect();
-    
     const updateRect = () => { rect = card.getBoundingClientRect(); };
     card.addEventListener('mouseenter', updateRect);
-    
     card.addEventListener('mousemove', e => {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -1782,9 +1441,8 @@ function initTilt() {
       const centerY = rect.height / 2;
       const rotateX = (y - centerY) / 20;
       const rotateY = (centerX - x) / 20;
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.01)`;
     });
-    
     card.addEventListener('mouseleave', () => {
       card.style.transform = '';
     });
@@ -1795,38 +1453,19 @@ function initTilt() {
 function initNeonGlow() {
   const style = document.createElement('style');
   style.textContent = `
-    .card:hover { box-shadow: var(--neon-glow), 0 20px 40px rgba(0, 0, 0, 0.4); }
-    .hero h1:hover { text-shadow: 0 0 30px rgba(108, 92, 231, 0.5); }
-    .hero .num:hover::after { opacity: 1 !important; }
-    .badge.live:hover { box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); }
-    .badge.hub:hover { box-shadow: 0 0 15px rgba(108, 92, 231, 0.4); }
+    .card:hover { box-shadow: var(--neon-glow), 0 15px 35px rgba(0, 0, 0, 0.25); }
+    .badge.live:hover { box-shadow: 0 0 12px rgba(34, 197, 94, 0.3); }
+    .badge.hub:hover { box-shadow: 0 0 12px rgba(108, 92, 231, 0.3); }
   `;
   document.head.appendChild(style);
 }
 
-/* ─── Parallax Background ─── */
-function initParallax() {
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', e => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-  });
-  function update() {
-    document.querySelector('.bg-mesh').style.backgroundPosition = 
-      `${mouseX * 10}% ${mouseY * 10}%`;
-    requestAnimationFrame(update);
-  }
-  update();
-}
-
 // Initialize all effects
 initNeonGlow();
- initParallax();
  initTilt();
  setTimeout(animateCounters, 800);
- animateAchievements();
 
- /* ─── Status check ─── */
+/* ─── Status check ─── */
 const SITES = [
   { url: 'https://fastapiurl.onrender.com/health', id: 's-url' },
   { url: 'https://graphql-blog-lxjy.onrender.com/health', id: 's-blog' },
