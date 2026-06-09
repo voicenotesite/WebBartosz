@@ -94,22 +94,6 @@ header{
 .card .lnk a{font-size:0.85rem;color:var(--accent-grad);text-decoration:none}
 .card .lnk a:hover{text-decoration:underline}
 
-/* About */
-.about{display:grid;gap:2rem;margin-top:2rem}
-@media(min-width:768px){.about{grid-template-columns:1fr 1fr}}
-.about > div{
-  background:rgba(18,18,40,0.5);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:24px;
-  backdrop-filter:blur(10px);
-}
-.about h3{font-weight:700;margin-bottom:12px;color:var(--text)}
-.about ul{list-style:none}
-.about li{padding:10px 0;border-bottom:1px solid var(--border)}
-.about li:last-child{border:0}
-.about .hdr{color:var(--accent-grad);font-weight:600;margin-bottom:12px}
-
 /* Footer */
 footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--text-dim);font-size:0.85rem}
 footer a{color:var(--accent-grad);text-decoration:none}
@@ -138,9 +122,10 @@ footer a{color:var(--accent-grad);text-decoration:none}
     <div class="stat"><div class="num">18</div><div class="lbl">AI Models</div></div>
     <div class="stat"><div class="num">140</div><div class="lbl">Reports</div></div>
   </div>
+  <div style="margin-top:40px"><a href="#projects" style="color:var(--accent-grad);text-decoration:none;font-weight:600;padding:16px 32px;border:2px solid var(--accent);border-radius:32px">View Projects</a></div>
 </section>
 
-<section class="sec">
+<section class="sec" id="projects">
   <div class="sec-header wrap">
     <h2><span>Projekty</span><span class="line"></span></h2>
   </div>
@@ -200,31 +185,23 @@ footer a{color:var(--accent-grad);text-decoration:none}
 
 <section class="sec">
   <div class="sec-header wrap">
-    <h2><span>Stack</span><span class="line"></span></h2>
+    <h2><span>Doświadczenie</span><span class="line"></span></h2>
   </div>
-  <div class="wrap about">
-    <div class="r">
-      <div class="hdr">⚡ Technologies</div>
-      <ul>
-        <li>Python 3.12+ · FastAPI · SQLAlchemy · Alembic</li>
-        <li>GraphQL · Strawberry · REST API</li>
-        <li>React 19 · Vite · TailwindCSS</li>
-        <li>PostgreSQL · SQLite · ChromaDB</li>
-        <li>WebSocket · SSE · asyncio</li>
-        <li>Docker · GitHub Actions · Render</li>
-        <li>Groq · Mistral · NVIDIA · Gemini · Together AI</li>
-      </ul>
+  <div class="wrap">
+    <div class="grid" style="margin-top:2rem">
+      <div class="card r">
+        <h3>Full-Stack Developer</h3>
+        <p style="color:var(--text-dim)">Independent projects · 2024-2025</p>
+      </div>
+      <div class="card r">
+        <h3>AI Integration</h3>
+        <p style="color:var(--text-dim)">18+ models integrated · Multi-provider support</p>
+      </div>
+      <div class="card r">
+        <h3>DevOps & Cloud</h3>
+        <p style="color:var(--text-dim)">Docker, CI/CD, Render deployment</p>
+      </div>
     </div>
-    <div class="r">
-      <div class="hdr">📌 Approach</div>
-      <ul>
-        <li>Real technologies in production, zero enterprise frameworks</li>
-        <li>Each project covers a different stack layer</li>
-        <li>Docker + CI/CD in every project</li>
-        <li>Zero maintenance costs — Render free tier + GitHub Pages</li>
-      </ul>
-    </div>
-  </div>
 </section>
 
 <footer>
@@ -248,7 +225,7 @@ function tw() {
       ci++;
     } else {
       dir = -1;
-      setTimeout(tw, 1000);
+      setTimeout(tw, 1500);
       return;
     }
   } else {
@@ -260,7 +237,7 @@ function tw() {
       ti = (ti + 1) % texts.length;
     }
   }
-  setTimeout(tw, 150);
+  setTimeout(tw, 250);
 }
 tw();
 
