@@ -3,27 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Bartosz Osiej - Cosmic Engineer building production AI systems, backends, and scalable infrastructure.">
+<meta name="description" content="Bartosz Osiej - AI Systems Engineer. Building production systems, backends, and scalable infrastructure.">
 <title>Bartosz Osiej · Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Clash+Display:wght/700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0f;
-  --surface: rgba(15, 15, 31, 0.7);
+  --bg: #0b080c;
+  --surface: #1a1a2e;
   --card: rgba(26, 26, 58, 0.6);
   --border: rgba(255, 255, 255, 0.08);
-  --text: #ffffff;
+  --text: #eae5ec;
   --text-dim: #a0a0c0;
-  --accent: #6c5ce7;
+  --accent: #a87cff;
   --neon: #00f3ff;
-  --neon-pink: #ff00ea;
   --space: 24px;
-  --font: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  --display: 'Clash Display', 'Space Grotesk', sans-serif;
-  --mono: 'JetBrains Mono', monospace;
-  --radius: 20px;
-  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --font: 'Geist', system-ui, sans-serif;
+  --display: 'Space Grotesk', sans-serif;
+  --mono: 'Space Grotesk', monospace;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -33,8 +30,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 
 .bg{position:fixed;inset:0;z-index:0}
 .bg::before,.bg::after{content:'';position:absolute;width:600px;height:600px;border-radius:50%;filter:blur(120px);opacity:0.3}
-.bg::before{top:-150px;right:-100px;background:radial-gradient(circle,rgba(108,92,231,0.4),transparent 70%)}
-.bg::after{bottom:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,243,255,0.3),transparent 70%)}
+.bg::before{top:-150px;right:-100px;background:radial-gradient(circle,rgba(168,124,255,0.3),transparent 70%)}
+.bg::after{bottom:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,243,255,0.2),transparent 70%)}
 
 .noise{position:fixed;inset:0;opacity:0.02;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stub'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E")}
 
@@ -43,18 +40,17 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 header{position:sticky;top:0;z-index:100;background:var(--surface);backdrop-filter:blur(30px);border-bottom:1px solid var(--border)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:20px var(--space)}
 .logo{font-family:var(--display);font-weight:800;font-size:1.35rem;color:var(--text);text-decoration:none;letter-spacing:-0.03em}
-.logo span{color:var(--neon)}
+.logo span{color:var(--accent)}
 
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:var(--space) 0;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(108,92,231,0.15),transparent 70%)}
-.hero .label{display:inline-flex;align-items:center;gap:8px;background:rgba(108,92,231,0.1);border:1px solid rgba(108,92,231,0.3);color:var(--neon);font-size:0.85rem;font-weight:600;padding:8px 20px;border-radius:32px;margin-bottom:32px;letter-spacing:0.5px;text-transform:uppercase}
+.hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(168,124,255,0.15),transparent 70%)}
+.hero .label{display:inline-flex;align-items:center;gap:8px;background:rgba(168,124,255,0.1);border:1px solid rgba(168,124,255,0.3);color:var(--accent);font-size:0.85rem;font-weight:600;padding:8px 20px;border-radius:32px;margin-bottom:32px;letter-spacing:0.5px;text-transform:uppercase}
 .hero h1{font-family:var(--display);font-size:clamp(3rem,10vw,6rem);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin-bottom:24px}
-.hero .typewriter{font-family:var(--mono);color:var(--neon);animation:pulse 2s infinite}
-@keyframes pulse{0%,100{opacity:0.7}50{opacity:1}}
+.hero .typewriter{font-family:var(--mono);color:var(--accent)}
 .hero .desc{color:var(--text-dim);max-width:700px;margin:0 auto 48px;font-size:1.2rem;font-weight:300}
 .hero .stats{display:flex;gap:60px;justify-content:center;flex-wrap:wrap;margin:60px 0}
 .hero .stat{text-align:center}
-.hero .stat .num{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;font-family:var(--mono);color:var(--neon)}
+.hero .stat .num{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;font-family:var(--mono);color:var(--accent)}
 .hero .stat .lbl{font-size:0.85rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px}
 
 .sec{padding:8rem 0}
@@ -65,36 +61,36 @@ header{position:sticky;top:0;z-index:100;background:var(--surface);backdrop-filt
 @media(min-width:768px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1280px){.projects-grid{grid-template-columns:repeat(3,1fr)}}
 
-.project-card{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--card);border:1px solid var(--border);transition:var(--transition);backdrop-filter:blur(20px)}
+.project-card{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--card);border:1px solid var(--border);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);backdrop-filter:blur(20px)}
 .project-card:hover{transform:translateY(-12px) scale(1.02)}
 .project-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,var(--accent),var(--neon),var(--accent))}
-.project-card::after{content:'';position:absolute;inset:-1px;border-radiusinherit;border:2px solid transparent;background:linear-gradient(270deg,var(--accent),var(--neon),var(--accent-grad),var(--neon),var(--accent));opacity:0;transition:var(--transition);z-index:-1}
+.project-card::after{content:'';position:absolute;inset:-1px;border-radius:inherit;border:1px solid transparent;background:linear-gradient(270deg,var(--accent),var(--neon),var(--accent));opacity:0;transition:opacity 0.4s ease;z-index:-1}
 .project-card:hover::after{opacity:0.5}
 
 .project-img{height:200px;background-size:cover;background-position:center;border-radius:12px;margin-bottom:20px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.1)}
-.project-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,10,18,0.8))}
+.project-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,10,20,0.8))}
 
-.project-content h3{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.25rem;margin-bottom:12px;font-family:var(--display)}
+.project-content h3{font-family:var(--display);display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.25rem;margin-bottom:12px}
 .project-content p{color:var(--text-dim);margin-bottom:16px;font-weight:300;line-height:1.5}
 
 .tech-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.tech-chips span{font-size:0.75rem;background:rgba(108,92,231,0.15);color:var(--neon);padding:4px 12px;border-radius:12px;border:1px solid rgba(108,92,231,0.2)}
+.tech-chips span{font-size:0.75rem;background:rgba(168,124,255,0.15);color:var(--accent);padding:4px 12px;border-radius:12px;border:1px solid rgba(168,124,255,0.2)}
 
 .project-cta{display:flex;gap:12px;margin-top:16px}
-.project-cta a{font-size:0.85rem;color:var(--neon);text-decoration:none;font-weight:500;transition:var(--transition);padding:6px 12px;border-radius:6px;background:rgba(108,92,231,0.1)}
-.project-cta a:hover{background:rgba(108,92,231,0.2)}
+.project-cta a{font-size:0.85rem;color:var(--accent);text-decoration:none;font-weight:500;transition:all 0.2s;padding:6px 12px;border-radius:6px;background:rgba(168,124,255,0.1)}
+.project-cta a:hover{background:rgba(168,124,255,0.2)}
 
 .experience-grid{display:grid;gap:24px;margin-top:3rem}
 @media(min-width:768px){.experience-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.experience-grid{grid-template-columns:repeat(3,1fr)}}
 
-.exp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;backdrop-filter:blur(15px);transition:var(--transition)}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;backdrop-filter:blur(15px);transition:all 0.3s ease}
 .exp-card:hover{transform:translateY(-4px)}
 .exp-card h3{margin-bottom:12px;font-weight:600;font-family:var(--display)}
 .exp-card p{color:var(--text-dim);font-weight:300}
 
 .tech-stack{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:3rem}
-.tech-stack .tech-item{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:14px 24px;transition:var(--transition);text-align:center}
+.tech-stack .tech-item{background:rgba(26,26,46,0.4);border:1px solid var(--border);border-radius:20px;padding:14px 24px;transition:all 0.3s;text-align:center}
 .tech-stack .tech-item:hover{transform:translateY(-4px);border-color:var(--accent)}
 .tech-stack .tech-item span{display:block;font-weight:600;margin-bottom:4px}
 .tech-stack .tech-item .desc{font-size:0.75rem;color:var(--text-dim)}
@@ -104,12 +100,17 @@ header{position:sticky;top:0;z-index:100;background:var(--surface);backdrop-filt
 .footer h4{margin-bottom:20px;font-weight:600;font-family:var(--display)}
 .footer p{color:var(--text-dim)}
 .footer-links{display:flex;flex-direction:column;gap:12px}
-.footer-links a{color:var(--neon);text-decoration:none;transition:var(--transition)}
+.footer-links a{color:var(--accent);text-decoration:none;transition:all 0.2s}
 .footer-links a:hover{color:var(--text)}
 .copyright{border-top:1px solid var(--border);padding-top:32px;text-align:center;color:var(--text-dim);font-size:0.85rem}
 
 .r{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
 .r.v{opacity:1;transform:translateY(0)}
+
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 32px rgba(168,124,255,0.4);border:none;border-radius:32px;padding:16px 36px;font-weight:600;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(168,124,255,0.6)}
+.btn-secondary{background:var(--surface);color:var(--accent);border:1px solid var(--border);border-radius:32px;padding:16px 32px;font-weight:600;cursor:pointer;transition:all 0.3s;text-decoration:none}
+.btn-secondary:hover{background:rgba(168,124,255,0.1)}
 
 @media(max-width:768px){
   .wrap{padding:0 16px}
@@ -144,7 +145,7 @@ header{position:sticky;top:0;z-index:100;background:var(--surface);backdrop-filt
 </section>
 
 <section class="sec" id="projects">
-  <div class="sec-header wrap"><h2>Technology Gallery</h2></div>
+  <div class="sec-header wrap"><h2>Projects</h2></div>
   <div class="wrap">
     <div class="projects-grid">
       <div class="project-card r">
@@ -199,7 +200,7 @@ header{position:sticky;top:0;z-index:100;background:var(--surface);backdrop-filt
       <div class="project-card r">
         <div class="project-img" style="background:linear-gradient(135deg,#0984e3,#00cec9)"></div>
         <h3>Search Engine <span style="background:rgba(34,197,94,0.2);color:#22c55e;padding:2px 8px;border-radius:4px;font-size:0.7rem;font-weight:700">Live</span></h3>
-        <p>Clearnet + darknet search. DuckDuckGo + Ahmia integration.</p>
+        <p>Clearnet + darknet search. DuckDuckGo + Ahmia.</p>
         <div class="tech-chips"><span>FastAPI</span><span>Playwright</span></div>
         <div class="project-cta"><a href="https://search-engine-l2zt.onrender.com">Demo</a><a href="https://github.com/voicenotesite/search-engine">GitHub</a></div>
       </div>
@@ -211,23 +212,9 @@ header{position:sticky;top:0;z-index:100;background:var(--surface);backdrop-filt
   <div class="sec-header wrap"><h2>Experience</h2></div>
   <div class="wrap">
     <div class="experience-grid">
-      <div class="project-card r"><h3 style="font-family:var(--display)">Full-Stack Engineer</h3><p>Self-taught since 2024. 12 projects, 18 AI models integrated.</p></div>
-      <div class="project-card r"><h3 style="font-family:var(--display)">AI Systems Architect</h3><p>Multi-provider AI proxy. Groq, Mistral, NVIDIA, Gemini.</p></div>
-      <div class="project-card r"><h3 style="font-family:var(--display)">DevOps & Cloud</h3><p>Docker, CI/CD, GitHub Actions, Render deployment.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="tech" style="background:rgba(10,10,15,0.5)">
-  <div class="sec-header wrap"><h2>Tech Stack</h2></div>
-  <div class="wrap">
-    <div class="tech-stack">
-      <div class="tech-item r"><span>Python</span><span class="desc">Backend</span></div>
-      <div class="tech-item r"><span>FastAPI</span><span class="desc">Async APIs</span></div>
-      <div class="tech-item r"><span>React</span><span class="desc">Frontend</span></div>
-      <div class="tech-item r"><span>PostgreSQL</span><span class="desc">Database</span></div>
-      <div class="tech-item r"><span>Docker</span><span class="desc">Containers</span></div>
-      <div class="tech-item r"><span>GraphQL</span><span class="desc">API</span></div>
+      <div class="project-card r"><h3 style="font-family:var(--display)">Full-Stack Engineer</h3><p>Self-taught since 2024. Built 12 production projects with 18 AI models integrated.</p></div>
+      <div class="project-card r"><h3 style="font-family:var(--display)">AI Systems Architect</h3><p>Multi-provider AI proxy. Groq, Mistral, NVIDIA, Gemini integration.</p></div>
+      <div class="project-card r"><h3 style="font-family:var(--display)">DevOps & Cloud</h3><p>Docker, CI/CD, GitHub Actions, Render deployment with auto-scaling.</p></div>
     </div>
   </div>
 </section>
@@ -255,7 +242,7 @@ const ps = Array(100).fill().map(()=>({
 }));
 function an(){ctx.clearRect(0,0,c.width,c.height);
 ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;
-ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(108,92,231,0.4)';ctx.fill()});
+ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(168,124,255,0.4)';ctx.fill()});
 requestAnimationFrame(an)}
 an();
 
