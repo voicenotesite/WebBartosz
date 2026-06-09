@@ -3,48 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Bartosz Osiej - Full-Stack Engineer building production AI systems, backends, and scalable infrastructure. 12 live projects.">
+<meta name="keywords" content="bartosz osiej, portfolio, ai, fastapi, react, backend">
+<meta property="og:title" content="Bartosz Osiej · Portfolio">
+<meta property="og:description" content="Full-Stack Engineer · 12 Production Projects">
+<meta property="og:type" content="website">
 <title>Bartosz Osiej · Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Söhne:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a14;
-  --surface: #0f0f1f;
-  --card: #121228;
+  --bg: #0a0a0f;
+  --surface: #11111a;
+  --card: #1a1a2e;
   --border: #252545;
-  --text: #f0f0ff;
+  --text: #ffffff;
   --text-dim: #a0a0c0;
   --accent: #6c5ce7;
   --accent-grad: #a29bfe;
   --space: 24px;
-  --font: 'Inter', system-ui, sans-serif;
+  --font: 'Söhne', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
   --mono: 'JetBrains Mono', monospace;
   --radius: 16px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
 ::selection{background:var(--accent);color:#fff}
 
-/* Background */
-.bg{display:fixed;inset:0;z-index:0}
+.bg{position:fixed;inset:0;z-index:0}
 .bg::before,.bg::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;filter:blur(100px);opacity:0.3}
 .bg::before{top:-100px;right:-100px;background:var(--accent)}
 .bg::after{bottom:-150px;left:-50px;background:var(--accent-grad)}
 
-/* Container */
 .wrap{max-width:1280px;margin:0 auto;padding:0 var(--space)}
 
-/* Header */
 header{
-  position:sticky;top:0;z-index:100;background:rgba(10,10,20,0.85);
+  position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.85);
   backdrop-filter:blur(20px);border-bottom:1px solid var(--border);
 }
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px var(--space)}
 .logo{font-weight:800;font-size:1.25rem;color:var(--text);text-decoration:none}
 .logo span{color:var(--accent-grad)}
 
-/* Hero */
+.nav{display:flex;gap:32px}
+.nav a{color:var(--text-dim);text-decoration:none;font-weight:500;transition:var(--transition)}
+.nav a:hover{color:var(--text)}
+
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:var(--space) 0}
 .hero .label{
   display:inline-flex;align-items:center;gap:8px;background:rgba(108,92,231,0.1);
@@ -57,18 +64,16 @@ header{
 .hero .stat{text-align:center}
 .hero .stat .num{font-size:clamp(2rem,5vw,3rem);font-weight:800;font-family:var(--mono);color:var(--accent-grad)}
 .hero .stat .lbl{font-size:0.85rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px}
-.hero::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(108,92,231,0.1),transparent 70%);pointer-events:none}
 
-/* Section */
 .sec{padding:5rem 0}
 .sec-header{text-align:center;margin-bottom:3rem}
 .sec-header h2{font-size:2rem;font-weight:700;color:var(--text)}
 .sec-header .line{display:block;width:40px;height:2px;background:var(--accent);margin:12px auto}
 
-/* Projects */
 .grid{display:grid;gap:24px;margin-top:2rem}
 @media(min-width:768px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+
 .card{
   background:rgba(18,18,40,0.5);
   border:1px solid var(--border);
@@ -78,12 +83,9 @@ header{
   position:relative;
   overflow:hidden;
   backdrop-filter:blur(10px);
-  will-change:transform;
 }
-.card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 30px 60px rgba(108,92,231,0.4)}
+.card:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(108,92,231,0.4)}
 .card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-grad),var(--accent))}
-.card::after{content:'';position:absolute;inset:-2px;border-radius:inherit;border:2px solid transparent;border-tint:auto;background:linear-gradient(270deg,var(--accent),var(--accent-grad),var(--accent));opacity:0;transition:opacity 0.3s ease;z-index:-1}
-.card:hover::after{opacity:1}
 .card h3{font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
 .badge{display:inline-block;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:4px}
 .badge.live{background:rgba(34,197,94,0.2);color:#22c55e}
@@ -94,11 +96,16 @@ header{
 .card .lnk a{font-size:0.85rem;color:var(--accent-grad);text-decoration:none}
 .card .lnk a:hover{text-decoration:underline}
 
-/* Footer */
-footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--text-dim);font-size:0.85rem}
-footer a{color:var(--accent-grad);text-decoration:none}
+.screenshot{
+  height:160px;background-size:cover;background-position:center;border-radius:12px;margin-bottom:16px;
+  position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.1)
+}
+.screenshot::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,10,15,.8))}
+.screenshot .project-label{position:absolute;bottom:12px;left:12px;font-size:0.85rem;font-weight:600;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
 
-/* Reveal */
+.footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--text-dim);font-size:0.85rem}
+.footer a{color:var(--accent-grad);text-decoration:none}
+
 .r{opacity:0;transform:translateY(20px);transition:all 0.6s ease}
 .r.v{opacity:1;transform:translateY(0)}
 </style>
@@ -109,245 +116,198 @@ footer a{color:var(--accent-grad);text-decoration:none}
 
 <header>
   <div class="header-inner wrap">
-    <a class="logo" href="/">Bartosz<span>.</span>web</a>
+    <a class="logo" href="/">Bartosz<span>.</span> portfolio</a>
+    <nav class="nav">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#tech">Stack</a>
+    </nav>
   </div>
 </header>
 
 <section class="hero">
-  <div class="label">5 lat · 12 projektów · Production-ready</div>
-  <h1 id="hooks" style="position:relative;margin-bottom:32px"></h1>
-  <p class="desc" style="margin-bottom:48px">Twelve full-stack projects delivered in six intensive days. Python, FastAPI, React, Docker, CI/CD.</p>
+  <div class="label">Full-Stack Engineer · AI Systems</div>
+  <h1>Bartosz Osiej</h1>
+  <p class="desc">Building production-grade AI systems, full-stack backends, and scalable infrastructure. 12 live projects.</p>
   <div class="stats">
     <div class="stat"><div class="num">12</div><div class="lbl">Projects</div></div>
     <div class="stat"><div class="num">18</div><div class="lbl">AI Models</div></div>
-    <div class="stat"><div class="num">140</div><div class="lbl">Reports</div></div>
-  </div>
-  <div style="margin-top:64px;display:flex;gap:24px;justify-content:center">
-    <a href="#projects" style="background:var(--accent);color:#fff;padding:16px 32px;border-radius:32px;text-decoration:none;font-weight:600">View All Projects</a>
-    <a href="https://github.com/voicenotesite" style="color:var(--accent-grad);text-decoration:none;font-weight:600">GitHub →</a>
+    <div class="stat"><div class="num">140+</div><div class="lbl">Reports</div></div>
   </div>
 </section>
 
 <section class="sec" id="projects">
   <div class="sec-header wrap">
-    <h2><span>Projekty</span><span class="line"></span></h2>
+    <h2>Projects</h2>
   </div>
   <div class="wrap">
     <div class="grid">
-      <div class="card r" data-project="linkshort">
-        <div style="height:120px;background:linear-gradient(135deg,#6c5ce7,#a29bfe);border-radius:8px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:#fff">LinkShort</div>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe)">
+          <span class="project-label">URL Shortener</span>
+        </div>
         <h3>LinkShort <span class="badge live">Live</span></h3>
-        <p>URL shortener z JWT auth, click trackingiem i dashboardem React + Tailwind.</p>
-        <div class="tech"><span>FastAPI</span><span>React</span><span>Tailwind</span><span>JWT</span></div>
+        <p>JWT auth, click tracking, React dashboard. Production URL shortener.</p>
+        <div class="tech"><span>FastAPI</span><span>React</span><span>JWT</span></div>
         <div class="lnk"><a href="https://fastapiurl.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/FastAPI-url" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="graphql-blog">
-        <div class="img" style="height:120px;background:url('https://voicenotesite.github.io/reports/screenshots/graphql-blog-1.jpg');background-size:cover;border-radius:8px;margin-bottom:12px"></div>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#00b894,#00cec9)">
+          <span class="project-label">GraphQL Blog</span>
+        </div>
         <h3>GraphQL Blog <span class="badge live">Live</span></h3>
-        <p>Blog API z postami, komentarzami i auth JWT. Strawberry + PostgreSQL.</p>
+        <p>Blog API with posts, comments, JWT auth. Strawberry + PostgreSQL.</p>
         <div class="tech"><span>FastAPI</span><span>Strawberry</span><span>GraphQL</span></div>
         <div class="lnk"><a href="https://graphql-blog-lxjy.onrender.com/graphql" target="_blank">Playground</a><a href="https://github.com/voicenotesite/graphql-blog" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="ai-chat-proxy">
-        <div class="img" style="height:120px;background:url('https://voicenotesite.github.io/reports/screenshots/ai-chat-proxy-1.jpg');background-size:cover;border-radius:8px;margin-bottom:12px"></div>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#6c5ce7,#fdcb6e)">
+          <span class="project-label">AI Chat Proxy</span>
+        </div>
         <h3>AI Chat Proxy <span class="badge live">Live</span></h3>
-        <p>Proxy dla 18 modeli AI. Groq, Mistral, NVIDIA, Gemini, Together.</p>
+        <p>Proxy for 18 AI models. Groq, Mistral, NVIDIA, Gemini with SSE streaming.</p>
         <div class="tech"><span>FastAPI</span><span>SSE</span><span>Groq</span></div>
         <div class="lnk"><a href="https://ai-chat-proxy-twj4.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/ai-chat-proxy" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="unified-api">
-        <div class="img" style="height:120px;background:url('https://voicenotesite.github.io/reports/screenshots/unified-api-1.jpg');background-size:cover;border-radius:8px;margin-bottom:12px"></div>
-        <h3>Unified Portfolio API <span class="badge live">Live</span></h3>
-        <p>5 modułów w jednym API: URL shortener, blog, czat, task queue i RAG.</p>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7)">
+          <span class="project-label">Unified API</span>
+        </div>
+        <h3>Unified Portfolio API</h3>
+        <p>5 modules in one: URL, blog, chat, queue, RAG. Single endpoint architecture.</p>
         <div class="tech"><span>FastAPI</span><span>PostgreSQL</span><span>JWT</span></div>
         <div class="lnk"><a href="https://python-portfolio-y0z8.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/python-portfolio" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="task-queue">
-        <div class="img" style="height:120px;background:url('https://voicenotesite.github.io/reports/screenshots/task-queue-1.jpg');background-size:cover;border-radius:8px;margin-bottom:12px"></div>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#00cec9,#00b894)">
+          <span class="project-label">Task Queue</span>
+        </div>
         <h3>Task Queue</h3>
-        <p>Async task queue z WebSocket i real-time progress barem.</p>
+        <p>Async with WebSocket, real-time progress. Redis backend processing.</p>
         <div class="tech"><span>FastAPI</span><span>WebSocket</span><span>Redis</span></div>
         <div class="lnk"><a href="https://github.com/voicenotesite/task-queue" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="rag-pdf">
-        <div class="img" style="height:120px;background:url('https://voicenotesite.github.io/reports/screenshots/rag-pdf-1.jpg');background-size:cover;border-radius:8px;margin-bottom:12px"></div>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#fdcb6e,#e17055)">
+          <span class="project-label">RAG PDF</span>
+        </div>
         <h3>RAG PDF Q&A</h3>
-        <p>Upload PDF → TF-IDF vector search → odpowiedź. Zero OpenAI, zero API.</p>
+        <p>Upload PDF → TF-IDF → answers. Zero API costs, pure local processing.</p>
         <div class="tech"><span>FastAPI</span><span>TF-IDF</span><span>Numpy</span></div>
         <div class="lnk"><a href="https://github.com/voicenotesite/rag-qa" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="chat-proxy-light">
-        <div class="img" style="height:120px;background:url('https://voicenotesite.github.io/reports/screenshots/chat-proxy-light-1.jpg');background-size:cover;border-radius:8px;margin-bottom:12px"></div>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#6c5ce7,#00f3ff)">
+          <span class="project-label">Chat Proxy</span>
+        </div>
         <h3>Chat Proxy Light</h3>
-        <p>Minimalny Groq proxy — jeden provider, streaming, zero zależności.</p>
+        <p>Minimal Groq proxy. Streaming, zero dependencies. Lightweight.</p>
         <div class="tech"><span>FastAPI</span><span>Groq</span><span>Streaming</span></div>
         <div class="lnk"><a href="https://github.com/voicenotesite/chat-proxy" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="search-engine">
-        <div class="img" style="height:120px;background:url('https://voicenotesite.github.io/reports/screenshots/search-engine-1.jpg');background-size:cover;border-radius:8px;margin-bottom:12px"></div>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#0984e3,#00cec9)">
+          <span class="project-label">Darknet Search</span>
+        </div>
         <h3>Search Engine <span class="badge live">Live</span></h3>
-        <p>Wyszukiwarka clearnet + darknet (.onion). DuckDuckGo + Ahmia.</p>
+        <p>Clearnet + darknet search. DuckDuckGo + Ahmia integration.</p>
         <div class="tech"><span>FastAPI</span><span>Playwright</span></div>
         <div class="lnk"><a href="https://search-engine-l2zt.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/search-engine" target="_blank">GitHub</a></div>
       </div>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#636e72,#2d3436)">
+          <span class="project-label">Reports</span>
+        </div>
+        <h3>Reports</h3>
+        <p>140+ technical reports with code samples and architecture diagrams.</p>
+        <div class="tech"><span>Markdown</span><span>GitHub Pages</span></div>
+        <div class="lnk"><a href="https://voicenotesite.github.io/reports/" target="_blank">View</a></div>
+      </div>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#e17055,#fdcb6e)">
+          <span class="project-label">CV Maker</span>
+        </div>
+        <h3>CV Maker</h3>
+        <p>JSON-based CV generator with PDF export and templates.</p>
+        <div class="tech"><span>FastAPI</span><span>pdfkit</span><span>JSON</span></div>
+        <div class="lnk"><a href="https://github.com/voicenotesite" target="_blank">GitHub</a></div>
+      </div>
+      <div class="card r">
+        <div class="screenshot" style="background:linear-gradient(135deg,#2d3436,#6c5ce7)">
+          <span class="project-label">Portfolio Daemon</span>
+        </div>
+        <h3>Portfolio Daemon</h3>
+        <p>Background service monitoring health and auto-deploying updates.</p>
+        <div class="tech"><span>Python</span><span>Docker</span></div>
+        <div class="lnk"><a href="https://github.com/voicenotesite" target="_blank">GitHub</a></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec" id="experience">
   <div class="sec-header wrap">
-    <h2><span>Doświadczenie</span><span class="line"></span></h2>
+    <h2>Experience</h2>
   </div>
   <div class="wrap">
-    <div class="grid" style="margin-top:2rem">
+    <div class="grid">
       <div class="card r">
-        <h3>Full-Stack Developer</h3>
-        <p style="color:var(--text-dim)">Independent projects · 2024-2025</p>
-        <p style="font-size:0.9rem;color:var(--text-dim);margin-top:8px">12 production projects, 140+ reports, 18 AI models integrated</p>
+        <h3>Full-Stack Engineer</h3>
+        <p>Self-taught since 2024. 12 projects, 140+ reports, 18 AI models integrated.</p>
       </div>
       <div class="card r">
         <h3>AI Integration</h3>
-        <p style="color:var(--text-dim)">18+ models integrated · Multi-provider support</p>
-        <p style="font-size:0.9rem;color:var(--text-dim);margin-top:8px">Groq, Mistral, NVIDIA, Gemini, Together AI, OpenAI</p>
+        <p>Multi-provider AI proxy. Groq, Mistral, NVIDIA, Gemini, Together AI.</p>
       </div>
       <div class="card r">
         <h3>DevOps & Cloud</h3>
-        <p style="color:var(--text-dim)">Docker, CI/CD, Render deployment</p>
-        <p style="font-size:0.9rem;color:var(--text-dim);margin-top:8px">GitHub Actions, auto-deploy, health monitoring</p>
+        <p>Docker, CI/CD, GitHub Actions, Render deployment. Auto-scaling systems.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec" style="background:rgba(10,10,20,0.3)">
+<section class="sec" id="tech" style="background:rgba(10,10,15,0.5)">
   <div class="sec-header wrap">
-    <h2><span>Tech Stack</span><span class="line"></span></h2>
+    <h2>Tech Stack</h2>
   </div>
   <div class="wrap">
-    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:2rem">
-      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">Python</span>
-      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">FastAPI</span>
-      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">React</span>
-      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">PostgreSQL</span>
-      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">Docker</span>
-      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">GraphQL</span>
-      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">WebSocket</span>
-      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">Redis</span>
-      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">AI/ML</span>
+    <div class="grid" style="margin-top:2rem">
+      <div class="card r"><strong>Python</strong><br><span style="color:var(--text-dim)">Backend</span></div>
+      <div class="card r"><strong>FastAPI</strong><br><span style="color:var(--text-dim)">Async APIs</span></div>
+      <div class="card r"><strong>React</strong><br><span style="color:var(--text-dim)">Frontend</span></div>
+      <div class="card r"><strong>PostgreSQL</strong><br><span style="color:var(--text-dim)">Database</span></div>
+      <div class="card r"><strong>Docker</strong><br><span style="color:var(--text-dim)">Containers</span></div>
+      <div class="card r"><strong>GraphQL</strong><br><span style="color:var(--text-dim)">API</span></div>
     </div>
   </div>
 </section>
 
-<footer>
+<footer class="footer">
   <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:32px">
-      <div>
-        <h4 style="margin-bottom:16px">Bartosz Osiej</h4>
-        <p style="color:var(--text-dim)">Full-stack developer specjalizujący się w FastAPI, React i AI integration.</p>
-      </div>
-      <div>
-        <h4 style="margin-bottom:16px">Linki</h4>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <a href="https://github.com/voicenotesite" style="color:var(--accent-grad)">GitHub</a>
-          <a href="https://voicenotesite.github.io/reports/" style="color:var(--accent-grad)">Reports</a>
-          <a href="mailto:mmc29213@gmail.com" style="color:var(--accent-grad)">Kontakt</a>
-        </div>
-      </div>
-    </div>
-    <div style="border-top:1px solid var(--border);padding-top:24px;color:var(--text-dim)">
-      <p>Bartosz Osiej © 2025 | All rights reserved</p>
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div>Bartosz Osiej © 2025</div>
+      <div><a href="https://github.com/voicenotesite">GitHub</a> • <a href="https://voicenotesite.github.io/reports/">Reports</a></div>
     </div>
   </div>
 </footer>
 
-<div class="sec" style="padding:4rem 0">
-  <div class="wrap" style="max-width:800px;margin:0 auto;text-align:center">
-    <h2 style="margin-bottom:24px">Profesjonalne doświadczenie</h2>
-    <p style="color:var(--text-dim);margin-bottom:24px">
-      5 lat self-taught development. Od hobby do production-ready projektów. 
-      Każdy projekt to real solution dla rzeczywistych problemów.
-    </p>
-    <div style="display:flex;gap:32px;justify-content:center;flex-wrap:wrap">
-      <div class="stat"><div class="num">5</div><div class="lbl">Years Experience</div></div>
-      <div class="stat"><div class="num">12</div><div class="lbl">Projects</div></div>
-      <div class="stat"><div class="num">100%</div><div class="lbl">Live</div></div>
-    </div>
-  </div>
-</div>
-
-<section class="sec" style="background:rgba(10,10,20,0.3);padding:5rem 0">
-  <div class="sec-header wrap">
-    <h2><span>Screenshoty</span><span class="line"></span></h2>
-  </div>
-  <div class="wrap">
-    <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:2rem">
-      <div style="height:150px;background:linear-gradient(135deg,#6c5ce7,#a29bfe);border-radius:12px"></div>
-      <div style="height:150px;background:linear-gradient(135deg,#00b894,#00cec9);border-radius:12px"></div>
-      <div style="height:150px;background:linear-gradient(135deg,#6c5ce7,#fdcb6e);border-radius:12px"></div>
-      <div style="height:150px;background:linear-gradient(135deg,#2d3436,#636e72);border-radius:12px"></div>
-    </div>
-  </div>
-</section>
-
 <script>
-// Reveal on scroll
 const obs = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:.1});
 document.querySelectorAll('.r').forEach(x=>obs.observe(x));
 
-// Real typewriter effect
-const texts = ["Ghost.","Architect.","Builder."];
-const el = document.getElementById('hooks');
-let ti = 0, ci = 0, dir = 1;
-function tw() {
-  const t = texts[ti];
-  if (dir === 1) {
-    if (ci < t.length) {
-      el.textContent = t.substring(0, ci + 1);
-      ci++;
-    } else {
-      dir = -1;
-      setTimeout(tw, 1500);
-      return;
-    }
-  } else {
-    if (ci > 0) {
-      el.textContent = t.substring(0, ci - 1);
-      ci--;
-    } else {
-      dir = 1;
-      ti = (ti + 1) % texts.length;
-    }
-  }
-  setTimeout(tw, 250);
-}
-tw();
-
-// Particles
 const c = document.getElementById('p'), ctx = c.getContext('2d');
-c.width = c.height = 0;
 function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
 window.addEventListener('resize',resize);resize();
 const ps = Array(60).fill().map(()=>({
-  x:Math.random()*window.innerWidth,
-  y:Math.random()*window.innerHeight,
-  r:Math.random()*1.5+0.5,
-  vx:(Math.random()-0.5)*0.2,
-  vy:(Math.random()-0.5)*0.2
+  x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight,
+  r:Math.random()*1.5+0.5, vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2
 }));
 function an(){ctx.clearRect(0,0,c.width,c.height);
-ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(162,155,254,0.6)';ctx.fill()});
+ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;
+ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(108,92,231,0.5)';ctx.fill()});
 requestAnimationFrame(an)}
 an();
-
-// Tilt effect
-document.querySelectorAll('.card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=20, rect=card.getBoundingClientRect();
-    const x=(e.clientX-rect.left)/rect.width-0.5, y=(e.clientY-rect.top)/rect.height-0.5;
-    card.style.transform=`perspective(1000px) rotateX(${ -y*r }deg) rotateY(${ x*r }deg) translateY(-8px)`;
-  });
-  card.addEventListener('mouseleave',()=>card.style.transform='');
-});
 </script>
 </body>
 </html>
