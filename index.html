@@ -115,12 +115,13 @@ footer a{color:var(--accent-grad);text-decoration:none}
 
 <section class="hero">
   <div class="label">6 dni · 12 projektów · Zero mocków</div>
-  <h1 id="hooks"></h1>
+  <h1 id="hooks" style="position:relative"></h1>
   <p class="desc">Twelve full-stack projects delivered in six intensive days. Python, FastAPI, React, Docker, CI/CD.</p>
   <div class="stats">
     <div class="stat"><div class="num">12</div><div class="lbl">Projects</div></div>
     <div class="stat"><div class="num">18</div><div class="lbl">AI Models</div></div>
     <div class="stat"><div class="num">140</div><div class="lbl">Reports</div></div>
+    <div class="stat"><div class="num">5</div><div class="lbl">Services</div></div>
   </div>
   <div style="margin-top:40px"><a href="#projects" style="color:var(--accent-grad);text-decoration:none;font-weight:600;padding:16px 32px;border:2px solid var(--accent);border-radius:32px">View Projects</a></div>
 </section>
@@ -132,52 +133,60 @@ footer a{color:var(--accent-grad);text-decoration:none}
   <div class="wrap">
     <div class="grid">
       <div class="card r" data-project="linkshort">
+        <div class="img" style="height:120px;background:linear-gradient(135deg,#6c5ce7,#a29bfe);border-radius:8px;margin-bottom:12px"></div>
         <h3>LinkShort <span class="badge live">Live</span></h3>
-        <p>URL shortener with JWT auth, click tracking, and React dashboard.</p>
-        <div class="tech"><span>FastAPI</span><span>React</span><span>JWT</span><span>PostgreSQL</span><span>Docker</span></div>
+        <p>URL shortener z JWT auth, click trackingiem i dashboardem React + Tailwind.</p>
+        <div class="tech"><span>FastAPI</span><span>React</span><span>Tailwind</span><span>JWT</span></div>
         <div class="lnk"><a href="https://fastapiurl.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/FastAPI-url" target="_blank">GitHub</a></div>
       </div>
       <div class="card r" data-project="graphql-blog">
+        <div class="img" style="height:120px;background:linear-gradient(135deg,#a29bfe,#6c5ce7);border-radius:8px;margin-bottom:12px"></div>
         <h3>GraphQL Blog <span class="badge live">Live</span></h3>
-        <p>GraphQL API with posts, comments, JWT auth, and interactive playground.</p>
-        <div class="tech"><span>FastAPI</span><span>Strawberry</span><span>GraphQL</span><span>PostgreSQL</span><span>Docker</span></div>
+        <p>Blog API z postami, komentarzami i auth JWT. Strawberry + PostgreSQL.</p>
+        <div class="tech"><span>FastAPI</span><span>Strawberry</span><span>GraphQL</span></div>
         <div class="lnk"><a href="https://graphql-blog-lxjy.onrender.com/graphql" target="_blank">Playground</a><a href="https://github.com/voicenotesite/graphql-blog" target="_blank">GitHub</a></div>
       </div>
       <div class="card r" data-project="ai-chat-proxy">
+        <div class="img" style="height:120px;background:linear-gradient(135deg,#00b894,#00cec9);border-radius:8px;margin-bottom:12px"></div>
         <h3>AI Chat Proxy <span class="badge live">Live</span></h3>
-        <p>Multi-provider proxy for 18 AI models with SSE streaming and rate limiting.</p>
-        <div class="tech"><span>FastAPI</span><span>SSE</span><span>Groq</span><span>Mistral</span><span>NVIDIA</span></div>
+        <p>Proxy dla 18 modeli AI. Groq, Mistral, NVIDIA, Gemini, Together.</p>
+        <div class="tech"><span>FastAPI</span><span>SSE</span><span>Groq</span></div>
         <div class="lnk"><a href="https://ai-chat-proxy-twj4.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/ai-chat-proxy" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="fastapi-admin">
-        <h3>FastAPI Admin <span class="badge live">Live</span></h3>
-        <p>Admin panel with role-based access, CRUD operations, and audit logging.</p>
-        <div class="tech"><span>FastAPI</span><span>React</span><span>NextUI</span><span>JWT</span><span>PostgreSQL</span></div>
-        <div class="lnk"><a href="https://fastapi-admin-pannel.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/fastapi-admin" target="_blank">GitHub</a></div>
+      <div class="card r" data-project="unified-api">
+        <div class="img" style="height:120px;background:linear-gradient(135deg,#6c5ce7,#00b894);border-radius:8px;margin-bottom:12px"></div>
+        <h3>Unified Portfolio API <span class="badge live">Live</span></h3>
+        <p>5 modułów w jednym API: URL shortener, blog, czat, task queue i RAG.</p>
+        <div class="tech"><span>FastAPI</span><span>PostgreSQL</span><span>JWT</span></div>
+        <div class="lnk"><a href="https://python-portfolio-y0z8.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/python-portfolio" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="websocket-chat">
-        <h3>WebSocket Chat <span class="badge live">Live</span></h3>
-        <p>Real-time chat with WebSocket, rooms, and message history.</p>
-        <div class="tech"><span>FastAPI</span><span>WebSocket</span><span>React</span><span>Redis</span><span>Docker</span></div>
-        <div class="lnk"><a href="https://websocket-chat-seven.vercel.app" target="_blank">Demo</a><a href="https://github.com/voicenotesite/websocket-chat" target="_blank">GitHub</a></div>
+      <div class="card r" data-project="task-queue">
+        <div class="img" style="height:120px;background:linear-gradient(135deg,#e17055,#0984e3);border-radius:8px;margin-bottom:12px"></div>
+        <h3>Task Queue</h3>
+        <p>Async task queue z WebSocket i real-time progress barem.</p>
+        <div class="tech"><span>FastAPI</span><span>WebSocket</span><span>Redis</span></div>
+        <div class="lnk"><a href="https://github.com/voicenotesite/task-queue" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="voice-notes">
-        <h3>Voice Notes <span class="badge live">Live</span></h3>
-        <p>Audio recording, transcription, and note management with vector search.</p>
-        <div class="tech"><span>FastAPI</span><span>React</span><span>Whisper</span><span>ChromaDB</span><span>NVIDIA</span></div>
-        <div class="lnk"><a href="https://voice-notes-6b8d.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/voice-notes" target="_blank">GitHub</a></div>
+      <div class="card r" data-project="rag-pdf">
+        <div class="img" style="height:120px;background:linear-gradient(135deg,#2d3436,#636e72);border-radius:8px;margin-bottom:12px"></div>
+        <h3>RAG PDF Q&A</h3>
+        <p>Upload PDF → TF-IDF vector search → odpowiedź. Zero OpenAI, zero API.</p>
+        <div class="tech"><span>FastAPI</span><span>TF-IDF</span><span>Numpy</span></div>
+        <div class="lnk"><a href="https://github.com/voicenotesite/rag-qa" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="ocr-service">
-        <h3>OCR Service <span class="badge live">Live</span></h3>
-        <p>Document OCR with Tesseract.js, preprocessing, and export.</p>
-        <div class="tech"><span>FastAPI</span><span>Tesseract</span><span>React</span><span>Opencv</span><span>Docker</span></div>
-        <div class="lnk"><a href="https://ocr-service-6b8d.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/ocr-service" target="_blank">GitHub</a></div>
+      <div class="card r" data-project="chat-proxy-light">
+        <div class="img" style="height:120px;background:linear-gradient(135deg,#6c5ce7,#fdcb6e);border-radius:8px;margin-bottom:12px"></div>
+        <h3>Chat Proxy Light</h3>
+        <p>Minimalny Groq proxy — jeden provider, streaming, zero zależności.</p>
+        <div class="tech"><span>FastAPI</span><span>Groq</span><span>Streaming</span></div>
+        <div class="lnk"><a href="https://github.com/voicenotesite/chat-proxy" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r" data-project="file-storage">
-        <h3>Cloud Storage <span class="badge live">Live</span></h3>
-        <p>S3-compatible storage with chunked uploads and resumable transfers.</p>
-        <div class="tech"><span>FastAPI</span><span>MinIO</span><span>React</span><span>Docker</span><span>S3</span></div>
-        <div class="lnk"><a href="https://file-storage-6b8b.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/file-storage" target="_blank">GitHub</a></div>
+      <div class="card r" data-project="search-engine">
+        <div class="img" style="height:120px;background:linear-gradient(135deg,#24243e,#40405d);border-radius:8px;margin-bottom:12px"></div>
+        <h3>Search Engine <span class="badge live">Live</span></h3>
+        <p>Wyszukiwarka clearnet + darknet (.onion). DuckDuckGo + Ahmia.</p>
+        <div class="tech"><span>FastAPI</span><span>Playwright</span><span>Docker</span></div>
+        <div class="lnk"><a href="https://search-engine-l2zt.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/search-engine" target="_blank">GitHub</a></div>
       </div>
     </div>
   </div>
