@@ -64,16 +64,16 @@ header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9
 </div>
 
 <script>
-const projects=[
+const defaults={name:'Bartosz Osiej',title:'AI Systems Engineer',hero1:'Building Systems That Work',hero2:'',heroDesc:'',projects:[
   {name:'LinkShort',url:'https://fastapiurl.onrender.com',desc:'JWT URL shortener'},
   {name:'AI Chat Proxy',url:'https://ai-chat-proxy-twj4.onrender.com',desc:'18+ AI models'},
   {name:'GraphQL Blog',url:'https://graphql-blog-lxjy.onrender.com/graphql',desc:'Blog API'},
-];
-function render(){const g=document.getElementById('grid');g.innerHTML='';projects.forEach(p=>{const d=document.createElement('div');d.className='project';d.innerHTML=`<h3>${p.name}</h3><p>${p.desc}</p>`;g.appendChild(d)})}
+]};
+let d=Object.assign({},defaults);
+function load(){const s=localStorage.getItem('adminData');if(s)d=Object.assign({},defaults,JSON.parse(s))}
+function render(){const g=document.getElementById('grid');g.innerHTML='';(d.projects||defaults.projects).forEach(p=>{const el=document.createElement('div');el.className='project';el.innerHTML=`<h3>${p.name}</h3><p>${p.desc}</p>`;g.appendChild(el)})}
+document.title=d.name;document.querySelector('.logo').textContent='> '+d.name+' ~$';document.querySelector('.hero h1').textContent=d.hero1+(d.hero2?' '+d.hero2:'');document.querySelector('.hero p').textContent=d.heroDesc||d.title;
 
-function go(){
-  document.getElementById('err').classList.add('on');
-  setTimeout(()=>{document.getElementById('err').classList.remove('on');setTimeout(()=>{document.getElementById('terminal').style.display='none';document.getElementById('site').style.display='block';render()},300)},400)
-}
+function go(){load();render();document.getElementById('err').classList.add('on');setTimeout(()=>{document.getElementById('err').classList.remove('on');setTimeout(()=>{document.getElementById('terminal').style.display='none';document.getElementById('site').style.display='block';document.body.style.overflow='auto'},300)},400)}
 
 setTimeout(go,1800);
