@@ -45,7 +45,7 @@ header{
 .logo span{color:var(--accent-grad)}
 
 /* Hero */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:var(--space)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:var(--space) 0}
 .hero .label{
   display:inline-flex;align-items:center;gap:8px;background:rgba(108,92,231,0.1);
   border:1px solid rgba(108,92,231,0.2);color:var(--accent-grad);font-size:0.85rem;
@@ -53,7 +53,7 @@ header{
 }
 .hero h1{font-size:clamp(2.5rem,8vw,4rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:16px}
 .hero .desc{color:var(--text-dim);max-width:600px;margin:0 auto 32px;font-size:1.1rem}
-.hero .stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.hero .stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin:40px 0}
 .hero .stat{text-align:center}
 .hero .stat .num{font-size:clamp(2rem,5vw,3rem);font-weight:800;font-family:var(--mono);color:var(--accent-grad)}
 .hero .stat .lbl{font-size:0.85rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px}
@@ -115,15 +115,16 @@ footer a{color:var(--accent-grad);text-decoration:none}
 
 <section class="hero">
   <div class="label">6 dni · 12 projektów · Zero mocków</div>
-  <h1 id="hooks" style="position:relative"></h1>
-  <p class="desc">Twelve full-stack projects delivered in six intensive days. Python, FastAPI, React, Docker, CI/CD.</p>
+  <h1 id="hooks" style="position:relative;margin-bottom:32px"></h1>
+  <p class="desc" style="margin-bottom:48px">Twelve full-stack projects delivered in six intensive days. Python, FastAPI, React, Docker, CI/CD.</p>
   <div class="stats">
     <div class="stat"><div class="num">12</div><div class="lbl">Projects</div></div>
     <div class="stat"><div class="num">18</div><div class="lbl">AI Models</div></div>
     <div class="stat"><div class="num">140</div><div class="lbl">Reports</div></div>
     <div class="stat"><div class="num">5</div><div class="lbl">Services</div></div>
+    <div class="stat"><div class="num">3</div><div class="lbl">Years</div></div>
   </div>
-  <div style="margin-top:40px"><a href="#projects" style="color:var(--accent-grad);text-decoration:none;font-weight:600;padding:16px 32px;border:2px solid var(--accent);border-radius:32px">View Projects</a></div>
+  <div style="margin-top:48px"><a href="#projects" style="color:var(--accent-grad);text-decoration:none;font-weight:600;padding:16px 32px;border:2px solid var(--accent);border-radius:32px">View Projects</a></div>
 </section>
 
 <section class="sec" id="projects">
@@ -201,21 +202,60 @@ footer a{color:var(--accent-grad);text-decoration:none}
       <div class="card r">
         <h3>Full-Stack Developer</h3>
         <p style="color:var(--text-dim)">Independent projects · 2024-2025</p>
+        <p style="font-size:0.9rem;color:var(--text-dim);margin-top:8px">12 production projects, 140+ reports, 18 AI models integrated</p>
       </div>
       <div class="card r">
         <h3>AI Integration</h3>
         <p style="color:var(--text-dim)">18+ models integrated · Multi-provider support</p>
+        <p style="font-size:0.9rem;color:var(--text-dim);margin-top:8px">Groq, Mistral, NVIDIA, Gemini, Together AI, OpenAI</p>
       </div>
       <div class="card r">
         <h3>DevOps & Cloud</h3>
         <p style="color:var(--text-dim)">Docker, CI/CD, Render deployment</p>
+        <p style="font-size:0.9rem;color:var(--text-dim);margin-top:8px">GitHub Actions, auto-deploy, health monitoring</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="sec" style="background:rgba(10,10,20,0.3)">
+  <div class="sec-header wrap">
+    <h2><span>Tech Stack</span><span class="line"></span></h2>
+  </div>
+  <div class="wrap">
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:2rem">
+      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">Python</span>
+      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">FastAPI</span>
+      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">React</span>
+      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">PostgreSQL</span>
+      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">Docker</span>
+      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">GraphQL</span>
+      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">WebSocket</span>
+      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">Redis</span>
+      <span style="background:rgba(108,92,231,0.2);padding:12px 20px;border-radius:24px;border:1px solid rgba(108,92,231,0.3)">AI/ML</span>
+    </div>
+  </div>
 </section>
 
 <footer>
   <div class="wrap">Bartosz Osiej · <a href="https://github.com/voicenotesite">GitHub</a> · <a href="mailto:mmc29213@gmail.com">Contact</a></div>
 </footer>
+
+<div class="sec" style="padding:4rem 0">
+  <div class="wrap" style="max-width:800px;margin:0 auto;text-align:center">
+    <h2 style="margin-bottom:24px">O mnie</h2>
+    <p style="color:var(--text-dim);margin-bottom:24px">
+      Full-stack developer tworzący production-ready projekty w 6 dni. 
+      Specializuję się w FastAPI, React, AI integration i DevOps.
+      Każdy projekt ma zdjęcia, raporty i live demo.
+    </p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="https://github.com/voicenotesite" style="color:var(--accent-grad)">GitHub</a>
+      <a href="https://voicenotesite.github.io/reports/" style="color:var(--accent-grad)">Reports</a>
+      <a href="mailto:mmc29213@gmail.com" style="color:var(--accent-grad)">Email</a>
+    </div>
+  </div>
+</div>
 
 <script>
 // Reveal on scroll
