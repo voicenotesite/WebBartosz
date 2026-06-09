@@ -114,6 +114,8 @@ footer a{color:var(--accent-grad);text-decoration:none}
 /* Reveal */
 .r{opacity:0;transform:translateY(20px);transition:all 0.6s ease}
 .r.v{opacity:1;transform:translateY(0)}
+.cursor{animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
 </style>
 </head>
 <body>
@@ -127,7 +129,7 @@ footer a{color:var(--accent-grad);text-decoration:none}
 
 <section class="hero">
   <div class="label">6 dni · 12 projektów · Zero mocków</div>
-  <h1>Ghost · Architect · Builder</h1>
+  <h1 id="hooks">Ghost<span>.</span>Architect<span>.</span>Builder<span class="cursor">|</span></h1>
   <p class="desc">Twelve full-stack projects delivered in six intensive days. Python, FastAPI, React, Docker, CI/CD.</p>
   <div class="stats">
     <div class="stat"><div class="num">12</div><div class="lbl">Projects</div></div>
@@ -201,6 +203,24 @@ footer a{color:var(--accent-grad);text-decoration:none}
 // Reveal on scroll
 const obs = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:.1});
 document.querySelectorAll('.r').forEach(x=>obs.observe(x));
+
+// Typewriter
+const texts = ["Ghost","Architect","Builder"];
+let ti = 0, ci = 0, ht = document.getElementById('hooks');
+function tw() {
+  if (ti < texts.length) {
+    ht.innerHTML = texts[ti].split('').map((c,i) => `<span style="--d:${i*100}ms">${c}</span>`).join('') + '<span class="cursor">|</span>';
+    ti++;
+  } else { ti = 0; ht.innerHTML = ''; }
+}
+tw();
+setInterval(tw, 2500);
+
+// Cursor blink
+document.querySelector('.cursor')?.style?.setProperty('animation', 'blink 1s step-end infinite');
+const s = document.createElement('style');
+s.textContent = '@keyframes blink{50%{opacity:0}}';
+document.head.appendChild(s);
 </script>
 </body>
 </html>
