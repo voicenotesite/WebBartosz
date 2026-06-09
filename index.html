@@ -18,9 +18,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);overflow:hid
 #terminal .wrap{max-width:600px;width:90%;text-align:center}
 #terminal h2{font-size:1.5rem;margin-bottom:20px;color:#00ff88;overflow:hidden;border-right:2px solid #00ff88;white-space:nowrap;animation:typing 2s steps(25,start)}
 #terminal .err{color:#ff4444;margin:20px 0;opacity:0;transition:opacity 0.3s}
-#terminal .err.on{opacity:1}
+#terminal .err.on{opacity:1;animation:errorFlicker 0.4s step-end}
 @keyframes typing{width:0}
-@keyframes errorFlicker{0%,20%{opacity:0}50%{opacity:1}100%{opacity:0}}
+@keyframes errorFlicker{0%,10%,20%,30%,40%,50%,60%,70%,80%,90%,100%{opacity:1}3%,6%,9%,12%,15%,18%,21%,24%,27%,30%{opacity:0}}
 #site{display:none}
 header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9);border-bottom:1px solid #00ff88;display:flex;align-items:center;z-index:100}
 .logo{font-weight:700;font-size:1.25rem;padding:20px;font-family:monospace;color:#00ff88}
