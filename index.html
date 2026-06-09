@@ -1,61 +1,72 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Bartosz Osiej</title><style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#00ff88;font-family:monospace;height:100vh;overflow:hidden}
-#terminal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000;z-index:9999}
-#site{display:none;width:100%}
-#err{color:#f44;opacity:0}
-header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9);border-bottom:1px solid #00ff88;display:flex;align-items:center}
-.logo{font-weight:700;font-size:1.25rem;padding:20px;color:#00ff88}
-.hero{display:flex;min-height:100vh;align-items:center;justify-content:center;flex-direction:column;background:#000}
-.hero h1{font-size:clamp(2rem,6vw,4rem);color:#00ff88;margin-bottom:20px}
-.hero p{color:#888;margin-bottom:40px}
-.btn{background:#00ff88;color:#000;padding:12px 30;border-radius:32px;font-weight:700;text-decoration:none;display:inline-block;margin-top:20px}
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Bartosz Osiej — AI Systems Engineer</title><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/><style>
+:root{--bg:#080C18;--bg-2:#0D1221;--bg-card:#111827;--cyan:#00D4FF;--violet:#7C3AED;--violet-lt:#A855F7;--white:#F0F4FF;--gray-1:#94A3B8;--gray-2:#475569;--gray-3:#1E293B;--border:rgba(0,212,255,0.12);--glow-c:rgba(0,212,255,0.25);--font-display:'Space Grotesk',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+#shell{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#000;font-family:var(--font-mono);color:#00ff88;position:fixed;inset:0;z-index:9999}
+#shell.preboot{animation:fadeShell 0.5s ease 1.8s forwards}
+@keyframes fadeShell{to{opacity:0;pointer-events:none}}
+#err{color:#ff4444;opacity:0;font-size:2rem;margin-top:20px;animation:flicker 0.4s step-end 0.5s 6}}
+@keyframes flicker{0%,10%{opacity:1}5%{opacity:0}}
+#site{display:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 clamp(24px,5vw,80px);height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,12,24,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--white);display:flex;align-items:center;gap:8px}
+.nav-logo span{color:var(--cyan)}
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px clamp(24px,8vw,120px) 60px}
+.hero-inner{max-width:900px}
+.hero-eyebrow{font-family:var(--font-mono);font-size:0.8rem;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.hero-eyebrow::before{content:'';display:inline-block;width:32px;height:1.5px;background:var(--cyan)}
+h1{font-family:var(--font-display);font-size:clamp(3rem,8vw,7rem);font-weight:700;line-height:1.0;letter-spacing:-0.03em;margin-bottom:12px}
+.h1-sub{display:block;background:linear-gradient(90deg,var(--cyan),var(--violet-lt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:1.15rem;color:var(--gray-1);max-width:540px;margin:28px 0 44px;line-height:1.7}
+.btn-primary{padding:14px 34px;background:linear-gradient(135deg,var(--cyan),var(--violet));color:var(--bg);font-family:var(--font-display);font-weight:700;border-radius:10px;border:none;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 40px var(--glow-c)}
 .projects{padding:40px 20px}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1200px;margin:0 auto}
-.project{background:rgba(26,26,58,0.6);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:20px}
-.project h3{color:#00ff88;margin-bottom:8px}
-.project p{color:#888;font-size:0.9rem}
-.footer{border-top:1px solid #00ff88;padding:40px;text-align:center;color:#666;margin-top:40px}
-@keyframes flicker{0%,100%{opacity:1}50%{opacity:0}}
-.flicker{animation:flicker 0.1s 30}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;max-width:1200px;margin:0 auto}
+.project-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;border:1px solid var(--border)}
+.project-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px var(--glow-c)}
+.project-thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,var(--bg-2),var(--bg));display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.75rem;color:var(--gray-2);border-bottom:1px solid var(--border);overflow:hidden;position:relative}
+.project-body{padding:24px;flex:1;display:flex;flex-direction:column}
+.project-title{font-family:var(--font-display);font-size:1.15rem;font-weight:600;margin-bottom:10px;color:var(--white)}
+.project-desc{font-size:0.875rem;color:var(--gray-1);line-height:1.7;flex:1}
+.project-links{display:flex;gap:12px;margin-top:20px}
+.plink{display:flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:500;color:var(--cyan);padding:7px 16px;border:1px solid rgba(0,212,255,0.25);border-radius:8px;transition:background 0.2s,border-color 0.2s}
+.plink:hover{background:rgba(0,212,255,0.08);border-color:var(--cyan)}
+.footer{border-top:1px solid var(--border);padding:32px;text-align:center;color:var(--gray-2);margin-top:40px}
+.footer a{color:var(--gray-2);font-size:0.8rem}
+.footer a:hover{color:var(--cyan)}
+.why-grid,.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.why-card,.skill-group{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:border-color 0.3s,transform 0.3s}
+.why-card:hover,.skill-group:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-4px)}
+.timeline{position:relative;max-width:760px}
+.timeline-item{display:flex;gap:36px;padding:0 0 48px 56px;position:relative}
+.timeline-dot{position:absolute;left:-31px;top:5px;width:17px;height:17px;border-radius:50%;border:2px solid var(--cyan);background:var(--bg);box-shadow:0 0 12px var(--glow-c)}
+.timeline-date{font-family:var(--font-mono);font-size:0.75rem;color:var(--cyan);white-space:nowrap;min-width:120px}
+.timeline-role{font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:4px}
+.timeline-company{font-size:0.85rem;color:var(--violet-lt);margin-bottom:10px}
+.timeline-desc{font-size:0.875rem;color:var(--gray-1)}
+.section-label{font-family:var(--font-mono);font-size:0.75rem;color:var(--cyan);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:12px}
+.section-title{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;margin-bottom:16px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:none}
+cursor .cursor-glow{display:none}
+@media(max-width:900px){.hero-terminal{display:none}}
+@media(max-width:640px){.nav-links{display:none}}
 </style></head><body>
-<div id="terminal">
-<pre style="color:#00ff88">BARTOSZ OSIJE :: PORTFOLIO
-<span id="err">ERROR 404 :: SYSTEM FAILURE</span>
-<span id="cmd">$ access denied</span></pre>
-</div>
-<div id="site">
-<header><span class="logo">&gt; bartosz@portfolio:~$ whoami</span></header>
-<section class="hero">
-<div style="text-align:center;padding:40px">
-<h1>BUILDING SYSTEMS THAT WORK</h1>
-<p>AI infrastructure • Production APIs • Scalable backends</p>
-<a href="#projects" class="btn">View Projects</a>
-</div>
-</section>
-<section class="projects" id="projects">
-<div class="projects-grid" id="grid"></div>
-</section>
-<div class="footer">
-<p>© 2025 Bartosz Osiej | <a href="admin/.secret.html">Admin</a></p>
-</div>
-</div>
+<div id="shell"><div id="boot"><div>BARTOSZ OSIJE :: PORTFOLIO</div><div id="err">ERROR 404 :: SYSTEM FAILURE</div><div style="color:#888">$ access denied</div></div></div>
+<div id="site"><nav><div class="nav-logo"><span>&lt;</span>BARTOSZ<span>/&gt;</span></div></nav>
+<section class="hero"><div class="hero-inner"><div class="hero-eyebrow">AI Systems Engineer</div><h1>Bartosz <span class="h1-sub">Osiej</span></h1><p class="hero-desc">Buduję infrastrukturę AI, produkcyjne API i skalowalne systemy backendowe.</p><div style="display:flex;gap:16px"><a href="#projects" class="btn-primary">Projekty</a></div></div></section>
+<section class="projects" id="projects"><div class="project-grid" id="grid"></div></section>
+<section id="skills"><div style="max-width:1200px;margin:0 auto;padding:100px 24px 60px"><div class="section-label">// stack</div><h2 class="section-title">Technologie</h2><div class="skills-grid" id="skills-grid"></div></div></section>
+<section id="experience" style="background:var(--bg-2)"><div style="max-width:1200px;margin:0 auto;padding:100px 24px 60px"><div class="section-label">// doświadczenie</div><h2 class="section-title">Historia</h2><div class="timeline" id="timeline"></div></div></section>
+<div class="footer"><p>© 2025 Bartosz Osiej | <a href="admin/.secret.html">Admin</a></div></div>
 <script>
-// Data
-let data=JSON.parse(localStorage.getItem('adminData')||'{}');
-let projects=[
-{name:'LinkShort',url:'https://fastapiurl.onrender.com',desc:'JWT URL shortener'},
-{name:'AI Chat Proxy',url:'https://ai-chat-proxy-twj4.onrender.com',desc:'18+ AI models'},
-{name:'GraphQL Blog',url:'https://graphql-blog-lxjy.onrender.com/graphql',desc:'Blog API'}
-];
-if(data.projects&&data.projects.length)projects=data.projects;
-// Animation
-document.getElementById('err').className='flicker';
-setTimeout(()=>{document.getElementById('cmd').textContent='$ booting...';setTimeout(()=>{document.getElementById('terminal').style.opacity=0;document.getElementById('terminal').style.transition='opacity 0.5s';setTimeout(()=>{document.getElementById('terminal').style.display='none';document.getElementById('site').style.display='block';document.body.style.overflow='auto'},500)},400)},1800);
-// Render
-const g=document.getElementById('grid');projects.forEach(p=>{const d=document.createElement('div');d.className='project';d.innerHTML='<h3>'+p.name+'</h3><p>'+p.desc+'</p>';g.appendChild(d)});
-if(data.name)document.querySelector('.logo').textContent='> '+data.name+' ~$';
-if(data.hero1)document.querySelector('.hero h1').textContent=data.hero1;
-</script>
-</body>
-</html>
+document.body.style.overflow='hidden';
+const projects=[{name:'LinkShort',url:'https://fastapiurl.onrender.com',desc:'JWT URL shortener'},{name:'AI Chat Proxy',url:'https://ai-chat-proxy-twj4.onrender.com',desc:'18+ AI models'},{name:'GraphQL Blog',url:'https://graphql-blog-lxjy.onrender.com/graphql',desc:'Blog API'}];
+const skills=[{icon:'⚙️',skills:[{n:'AI Infrastructure',p:92},{n:'Python',p:95},{n:'Go',p:85},{n:'PostgreSQL',p:88}]},{icon:'☁️',skills:[{n:'AWS',p:82},{n:'Docker',p:90},{n:'Kubernetes',p:70},{n:'Terraform',p:65}]}];
+const experience=[{date:'2024 — teraz',role:'AI Systems Engineer',company:'Freelance',desc:'Budowanie API, systemów ML, automatyzacja.'},{date:'2020 — 2024',role:'Backend Developer',company:'Various',desc:'Skalowalne systemy backendu.'}];
+function render(){const g=document.getElementById('grid');g.innerHTML='';projects.forEach(p=>{const d=document.createElement('div');d.className='project-card';d.innerHTML=`<div class="project-thumb">${p.name}</div><div class="project-body"><div class="project-title">${p.name}</div><p class="project-desc">${p.desc}</p><div class="project-links"><a href="${p.url}" target="_blank" class="plink">Demo →</a></div></div>`;g.appendChild(d)});const s=document.getElementById('skills-grid');s.innerHTML='';skills.forEach(section=>{const div=document.createElement('div');div.className='skill-group reveal';div.innerHTML=`<div style="font-size:1.5rem;margin-bottom:16px">${section.icon}</div>`+section.skills.map(sk=>`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:0.83rem;color:var(--gray-1)"><span>${sk.n}</span><span>${sk.p}%</span></div><div style="height:4px;background:var(--gray-3);border-radius:2px;overflow:hidden"><div style="height:100%;width:${sk.p}%;background:linear-gradient(90deg,var(--cyan),var(--violet-lt));border-radius:2px"></div></div></div>`).join('');s.appendChild(div));const t=document.getElementById('timeline');t.innerHTML='';experience.forEach(e=>{const item=document.createElement('div');item.className='timeline-item reveal';item.innerHTML=`<div class="timeline-dot"></div><div><div class="timeline-date">${e.date}</div><div class="timeline-role">${e.role}</div><div class="timeline-company">${e.company}</div><p class="timeline-desc">${e.desc}</p></div>`;t.appendChild(item);});setTimeout(()=>{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));},100);}
+setTimeout(()=>{document.getElementById('shell').classList.add('preboot');setTimeout(()=>{document.getElementById('shell').style.display='none';document.getElementById('site').style.display='block';document.body.style.overflow='auto';render();},600);},1800);
+</script></body></html>
