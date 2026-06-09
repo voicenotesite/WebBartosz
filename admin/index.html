@@ -7,121 +7,169 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#000;
-  --text:#ff4444;
-  --card:#111;
-  --accent:#ff4444;
-  --font:monospace;
+  --bg:#080C18;
+  --card:#111827;
+  --border:rgba(0,212,255,0.12);
+  --cyan:#00D4FF;
+  --violet:#7C3AED;
+  --text:#F0F4FF;
+  --text-dim:#94A3B8;
 }
 *{transition:none!important}
-body{font-family:var(--font);background:var(--bg);color:var(--text);overflow:hidden;height:100vh}
-
-#terminal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000;z-index:9999}
-#terminal .terminal-wrap{max-width:600px;width:90%;text-align:center}
-#terminal h1{font-size:2rem;margin-bottom:20px;color:#ff4444;font-family:monospace}
-#terminal .prompt{margin:10px 0;font-family:monospace;font-size:1rem}
-#terminal .output{margin:10px 0;font-family:monospace;font-size:0.9rem;color:#ff4444;opacity:0}
-#terminal .error{color:#ff6b6b;margin:10px 0;font-family:monospace}
-#terminal .cursor{display:inline-block;width:8px;height:16px;background:#ff4444;animation:blink 1s step-end infinite}
-@keyframes blink{50%{opacity:0}}
-
-#site{display:none}
-header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9);border-bottom:1px solid #ff4444;display:flex;align-items:center;z-index:100}
-.logo{font-weight:bold;font-size:1.25rem;padding:20px;font-family:monospace;color:#ff4444}
-
-.admin{display:flex;min-height:100vh;padding:40px}
-.sidebar{width:200px;background:#111;border-right:1px solid #333}
-.sidebar ul{list-style:none;padding:20px}
-.sidebar li{padding:10px;color:#ff4444;font-family:monospace;cursor:pointer}
-.sidebar li:hover{background:#222}
-
-.content{flex:1;padding:40px}
-.content h1{color:#ff4444;font-family:monospace;margin-bottom:20px}
-.form-group{margin-bottom:20px}
-.form-group label{display:block;color:#888;margin-bottom:5px;font-family:monospace}
-.form-group input{width:100%;padding:10px;background:#111;border:1px solid #333;color:#ff4444;font-family:monospace}
-.btn{background:#ff4444;color:#000;border:none;padding:12px 24px;font-weight:bold;font-family:monospace;cursor:pointer}
-.projects-list{margin-top:30px}
-.project-item{display:flex;gap:10px;align-items:center;background:#111;padding:10px;margin-bottom:10px;border:1px solid #333}
-.project-item input{flex:1;background:#000;color:#ff4444;border:none;padding:8px}
-.del{background:#333;color:#ff4444;border:none;padding:5px 10px;cursor:pointer;font-family:monospace}
+body{font-family:system-ui;background:var(--bg);color:var(--text);min-height:100vh}
+header{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--border);padding:20px;z-index:100}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:700;color:var(--cyan)}
+main{max-width:1400px;margin:0 auto;padding:20px}
+h2{color:var(--cyan);margin-bottom:20px;font-size:1.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.field{margin-bottom:20px}
+.field label{display:block;color:var(--text-dim);margin-bottom:6px;font-size:0.85rem}
+.field input,.field textarea,.field select{width:100%;padding:12px;background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:6px;font-family:inherit}
+.field textarea{min-height:100px;resize:vertical}
+.btn{background:var(--cyan);color:#000;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:600}
+.btn:hover{opacity:0.9}
+.btn-secondary{background:var(--violet);color:#fff}
+.preview{margin-top:30px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px}
+.preview h3{color:var(--text);margin-bottom:10px}
+.del{color:#ff6b6b;background:rgba(255,107,107,0.1);padding:6px 10px;border-radius:4px;margin-left:10px}
+.social-item{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.social-item input{flex:1}
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr}
+  main{padding:10px}
+}
 </style>
 </head>
 <body>
-<div id="terminal">
-  <div class="terminal-wrap">
-    <h1>ADMIN ACCESS :: PORTFOLIO v6</h1>
-    <div class="prompt">Security protocols...</div>
-    <div class="error" id="err">ERROR 404 :: ACCESS DENIED</div>
-    <div class="output" id="out1">Authentication failed.</div>
-    <div class="prompt">access@admin:~$ <span class="cursor"></span></div>
-  </div>
-</div>
-
-<div id="site">
 <header>
-<span class="logo">&gt; admin@portfolio:~$ ./control.sh</span>
+<div class="header-inner">
+<span class="logo">ADMIN PANEL</span>
+<div><button class="btn" onclick="saveAll()">Save All</button></div>
+</div>
 </header>
+<main>
+<h2>Site Settings</h2>
+<div class="grid">
+<div class="field">
+<label>Site Title</label>
+<input id="siteTitle" placeholder="My Portfolio">
+</div>
+<div class="field">
+<label>Your Name</label>
+<input id="authorName" placeholder="Jan Kowalski">
+</div>
+<div class="field">
+<label>Description</label>
+<textarea id="siteDesc" placeholder="What this site is about"></textarea>
+</div>
+</div>
 
-<div class="admin">
-<div class="sidebar">
-<ul>
-<li>Dashboard</li>
-<li>Projects</li>
-<li>Settings</li>
-<li>Logout</li>
-</ul>
+<h2 style="margin-top:30px">Hero Section</h2>
+<div class="grid">
+<div class="field">
+<label>Hero Title (line 1)</label>
+<input id="heroTitle1" placeholder="Cześć, jestem">
 </div>
-<div class="content">
-<h1>Project Management</h1>
-<div class="form-group">
-<label>Name</label>
-<input type="text" placeholder="Project name">
+<div class="field">
+<label>Hero Title (line 2)</label>
+<input id="heroTitle2" placeholder="Jan Kowalski">
 </div>
-<div class="form-group">
-<label>URL</label>
-<input type="text" placeholder="https://...">
-</div>
-<button class="btn" onclick="addProject()">Add Project</button>
-<div class="projects-list" id="projectsList"></div>
-<button class="btn" onclick="saveProjects()">Save to JSON File</button>
-<textarea id="jsonOutput" style="width:100%;height:200px;background:#000;color:#ff4444;font-family:monospace;margin-top:20px"></textarea>
+<div class="field">
+<label>Hero Description</label>
+<textarea id="heroDesc" placeholder="Your description"></textarea>
 </div>
 </div>
+
+<h2>Social Links</h2>
+<div id="socialList">
+<div class="social-item">
+<select onchange="addSocial(this.value)">
+<option value="">+ Add Social</option>
+<option value="github">GitHub</option>
+<option value="linkedin">LinkedIn</option>
+<option value="twitter">Twitter</option>
+<option value="email">Email</option>
+</select>
 </div>
 </div>
+<div id="socialFields"></div>
+
+<h2>Projects</h2>
+<div id="projectList">
+<div class="field">
+<label>Project 1</label>
+<input placeholder="Project name">
+</div>
+</div>
+<button class="btn btn-secondary" onclick="addProject()">+ Add Project</button>
+
+<h2>Sections Order</h2>
+<div id="sectionOrder">
+<label><input type="checkbox" checked> About</label><br>
+<label><input type="checkbox" checked> Projects</label><br>
+<label><input type="checkbox" checked> Experience</label><br>
+<label><input type="checkbox" checked> Contact</label><br>
+</div>
+
+<h2>Preview</h2>
+<div class="preview">
+<div id="previewContent"></div>
+</div>
+</main>
 
 <script>
-let projects=[];
-const form={name:'',url:'',desc:'',tags:''};
+let settings={
+  title:"Bartosz Osiej Portfolio",
+  name:"Bartosz Osiej",
+  desc:"AI Systems Engineer",
+  heroTitle1:"Building Systems That Work",
+  heroTitle2:"",
+  heroDesc:"AI infrastructure & scalable backends",
+  socials:{github:"https://github.com/voicenotesite",linkedin:"",twitter:"",email:""},
+  projects:[]
+};
+
+function addSocial(type){
+  if(!type)return;
+  const d=document.createElement('div');
+  d.className='social-item';
+  d.innerHTML=`
+    <select onchange="updateSocialType(this,${Date.now()})">
+      <option value="github" ${type==='github'?'selected':''}>GitHub</option>
+      <option value="linkedin" ${type==='linkedin'?'selected':''}>LinkedIn</option>
+      <option value="twitter" ${type==='twitter'?'selected':''}>Twitter</option>
+      <option value="email" ${type==='email'?'selected':''}>Email</option>
+    </select>
+    <input placeholder="URL" value="${settings.socials[type]||''}">
+    <button class="del" onclick="this.parentElement.remove()">×</button>`;
+  document.getElementById('socialFields').appendChild(d);
+}
 
 function addProject(){
   const d=document.createElement('div');
-  d.className='project-item';
-  d.innerHTML=`
-    <input placeholder="Name" value="New Project">
-    <input placeholder="URL">
-    <input placeholder="Description">
-    <input placeholder="Tags comma,separated">
-    <button class="del" onclick="this.parentElement.remove()">X</button>`;
-  document.getElementById('projectsList').appendChild(d);
+  d.className='field';
+  d.innerHTML='<label>Project</label><input placeholder="Project name URL tags">';
+  document.getElementById('projectList').appendChild(d);
 }
 
-function saveProjects(){
-  const items=document.querySelectorAll('.project-item');
-  const arr=[];
-  items.forEach((it,idx)=>{
-    const inp=it.querySelectorAll('input');
-    arr.push({id:idx+1,name:inp[0].value,url:inp[1].value,desc:inp[2].value,tags:inp[3]?inp[3].value.split(',').map(x=>x.trim()):[]});
-  });
-  document.getElementById('jsonOutput').value=JSON.stringify(arr,null,2);
-  localStorage.setItem('portfolio_projects',JSON.stringify(arr));
+function saveAll(){
+  localStorage.setItem('portfolio_settings',JSON.stringify(settings));
+  alert('Settings saved!');
 }
 
-setTimeout(()=>{
-  document.getElementById('terminal').style.display='none';
-  document.getElementById('site').style.display='block';
-},2500);
+function loadAll(){
+  const s=localStorage.getItem('portfolio_settings');
+  if(s)settings=JSON.parse(s);
+  document.getElementById('siteTitle').value=settings.title||'';
+  document.getElementById('authorName').value=settings.name||'';
+  document.getElementById('siteDesc').value=settings.desc||'';
+  document.getElementById('heroTitle1').value=settings.heroTitle1||'';
+  document.getElementById('heroTitle2').value=settings.heroTitle2||'';
+  document.getElementById('heroDesc').value=settings.heroDesc||'';
+}
+
+window.onload=function(){loadAll()};
 </script>
 </body>
 </html>
