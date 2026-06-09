@@ -3,116 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Bartosz Osiej - Full-Stack Engineer building production AI systems, backends, and scalable infrastructure. 12 live projects.">
-<meta name="keywords" content="bartosz osiej, portfolio, ai, fastapi, react, backend">
+<meta name="description" content="Bartosz Osiej - Cosmic Engineer building production AI systems, backends, and scalable infrastructure.">
+<meta name="keywords" content="bartosz osiej, portfolio, ai, backend, fastapi, react">
 <meta property="og:title" content="Bartosz Osiej · Portfolio">
-<meta property="og:description" content="Full-Stack Engineer · 12 Production Projects">
-<meta property="og:type" content="website">
-<title>Bartosz Osiej · Portfolio</title>
+<meta property="og:description" content="Cosmic Engineer · 12 Production Projects">
+<title>Bartosz Osiej · Cosmic Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Söhne:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #0a0a0f;
-  --surface: #11111a;
-  --card: #1a1a2e;
-  --border: #252545;
+  --surface: rgba(17, 17, 26, 0.8);
+  --card: rgba(26, 26, 46, 0.6);
+  --border: rgba(255, 255, 255, 0.08);
   --text: #ffffff;
   --text-dim: #a0a0c0;
   --accent: #6c5ce7;
   --accent-grad: #a29bfe;
+  --neon: #00f3ff;
   --space: 24px;
-  --font: 'Söhne', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  --font: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   --mono: 'JetBrains Mono', monospace;
-  --radius: 16px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 20px;
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;letter-spacing:-0.01em}
 ::selection{background:var(--accent);color:#fff}
 
 .bg{position:fixed;inset:0;z-index:0}
-.bg::before,.bg::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;filter:blur(100px);opacity:0.3}
-.bg::before{top:-100px;right:-100px;background:var(--accent)}
-.bg::after{bottom:-150px;left:-50px;background:var(--accent-grad)}
+.bg::before,.bg::after{content:'';position:absolute;width:600px;height:600px;border-radius:50%;filter:blur(120px);opacity:0.3}
+.bg::before{top:-150px;right:-100px;background:radial-gradient(circle,rgba(108,92,231,0.3),transparent 70%)}
+.bg::after{bottom:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,243,255,0.2),transparent 70%)}
 
-.wrap{max-width:1280px;margin:0 auto;padding:0 var(--space)}
+.noise{position:fixed;inset:0;opacity:0.02;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stub'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.3'/%3E%3C/svg%3E")}}
 
-header{
-  position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.85);
-  backdrop-filter:blur(20px);border-bottom:1px solid var(--border);
-}
-.header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px var(--space)}
-.logo{font-weight:800;font-size:1.25rem;color:var(--text);text-decoration:none}
-.logo span{color:var(--accent-grad)}
+.wrap{max-width:1400px;margin:0 auto;padding:0 var(--space)}
 
+header{position:sticky;top:0;z-index:100;background:var(--surface);backdrop-filter:blur(30px);border-bottom:1px solid var(--border)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:20px var(--space)}
+.logo{font-weight:800;font-size:1.35rem;color:var(--text);text-decoration:none;letter-spacing:-0.03em}
+.logo span{background:linear-gradient(90deg,var(--accent),var(--accent-grad));-webkit-background-clip:text;background-clip:text;color:transparent}
 .nav{display:flex;gap:32px}
 .nav a{color:var(--text-dim);text-decoration:none;font-weight:500;transition:var(--transition)}
 .nav a:hover{color:var(--text)}
 
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:var(--space) 0}
-.hero .label{
-  display:inline-flex;align-items:center;gap:8px;background:rgba(108,92,231,0.1);
-  border:1px solid rgba(108,92,231,0.2);color:var(--accent-grad);font-size:0.85rem;
-  font-weight:600;padding:6px 16px;border-radius:32px;margin-bottom:24px;
-}
-.hero h1{font-size:clamp(2.5rem,8vw,4rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:16px}
-.hero .desc{color:var(--text-dim);max-width:600px;margin:0 auto 32px;font-size:1.1rem}
-.hero .stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin:40px 0}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:var(--space) 0;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(108,92,231,0.15),transparent 70%);animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+
+.hero .label{display:inline-flex;align-items:center;gap:8px;background:rgba(108,92,231,0.1);border:1px solid rgba(108,92,231,0.3);color:var(--accent-grad);font-size:0.85rem;font-weight:600;padding:8px 20px;border-radius:32px;margin-bottom:32px;letter-spacing:0.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(3rem,10vw,6rem);font-weight:900;letter-spacing:-0.03em;line-height:1.05;margin-bottom:24px}
+.hero .desc{color:var(--text-dim);max-width:700px;margin:0 auto 48px;font-size:1.2rem;font-weight:300}
+.hero .stats{display:flex;gap:60px;justify-content:center;flex-wrap:wrap;margin:60px 0}
 .hero .stat{text-align:center}
-.hero .stat .num{font-size:clamp(2rem,5vw,3rem);font-weight:800;font-family:var(--mono);color:var(--accent-grad)}
-.hero .stat .lbl{font-size:0.85rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px}
+.hero .stat .num{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;font-family:var(--mono);color:var(--accent-grad);letter-spacing:-0.03em}
+.hero .stat .lbl{font-size:0.85rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
 
-.sec{padding:5rem 0}
-.sec-header{text-align:center;margin-bottom:3rem}
-.sec-header h2{font-size:2rem;font-weight:700;color:var(--text)}
-.sec-header .line{display:block;width:40px;height:2px;background:var(--accent);margin:12px auto}
+.sec{padding:8rem 0}
+.sec-header{text-align:center;margin-bottom:5rem}
+.sec-header h2{font-size:clamp(2rem,5vw,3rem);font-weight:800;color:var(--text);letter-spacing:-0.03em;margin-bottom:16px}
+.sec-header .line{display:block;width:48px;height:2.5px;background:var(--accent);margin:16px auto;border-radius:2px}
 
-.grid{display:grid;gap:24px;margin-top:2rem}
-@media(min-width:768px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+.projects-grid{display:grid;gap:32px;margin-top:3rem}
+@media(min-width:768px){.projects-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1280px){.projects-grid{grid-template-columns:repeat(3,1fr)}}
 
-.card{
-  background:rgba(18,18,40,0.5);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:24px;
-  transition:all 0.3s ease;
-  position:relative;
-  overflow:hidden;
-  backdrop-filter:blur(10px);
+.project-card{
+  position:relative;overflow:hidden;border-radius:var(--radius);
+  background:var(--card);border:1px solid var(--border);transition:var(--transition);
+  backdrop-filter:blur(20px)
 }
-.card:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(108,92,231,0.4)}
-.card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-grad),var(--accent))}
-.card h3{font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.badge{display:inline-block;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:4px}
-.badge.live{background:rgba(34,197,94,0.2);color:#22c55e}
-.card p{color:var(--text-dim);margin-bottom:16px}
-.tech{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.tech span{font-size:0.75rem;background:var(--surface);padding:4px 10px;border-radius:6px}
-.card .lnk{display:flex;gap:8px}
-.card .lnk a{font-size:0.85rem;color:var(--accent-grad);text-decoration:none}
-.card .lnk a:hover{text-decoration:underline}
+.project-card:hover{transform:translateY(-12px)}
+.project-card::after{content:'';position:absolute;inset:-1px;border-radius:inherit;border:2px solid transparent;background:linear-gradient(270deg,var(--accent),var(--accent-grad),var(--neon),var(--accent-grad),var(--accent));opacity:0;transition:var(--transition);z-index:-1}
+.project-card:hover::after{opacity:0.5}
 
-.screenshot{
-  height:160px;background-size:cover;background-position:center;border-radius:12px;margin-bottom:16px;
-  position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.1)
-}
-.screenshot::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,10,15,.8))}
-.screenshot .project-label{position:absolute;bottom:12px;left:12px;font-size:0.85rem;font-weight:600;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.project-img{height:200px;background-size:cover;background-position:center;border-radius:12px;margin-bottom:20px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.1)}
+.project-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,10,18,0.8))}
 
-.footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--text-dim);font-size:0.85rem}
-.footer a{color:var(--accent-grad);text-decoration:none}
+.project-content h3{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.25rem;margin-bottom:12px}
+.project-content p{color:var(--text-dim);margin-bottom:16px;font-weight:300;line-height:1.5}
 
-.r{opacity:0;transform:translateY(20px);transition:all 0.6s ease}
+.tech-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tech-chips span{font-size:0.75rem;background:rgba(108,92,231,0.15);color:var(--accent-grad);padding:4px 12px;border-radius:12px;border:1px solid rgba(108,92,231,0.2)}
+
+.project-cta{display:flex;gap:12px;margin-top:16px}
+.project-cta a{font-size:0.85rem;color:var(--accent-grad);text-decoration:none;font-weight:500;transition:var(--transition);padding:6px 12px;border-radius:6px;background:rgba(108,92,231,0.1)}
+.project-cta a:hover{background:rgba(108,92,231,0.2)}
+
+.experience-grid{display:grid;gap:24px;margin-top:3rem}
+@media(min-width:768px){.experience-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.experience-grid{grid-template-columns:repeat(3,1fr)}}
+
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;backdrop-filter:blur(15px);transition:var(--transition)}
+.exp-card:hover{transform:translateY(-4px)}
+.exp-card h3{margin-bottom:12px;font-weight:600}
+.exp-card p{color:var(--text-dim);font-weight:300}
+
+.tech-stack{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:3rem}
+.tech-stack .tech-item{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:14px 24px;transition:var(--transition);text-align:center}
+.tech-stack .tech-item:hover{transform:translateY(-4px);border-color:var(--accent)}
+.tech-stack .tech-item span{display:block;font-weight:600;margin-bottom:4px}
+.tech-stack .tech-item .desc{font-size:0.75rem;color:var(--text-dim)}
+
+.footer{border-top:1px solid var(--border);padding:4rem 0;background:var(--surface)}
+.footer .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px;margin-bottom:32px}
+.footer h4{margin-bottom:20px;font-weight:600}
+.footer p{color:var(--text-dim)}
+.footer .footer-links{display:flex;flex-direction:column;gap:12px}
+.footer .footer-links a{color:var(--accent-grad);text-decoration:none;transition:var(--transition)}
+.footer .footer-links a:hover{color:var(--text)}
+.footer .copyright{border-top:1px solid var(--border);padding-top:32px;text-align:center;color:var(--text-dim);font-size:0.85rem}
+
+.r{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
 .r.v{opacity:1;transform:translateY(0)}
+.r-stagger{transition-delay:0.1s}
+.r-stagger.v{transition-delay:0.2s}
+.r-stagger-2{transition-delay:0.3s}
+.r-stagger-2.v{transition-delay:0.4s}
+
+.magnetic{display:inline-block}
+.magnetic:hover{transform:scale(1.05)}
+
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 32px rgba(108,92,231,0.4);border:none;border-radius:32px;padding:16px 36px;font-weight:600;cursor:pointer;transition:var(--transition)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(108,92,231,0.6)}
+.btn-secondary{background:var(--surface);color:var(--accent-grad);border:1px solid var(--border);border-radius:32px;padding:16px 32px;font-weight:600;cursor:pointer;transition:var(--transition)}
+.btn-secondary:hover{background:rgba(108,92,231,0.1)}
+
+@media(max-width:768px){
+  .wrap{padding:0 16px}
+  .header-inner{padding:16px}
+  .sec{padding:4rem 0}
+  .hero .stats{gap:24px}
+  .projects-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 <canvas id="p" style="position:fixed;inset:0;z-index:0;pointer-events:none"></canvas>
 <div class="bg"></div>
+<div class="noise"></div>
 
 <header>
   <div class="header-inner wrap">
@@ -126,9 +158,9 @@ header{
 </header>
 
 <section class="hero">
-  <div class="label">Full-Stack Engineer · AI Systems</div>
+  <div class="label">Cosmic Engineer · Production Systems</div>
   <h1>Bartosz Osiej</h1>
-  <p class="desc">Building production-grade AI systems, full-stack backends, and scalable infrastructure. 12 live projects.</p>
+  <p class="desc">Building production-grade AI systems, full-stack backends, and scalable infrastructure. 12 live projects delivered in 6 intensive days.</p>
   <div class="stats">
     <div class="stat"><div class="num">12</div><div class="lbl">Projects</div></div>
     <div class="stat"><div class="num">18</div><div class="lbl">AI Models</div></div>
@@ -141,105 +173,84 @@ header{
     <h2>Projects</h2>
   </div>
   <div class="wrap">
-    <div class="grid">
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe)">
-          <span class="project-label">URL Shortener</span>
+    <div class="projects-grid">
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe)">
         </div>
         <h3>LinkShort <span class="badge live">Live</span></h3>
-        <p>JWT auth, click tracking, React dashboard. Production URL shortener.</p>
-        <div class="tech"><span>FastAPI</span><span>React</span><span>JWT</span></div>
-        <div class="lnk"><a href="https://fastapiurl.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/FastAPI-url" target="_blank">GitHub</a></div>
+        <p>URL shortener with JWT auth, click tracking, React dashboard.</p>
+        <div class="tech-chips"><span>FastAPI</span><span>React</span><span>JWT</span></div>
+        <div class="project-cta"><a href="https://fastapiurl.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/FastAPI-url" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#00b894,#00cec9)">
-          <span class="project-label">GraphQL Blog</span>
-        </div>
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#00b894,#00cec9)"></div>
         <h3>GraphQL Blog <span class="badge live">Live</span></h3>
         <p>Blog API with posts, comments, JWT auth. Strawberry + PostgreSQL.</p>
-        <div class="tech"><span>FastAPI</span><span>Strawberry</span><span>GraphQL</span></div>
-        <div class="lnk"><a href="https://graphql-blog-lxjy.onrender.com/graphql" target="_blank">Playground</a><a href="https://github.com/voicenotesite/graphql-blog" target="_blank">GitHub</a></div>
+        <div class="tech-chips"><span>FastAPI</span><span>Strawberry</span><span>GraphQL</span></div>
+        <div class="project-cta"><a href="https://graphql-blog-lxjy.onrender.com/graphql" target="_blank">Playground</a><a href="https://github.com/voicenotesite/graphql-blog" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#6c5ce7,#fdcb6e)">
-          <span class="project-label">AI Chat Proxy</span>
-        </div>
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#6c5ce7,#fdcb6e)"></div>
         <h3>AI Chat Proxy <span class="badge live">Live</span></h3>
-        <p>Proxy for 18 AI models. Groq, Mistral, NVIDIA, Gemini with SSE streaming.</p>
-        <div class="tech"><span>FastAPI</span><span>SSE</span><span>Groq</span></div>
-        <div class="lnk"><a href="https://ai-chat-proxy-twj4.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/ai-chat-proxy" target="_blank">GitHub</a></div>
+        <p>Proxy for 18 AI models. Groq, Mistral, NVIDIA, Gemini integration.</p>
+        <div class="tech-chips"><span>FastAPI</span><span>SSE</span><span>Groq</span></div>
+        <div class="project-cta"><a href="https://ai-chat-proxy-twj4.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/ai-chat-proxy" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7)">
-          <span class="project-label">Unified API</span>
-        </div>
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7)"></div>
         <h3>Unified Portfolio API</h3>
-        <p>5 modules in one: URL, blog, chat, queue, RAG. Single endpoint architecture.</p>
-        <div class="tech"><span>FastAPI</span><span>PostgreSQL</span><span>JWT</span></div>
-        <div class="lnk"><a href="https://python-portfolio-y0z8.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/python-portfolio" target="_blank">GitHub</a></div>
+        <p>5 modules: URL, blog, chat, queue, RAG. Single architecture.</p>
+        <div class="tech-chips"><span>FastAPI</span><span>PostgreSQL</span><span>JWT</span></div>
+        <div class="project-cta"><a href="https://python-portfolio-y0z8.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/python-portfolio" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#00cec9,#00b894)">
-          <span class="project-label">Task Queue</span>
-        </div>
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#00cec9,#00b894)"></div>
         <h3>Task Queue</h3>
-        <p>Async with WebSocket, real-time progress. Redis backend processing.</p>
-        <div class="tech"><span>FastAPI</span><span>WebSocket</span><span>Redis</span></div>
-        <div class="lnk"><a href="https://github.com/voicenotesite/task-queue" target="_blank">GitHub</a></div>
+        <p>Async with WebSocket, real-time progress. Redis backend.</p>
+        <div class="tech-chips"><span>FastAPI</span><span>WebSocket</span><span>Redis</span></div>
+        <div class="project-cta"><a href="https://github.com/voicenotesite/task-queue" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#fdcb6e,#e17055)">
-          <span class="project-label">RAG PDF</span>
-        </div>
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#fdcb6e,#e17055)"></div>
         <h3>RAG PDF Q&A</h3>
-        <p>Upload PDF → TF-IDF → answers. Zero API costs, pure local processing.</p>
-        <div class="tech"><span>FastAPI</span><span>TF-IDF</span><span>Numpy</span></div>
-        <div class="lnk"><a href="https://github.com/voicenotesite/rag-qa" target="_blank">GitHub</a></div>
+        <p>Upload PDF → TF-IDF → answers. Zero API costs.</p>
+        <div class="tech-chips"><span>FastAPI</span><span>TF-IDF</span><span>Numpy</span></div>
+        <div class="project-cta"><a href="https://github.com/voicenotesite/rag-qa" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#6c5ce7,#00f3ff)">
-          <span class="project-label">Chat Proxy</span>
-        </div>
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#6c5ce7,#00f3ff)"></div>
         <h3>Chat Proxy Light</h3>
-        <p>Minimal Groq proxy. Streaming, zero dependencies. Lightweight.</p>
-        <div class="tech"><span>FastAPI</span><span>Groq</span><span>Streaming</span></div>
-        <div class="lnk"><a href="https://github.com/voicenotesite/chat-proxy" target="_blank">GitHub</a></div>
+        <p>Minimal Groq proxy. Streaming, zero dependencies.</p>
+        <div class="tech-chips"><span>FastAPI</span><span>Groq</span><span>Streaming</span></div>
+        <div class="project-cta"><a href="https://github.com/voicenotesite/chat-proxy" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#0984e3,#00cec9)">
-          <span class="project-label">Darknet Search</span>
-        </div>
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#0984e3,#00cec9)"></div>
         <h3>Search Engine <span class="badge live">Live</span></h3>
         <p>Clearnet + darknet search. DuckDuckGo + Ahmia integration.</p>
-        <div class="tech"><span>FastAPI</span><span>Playwright</span></div>
-        <div class="lnk"><a href="https://search-engine-l2zt.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/search-engine" target="_blank">GitHub</a></div>
+        <div class="tech-chips"><span>FastAPI</span><span>Playwright</span></div>
+        <div class="project-cta"><a href="https://search-engine-l2zt.onrender.com" target="_blank">Demo</a><a href="https://github.com/voicenotesite/search-engine" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#636e72,#2d3436)">
-          <span class="project-label">Reports</span>
-        </div>
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#636e72,#2d3436)"></div>
         <h3>Reports</h3>
-        <p>140+ technical reports with code samples and architecture diagrams.</p>
-        <div class="tech"><span>Markdown</span><span>GitHub Pages</span></div>
-        <div class="lnk"><a href="https://voicenotesite.github.io/reports/" target="_blank">View</a></div>
+        <p>140+ technical reports with code samples and architecture.</p>
+        <div class="tech-chips"><span>Markdown</span><span>GitHub Pages</span></div>
+        <div class="project-cta"><a href="https://voicenotesite.github.io/reports/" target="_blank">View</a></div>
       </div>
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#e17055,#fdcb6e)">
-          <span class="project-label">CV Maker</span>
-        </div>
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#e17055,#fdcb6e)"></div>
         <h3>CV Maker</h3>
-        <p>JSON-based CV generator with PDF export and templates.</p>
-        <div class="tech"><span>FastAPI</span><span>pdfkit</span><span>JSON</span></div>
-        <div class="lnk"><a href="https://github.com/voicenotesite" target="_blank">GitHub</a></div>
+        <p>JSON-based CV generator with PDF export.</p>
+        <div class="tech-chips"><span>FastAPI</span><span>pdfkit</span><span>JSON</span></div>
+        <div class="project-cta"><a href="https://github.com/voicenotesite" target="_blank">GitHub</a></div>
       </div>
-      <div class="card r">
-        <div class="screenshot" style="background:linear-gradient(135deg,#2d3436,#6c5ce7)">
-          <span class="project-label">Portfolio Daemon</span>
-        </div>
+      <div class="project-card r">
+        <div class="project-img" style="background:linear-gradient(135deg,#2d3436,#6c5ce7)"></div>
         <h3>Portfolio Daemon</h3>
-        <p>Background service monitoring health and auto-deploying updates.</p>
-        <div class="tech"><span>Python</span><span>Docker</span></div>
-        <div class="lnk"><a href="https://github.com/voicenotesite" target="_blank">GitHub</a></div>
+        <p>Background service monitoring health and auto-deploying.</p>
+        <div class="tech-chips"><span>Python</span><span>Docker</span></div>
+        <div class="project-cta"><a href="https://github.com/voicenotesite" target="_blank">GitHub</a></div>
       </div>
     </div>
   </div>
@@ -250,16 +261,16 @@ header{
     <h2>Experience</h2>
   </div>
   <div class="wrap">
-    <div class="grid">
-      <div class="card r">
-        <h3>Full-Stack Engineer</h3>
+    <div class="experience-grid">
+      <div class="project-card r">
+        <h3>Full-Stack Developer</h3>
         <p>Self-taught since 2024. 12 projects, 140+ reports, 18 AI models integrated.</p>
       </div>
-      <div class="card r">
-        <h3>AI Integration</h3>
+      <div class="project-card r">
+        <h3>AI Systems Architect</h3>
         <p>Multi-provider AI proxy. Groq, Mistral, NVIDIA, Gemini, Together AI.</p>
       </div>
-      <div class="card r">
+      <div class="project-card r">
         <h3>DevOps & Cloud</h3>
         <p>Docker, CI/CD, GitHub Actions, Render deployment. Auto-scaling systems.</p>
       </div>
@@ -272,23 +283,24 @@ header{
     <h2>Tech Stack</h2>
   </div>
   <div class="wrap">
-    <div class="grid" style="margin-top:2rem">
-      <div class="card r"><strong>Python</strong><br><span style="color:var(--text-dim)">Backend</span></div>
-      <div class="card r"><strong>FastAPI</strong><br><span style="color:var(--text-dim)">Async APIs</span></div>
-      <div class="card r"><strong>React</strong><br><span style="color:var(--text-dim)">Frontend</span></div>
-      <div class="card r"><strong>PostgreSQL</strong><br><span style="color:var(--text-dim)">Database</span></div>
-      <div class="card r"><strong>Docker</strong><br><span style="color:var(--text-dim)">Containers</span></div>
-      <div class="card r"><strong>GraphQL</strong><br><span style="color:var(--text-dim)">API</span></div>
+    <div class="tech-stack">
+      <div class="project-card r"><strong>Python</strong><br><span style="color:var(--text-dim)">Backend Mastery</span></div>
+      <div class="project-card r"><strong>FastAPI</strong><br><span style="color:var(--text-dim)">Async APIs</span></div>
+      <div class="project-card r"><strong>React</strong><br><span style="color:var(--text-dim)">Frontend</span></div>
+      <div class="project-card r"><strong>PostgreSQL</strong><br><span style="color:var(--text-dim)">Database</span></div>
+      <div class="project-card r"><strong>Docker</strong><br><span style="color:var(--text-dim)">Containerization</span></div>
+      <div class="project-card r"><strong>GraphQL</strong><br><span style="color:var(--text-dim)">API Query</span></div>
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="wrap">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px">
-      <div>Bartosz Osiej © 2025</div>
-      <div><a href="https://github.com/voicenotesite">GitHub</a> • <a href="https://voicenotesite.github.io/reports/">Reports</a></div>
+    <div class="footer-content">
+      <div><h4>Bartosz Osiej</h4><p style="color:var(--text-dim)">Building tomorrow's technology, today.</p></div>
+      <div><h4>Links</h4><div class="footer-links"><a href="https://github.com/voicenotesite">GitHub</a><a href="https://voicenotesite.github.io/reports/">Reports</a></div></div>
     </div>
+    <div class="copyright">Bartosz Osiej © 2025 | All rights reserved</div>
   </div>
 </footer>
 
@@ -299,13 +311,13 @@ document.querySelectorAll('.r').forEach(x=>obs.observe(x));
 const c = document.getElementById('p'), ctx = c.getContext('2d');
 function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
 window.addEventListener('resize',resize);resize();
-const ps = Array(60).fill().map(()=>({
+const ps = Array(80).fill().map(()=>({
   x:Math.random()*window.innerWidth, y:Math.random()*window.innerHeight,
-  r:Math.random()*1.5+0.5, vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2
+  r:Math.random()*2+0.5, vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3
 }));
 function an(){ctx.clearRect(0,0,c.width,c.height);
 ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;
-ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(108,92,231,0.5)';ctx.fill()});
+ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(108,92,231,0.4)';ctx.fill()});
 requestAnimationFrame(an)}
 an();
 </script>
