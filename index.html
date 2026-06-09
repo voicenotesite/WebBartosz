@@ -1,49 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Bartosz Osiej</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#000;--text:#00ff88;--font:monospace}
-*{transition:none!important}
-body{font-family:var(--font);background:var(--bg);color:var(--text);overflow:hidden;height:100vh}
-#terminal{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999}
-#terminal .wrap{max-width:600px;width:90%;text-align:center}
-#terminal h2{font-size:1.5rem;margin-bottom:20px;color:#00ff88;overflow:hidden;border-right:2px solid #00ff88;white-space:nowrap;animation:typing 2s steps(25,start)}
-#terminal .err{color:#ff4444;margin:20px 0;opacity:0}
-#terminal .err.on{opacity:1;animation:errorFlicker 0.4s step-end}
-@keyframes typing{width:0}
-@keyframes errorFlicker{0%,8%,16%,24%,32%,40%,48%,56%,64%,72%,80%,88%,96%,100%{opacity:1}4%,12%,20%,28%,36%,44%,52%,60%,68%,76%,84%,92%,96%{opacity:0}}
-#site{display:none}
-header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9);border-bottom:1px solid #00ff88;display:flex;align-items:center;z-index:100}
-.logo{font-weight:700;font-size:1.25rem;padding:20px;font-family:monospace;color:#00ff88}
-.hero{display:flex;min-height:100vh;align-items:center;justify-content:center;background:#000}
-.hero .wrap{text-align:center;padding:40px}
-.hero h1{font-size:clamp(2rem,6vw,4rem);font-weight:bold;margin-bottom:20px;font-family:monospace;color:#00ff88}
-.hero p{color:#888;margin-bottom:40px;font-family:monospace}
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Bartosz Osiej</title><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#00ff88;font-family:monospace;height:100vh;overflow:hidden}
+#terminal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000;z-index:9999}
+#site{display:none;width:100%}
+#err{color:#f44;opacity:0}
+header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9);border-bottom:1px solid #00ff88;display:flex;align-items:center}
+.logo{font-weight:700;font-size:1.25rem;padding:20px;color:#00ff88}
+.hero{display:flex;min-height:100vh;align-items:center;justify-content:center;flex-direction:column;background:#000}
+.hero h1{font-size:clamp(2rem,6vw,4rem);color:#00ff88;margin-bottom:20px}
+.hero p{color:#888;margin-bottom:40px}
+.btn{background:#00ff88;color:#000;padding:12px 30;border-radius:32px;font-weight:700;text-decoration:none;display:inline-block;margin-top:20px}
 .projects{padding:40px 20px}
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1200px;margin:0 auto}
 .project{background:rgba(26,26,58,0.6);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:20px}
 .project h3{color:#00ff88;margin-bottom:8px}
 .project p{color:#888;font-size:0.9rem}
-.footer{border-top:1px solid #00ff88;padding:40px;text-align:center;color:#666;font-family:monospace}
-.btn{display:inline-block;background:#00ff88;color:#000;padding:12px 30;border-radius:32px;font-weight:700;text-decoration:none;margin-top:20px}
-</style>
-</head>
-<body>
+.footer{border-top:1px solid #00ff88;padding:40px;text-align:center;color:#666;margin-top:40px}
+@keyframes flicker{0%,100%{opacity:1}50%{opacity:0}}
+.flicker{animation:flicker 0.1s 30}
+</style></head><body>
 <div id="terminal">
-<div class="wrap">
-<h2>BARTOSZ OSIJE :: PORTFOLIO</h2>
-<div class="err" id="err">ERROR 404 :: SYSTEM FAILURE</div>
-<div style="color:#a0a0c0" id="prompt">$ access denied</div>
-</div>
+<pre style="color:#00ff88">BARTOSZ OSIJE :: PORTFOLIO
+<span id="err">ERROR 404 :: SYSTEM FAILURE</span>
+<span id="cmd">$ access denied</span></pre>
 </div>
 <div id="site">
 <header><span class="logo">&gt; bartosz@portfolio:~$ whoami</span></header>
 <section class="hero">
-<div class="wrap">
+<div style="text-align:center;padding:40px">
 <h1>BUILDING SYSTEMS THAT WORK</h1>
 <p>AI infrastructure • Production APIs • Scalable backends</p>
 <a href="#projects" class="btn">View Projects</a>
@@ -57,17 +41,21 @@ header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9
 </div>
 </div>
 <script>
-const defaults={name:'Bartosz Osiej',title:'AI Systems Engineer',hero1:'Building Systems That Work',hero2:'',heroDesc:'',projects:[
-  {name:'LinkShort',url:'https://fastapiurl.onrender.com',desc:'JWT URL shortener'},
-  {name:'AI Chat Proxy',url:'https://ai-chat-proxy-twj4.onrender.com',desc:'18+ AI models'},
-  {name:'GraphQL Blog',url:'https://graphql-blog-lxjy.onrender.com/graphql',desc:'Blog API'},
-]};
-let d=Object.assign({},defaults);
-function load(){const s=localStorage.getItem('adminData');if(s)d=Object.assign({},defaults,JSON.parse(s))}
-function renderProjects(){const g=document.getElementById('grid');g.innerHTML='';(d.projects||defaults.projects).forEach(p=>{const el=document.createElement('div');el.className='project';el.innerHTML=`<h3>${p.name}</h3><p>${p.desc}</p>`;g.appendChild(el)})}
-function applyData(){document.title=d.name;document.querySelector('.logo').textContent='> '+d.name+' ~$';document.querySelector('.hero h1').textContent=d.hero1+(d.hero2?' '+d.hero2:'');document.querySelector('.hero p').textContent=d.heroDesc||d.title;}
-function go(){load();applyData();renderProjects();document.getElementById('err').classList.add('on');setTimeout(()=>{document.getElementById('terminal').style.opacity='0';setTimeout(()=>{document.getElementById('terminal').style.display='none';document.getElementById('site').style.display='block';document.body.style.overflow='auto'},400)},500)}
-setTimeout(go,1500);
+// Data
+let data=JSON.parse(localStorage.getItem('adminData')||'{}');
+let projects=[
+{name:'LinkShort',url:'https://fastapiurl.onrender.com',desc:'JWT URL shortener'},
+{name:'AI Chat Proxy',url:'https://ai-chat-proxy-twj4.onrender.com',desc:'18+ AI models'},
+{name:'GraphQL Blog',url:'https://graphql-blog-lxjy.onrender.com/graphql',desc:'Blog API'}
+];
+if(data.projects&&data.projects.length)projects=data.projects;
+// Animation
+document.getElementById('err').className='flicker';
+setTimeout(()=>{document.getElementById('cmd').textContent='$ booting...';setTimeout(()=>{document.getElementById('terminal').style.opacity=0;document.getElementById('terminal').style.transition='opacity 0.5s';setTimeout(()=>{document.getElementById('terminal').style.display='none';document.getElementById('site').style.display='block';document.body.style.overflow='auto'},500)},400)},1800);
+// Render
+const g=document.getElementById('grid');projects.forEach(p=>{const d=document.createElement('div');d.className='project';d.innerHTML='<h3>'+p.name+'</h3><p>'+p.desc+'</p>';g.appendChild(d)});
+if(data.name)document.querySelector('.logo').textContent='> '+data.name+' ~$';
+if(data.hero1)document.querySelector('.hero h1').textContent=data.hero1;
 </script>
 </body>
 </html>
