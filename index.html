@@ -117,9 +117,6 @@ footer a{color:var(--accent-grad);text-decoration:none}
 /* Reveal */
 .r{opacity:0;transform:translateY(20px);transition:all 0.6s ease}
 .r.v{opacity:1;transform:translateY(0)}
-#hooks{position:relative}
-#hooks .c{position:absolute;inset:0;animation:fade 2.5s step-end infinite}
-@keyframes fade{0%,49%{opacity:1}50%,100%{opacity:0}}
 </style>
 </head>
 <body>
@@ -134,9 +131,7 @@ footer a{color:var(--accent-grad);text-decoration:none}
 
 <section class="hero">
   <div class="label">6 dni · 12 projektów · Zero mocków</div>
-  <h1 id="hooks">
-  Ghost<span>.</span><span class="c" style="display:none">Architect<span>.</span></span><span class="c" style="display:none">Builder<span>.</span></span>
-</h1>
+  <h1 id="hooks"></h1>
   <p class="desc">Twelve full-stack projects delivered in six intensive days. Python, FastAPI, React, Docker, CI/CD.</p>
   <div class="stats">
     <div class="stat"><div class="num">12</div><div class="lbl">Projects</div></div>
@@ -241,16 +236,33 @@ footer a{color:var(--accent-grad);text-decoration:none}
 const obs = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:.1});
 document.querySelectorAll('.r').forEach(x=>obs.observe(x));
 
-// Typewriter (smooth)
-const texts = document.querySelectorAll('#hooks .c');
-let ti = 0;
+// Real typewriter effect
+const texts = ["Ghost.","Architect.","Builder."];
+const el = document.getElementById('hooks');
+let ti = 0, ci = 0, dir = 1;
 function tw() {
-  texts.forEach(t=>t.style.display='none');
-  texts[ti].style.display='inline';
-  ti = (ti + 1) % texts.length;
+  const t = texts[ti];
+  if (dir === 1) {
+    if (ci < t.length) {
+      el.textContent = t.substring(0, ci + 1);
+      ci++;
+    } else {
+      dir = -1;
+      setTimeout(tw, 1000);
+      return;
+    }
+  } else {
+    if (ci > 0) {
+      el.textContent = t.substring(0, ci - 1);
+      ci--;
+    } else {
+      dir = 1;
+      ti = (ti + 1) % texts.length;
+    }
+  }
+  setTimeout(tw, 150);
 }
 tw();
-setInterval(tw, 2500);
 
 // Particles
 const c = document.getElementById('p'), ctx = c.getContext('2d');
