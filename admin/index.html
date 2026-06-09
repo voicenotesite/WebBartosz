@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Panel</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#000;
+  --text:#ff4444;
+  --card:#111;
+  --accent:#ff4444;
+  --font:monospace;
+}
+*{transition:none!important}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow:hidden;height:100vh}
+
+#terminal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000;z-index:9999}
+#terminal .terminal-wrap{max-width:600px;width:90%;text-align:center}
+#terminal h1{font-size:2rem;margin-bottom:20px;color:#ff4444;font-family:monospace}
+#terminal .prompt{margin:10px 0;font-family:monospace;font-size:1rem}
+#terminal .output{margin:10px 0;font-family:monospace;font-size:0.9rem;color:#ff4444;opacity:0}
+#terminal .error{color:#ff6b6b;margin:10px 0;font-family:monospace}
+#terminal .cursor{display:inline-block;width:8px;height:16px;background:#ff4444;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+
+#site{display:none}
+header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9);border-bottom:1px solid #ff4444;display:flex;align-items:center;z-index:100}
+.logo{font-weight:bold;font-size:1.25rem;padding:20px;font-family:monospace;color:#ff4444}
+
+.admin{display:flex;min-height:100vh;padding:40px}
+.sidebar{width:200px;background:#111;border-right:1px solid #333}
+.sidebar ul{list-style:none;padding:20px}
+.sidebar li{padding:10px;color:#ff4444;font-family:monospace;cursor:pointer}
+.sidebar li:hover{background:#222}
+
+.content{flex:1;padding:40px}
+.content h1{color:#ff4444;font-family:monospace;margin-bottom:20px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;color:#888;margin-bottom:5px;font-family:monospace}
+.form-group input{width:100%;padding:10px;background:#111;border:1px solid #333;color:#ff4444;font-family:monospace}
+.btn{background:#ff4444;color:#000;border:none;padding:12px 24px;font-weight:bold;font-family:monospace;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="terminal">
+  <div class="terminal-wrap">
+    <h1>ADMIN ACCESS :: PORTFOLIO v6</h1>
+    <div class="prompt">Security protocols...</div>
+    <div class="error" id="err">ERROR 404 :: ACCESS DENIED</div>
+    <div class="output" id="out1">Authentication failed.</div>
+    <div class="prompt">access@admin:~$ <span class="cursor"></span></div>
+  </div>
+</div>
+
+<div id="site">
+<header>
+<span class="logo">&gt; admin@portfolio:~$ ./control.sh</span>
+</header>
+
+<div class="admin">
+<div class="sidebar">
+<ul>
+<li>Dashboard</li>
+<li>Projects</li>
+<li>Settings</li>
+<li>Logout</li>
+</ul>
+</div>
+<div class="content">
+<h1>Project Management</h1>
+<div class="form-group">
+<label>Name</label>
+<input type="text" placeholder="Project name">
+</div>
+<div class="form-group">
+<label>URL</label>
+<input type="text" placeholder="https://...">
+</div>
+<button class="btn">Add Project</button>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+setTimeout(()=>{
+  document.getElementById('terminal').style.display='none';
+  document.getElementById('site').style.display='block';
+},2500);
+</script>
+</body>
+</html>
