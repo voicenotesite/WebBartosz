@@ -1,7 +1,12 @@
 [
-  {"id":1,"name":"LinkShort","url":"https://fastapiurl.onrender.com","desc":"JWT URL shortener with click analytics","tags":["FastAPI","React","JWT"]},
-  {"id":2,"name":"AI Chat Proxy","url":"https://ai-chat-proxy-twj4.onrender.com","desc":"Unified proxy for 18+ AI models","tags":["FastAPI","SSE","Groq"]},
-  {"id":3,"name":"GraphQL Blog","url":"https://graphql-blog-lxjy.onrender.com/graphql","desc":"Blog API with posts and comments","tags":["FastAPI","Strawberry","GraphQL"]},
-  {"id":4,"name":"Unified Portfolio API","url":"https://python-portfolio-y0z8.onrender.com","desc":"5 modules in single architecture","tags":["FastAPI","PostgreSQL","JWT"]},
-  {"id":5,"name":"Task Queue","url":"https://github.com/voicenotesite/task-queue","desc":"Async task queue with WebSocket","tags":["FastAPI","WebSocket","Redis"]}
+  {"id":1,"name":"LinkShort","url":"https://fastapiurl.onrender.com","desc":"JWT URL shortener with click analytics","tags":["FastAPI","React","JWT"],"screenshots":["linkshort-1.jpg","linkshort-2.jpg","linkshort-3.jpg"]},
+  {"id":2,"name":"AI Chat Proxy","url":"https://ai-chat-proxy-twj4.onrender.com","desc":"Unified proxy for 18+ AI models","tags":["FastAPI","SSE","Groq"],"screenshots":["ai-chat-proxy-1.jpg","ai-chat-proxy-2.jpg","ai-chat-proxy-3.jpg"]},
+  {"id":3,"name":"GraphQL Blog","url":"https://graphql-blog-lxjy.onrender.com/graphql","desc":"Blog API with posts, comments","tags":["FastAPI","Strawberry","GraphQL"],"screenshots":["graphql-blog-1.jpg","graphql-blog-2.jpg","graphql-blog-3.jpg"]},
+  {"id":4,"name":"Unified Portfolio API","url":"https://python-portfolio-y0z8.onrender.com","desc":"5 modules in single architecture","tags":["FastAPI","PostgreSQL","JWT"],"screenshots":["unified-api-1.jpg","unified-api-2.jpg","unified-api-3.jpg"]},
+  {"id":5,"name":"Task Queue","url":"https://github.com/voicenotesite/task-queue","desc":"Async task queue with WebSocket","tags":["FastAPI","WebSocket","Redis"],"screenshots":["task-queue-1.jpg","task-queue-2.jpg"]},
+  {"id":6,"name":"RAG PDF Q&A","url":"https://github.com/voicenotesite/rag-qa","desc":"Upload PDF → intelligent answers","tags":["FastAPI","TF-IDF","Numpy"],"screenshots":["rag-pdf-1.jpg","rag-pdf-2.jpg"]},
+  {"id":7,"name":"Search Engine","url":"https://search-engine-l2zt.onrender.com","desc":"Clearnet + darknet search","tags":["FastAPI","Playwright"],"screenshots":["reports-1.jpg","reports-2.jpg","reports-3.jpg"]},
+  {"id":8,"name":"Chat Proxy Light","url":"https://github.com/voicenotesite/chat-proxy","desc":"Minimal Groq proxy","tags":["FastAPI","Groq"],"screenshots":["chat-proxy-light-1.jpg","chat-proxy-light-2.jpg"]},
+  {"id":9,"name":"Portfolio Daemon","url":"https://github.com/voicenotesite/portfolio-daemon","desc":"Portfolio automation system","tags":["Python","Automation"],"screenshots":["portfolio-daemon-1.jpg","portfolio-daemon-2.jpg"]},
+  {"id":10,"name":"CV Maker","url":"https://github.com/voicenotesite/cv-maker","desc":"Generate CVs from templates","tags":["React","PDF"],"screenshots":["cv-maker-1.jpg","cv-maker-2.jpg"]}
 ]

@@ -6,121 +6,158 @@
 <title>Bartosz Osiej</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html::-webkit-scrollbar{width:0}
-html{ scrollbar-width:none}
-body::-webkit-scrollbar{width:0}
-body{ scrollbar-width:none}
-html{ms-overflow-style:none}
-
 :root{
-  --bg:#000;
-  --text:#00ff88;
-  --card:#111;
-  -- accent:#00ff88;
-  --font:monospace;
+  --bg:#0b080c;
+  --card:rgba(26,26,58,0.6);
+  --border:rgba(255,255,255,0.08);
+  --text:#eae5ec;
+  --text-dim:#a0a0c0;
+  --accent:#a87cff;
+  --neon:#00f3ff;
+  --font:'Space Grotesk',sans-serif;
 }
 *{transition:none!important}
-body{font-family:var(--font);background:var(--bg);color:var(--text);overflow:hidden;height:100vh}
+body{font-family:var(--font);background:var(--bg);color:var(--text)}
+html{scroll-behavior:smooth}
 
-#terminal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000;z-index:9999}
-#terminal .terminal-wrap{max-width:600px;width:90%;text-align:center}
-#terminal h1{font-size:2rem;margin-bottom:20px;color:#00ff88;font-family:monospace}
-#terminal .prompt{margin:10px 0;font-family:monospace;font-size:1rem}
-#terminal .output{margin:10px 0;font-family:monospace;font-size:0.9rem;color:#00ff88;opacity:0}
-#terminal .error{color:#ff4444;margin:10px 0;font-family:monospace}
-#terminal .cursor{display:inline-block;width:8px;height:16px;background:#00ff88;animation:blink 1s step-end infinite}
+#terminal{position:fixed;inset:0;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center}
+#terminal .wrap{max-width:500px;text-align:center}
+#terminal h1{color:#a87cff;font-size:1.5rem;margin-bottom:20px}
+#terminal .line{font-family:monospace;color:#a87cff;margin:8px 0;font-size:0.9rem}
+#terminal .error{color:#ff4444;margin:20px 0}
+.cursor{display:inline-block;width:2px;height:1.2em;background:#a87cff;animation:blink 1s step-end infinite}
 @keyframes blink{50%{opacity:0}}
 
 #site{display:none}
-header{position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.9);border-bottom:1px solid #00ff88;display:flex;align-items:center;z-index:100}
-.logo{font-weight:bold;font-size:1.25rem;padding:20px;font-family:monospace;color:#00ff88}
+header{position:sticky;top:0;z-index:100;background:rgba(26,26,58,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-weight:800;font-size:1.25rem;padding:20px;color:var(--text);text-decoration:none;font-family:'Space Grotesk',sans-serif}
+.logo span{color:var(--accent)}
 
-.hero{display:flex;min-height:100vh;align-items:center;justify-content:center;background:#000}
-.hero .wrap{text-align:center;padding:40px}
-.hero h1{font-size:4rem;font-weight:bold;margin-bottom:20px;font-family:monospace;color:#00ff88}
-.hero p{color:#888;margin-bottom:40px;font-family:monospace}
+.hero{display:flex;min-height:100vh;align-items:center;justify-content:center;background:linear-gradient(180deg,#0b080c,#0a0a0f)}
+.hero .wrap{text-align:center;padding:40px;max-width:700px}
+.hero h1{font-size:clamp(2rem,6vw,4rem);font-weight:800;margin-bottom:20px;line-height:1.1}
+.hero .gradient{background:linear-gradient(90deg,var(--accent),var(--neon));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--text-dim);margin-bottom:30px;font-size:1.1rem}
+.stats{display:flex;gap:40px;justify-content:center;margin:40px 0}
+.stat .num{font-size:clamp(2rem,5vw,3rem);font-weight:800;color:var(--accent)}
+.stat .lbl{font-size:0.8rem;color:var(--text-dim);text-transform:uppercase}
 
-.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:40px}
-.project{background:#111;border:1px solid #00ff88;border-radius:8px;padding:20px}
-.project h3{font-family:monospace;color:#00ff88;margin-bottom:10px}
-.project p{font-size:0.9rem;color:#888;font-family:monospace}
+.projects{padding:60px 20px;background:var(--bg)}
+.projects .wrap{max-width:1200px;margin:0 auto}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.project{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;backdrop-filter:blur(10px);transition:all 0.3s ease}
+.project:hover{transform:translateY(-6px)}
+.project h3{color:var(--accent);margin-bottom:8px;font-size:1.1rem;font-weight:700}
+.project p{color:var(--text-dim);margin-bottom:16px;font-size:0.95rem;line-height:1.5}
+.project .tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:0.7rem;background:rgba(168,124,255,0.15);color:var(--accent);padding:3px 10px;border-radius:4px;border:1px solid rgba(168,124,255,0.3)}
+.project .links{margin-top:16px;display:flex;gap:10px}
+.project a{font-size:0.85rem;color:var(--neon);text-decoration:none;border:1px solid var(--border);padding:6px 12px;border-radius:6px;background:rgba(0,243,255,0.1)}
 
-.experience{padding:40px;background:#111;margin:20px}
-.exp h3{color:#00ff88;font-family:monospace;margin-bottom:5px}
-.exp p{font-size:0.9rem;color:#888;font-family:monospace}
+.experience{padding:60px 20px;background:#111}
+.experience .wrap{max-width:800px;margin:0 auto}
+.exp-item{border-left:2px solid var(--accent);padding-left:20px;margin-bottom:40px}
+.exp-item h3{color:var(--accent);margin-bottom:4px}
+.exp-item .meta{font-size:0.85rem;color:var(--text-dim)}
+.exp-item p{color:var(--text-dim);margin-top:8px}
 
-.footer{border-top:1px solid #00ff88;padding:40px;text-align:center;color:#666;font-family:monospace}
+.footer{border-top:1px solid var(--border);padding:40px;text-align:center;color:var(--text-dim)}
+.footer a{color:var(--accent);text-decoration:none}
 
-.btn{background:#00ff88;color:#000;border:none;padding:12px 24px;font-weight:bold;font-family:monospace;cursor:pointer}
-.btn a{color:#000;text-decoration:none}
+.btn{display:inline-block;background:var(--accent);color:#000;padding:12px 30px;border-radius:32px;font-weight:700;text-decoration:none;transition:all 0.3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(168,124,255,0.4)}
+
+@media(max-width:768px){
+  .stats{gap:20px}
+  .project{min-width:auto}
+}
 </style>
 </head>
 <body>
+<canvas id="p" style="position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.3"></canvas>
 <div id="terminal">
-  <div class="terminal-wrap">
-    <h1>BARTOSZ OSIJE :: PORTFOLIO v6</h1>
-    <div class="prompt">Initializing systems...</div>
-    <div class="output" id="out1">Loading modules...</div>
-    <div class="output" id="out2">Connecting to database...</div>
-    <div class="output" id="out3">System operational.</div>
-    <div class="prompt">access@portfolio:~$ <span class="cursor"></span></div>
+  <div class="wrap">
+    <h1>BARTOSZ OSIJE :: PORTFOLIO</h1>
+    <div class="line">Initializing systems...</div>
+    <div class="line">Loading modules...</div>
+    <div class="line error">ERROR 404 :: Modules corrupted</div>
+    <div class="line">Rebooting... OK</div>
+    <div class="line">access@portfolio:~$</div>
   </div>
 </div>
 
 <div id="site">
-<header>
-<span class="logo">&gt; bartosz@portfolio:~$ whoami</span>
-</header>
+<header><a class="logo" href="/">Bartosz<span>.</span> cosmic</a></header>
 
 <section class="hero">
 <div class="wrap">
-<h1>BUILDING SYSTEMS THAT WORK</h1>
-<p>AI infrastructure • Production APIs • Scalable backends</p>
-<button class="btn"><a href="#projects">View Projects</a></button>
+<h1>Building<span class="gradient">Production Systems</span></h1>
+<p>AI infrastructure • Full-stack APIs • Scalable backends</p>
+<div class="stats">
+<div class="stat"><div class="num">12</div><div class="lbl">Projects</div></div>
+<div class="stat"><div class="num">18</div><div class="lbl">AI Models</div></div>
+<div class="stat"><div class="num">140+</div><div class="lbl">Reports</div></div>
+</div>
+<a href="#projects" class="btn">View Projects</a>
 </div>
 </section>
 
 <section class="projects" id="projects">
-<div id="projects-grid"></div>
+<div class="wrap">
+<div class="projects-grid" id="projectsGrid"></div>
+</div>
 </section>
 
 <section class="experience" id="experience">
-<h2>Experience</h2>
-<div class="exp">
+<div class="wrap">
+<h2 style="text-align:center;margin-bottom:40px;color:var(--accent)">Experience</h2>
+<div class="exp-item">
 <h3>2023 - Present</h3>
-<p>Senior Systems Engineer - Production AI infrastructure</p>
+<p>Senior Systems Engineer. Built 12 production APIs with 18 AI model integrations.</p>
+</div>
+<div class="exp-item">
+<h3>2022 - 2023</h3>
+<p>Full-Stack Engineer. Self-taught Python/React developer.</p>
+</div>
 </div>
 </section>
 
 <div class="footer">
-<p>&copy; 2025 Bartosz Osiej | Systems Engineer</p>
-<p><a href="/admin">Admin Panel</a></p>
+<p>© 2025 Bartosz Osiej | <a href="/admin">Admin</a></p>
 </div>
 </div>
 
 <script>
-async function loadProjects(){
-  try{
-    const res=await fetch('data/projects.json');
-    const projects=await res.json();
-    const grid=document.getElementById('projects-grid');
-    grid.innerHTML='';
-    projects.forEach(p=>{
-      const d=document.createElement('div');
-      d.className='project';
-      d.innerHTML=`<h3>${p.name}</h3><p>${p.desc}</p>`;
-      grid.appendChild(d);
-    });
-  }catch(e){
-    document.getElementById('projects-grid').innerHTML='<div class="project"><h3>Projects loaded from admin panel</h3></div>';
-  }
+const projects = [
+  {name:"LinkShort",url:"https://fastapiurl.onrender.com",desc:"JWT URL shortener with analytics",tags:["FastAPI","React"]},
+  {name:"AI Chat Proxy",url:"https://ai-chat-proxy-twj4.onrender.com",desc:"18+ AI models unified",tags:["FastAPI","Groq"]},
+  {name:"GraphQL Blog",url:"https://graphql-blog-lxjy.onrender.com/graphql",desc:"Blog API with auth",tags:["FastAPI","GraphQL"]},
+  {name:"Unified API",url:"https://python-portfolio-y0z8.onrender.com",desc:"5 modules architecture",tags:["FastAPI","PostgreSQL"]},
+  {name:"Task Queue",url:"https://github.com/voicenotesite/task-queue",desc:"Async WebSocket queue",tags:["FastAPI","Redis"]},
+  {name:"RAG PDF",url:"https://github.com/voicenotesite/rag-qa",desc:"PDF Q&A system",tags:["FastAPI","TF-IDF"]},
+  {name:"Search Engine",url:"https://search-engine-l2zt.onrender.com",desc:"Clearnet+darknet search",tags:["FastAPI","Playwright"]},
+  {name:"Chat Proxy Light",url:"https://github.com/voicenotesite/chat-proxy",desc:"Minimal Groq proxy",tags:["FastAPI","Groq"]},
+];
+
+function renderProjects(){
+  const g=document.getElementById('projectsGrid');
+  g.innerHTML='';
+  projects.forEach(p=>{
+    const d=document.createElement('div');
+    d.className='project';
+    d.innerHTML=`<h3>${p.name}</h3><p>${p.desc}</p><div class="tags">${p.tags.map(t=><span class="tag">${t}</span>).join('')}</div><div class="links"><a href="${p.url}" target="_blank">Demo</a></div>`;
+    g.appendChild(d);
+  });
 }
 
-setTimeout(()=>{
-  document.getElementById('terminal').style.display='none';
-  document.getElementById('site').style.display='block';
-  loadProjects();
-},2500);
+setTimeout(()=>{document.getElementById('terminal').style.display='none';document.getElementById('site').style.display='block';renderProjects()},2000);
+
+const c=document.getElementById('p'),ctx=c.getContext('2d');
+function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
+window.addEventListener('resize',resize);resize();
+const ps=Array(80).fill().map(()=>({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,r:Math.random()*1.5,vx:(Math.random()-0.5)*0.2,vy:(Math.random()-0.5)*0.2}));
+function an(){ctx.fillStyle='#000';ctx.fillRect(0,0,c.width,c.height);ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx*=-1;if(p.y<0||p.y>c.height)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(168,124,255,0.5)';ctx.fill()});requestAnimationFrame(an)}
+an();
 </script>
 </body>
 </html>

@@ -102,6 +102,7 @@ function addProject(){
     <input placeholder="Name" value="New Project">
     <input placeholder="URL">
     <input placeholder="Description">
+    <input placeholder="Tags comma,separated">
     <button class="del" onclick="this.parentElement.remove()">X</button>`;
   document.getElementById('projectsList').appendChild(d);
 }
@@ -114,6 +115,7 @@ function saveProjects(){
     arr.push({id:idx+1,name:inp[0].value,url:inp[1].value,desc:inp[2].value,tags:inp[3]?inp[3].value.split(',').map(x=>x.trim()):[]});
   });
   document.getElementById('jsonOutput').value=JSON.stringify(arr,null,2);
+  localStorage.setItem('portfolio_projects',JSON.stringify(arr));
 }
 
 setTimeout(()=>{
