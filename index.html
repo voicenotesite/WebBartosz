@@ -114,8 +114,6 @@ footer a{color:var(--accent-grad);text-decoration:none}
 /* Reveal */
 .r{opacity:0;transform:translateY(20px);transition:all 0.6s ease}
 .r.v{opacity:1;transform:translateY(0)}
-.cursor{animation:blink 1s step-end infinite}
-@keyframes blink{50%{opacity:0}}
 </style>
 </head>
 <body>
@@ -206,21 +204,13 @@ document.querySelectorAll('.r').forEach(x=>obs.observe(x));
 
 // Typewriter
 const texts = ["Ghost","Architect","Builder"];
-let ti = 0, ci = 0, ht = document.getElementById('hooks');
+let ti = 0, ht = document.getElementById('hooks');
 function tw() {
-  if (ti < texts.length) {
-    ht.innerHTML = texts[ti].split('').map((c,i) => `<span style="--d:${i*100}ms">${c}</span>`).join('') + '<span class="cursor">|</span>';
-    ti++;
-  } else { ti = 0; ht.innerHTML = ''; }
+  ht.textContent = texts[ti];
+  ti = (ti + 1) % texts.length;
 }
 tw();
 setInterval(tw, 2500);
-
-// Cursor blink
-document.querySelector('.cursor')?.style?.setProperty('animation', 'blink 1s step-end infinite');
-const s = document.createElement('style');
-s.textContent = '@keyframes blink{50%{opacity:0}}';
-document.head.appendChild(s);
 </script>
 </body>
 </html>
