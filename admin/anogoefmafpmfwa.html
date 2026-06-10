@@ -1,357 +1,78 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel — Bartosz Osiej</title>
+  <title>Admin — Terminal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg: #080C18;
-      --bg-2: #0D1221;
-      --bg-card: #111827;
-      --cyan: #00D4FF;
-      --violet: #7C3AED;
-      --white: #F0F4FF;
-      --gray-1: #94A3B8;
-      --border: rgba(0, 212, 255, 0.12);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-    #auth-screen, #admin-screen {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--bg), var(--bg-2));
-    }
-    #auth-screen::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 80, 0.03) 2px, rgba(0, 255, 80, 0.03) 4px);
-      pointer-events: none;
-      animation: scan 8s linear infinite;
-    }
-    @keyframes scan { from { background-position: 0 0; } to { background-position: 0 100%; } }
-    .auth-box, .admin-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 30px;
-      min-width: 320px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-      position: relative;
-    }
-    .auth-box::before, .admin-box::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 18px;
-      background: linear-gradient(90deg, var(--cyan), var(--violet), var(--cyan));
-      z-index: -1;
-      animation: border-move 3s linear infinite;
-    }
-    @keyframes border-move { 0% { background-position: 0 50%; } 100% { background-position: 200% 50%; } }
-    .auth-box h2, .admin-box h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      color: var(--cyan);
-      text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-    }
-    input {
-      width: 100%;
-      padding: 12px 16px;
-      margin-bottom: 16px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--white);
-      border-radius: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1rem;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    input:focus { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0, 212, 255, 0.2); outline: none; }
-    button {
-      padding: 12px 20px;
-      background: linear-gradient(135deg, var(--cyan), var(--violet));
-      color: var(--bg);
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 212, 255, 0.3); }
-    .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-    .tab { padding: 10px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; color: var(--gray-1); transition: all 0.2s; }
-    .tab:hover { border-color: var(--cyan); }
-    .tab.active { color: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 20px rgba(0, 212, 255, 0.2); }
-    .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; margin-bottom: 6px; color: var(--gray-1); font-size: 0.85rem; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--white); font-family: inherit; font-size: 0.9rem; transition: border-color 0.3s; }
-    .item-list { max-height: 200px; overflow-y: auto; margin-bottom: 10px; }
-    .item { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
-    .item input { flex: 1; }
-    .remove-btn { background: none; border: none; color: #ff4444; cursor: pointer; padding: 0 8px; }
-    .preview { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 20px; max-height: 300px; overflow-y: auto; }
-    .preview h4 { color: var(--cyan); margin-bottom: 10px; font-size: 0.9rem; }
-    .msg { padding: 10px; border-radius: 6px; margin-bottom: 16px; text-align: center; animation: fadeIn 0.3s; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; } }
-    .msg.success { background: rgba(74, 222, 128, 0.1); color: #4ADE80; border: 1px solid rgba(74, 222, 128, 0.3); }
-    .msg.error { background: rgba(255, 68, 68, 0.1); color: #ff4444; border: 1px solid rgba(255, 68, 68, 0.3); }
-    .t-prompt { color: var(--cyan); }
-    .t-out { color: var(--gray-1); }
-    .t-ok { color: #4ADE80; }
-    @keyframes blink { 50% { opacity: 0; } }
-    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    :root { --bg: #080C18; --bg-2: #0D1221; --bg-card: #111827; --cyan: #00D4FF; --violet: #7C3AED; --white: #F0F4FF; --gray-1: #94A3B8; --border: rgba(0,212,255,0.12); }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow:hidden}
+    #terminal{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);font-family:'JetBrains Mono',monospace;color:#00ff88;padding:20px}
+    .term-inner{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,0.6);padding:30px;min-width:600px;max-width:900px}
+    .term-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;background:rgba(255,255,255,0.04);border-bottom:1px solid var(--border);margin-bottom:20px}
+    .term-dot{width:11px;height:11px;border-radius:50%;background:#FF5F57}.term-dot:nth-child(2){background:#FEBC2E}.term-dot:nth-child(3){background:#28C840}
+    .term-title{margin-left:auto;font-size:.72rem;color:var(--gray-2);letter-spacing:.05em}
+    #term-output{line-height:1.8;font-size:.85rem;max-height:400px;overflow-y:auto}
+    .t-prompt{color:var(--cyan)}.t-cmd{color:var(--white)}.t-out{color:var(--gray-1)}.t-ok{color:#4ADE80}.t-hl{color:var(--violet-lt)}.cursor{display:inline-block;width:8px;height:1em;background:var(--cyan);vertical-align:text-bottom;animation:blink 1s step-end infinite}
+    @keyframes blink{50%{opacity:0}}.section-label{font-family:'JetBrains Mono';font-size:.75rem;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;margin:20px 0 10px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}[id^=tab-]{display:none}[id^=tab-].active{display:block}
+    input,textarea,select{width:100%;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--white);font-family:inherit}
+    button{padding:10px 16px;background:linear-gradient(135deg,var(--cyan),var(--violet));color:var(--bg);border:none;border-radius:6px;cursor:pointer;margin:5px}
   </style>
 </head>
 <body>
-  <div id="auth-screen">
-    <div class="auth-box">
-      <h2>🔐 Admin Panel v1.0</h2>
-      <div id="term-auth" style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#00ff88;margin-bottom:16px;min-height:80px"></div>
-      <input type="password" id="pwd" placeholder="password" autofocus />
-      <button onclick="checkPwd()">Enter</button>
+<div id="terminal">
+  <div class="term-inner">
+    <div class="term-bar">
+      <div class="term-dot"></div><div class="term-dot"></div><div class="term-dot"></div>
+      <span class="term-title">~/admin -- bash</span>
+    </div>
+    <div id="term-output"></div>
+    <div class="section-label">// konfiguracja</div>
+    <div id="tab-hero" class="tab-content">
+      <input id="hero" placeholder="Hero Title" style="margin-bottom:10px">
+      <input id="heroDesc" placeholder="Hero Description">
+    </div>
+    <div id="tab-projects" class="tab-content" style="display:none">
+      <input id="pName" placeholder="Project Name" style="margin-bottom:10px">
+      <input id="pUrl" placeholder="URL" style="margin-bottom:10px">
+      <input id="pDesc" placeholder="Description">
+      <button style="margin-top:10px" onclick="addProj()">Add Project</button>
+    </div>
+    <div id="tab-skills" class="tab-content" style="display:none">
+      <input id="sTitle" placeholder="Skill Section" style="margin-bottom:10px">
+      <button onclick="addSkill()">Add Skill</button>
+    </div>
+    <div id="tab-experience" class="tab-content" style="display:none">
+      <input id="eDate" placeholder="Date" style="margin-bottom:10px">
+      <input id="eRole" placeholder="Role" style="margin-bottom:10px">
+      <input id="eCompany" placeholder="Company">
+      <button style="margin-top:10px" onclick="addExp()">Add Experience</button>
+    </div>
+    <div style="margin-top:20px">
+      <button onclick="saveData()">💾 Save</button>
+      <button onclick="loadDemo()">📂 Demo</button>
     </div>
   </div>
+</div>
 
-  <div id="admin-screen" style="display:none">
-    <div class="admin-box" style="min-width: 600px; max-width: 900px;">
-      <h2>⚙️ Konfiguracja Portfolio</h2>
-      <div id="term-admin" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#00ff88;margin-bottom:16px;min-height:60px"></div>
-      <div class="tabs">
-        <div class="tab active" onclick="switchTab('hero')">Hero</div>
-        <div class="tab" onclick="switchTab('projects')">Projekty</div>
-        <div class="tab" onclick="switchTab('skills')">Umiejętności</div>
-        <div class="tab" onclick="switchTab('experience')">Doświadczenie</div>
-        <div class="tab" onclick="switchTab('socials')">Social Media</div>
-      </div>
-      <div id="tab-hero">
-        <div class="form-group">
-          <label for="hero">Hero Title</label>
-          <input type="text" id="hero" placeholder="Bartosz Osiej" />
-        </div>
-        <div class="form-group">
-          <label for="heroDesc">Hero Description</label>
-          <input type="text" id="heroDesc" placeholder="AI Systems Engineer" />
-        </div>
-      </div>
-      <div id="tab-projects" style="display:none">
-        <div class="form-group grid2">
-          <input type="text" id="projName" placeholder="Nazwa projektu" />
-          <input type="text" id="projUrl" placeholder="URL (https://...)" />
-        </div>
-        <div class="form-group">
-          <input type="text" id="projDesc" placeholder="Opis" />
-        </div>
-        <button onclick="addProject()">+ Dodaj projekt</button>
-        <div class="item-list" id="projects-list"></div>
-      </div>
-      <div id="tab-skills" style="display:none">
-        <div class="form-group grid2">
-          <input type="text" id="skillIcon" placeholder="Emoji (⚙️)" />
-          <input type="text" id="skillTitle" placeholder="Nazwa (Frontend)" />
-        </div>
-        <button onclick="addSkill()">+ Dodaj sekcję</button>
-        <div class="item-list" id="skills-list"></div>
-      </div>
-      <div id="tab-experience" style="display:none">
-        <div class="form-group">
-          <input type="text" id="expDate" placeholder="2024 — teraz" />
-        </div>
-        <div class="form-group grid2">
-          <input type="text" id="expRole" placeholder="Rola" />
-          <input type="text" id="expCompany" placeholder="Firma" />
-        </div>
-        <div class="form-group">
-          <textarea id="expDesc" placeholder="Opis..." rows="3"></textarea>
-        </div>
-        <button onclick="addExperience()">+ Dodaj doświadczenie</button>
-        <div class="item-list" id="experience-list"></div>
-      </div>
-      <div id="tab-socials" style="display:none">
-        <div class="form-group">
-          <input type="text" id="socialGithub" placeholder="GitHub URL" />
-        </div>
-        <div class="form-group">
-          <input type="text" id="socialLinkedin" placeholder="LinkedIn URL" />
-        </div>
-        <div class="form-group">
-          <input type="text" id="socialEmail" placeholder="Email" />
-        </div>
-      </div>
-      <div id="msg"></div>
-      <div style="display:flex;gap:8px">
-        <button onclick="saveData()">💾 Zapisz</button>
-        <button onclick="loadDemo()">📂 Demo</button>
-        <button onclick="exportData()">📥 Export JSON</button>
-        <button onclick="importData()">📤 Import JSON</button>
-      </div>
-      <div class="preview">
-        <h4>Live Preview</h4>
-        <div id="preview"></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const PASS = 'host';
-    let currentTab = 'hero';
-    let termAuth = document.getElementById('term-auth');
-    let termAdmin = document.getElementById('term-admin');
-
-    function tOut(el, lines, idx) {
-      if (idx >= lines.length) return;
-      const d = document.createElement('div');
-      el.appendChild(d);
-      let i = 0;
-      const iv = setInterval(() => {
-        d.innerHTML = lines[idx].replace('{cursor}', '<span class="cursor" style="opacity:1">|</span>');
-        i++;
-        if (i >= lines[idx].length) {
-          clearInterval(iv);
-          setTimeout(() => tOut(el, lines, idx + 1), 300);
-        }
-      }, 25);
-    }
-    const authLines = ['> ./auth.sh', '<span class="t-prompt">$ </span>authenticate --level 1000000', '> ACCESS GRANTED', '<span class="t-out">Welcome back, Administrator.</span>', '<span class="t-out">Class: NETHER - LEVEL 1000000 ✓</span>'];
-    setTimeout(() => tOut(termAuth, authLines, 0), 300);
-
-    let data = {
-      hero: 'Bartosz Osiej',
-      heroDesc: 'AI Systems Engineer',
-      projects: [
-        { name: 'LinkShort', url: 'https://fastapiurl.onrender.com', desc: 'JWT URL shortener' },
-        { name: 'AI Chat Proxy', url: 'https://ai-chat-proxy.onrender.com', desc: '18+ AI models' },
-        { name: 'GraphQL Blog', url: 'https://graphql-blog-lxjy.onrender.com/graphql', desc: 'Blog API' }
-      ],
-      skills: [
-        { icon: '⚙️', title: 'AI & Backend', skills: [{ n: 'AI Infrastructure', p: 92 }, { n: 'Python', p: 95 }, { n: 'Go', p: 85 }, { n: 'PostgreSQL', p: 88 }] },
-        { icon: '☁️', title: 'Cloud & DevOps', skills: [{ n: 'AWS', p: 82 }, { n: 'Docker', p: 90 }, { n: 'Kubernetes', p: 70 }, { n: 'Terraform', p: 65 }] }
-      ],
-      experience: [
-        { date: '2024 — teraz', role: 'AI Systems Engineer', company: 'Freelance', desc: 'Budowanie API, systemów ML, automatizacja.' },
-        { date: '2020 — 2024', role: 'Backend Developer', company: 'Various', desc: 'Skalowalne systemy backendu.' }
-      ],
-      socials: { github: '', linkedin: '', email: '' }
-    };
-
-    function checkPwd() {
-      if (document.getElementById('pwd').value === PASS) {
-        termAdmin.innerHTML = '<span class="t-prompt">$ </span>admin_panel.login()';
-        setTimeout(() => {
-          termAdmin.innerHTML += '<br><span class="t-ok">✓ Session started. Welcome, Legend.</span>';
-          document.getElementById('auth-screen').style.display = 'none';
-          document.getElementById('admin-screen').style.display = 'block';
-          loadData();
-          renderLists();
-        }, 500);
-      } else {
-        showMsg('Wrong password', 'error');
-      }
-    }
-
-    function switchTab(tab) {
-      currentTab = tab;
-      document.querySelectorAll('[id^="tab-"]').forEach(t => t.style.display = 'none');
-      document.getElementById('tab-' + tab).style.display = 'block';
-    }
-
-    function addProject() {
-      data.projects.push({ name: document.getElementById('projName').value, url: document.getElementById('projUrl').value, desc: document.getElementById('projDesc').value });
-      document.getElementById('projName').value = ''; document.getElementById('projUrl').value = ''; document.getElementById('projDesc').value = '';
-      renderLists();
-    }
-
-    function addSkill() {
-      const icon = document.getElementById('skillIcon').value;
-      const title = document.getElementById('skillTitle').value;
-      data.skills.push({ icon, title, skills: [] });
-      document.getElementById('skillIcon').value = ''; document.getElementById('skillTitle').value = '';
-      renderLists();
-    }
-
-    function addExperience() {
-      data.experience.push({
-        date: document.getElementById('expDate').value,
-        role: document.getElementById('expRole').value,
-        company: document.getElementById('expCompany').value,
-        desc: document.getElementById('expDesc').value
-      });
-      document.getElementById('expDate').value = ''; document.getElementById('expRole').value = '';
-      document.getElementById('expCompany').value = ''; document.getElementById('expDesc').value = '';
-      renderLists();
-    }
-
-    function removeProject(i) { data.projects.splice(i, 1); renderLists(); }
-    function removeSkill(i) { data.skills.splice(i, 1); renderLists(); }
-    function removeExp(i) { data.experience.splice(i, 1); renderLists(); }
-
-    function renderLists() {
-      const pl = document.getElementById('projects-list');
-      pl.innerHTML = data.projects.map((p, i) => `<div class="item"><input value="${p.name}" onchange="data.projects[${i}].name=this.value"/><input value="${p.url}" onchange="data.projects[${i}].url=this.value"/><button class="remove-btn" onclick="removeProject(${i})">×</button></div>`).join('');
-      const sl = document.getElementById('skills-list');
-      sl.innerHTML = data.skills.map((s, i) => `<div class="item"><input value="${s.title}" onchange="data.skills[${i}].title=this.value"/><button class="remove-btn" onclick="removeSkill(${i})">×</button></div>`).join('');
-      const el = document.getElementById('experience-list');
-      el.innerHTML = data.experience.map((e, i) => `<div class="item"><input value="${e.role} @ ${e.company}" onchange="data.experience[${i}].role=this.value.split('@')[0];data.experience[${i}].company=this.value.split('@')[1]"/><button class="remove-btn" onclick="removeExp(${i})">×</button></div>`).join('');
-    }
-
-    function saveData() {
-      localStorage.setItem('adminData', JSON.stringify(data));
-      showMsg('Zapisano!');
-    }
-
-    function loadData() {
-      const s = localStorage.getItem('adminData');
-      if (s) data = JSON.parse(s);
-      document.getElementById('hero').value = data.hero || '';
-      document.getElementById('heroDesc').value = data.heroDesc || '';
-      document.getElementById('socialGithub').value = data.socials?.github || '';
-      document.getElementById('socialLinkedin').value = data.socials?.linkedin || '';
-      document.getElementById('socialEmail').value = data.socials?.email || '';
-    }
-
-    function loadDemo() { localStorage.removeItem('adminData'); location.reload(); }
-
-    function exportData() {
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'portfolio-data.json';
-      a.click();
-    }
-
-    function importData() {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = '.json';
-      input.onchange = e => {
-        const f = e.target.files[0];
-        const r = new FileReader();
-        r.onload = () => { data = JSON.parse(r.result); renderLists(); showMsg('Wczytano!'); };
-        r.readAsText(f);
-      };
-      input.click();
-    }
-
-    function showMsg(txt, type = 'success') {
-      const m = document.getElementById('msg');
-      m.innerHTML = `<div class="msg ${type}">${txt}</div>`;
-      setTimeout(() => m.innerHTML = '', 3000);
-    }
-
-    window.addEventListener('keydown', e => { if (e.key === 'Enter') checkPwd(); });
-  </script>
+<script>
+const DEFAULTS={hero:'Bartosz Osiej',heroDesc:'AI Systems Engineer',projects:[{name:'LinkShort',url:'https://fastapiurl.onrender.com',desc:'JWT URL shortener'},{name:'AI Chat Proxy',url:'https://ai-chat-proxy.onrender.com',desc:'18+ AI models'}]};
+let data={...DEFAULTS};
+const out=document.getElementById('term-output');
+const lines=['$','$ whoami','bartosz_admin','','$ ls ./config','hero: '+data.hero,'heroDesc: '+data.heroDesc,'$ cat ./projects.json',''+JSON.stringify(data.projects,null,2),'','$ echo "Class: NETHER - LEVEL 1000000"','Class: NETHER - LEVEL 1000000 ✅','','$ ./apply_changes.sh','✓ Changes applied successfully','$'];
+function printLines(i=0){if(i>=lines.length)return;const l=document.createElement('div');l.innerHTML=lines[i];out.appendChild(l);setTimeout(()=>printLines(i+1),i%2?100:50)}
+setTimeout(printLines,500);
+function saveData(){localStorage.setItem('adminData',JSON.stringify(data));alert('Saved!');}
+function loadDemo(){data=DEFAULTS;localStorage.removeItem('adminData');location.reload();}
+function addProj(){const p={name:document.getElementById('pName').value,url:document.getElementById('pUrl').value,desc:document.getElementById('pDesc').value};data.projects.push(p);document.getElementById('pName').value='';}
+function addSkill(){const t=document.getElementById('sTitle').value;alert('Added: '+t);}
+function addExp(){const e={date:document.getElementById('eDate').value,role:document.getElementById('eRole').value,company:document.getElementById('eCompany').value};data.experience=[e,...(data.experience||[])];}
+window.addEventListener('keydown',e=>{if(e.key==='Enter'){const v=prompt('Command:')||'';if(v.startsWith('save')){saveData()}if(v==='demo'||v==='clear'){loadDemo()}})});
+</script>
 </body>
 </html>
