@@ -8,9 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ============================================================
-       DESIGN TOKENS
-    ============================================================ */
     :root {
       --bg:        #080C18;
       --bg-2:      #0D1221;
@@ -30,9 +27,6 @@
       --font-mono:    'JetBrains Mono', monospace;
     }
 
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -47,9 +41,6 @@
     img { display: block; max-width: 100%; }
     ::selection { background: var(--cyan); color: var(--bg); }
 
-    /* ============================================================
-       GRID BACKGROUND
-    ============================================================ */
     body::before {
       content: '';
       position: fixed;
@@ -62,9 +53,6 @@
       z-index: 0;
     }
 
-    /* ============================================================
-       NAV
-    ============================================================ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -569,6 +557,19 @@
       color: var(--white);
       border-color: var(--gray-2);
     }
+
+    #contact { background: var(--bg-2); padding: 80px clamp(24px, 8vw, 120px); }
+    .contact-container { max-width: 700px; margin: 0 auto; text-align: center; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .contact-item { padding: 20px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); }
+    .contact-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gray-2); margin-bottom: 8px; }
+    .contact-link { font-size: 1.1rem; font-weight: 500; color: var(--white); display: block; }
+    .contact-link:hover { color: var(--cyan); }
 
     /* ============================================================
        SKILLS
@@ -1150,12 +1151,12 @@
       <h1>
         Cześć, jestem<br/>
         <span class="h1-sub" id="hero-name">Bartosz Osiej</span>
-        <!-- ── ZMIEŃ SWOJE IMIĘ TUTAJ I W ID "hero-name" ── -->
+        
       </h1>
       <p class="hero-desc">
         Buduję szybkie, skalowalne i piękne aplikacje webowe.
         Specjalizuję się w React, Node.js i architekturze chmurowej.
-        <!-- ── ZMIEŃ SWÓJ OPIS TUTAJ ── -->
+        
       </p>
       <div class="hero-actions">
         <a href="#projects" class="btn-primary">Zobacz projekty</a>
@@ -1197,7 +1198,7 @@
        COUNTER STRIP — liczby mówią same za siebie
   ============================================================ -->
   <section id="counter-strip">
-    <!-- ── ZMIEŃ SWOJE LICZBY ── -->
+    
     <div class="counter-item reveal">
       <span class="counter-num"><span class="count-up" data-target="30">0</span><span class="counter-suffix">+</span></span>
       <span class="counter-label">projektów ukończonych</span>
@@ -1244,48 +1245,59 @@
     <div class="about-text reveal">
       <div class="section-label">// o mnie</div>
       <h2 class="section-title">Programista<br/>z pasją do UX</h2>
-      <p>
-        Mam <strong>5 lat doświadczenia</strong> w budowaniu produktów webowych
-        — od startupów po korporacyjne platformy SaaS.
-        <!-- ── ZMIEŃ SWÓJ OPIS ── -->
+<p>
+        Mam <strong>13 projektów</strong> w budowie — od AI systems po monitoring tools.
       </p>
       <p>
         Kiedy nie koduję, eksperymentuję z open-source, gram w szachy
         i piję za dużo kawy w trójmiejskich kawiarniach.
-        <!-- ── ZMIEŃ SWOJE HOBBY ── -->
       </p>
       <div class="about-stats">
-        <!-- ── ZMIEŃ SWOJE STATYSTYKI ── -->
-        <div class="stat"><span class="stat-num">30+</span><span class="stat-label">projektów</span></div>
-        <div class="stat"><span class="stat-num">5</span><span class="stat-label">lat exp.</span></div>
-        <div class="stat"><span class="stat-num">12</span><span class="stat-label">klientów</span></div>
+        <div class="stat"><span class="stat-num">13</span><span class="stat-label">projektów</span></div>
+        <div class="stat"><span class="stat-num">5+</span><span class="stat-label">lat exp.</span></div>
+        <div class="stat"><span class="stat-num">5</span><span class="stat-label">klientów</span></div>
       </div>
       <div class="tag-row">
-        <!-- ── ZMIEŃ TAGI ── -->
         <span class="tag">React</span>
         <span class="tag">TypeScript</span>
-        <span class="tag">Node.js</span>
+        <span class="tag">Python</span>
+        <span class="tag">AI</span>
+        <span class="tag">eBPF</span>
         <span class="tag">PostgreSQL</span>
-        <span class="tag">AWS</span>
-        <span class="tag">Docker</span>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- ============================================================
-       PROJECTS
-       ── DODAJ / EDYTUJ PROJEKTY W TABLICY projectData PONIŻEJ ──
-  ============================================================ -->
-  <section id="projects">
+  <section id="contact">
+    <div class="contact-container reveal">
+      <div class="section-label">// kontakt</div>
+      <h2 class="section-title">Skontaktuj się ze mną</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <a href="mailto:mmc29213@gmail.com" class="contact-link">mmc29213@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/bartosz-osiej-29095a409" target="_blank" class="contact-link">linkedin.com/in/bartosz-osiej</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">GitHub</div>
+          <a href="https://github.com/voicenotesite" target="_blank" class="contact-link">github.com/voicenotesite</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
     <div class="projects-header reveal">
       <div>
         <div class="section-label">// projekty</div>
         <h2 class="section-title">Wybrane prace</h2>
       </div>
-      <a href="https://github.com/TWOJ_LOGIN" target="_blank" class="btn-secondary" style="white-space:nowrap">
-        <!-- ── ZMIEŃ LINK DO GITHUB ── -->
+      <a href="https://github.com/voicenotesite" target="_blank" class="btn-secondary" style="white-space:nowrap">
         GitHub →
       </a>
     </div>
@@ -1414,7 +1426,7 @@
         </a>
       </div>
 
-      <!-- ── ZMIEŃ SWÓJ EMAIL ── -->
+      
       <a href="mailto:jan@example.com" class="contact-email-big">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m2 7 10 7 10-7"/></svg>
         jan@example.com
@@ -1612,33 +1624,13 @@ const projectData = [
   /* ────────────────────────────────────────────────────────────
      DOŚWIADCZENIE — dodaj / zmień wpisy
   ──────────────────────────────────────────────────────────── */
-  const experienceData = [
+const experienceData = [
     {
-      date:    "2023 — obecnie",
-      role:    "AI Systems Engineer",
-      company: "Self-employed · Remote",
-      desc:    "Liderowanie migracją monolitu do mikroserwisów, wdrożenie CI/CD, redukcja czasu deployu o 70%.",
+      date:    "2023 — 2026",
+      role:    "Full-stack Developer & Owner",
+      company: "Ghost Development · Remote",
+      desc:    "Building and maintaining all 13 portfolio projects including AI systems, monitoring tools, and web applications.",
     },
-    {
-      date:    "2021 — 2023",
-      role:    "Frontend Developer",
-      company: "StartupXYZ · Remote",
-      desc:    "Budowa dashboardu SaaS od zera (React + TypeScript). 40 000 aktywnych użytkowników.",
-    },
-    {
-      date:    "2020 — 2021",
-      role:    "Junior Developer",
-      company: "WebAgency · Gdynia",
-      desc:    "Tworzenie stron i sklepów dla lokalnych klientów. WordPress, PHP, WooCommerce.",
-    },
-    /* ── DODAJ KOLEJNE DOŚWIADCZENIE ──
-    {
-      date:    "XXXX — XXXX",
-      role:    "Stanowisko",
-      company: "Firma · Miasto",
-      desc:    "Opis obowiązków",
-    },
-    */
   ];
 
   /* ────────────────────────────────────────────────────────────
