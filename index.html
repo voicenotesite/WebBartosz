@@ -2017,6 +2017,17 @@ document.addEventListener('DOMContentLoaded', createChatWidget);
 document.getElementById('chat-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendChatMessage();
 });
+
+setInterval(() => {
+    fetch(`${BACKEND_URL}/chats`)
+        .then(r => r.json())
+        .then(chats => {
+            const msgDiv = document.getElementById('chat-messages');
+            if (chats.length > 0) {
+                msgDiv.innerHTML = chats.map(c => `<div><b>${c.name}:</b> ${c.message}</div>`).join('');
+            }
+        });
+}, 5000);
 </script>
 
 <style>
