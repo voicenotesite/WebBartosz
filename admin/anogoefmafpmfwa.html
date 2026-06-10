@@ -25,7 +25,6 @@
       font-family: 'Inter', sans-serif;
       font-size: 16px;
       line-height: 1.6;
-      overflow: hidden;
     }
     #auth-screen, #admin-screen {
       min-height: 100vh;
@@ -38,7 +37,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 40px;
+      padding: 30px;
       min-width: 320px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     }
@@ -60,8 +59,7 @@
       font-size: 1rem;
     }
     button {
-      width: 100%;
-      padding: 12px;
+      padding: 12px 20px;
       background: linear-gradient(135deg, var(--cyan), var(--violet));
       color: var(--bg);
       border: none;
@@ -69,14 +67,22 @@
       font-weight: 600;
       cursor: pointer;
     }
-    .admin-content { padding-top: 20px; }
-    .form-group { margin-bottom: 20px; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+    .tab { padding: 10px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; color: var(--gray-1); }
+    .tab.active { color: var(--cyan); border-color: var(--cyan); }
+    .form-group { margin-bottom: 16px; }
     .form-group label { display: block; margin-bottom: 6px; color: var(--gray-1); font-size: 0.85rem; }
     .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--white); font-family: inherit; font-size: 0.9rem; }
+    .item-list { max-height: 200px; overflow-y: auto; margin-bottom: 10px; }
+    .item { display: flex; gap: 8px; margin-bottom: 8px; }
+    .item input { flex: 1; }
+    .remove-btn { background: none; border: none; color: #ff4444; cursor: pointer; padding: 0 8px; }
     .preview { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 20px; max-height: 300px; overflow-y: auto; }
     .preview h4 { color: var(--cyan); margin-bottom: 10px; font-size: 0.9rem; }
     .msg { padding: 10px; border-radius: 6px; margin-bottom: 16px; text-align: center; }
     .msg.success { background: rgba(74, 222, 128, 0.1); color: #4ADE80; border: 1px solid rgba(74, 222, 128, 0.3); }
+    .msg.error { background: rgba(255, 68, 68, 0.1); color: #ff4444; border: 1px solid rgba(255, 68, 68, 0.3); }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   </style>
 </head>
 <body>
@@ -89,44 +95,87 @@
   </div>
 
   <div id="admin-screen" style="display:none">
-    <div class="admin-box">
-      <h2>⚙️ Configuracja</h2>
-      <div class="admin-content">
+    <div class="admin-box" style="min-width: 600px; max-width: 900px;">
+      <h2>⚙️ Konfiguracja Portfolio</h2>
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('hero')">Hero</div>
+        <div class="tab" onclick="switchTab('projects')">Projekty</div>
+        <div class="tab" onclick="switchTab('skills')">Umiejętności</div>
+        <div class="tab" onclick="switchTab('experience')">Doświadczenie</div>
+        <div class="tab" onclick="switchTab('socials')">Social Media</div>
+      </div>
+      <div id="tab-hero">
         <div class="form-group">
           <label for="hero">Hero Title</label>
-          <input type="text" id="hero" placeholder="Imię i nazwisko" />
+          <input type="text" id="hero" placeholder="Bartosz Osiej" />
         </div>
         <div class="form-group">
           <label for="heroDesc">Hero Description</label>
-          <input type="text" id="heroDesc" placeholder="_opis" />
+          <input type="text" id="heroDesc" placeholder="AI Systems Engineer" />
+        </div>
+      </div>
+      <div id="tab-projects" style="display:none">
+        <div class="form-group grid2">
+          <input type="text" id="projName" placeholder="Nazwa projektu" />
+          <input type="text" id="projUrl" placeholder="URL (https://...)" />
         </div>
         <div class="form-group">
-          <label for="projTitle">Project Title</label>
-          <input type="text" id="projTitle" />
+          <input type="text" id="projDesc" placeholder="Opis" />
+        </div>
+        <button onclick="addProject()">+ Dodaj projekt</button>
+        <div class="item-list" id="projects-list"></div>
+      </div>
+      <div id="tab-skills" style="display:none">
+        <div class="form-group grid2">
+          <input type="text" id="skillIcon" placeholder="Emoji (⚙️)" />
+          <input type="text" id="skillTitle" placeholder="Nazwa (Frontend)" />
+        </div>
+        <button onclick="addSkill()">+ Dodaj sekcję</button>
+        <div class="item-list" id="skills-list"></div>
+      </div>
+      <div id="tab-experience" style="display:none">
+        <div class="form-group">
+          <input type="text" id="expDate" placeholder="2024 — teraz" />
+        </div>
+        <div class="form-group grid2">
+          <input type="text" id="expRole" placeholder="Rola" />
+          <input type="text" id="expCompany" placeholder="Firma" />
         </div>
         <div class="form-group">
-          <label for="projUrl">Project URL</label>
-          <input type="url" id="projUrl" placeholder="https://..." />
+          <textarea id="expDesc" placeholder="Opis..." rows="3"></textarea>
+        </div>
+        <button onclick="addExperience()">+ Dodaj doświadczenie</button>
+        <div class="item-list" id="experience-list"></div>
+      </div>
+      <div id="tab-socials" style="display:none">
+        <div class="form-group">
+          <input type="text" id="socialGithub" placeholder="GitHub URL" />
         </div>
         <div class="form-group">
-          <label for="projDesc">Project Desc</label>
-          <input type="text" id="projDesc" />
+          <input type="text" id="socialLinkedin" placeholder="LinkedIn URL" />
         </div>
-        <button onclick="addProject()">Add Project</button>
-        <div class="preview">
-          <h4>Live Preview</h4>
-          <div id="preview"></div>
+        <div class="form-group">
+          <input type="text" id="socialEmail" placeholder="Email" />
         </div>
-        <div id="msg"></div>
-        <button onclick="saveData()" style="margin-top:20px">💾 Save to localStorage</button>
-        <button onclick="loadData()" style="margin-top:10px">📂 Load Demo Data</button>
+      </div>
+      <div id="msg"></div>
+      <div style="display:flex;gap:8px">
+        <button onclick="saveData()">💾 Zapisz</button>
+        <button onclick="loadDemo()">📂 Demo</button>
+        <button onclick="exportData()">📥 Export JSON</button>
+        <button onclick="importData()">📤 Import JSON</button>
+      </div>
+      <div class="preview">
+        <h4>Live Preview</h4>
+        <div id="preview"></div>
       </div>
     </div>
   </div>
 
   <script>
     const PASS = 'host';
-    const DEFAULTS = {
+    let currentTab = 'hero';
+    let data = {
       hero: 'Bartosz Osiej',
       heroDesc: 'AI Systems Engineer',
       projects: [
@@ -135,51 +184,114 @@
         { name: 'GraphQL Blog', url: 'https://graphql-blog-lxjy.onrender.com/graphql', desc: 'Blog API' }
       ],
       skills: [
-        { icon: '⚙️', skills: [{ n: 'AI Infrastructure', p: 92 }, { n: 'Python', p: 95 }, { n: 'Go', p: 85 }, { n: 'PostgreSQL', p: 88 }] },
-        { icon: '☁️', skills: [{ n: 'AWS', p: 82 }, { n: 'Docker', p: 90 }, { n: 'Kubernetes', p: 70 }, { n: 'Terraform', p: 65 }] }
+        { icon: '⚙️', title: 'AI & Backend', skills: [{ n: 'AI Infrastructure', p: 92 }, { n: 'Python', p: 95 }, { n: 'Go', p: 85 }, { n: 'PostgreSQL', p: 88 }] },
+        { icon: '☁️', title: 'Cloud & DevOps', skills: [{ n: 'AWS', p: 82 }, { n: 'Docker', p: 90 }, { n: 'Kubernetes', p: 70 }, { n: 'Terraform', p: 65 }] }
       ],
       experience: [
         { date: '2024 — teraz', role: 'AI Systems Engineer', company: 'Freelance', desc: 'Budowanie API, systemów ML, automatizacja.' },
         { date: '2020 — 2024', role: 'Backend Developer', company: 'Various', desc: 'Skalowalne systemy backendu.' }
-      ]
+      ],
+      socials: { github: '', linkedin: '', email: '' }
     };
 
     function checkPwd() {
       if (document.getElementById('pwd').value === PASS) {
         document.getElementById('auth-screen').style.display = 'none';
         document.getElementById('admin-screen').style.display = 'block';
-        loadForm();
+        loadData();
+        renderLists();
       } else {
-        alert('Wrong password');
+        showMsg('Wrong password', 'error');
       }
     }
 
-    function loadForm() {
-      document.getElementById('hero').value = DEFAULTS.hero;
-      document.getElementById('heroDesc').value = DEFAULTS.heroDesc;
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('[id^="tab-"]').forEach(t => t.style.display = 'none');
+      document.getElementById('tab-' + tab).style.display = 'block';
     }
 
     function addProject() {
-      const p = { name: document.getElementById('projTitle').value, url: document.getElementById('projUrl').value, desc: document.getElementById('projDesc').value };
-      document.getElementById('projTitle').value = '';
-      document.getElementById('projUrl').value = '';
-      document.getElementById('projDesc').value = '';
-      updatePreview();
+      data.projects.push({ name: document.getElementById('projName').value, url: document.getElementById('projUrl').value, desc: document.getElementById('projDesc').value });
+      document.getElementById('projName').value = ''; document.getElementById('projUrl').value = ''; document.getElementById('projDesc').value = '';
+      renderLists();
     }
 
-    function updatePreview() {
-      document.getElementById('preview').innerHTML = `<p style="color:var(--gray-1)">Projekty: ${DEFAULTS.projects.length}</p>`;
+    function addSkill() {
+      const icon = document.getElementById('skillIcon').value;
+      const title = document.getElementById('skillTitle').value;
+      data.skills.push({ icon, title, skills: [] });
+      document.getElementById('skillIcon').value = ''; document.getElementById('skillTitle').value = '';
+      renderLists();
+    }
+
+    function addExperience() {
+      data.experience.push({
+        date: document.getElementById('expDate').value,
+        role: document.getElementById('expRole').value,
+        company: document.getElementById('expCompany').value,
+        desc: document.getElementById('expDesc').value
+      });
+      document.getElementById('expDate').value = ''; document.getElementById('expRole').value = '';
+      document.getElementById('expCompany').value = ''; document.getElementById('expDesc').value = '';
+      renderLists();
+    }
+
+    function removeProject(i) { data.projects.splice(i, 1); renderLists(); }
+    function removeSkill(i) { data.skills.splice(i, 1); renderLists(); }
+    function removeExp(i) { data.experience.splice(i, 1); renderLists(); }
+
+    function renderLists() {
+      const pl = document.getElementById('projects-list');
+      pl.innerHTML = data.projects.map((p, i) => `<div class="item"><input value="${p.name}" onchange="data.projects[${i}].name=this.value"/><input value="${p.url}" onchange="data.projects[${i}].url=this.value"/><button class="remove-btn" onclick="removeProject(${i})">×</button></div>`).join('');
+      const sl = document.getElementById('skills-list');
+      sl.innerHTML = data.skills.map((s, i) => `<div class="item"><input value="${s.title}" onchange="data.skills[${i}].title=this.value"/><button class="remove-btn" onclick="removeSkill(${i})">×</button></div>`).join('');
+      const el = document.getElementById('experience-list');
+      el.innerHTML = data.experience.map((e, i) => `<div class="item"><input value="${e.role} @ ${e.company}" onchange="data.experience[${i}].role=this.value.split('@')[0];data.experience[${i}].company=this.value.split('@')[1]"/><button class="remove-btn" onclick="removeExp(${i})">×</button></div>`).join('');
     }
 
     function saveData() {
-      const data = { ...DEFAULTS, hero: document.getElementById('hero').value, heroDesc: document.getElementById('heroDesc').value };
       localStorage.setItem('adminData', JSON.stringify(data));
-      document.getElementById('msg').innerHTML = '<div class="msg success">Zapisano! Odśwież portfolio.</div>';
+      showMsg('Zapisano!');
     }
 
     function loadData() {
-      localStorage.setItem('adminData', JSON.stringify(DEFAULTS));
-      document.getElementById('msg').innerHTML = '<div class="msg success">Wczytano dane demo.</div>';
+      const s = localStorage.getItem('adminData');
+      if (s) data = JSON.parse(s);
+      document.getElementById('hero').value = data.hero || '';
+      document.getElementById('heroDesc').value = data.heroDesc || '';
+      document.getElementById('socialGithub').value = data.socials?.github || '';
+      document.getElementById('socialLinkedin').value = data.socials?.linkedin || '';
+      document.getElementById('socialEmail').value = data.socials?.email || '';
+    }
+
+    function loadDemo() { localStorage.removeItem('adminData'); location.reload(); }
+
+    function exportData() {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'portfolio-data.json';
+      a.click();
+    }
+
+    function importData() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      input.onchange = e => {
+        const f = e.target.files[0];
+        const r = new FileReader();
+        r.onload = () => { data = JSON.parse(r.result); renderLists(); showMsg('Wczytano!'); };
+        r.readAsText(f);
+      };
+      input.click();
+    }
+
+    function showMsg(txt, type = 'success') {
+      const m = document.getElementById('msg');
+      m.innerHTML = `<div class="msg ${type}">${txt}</div>`;
+      setTimeout(() => m.innerHTML = '', 3000);
     }
 
     window.addEventListener('keydown', e => { if (e.key === 'Enter') checkPwd(); });
