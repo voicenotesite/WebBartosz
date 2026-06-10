@@ -11,23 +11,17 @@
     :root { --bg: #080C18; --bg-2: #0D1221; --bg-card: #111827; --cyan: #00D4FF; --violet: #7C3AED; --violet-lt: #A855F7; --white: #F0F4FF; --gray-1: #94A3B8; --border: rgba(0,212,255,0.12); }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow:hidden}
-    #auth-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);font-family:'JetBrains Mono',monospace;color:#00ff88}
-    #term{display:none;flex-direction:column;min-height:100vh;background:var(--bg);font-family:'JetBrains Mono',monospace;color:#00ff88;padding:20px}
-    .term-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,0.6);overflow:hidden;max-width:900px;width:100%}
+    #bg-term{position:fixed;inset:0;font-family:'JetBrains Mono',monospace;font-size:clamp(0.5rem,1.5vw,0.8rem);color:#00ff88;padding:40px;opacity:0.15;pointer-events:none;overflow:hidden}
+    .bg-line{margin:2px 0;white-space:nowrap}
+    .bg-prompt{color:var(--cyan)}
+    #auth-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:rgba(8,12,24,0.95);font-family:'JetBrains Mono',monospace;color:#00ff88;z-index:100}
+    #admin-panel{display:none;position:relative;z-index:10;padding:40px;max-width:1200px;margin:0 auto}
+    .term-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,0.6);overflow:hidden}
     .term-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;background:rgba(0,212,255,0.05);border-bottom:1px solid var(--border)}
     .term-dot{width:11px;height:11px;border-radius:50%;background:#FF5F57}.term-dot:nth-child(2){background:#FEBC2E}.term-dot:nth-child(3){background:#28C840}
     .term-title{margin-left:auto;font-size:.72rem;color:var(--cyan);letter-spacing:.05em}
-    #term-body{padding:20px;max-height:500px;overflow-y:auto}
-    .line{margin:4px 0}.prompt{color:var(--cyan)}.cmd{color:var(--white)}.out{color:var(--gray-1)}.ok{color:#4ADE80}.err{color:#ff4444}
-    @keyframes blink{50%{opacity:0}}
-    @keyframes flicker{0%,12%{opacity:1}6%{opacity:0}}
-    @keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
     .config-area{padding:20px}
     .section-label{font-family:'JetBrains Mono';font-size:.75rem;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;margin:20px 0 10px}
-    .main-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .term-loop{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:15px;height:500px;overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#00ff88}
-    .term-loop .line{margin:3px 0}.term-loop .prompt{color:var(--cyan)}.term-loop .out{color:#00ff88}
-    @keyframes typing{from{width:0}to{width:100%}}
     .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
     .tab{padding:10px 16px;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--gray-1);transition:all .2s}
     .tab.active{color:var(--cyan);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,212,255,0.2)}
@@ -48,45 +42,30 @@
   </style>
 </head>
 <body>
+  <div id="bg-term"></div>
   <div id="auth-screen">
     <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center;min-width:320px">
       <div style="margin-bottom:20px">$ whoami_admin</div>
       <div style="color:var(--gray-1);margin-bottom:30px;font-size:.85rem">Enter password for GHOST_ROOT access</div>
-      <input type="password" id="adminPwd" placeholder="password" style="width:100%;padding:12px;background:var(--bg);border:1px solid var(--border);color:var(--white);border-radius:6px;font-family:'JetBrains Mono'">
+      <input type="password" id="adminPwd" placeholder="password" style="width:100%;padding:12px;background:var(--bg);border:1px solid var(--border);color:var(--white);border-radius:6px;font-family:'JetBrains Mono')">
       <button onclick="checkAdminPwd()" style="margin-top:16px">Enter</button>
     </div>
   </div>
 
-  <div id="term">
+  <div id="admin-panel">
     <div class="term-wrap">
       <div class="term-bar">
         <div class="term-dot"></div><div class="term-dot"></div><div class="term-dot"></div>
         <span class="term-title">~/admin -- PORTFOLIO CONFIG</span>
       </div>
-      <div id="term-body">
-        <div class="line"><span class="prompt">$</span> <span class="cmd">cat /etc/portfolio/admin.conf</span></div>
-        <div class="line out">> Loading configuration...</div>
-        <div class="line out">Class: NETHER - LEVEL 1000000 ✓</div>
-        <div class="line out">Status: ONLINE</div>
-        <div class="line out">Auth: GHOST_ROOT</div>
-        <div class="line"><span class="prompt">$</span> <span class="cmd">ls -la /config</span></div>
-        <div class="line out">drwxr-xr-x  config/  (3)</div>
-        <div class="line out">-rw-r--r--  hero.json</div>
-        <div class="line out">-rw-r--r--  projects.json</div>
-        <div class="line out">-rw-r--r--  skills.json</div>
-        <div class="line"><span class="prompt">$</span> <span class="cmd">echo "Ready for configuration..."</span></div>
-        <div class="line ok">✓ Admin panel loaded</div>
-      </div>
       <div class="config-area">
-        <div class="main-layout">
-        <div class="config-side">
-          <div class="tabs">
-            <div class="tab active" onclick="switchTab('hero')">Hero</div>
-            <div class="tab" onclick="switchTab('projects')">Projects</div>
-            <div class="tab" onclick="switchTab('skills')">Skills</div>
-            <div class="tab" onclick="switchTab('experience')">Experience</div>
-            <div class="tab" onclick="switchTab('socials')">Social</div>
-          </div>
+        <div class="tabs">
+          <div class="tab active" onclick="switchTab('hero')">Hero</div>
+          <div class="tab" onclick="switchTab('projects')">Projects</div>
+          <div class="tab" onclick="switchTab('skills')">Skills</div>
+          <div class="tab" onclick="switchTab('experience')">Experience</div>
+          <div class="tab" onclick="switchTab('socials')">Social</div>
+        </div>
         <div id="tab-hero" class="tab-content">
           <div class="form-group"><label>Hero Title</label><input id="hero" value="Bartosz Osiej"></div>
           <div class="form-group"><label>Description</label><input id="heroDesc" value="AI Systems Engineer"></div>
@@ -103,7 +82,7 @@
           <div class="item-list" id="skillList"></div>
         </div>
         <div id="tab-experience" class="tab-content" style="display:none">
-          <input id="eDate" placeholder="Date (2024 — teraz)" style="margin-bottom:10px">
+          <input id="eDate" placeholder="Date" style="margin-bottom:10px">
           <div class="grid2"><input id="eRole" placeholder="Role"><input id="eCompany" placeholder="Company"></div>
           <textarea id="eDesc" placeholder="Description" rows="3" style="margin-top:10px"></textarea>
           <button onclick="addExp()" style="margin-top:10px">+ Add Experience</button>
@@ -117,22 +96,6 @@
         <div class="preview"><div class="section-label">// live preview</div><div id="preview"></div></div>
         <div id="msg"></div>
         <div><button onclick="saveData()">💾 Save</button><button onclick="loadDemo()">📂 Demo</button><button onclick="exportJson()">📥 Export</button></div>
-        </div>
-        <div class="term-loop" id="termLoop">
-          <div class="line"><span class="prompt">$</span> <span class="cmd">sudo ./anogoefmafpmfwa --class=NETHER</span></div>
-          <div class="line out">Loading NETHER protocol...</div>
-          <div class="line out">Class: NETHER - LEVEL 1000000 ✓</div>
-          <div class="line out">System: PORTFOLIO_ADMIN v2.0</div>
-          <div class="line out">Status: ONLINE ✈️</div>
-          <div class="line"><span class="prompt">$</span> <span class="cmd">while true; do uptime</span></div>
-          <div class="line out">Uptime: 1000000 hours</div>
-          <div class="line out">Load: perfect</div>
-          <div class="line out">Memory: unlimited</div>
-          <div class="line"><span class="prompt">$</span> <span class="cmd">cat /proc/legend/status</span></div>
-          <div class="line out">Legendary Mode: ACTIVE</div>
-          <div class="line out">God Mode: ON</div>
-          <div class="line"><span class="prompt">$</span> <span class="cmd">echo "Ready..."</span></div>
-        </div>
       </div>
     </div>
   </div>
@@ -140,8 +103,8 @@
   <script>
     const PASS='host';
     let data=JSON.parse(localStorage.getItem('adminData'))||{hero:'Bartosz Osiej',heroDesc:'AI Systems Engineer',projects:[{name:'LinkShort',url:'https://fastapiurl.onrender.com',desc:'JWT URL shortener'},{name:'AI Chat Proxy',url:'https://ai-chat-proxy.onrender.com',desc:'18+ AI models'}]};
-    const auth=document.getElementById('auth-screen'),term=document.getElementById('term');
-    function checkAdminPwd(){if(document.getElementById('adminPwd').value===PASS){auth.style.display='none';term.style.display='flex';switchTab('hero');}}
+    const auth=document.getElementById('auth-screen'),panel=document.getElementById('admin-panel'),bgTerm=document.getElementById('bg-term');
+    function checkAdminPwd(){if(document.getElementById('adminPwd').value===PASS){auth.style.display='none';panel.style.display='block';document.body.style.fontFamily="'JetBrains Mono',monospace";}}
     function switchTab(t){document.querySelectorAll('[id^=tab-]').forEach(x=>x.style.display='none');document.getElementById('tab-'+t).style.display='block';document.querySelectorAll('.tab').forEach(el=>el.classList.toggle('active',el.onclick.toString().includes(t)));}
     function saveData(){localStorage.setItem('adminData',JSON.stringify(data));document.getElementById('msg').innerHTML='<div class="msg ok">Saved!</div>';setTimeout(()=>document.getElementById('msg').innerHTML='',2000);}
     function loadDemo(){localStorage.removeItem('adminData');location.reload();}
@@ -151,12 +114,13 @@
     function addSkill(){const t=document.getElementById('skillTitle').value;if(t){data.skills=data.skills||[];data.skills.push({title:t,skills:[]});renderAll();}}
     function addExp(){const e={date:document.getElementById('eDate').value,role:document.getElementById('eRole').value,company:document.getElementById('eCompany').value,desc:document.getElementById('eDesc').value};if(e.role){data.experience=data.experience||[];data.experience.push(e);renderAll();}}
     function renderAll(){document.getElementById('hero').value=data.hero||'';document.getElementById('heroDesc').value=data.heroDesc||'';}
-    // Terminal loop animation
-    const tl=document.getElementById('termLoop');
-    let tlIdx=0;
-    const tlLines=tl.innerHTML.split('\\n').map(s=>s.trim()).filter(s=>s);
-    function termLoopAnim(){if(!tl)return;tlIdx=++tlIdx%tlLines.length;const line=tlLines[tlIdx];const d=document.createElement('div');d.className='line';d.innerHTML=line;tl.appendChild(d);setTimeout(termLoopAnim,Math.random()*800+400);}
-    setTimeout(termLoopAnim,1000);
+
+    // Background terminal animation
+    const bgLines=['sudo ./portal','Loading...',`Welcome back, ADMIN`,'Class: NETHER - LEVEL 1000000 ✓','Status: ONLINE ✈️','uptime','1000000 days, 0 hours, 0 minutes','whoami','bartosz_admin','cat /proc/system/status','Perfect. Running at peak.','df -h','/dev/mem: 100% legendary','ps aux | grep legend','1 x legend','free -h','               total        used        free      shared  buff/cache   available','Mem:           100G        0G      100G        0G        0G      100G','top -b -n1','Legend: no process found','tail -f /var/log/system.log','System stable.','echo "sexy terminal animation"','Sexy? Very sexy. ✨'];
+    let bgIdx=0;
+    function bgAnim(){if(bgIdx>=bgLines.length)bgIdx=0;const l=document.createElement('div');l.className='bg-line';l.innerHTML=bgLines[bgIdx].replace(/^sudo/,'<span class="bg-prompt">$ </span><span class="t-cmd">sudo</span>').replace(/^[a-z]/,m=>'<span class="t-cmd">'+m+'</span>');bgTerm.appendChild(l);bgIdx++;setTimeout(bgAnim,Math.random()*1200+800);}
+    setTimeout(bgAnim,1000);
+
     window.addEventListener('keydown',e=>{if(e.key==='Enter')checkAdminPwd();});
   </script>
 </body>
