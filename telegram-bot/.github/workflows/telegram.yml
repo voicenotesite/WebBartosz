@@ -1,0 +1,13 @@
+name: Telegram Bot
+on:
+  workflow_dispatch:
+  rest:
+    types: [post]
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          # GitHub Actions doesn't easily support receiving webhooks
+          # This won't work as expected
+          echo "Use Render or similar"
