@@ -1,11 +1,15 @@
-import urllib.request
-import urllib.parse
 import json
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from pathlib import Path
 
 app = FastAPI()
+
+CHAT_FILE = Path("chats.json")
+if not CHAT_FILE.exists():
+    CHAT_FILE.write_text("[]")
 
 TELEGRAM_BOT_TOKEN = "8444958704:AAGkwFMh5IApceI61uipnmXjXWbvQWbDgXc"
 YOUR_TELEGRAM_CHAT_ID = "8444958704"
@@ -33,22 +37,10 @@ def detect_gender(name: str) -> str:
 
 @app.post("/send-message")
 async def send_message(msg: Message):
-    data = urllib.parse.urlencode({
-        "chat_id": YOUR_TELEGRAM_CHAT_ID,
-        "text": f"Test: {msg.message}"
-    }).encode()
-    
-    req = urllib.request.Request(
-        f"{TELEGRAM_API}/sendMessage",
-        data=data,
-        headers={"Content-Type": "application/x-www-form-urlencoded"}
-    )
-    
-    try:
-        with urllib.request.urlopen(req) as response:
-            return json.loads(response.read().decode())
-    except urllib.error.HTTPError as e:
-        return {"error": e.read().decode()}
+    chats = json.loads(CHAT_FILE.read_text())
+    chats.append({"name": msg.name, "message": msg.message})
+    CHAT_FILE.write_text(json.dumps(chats))
+    return {"status": "saved", "chat_id": len(chats)}
 
 @app.post("/telegram-webhook")
 async def telegram_webhook(update: dict):
