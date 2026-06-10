@@ -13,6 +13,7 @@ if not CHAT_FILE.exists():
     CHAT_FILE.write_text("[]")
 
 CHAT_ID = "8444958704"
+TELEGRAM_API = "https://api.telegram.org/bot8444958704:AAGkwFMh5IApceI61uipnmXjWbvQWbDgXc"
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,15 +25,6 @@ app.add_middleware(
 class Message(BaseModel):
     name: str
     message: str
-
-def detect_gender(name: str) -> str:
-    import json
-    try:
-        with open("firstnames.json", "r") as f:
-            names = json.load(f)
-        return names.get(name.lower(), "unknown")
-    except:
-        return "unknown"
 
 @app.post("/send-message")
 async def send_message(msg: Message):
@@ -47,14 +39,14 @@ async def send_message(msg: Message):
     }).encode()
     
     req = urllib.request.Request(
-        f"https://api.telegram.org/botest8444958704:AAGkwFMh5IApceI61uipnmXjWbvQWbDgXc/sendMessage",
+        f"{TELEGRAM_API}/sendMessage",
         data=data,
         headers={"Content-Type": "application/x-www-form-urlencoded"}
     )
     
     try:
         urllib.request.urlopen(req)
-    except:
+    except Exception as e:
         pass
     
     return {"status": "saved", "chat_id": len(chats)}
