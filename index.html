@@ -1992,14 +1992,21 @@ s0.parentNode.insertBefore(s1,s0);})();
 <script>
 let chatVisible = false;
 function toggleChat() {
-  const el = document.getElementById('chat-embedded');
-  const tawkFrame = el.querySelector('iframe');
-  chatVisible = !chatVisible;
-  el.classList.toggle('active', chatVisible);
-  if (!chatVisible && tawkFrame) {
-    tawkFrame.style.display = 'none';
-  } else if (tawkFrame) {
-    tawkFrame.style.display = 'block';
+  try {
+    if (Tawk_API && typeof Tawk_API.toggle === 'function') {
+      Tawk_API.toggle();
+      chatVisible = !chatVisible;
+    } else {
+      const el = document.getElementById('chat-embedded');
+      const tawkFrame = el.querySelector('iframe');
+      chatVisible = !chatVisible;
+      el.classList.toggle('active', chatVisible);
+      if (tawkFrame) {
+        tawkFrame.style.display = chatVisible ? 'block' : 'none';
+      }
+    }
+  } catch(e) {
+    console.log('Chat toggle error:', e);
   }
 }
 </script>
