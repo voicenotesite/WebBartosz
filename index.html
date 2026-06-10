@@ -1109,23 +1109,11 @@
       <li><a href="#experience">Doświadczenie</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div class="nav-avail"><div class="avail-dot"></div>Dostępny do pracy</div>
-      <a href="#contact" class="nav-cta">Zatrudnij mnie</a>
-    </div>
+    <div class="nav-avail"><div class="avail-dot"></div>Dostępny do pracy</div>
   </nav>
 
   <!-- Cursor glow effect -->
   <div class="cursor-glow" id="cursor-glow"></div>
-
-  <!-- Floating CTA -->
-  <div class="float-cta hidden" id="float-cta">
-    <div class="float-bubble">Szukasz developera? Jestem dostępny od zaraz 👇</div>
-    <a href="#contact" class="float-btn" style="position:relative;">
-      <div class="float-ping"></div>
-      ✉ Zatrudnij mnie
-    </a>
-  </div>
 
   <!-- ============================================================
        HERO
@@ -1982,8 +1970,9 @@
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||={}, Tawk_LoadStart=new Date();
+Tawk_API.embedded='chat-embedded';
 Tawk_API.onLoad = function() {
-  Tawk_API.hideWidget();
+  document.getElementById('chat-embedded').style.display = 'none';
 };
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -1995,17 +1984,57 @@ s0.parentNode.insertBefore(s1,s0);})();
 </script>
 <!--End of Tawk.to Script-->
 
+<div id="chat-embedded" class="chat-embedded"></div>
+
+<button id="chatBtn" class="chat-btn" onclick="toggleChat()" title="Chat">
+  <svg viewBox="0 0 24 24" width="24" height="24">
+    <path fill="#fff" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-4 4V4c0-.83.67-1.5 1.5-1.5h15c.83 0 1.5.67 1.5 1.5v12c0 .83-.67 1.5-1.5 1.5z"/>
+  </svg>
+</button>
+
+<style>
+.chat-embedded {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 340px;
+  height: 400px;
+  background: #080C18;
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0,212,255,0.5);
+  border: 1px solid rgba(0,212,255,0.4);
+  z-index: 9998;
+  display: none;
+  overflow: hidden;
+}
+.chat-embedded.active { display: block; }
+.chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #00D4FF, #0099cc);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(0,212,255,0.5);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-btn:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(0,212,255,0.7); }
+</style>
+
 <script>
-let lastScrollTop = 0;
-window.addEventListener('scroll', function() {
-  const st = window.pageYOffset || document.documentElement.scrollTop;
-  if (st > lastScrollTop && st > 100) {
-    Tawk_API.showWidget();
-  } else if (st < lastScrollTop && st < 100) {
-    Tawk_API.hideWidget();
-  }
-  lastScrollTop = st <= 0 ? 0 : st;
-});
+function toggleChat() {
+  const el = document.getElementById('chat-embedded');
+  el.classList.toggle('active');
+  if (el.classList.contains('active')) Tawk_API.showWidget();
+  else Tawk_API.hideWidget();
+}
 </script>
 
 <!-- 404 INTRO ANIMATION -->
