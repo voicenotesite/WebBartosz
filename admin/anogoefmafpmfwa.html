@@ -24,6 +24,10 @@
     @keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
     .config-area{padding:20px}
     .section-label{font-family:'JetBrains Mono';font-size:.75rem;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;margin:20px 0 10px}
+    .main-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .term-loop{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:15px;height:500px;overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#00ff88}
+    .term-loop .line{margin:3px 0}.term-loop .prompt{color:var(--cyan)}.term-loop .out{color:#00ff88}
+    @keyframes typing{from{width:0}to{width:100%}}
     .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
     .tab{padding:10px 16px;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--gray-1);transition:all .2s}
     .tab.active{color:var(--cyan);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,212,255,0.2)}
@@ -74,13 +78,15 @@
         <div class="line ok">✓ Admin panel loaded</div>
       </div>
       <div class="config-area">
-        <div class="tabs">
-          <div class="tab active" onclick="switchTab('hero')">Hero</div>
-          <div class="tab" onclick="switchTab('projects')">Projects</div>
-          <div class="tab" onclick="switchTab('skills')">Skills</div>
-          <div class="tab" onclick="switchTab('experience')">Experience</div>
-          <div class="tab" onclick="switchTab('socials')">Social</div>
-        </div>
+        <div class="main-layout">
+        <div class="config-side">
+          <div class="tabs">
+            <div class="tab active" onclick="switchTab('hero')">Hero</div>
+            <div class="tab" onclick="switchTab('projects')">Projects</div>
+            <div class="tab" onclick="switchTab('skills')">Skills</div>
+            <div class="tab" onclick="switchTab('experience')">Experience</div>
+            <div class="tab" onclick="switchTab('socials')">Social</div>
+          </div>
         <div id="tab-hero" class="tab-content">
           <div class="form-group"><label>Hero Title</label><input id="hero" value="Bartosz Osiej"></div>
           <div class="form-group"><label>Description</label><input id="heroDesc" value="AI Systems Engineer"></div>
@@ -111,6 +117,22 @@
         <div class="preview"><div class="section-label">// live preview</div><div id="preview"></div></div>
         <div id="msg"></div>
         <div><button onclick="saveData()">💾 Save</button><button onclick="loadDemo()">📂 Demo</button><button onclick="exportJson()">📥 Export</button></div>
+        </div>
+        <div class="term-loop" id="termLoop">
+          <div class="line"><span class="prompt">$</span> <span class="cmd">sudo ./anogoefmafpmfwa --class=NETHER</span></div>
+          <div class="line out">Loading NETHER protocol...</div>
+          <div class="line out">Class: NETHER - LEVEL 1000000 ✓</div>
+          <div class="line out">System: PORTFOLIO_ADMIN v2.0</div>
+          <div class="line out">Status: ONLINE ✈️</div>
+          <div class="line"><span class="prompt">$</span> <span class="cmd">while true; do uptime</span></div>
+          <div class="line out">Uptime: 1000000 hours</div>
+          <div class="line out">Load: perfect</div>
+          <div class="line out">Memory: unlimited</div>
+          <div class="line"><span class="prompt">$</span> <span class="cmd">cat /proc/legend/status</span></div>
+          <div class="line out">Legendary Mode: ACTIVE</div>
+          <div class="line out">God Mode: ON</div>
+          <div class="line"><span class="prompt">$</span> <span class="cmd">echo "Ready..."</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -129,6 +151,12 @@
     function addSkill(){const t=document.getElementById('skillTitle').value;if(t){data.skills=data.skills||[];data.skills.push({title:t,skills:[]});renderAll();}}
     function addExp(){const e={date:document.getElementById('eDate').value,role:document.getElementById('eRole').value,company:document.getElementById('eCompany').value,desc:document.getElementById('eDesc').value};if(e.role){data.experience=data.experience||[];data.experience.push(e);renderAll();}}
     function renderAll(){document.getElementById('hero').value=data.hero||'';document.getElementById('heroDesc').value=data.heroDesc||'';}
+    // Terminal loop animation
+    const tl=document.getElementById('termLoop');
+    let tlIdx=0;
+    const tlLines=tl.innerHTML.split('\\n').map(s=>s.trim()).filter(s=>s);
+    function termLoopAnim(){if(!tl)return;tlIdx=++tlIdx%tlLines.length;const line=tlLines[tlIdx];const d=document.createElement('div');d.className='line';d.innerHTML=line;tl.appendChild(d);setTimeout(termLoopAnim,Math.random()*800+400);}
+    setTimeout(termLoopAnim,1000);
     window.addEventListener('keydown',e=>{if(e.key==='Enter')checkAdminPwd();});
   </script>
 </body>
