@@ -3,76 +3,135 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin — Terminal</title>
+  <title>Admin Terminal — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    :root{--bg:#080C18;--bg-2:#0D1221;--bg-card:#111827;--cyan:#00D4FF;--violet:#7C3AED;--violet-lt:#A855F7;--white:#F0F4FF;--gray-1:#94A3B8;--border:rgba(0,212,255,0.12)}
+    :root { --bg: #080C18; --bg-2: #0D1221; --bg-card: #111827; --cyan: #00D4FF; --violet: #7C3AED; --violet-lt: #A855F7; --white: #F0F4FF; --gray-1: #94A3B8; --border: rgba(0,212,255,0.12); }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow:hidden}
-    #terminal{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);font-family:'JetBrains Mono',monospace;color:#00ff88;padding:20px}
-    .term-inner{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,0.6);padding:30px;min-width:600px;max-width:900px}
-    .term-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;background:rgba(255,255,255,0.04);border-bottom:1px solid var(--border);margin-bottom:20px}
+    #term{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);font-family:'JetBrains Mono',monospace;color:#00ff88;padding:20px}
+    .term-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,0.6);overflow:hidden}
+    .term-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;background:rgba(0,212,255,0.05);border-bottom:1px solid var(--border)}
     .term-dot{width:11px;height:11px;border-radius:50%;background:#FF5F57}.term-dot:nth-child(2){background:#FEBC2E}.term-dot:nth-child(3){background:#28C840}
-    .term-title{margin-left:auto;font-size:.72rem;color:var(--gray-2);letter-spacing:.05em}
-    #term-output{line-height:1.8;font-size:.85rem;max-height:400px;overflow-y:auto}
-    .t-prompt{color:var(--cyan)}.t-cmd{color:var(--white)}.t-out{color:var(--gray-1)}.t-ok{color:#4ADE80}.t-hl{color:var(--violet-lt)}.cursor{display:inline-block;width:8px;height:1em;background:var(--cyan);vertical-align:text-bottom;animation:blink 1s step-end infinite}
-    @keyframes blink{50%{opacity:0}}.section-label{font-family:'JetBrains Mono';font-size:.75rem;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;margin:20px 0 10px}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}[id^=tab-]{display:none}[id^=tab-].active{display:block}
+    .term-title{margin-left:auto;font-size:.72rem;color:var(--cyan);letter-spacing:.05em}
+    #term-body{padding:20px;max-height:500px;overflow-y:auto}
+    .line{margin:4px 0}.prompt{color:var(--cyan)}.cmd{color:var(--white)}.out{color:var(--gray-1)}.ok{color:#4ADE80}.err{color:#ff4444}.hl{color:var(--violet-lt)}
+    .cursor{display:inline-block;width:8px;height:1em;background:var(--cyan);animation:blink 1s step-end infinite}
+    @keyframes blink{50%{opacity:0}}
+    @keyframes flicker{0%,12%{opacity:1}6%{opacity:0}}
+    @keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .config-area{padding:20px}
+    .section-label{font-family:'JetBrains Mono';font-size:.75rem;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;margin:20px 0 10px}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+    .tab{padding:10px 16px;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--gray-1);transition:all .2s}
+    .tab.active{color:var(--cyan);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,212,255,0.2)}
+    .form-group{margin-bottom:16px}
+    .form-group label{display:block;margin-bottom:6px;color:var(--gray-1);font-size:.85rem}
     input,textarea,select{width:100%;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--white);font-family:inherit}
-    button{padding:10px 16px;background:linear-gradient(135deg,var(--cyan),var(--violet));color:var(--bg);border:none;border-radius:6px;cursor:pointer;margin:5px}
+    button{padding:10px 16px;background:linear-gradient(135deg,var(--cyan),var(--violet));color:var(--bg);border:none;border-radius:6px;cursor:pointer;margin:5px;transition:transform .2s}
+    button:hover{transform:translateY(-2px)}
+    .preview{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:15px;margin-top:15px}
+    .msg{padding:10px;border-radius:6px;margin:10px 0;text-align:center;animation:fadeIn .3s}
+    @keyframes fadeIn{from{opacity:0}}to{opacity:1}
+    .msg.ok{background:rgba(74,222,128,0.1);color:#4ADE80;border:1px solid rgba(74,222,128,0.3)}
+    [id^=tab-]{display:none}[id^=tab-].active{display:block}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .item-list{max-height:200px;overflow-y:auto}
+    .item{display:flex;gap:8px;align-items:center;margin:8px 0}
+    .remove{background:none;border:none;color:#ff4444;cursor:pointer;padding:0 8px}
   </style>
 </head>
 <body>
-<div id="terminal">
-  <div class="term-inner">
+<div id="term">
+  <div class="term-wrap">
     <div class="term-bar">
       <div class="term-dot"></div><div class="term-dot"></div><div class="term-dot"></div>
-      <span class="term-title">~/admin -- bash</span>
+      <span class="term-title">~/admin -- PORTFOLIO CONFIG</span>
     </div>
-    <div id="term-output"></div>
-    <div class="section-label">// konfiguracja</div>
-    <div id="tab-hero" class="tab-content">
-      <input id="hero" placeholder="Hero Title" style="margin-bottom:10px">
-      <input id="heroDesc" placeholder="Hero Description">
+    <div id="term-body" id="terminal-output">
+      <div class="line"><span class="prompt">$</span> <span class="cmd">cat /etc/portfolio/admin.conf</span></div>
+      <div class="line out">> Loading configuration...</div>
+      <div class="line out">Class: NETHER - LEVEL 1000000 ✓</div>
+      <div class="line out">Status: ONLINE</div>
+      <div class="line out">Auth: GHOST_ROOT</div>
+      <div class="line"><span class="prompt">$</span> <span class="cmd">ls -la /config</span></div>
+      <div class="line out">drwxr-xr-x  config/  (3)</div>
+      <div class="line out">-rw-r--r--  hero.json</div>
+      <div class="line out">-rw-r--r--  projects.json</div>
+      <div class="line out">-rw-r--r--  skills.json</div>
+      <div class="line"><span class="prompt">$</span> <span class="cmd">echo "Ready for configuration..."</span></div>
+      <div class="line ok">✓ Admin panel loaded</div>
     </div>
-    <div id="tab-projects" class="tab-content" style="display:none">
-      <input id="pName" placeholder="Project Name" style="margin-bottom:10px">
-      <input id="pUrl" placeholder="URL" style="margin-bottom:10px">
-      <input id="pDesc" placeholder="Description">
-      <button style="margin-top:10px" onclick="addProj()">Add Project</button>
-    </div>
-    <div id="tab-skills" class="tab-content" style="display:none">
-      <input id="sTitle" placeholder="Skill Section" style="margin-bottom:10px">
-      <button onclick="addSkill()">Add Skill</button>
-    </div>
-    <div id="tab-experience" class="tab-content" style="display:none">
-      <input id="eDate" placeholder="Date" style="margin-bottom:10px">
-      <input id="eRole" placeholder="Role" style="margin-bottom:10px">
-      <input id="eCompany" placeholder="Company">
-      <button style="margin-top:10px" onclick="addExp()">Add Experience</button>
-    </div>
-    <div style="margin-top:20px">
-      <button onclick="saveData()">💾 Save</button>
-      <button onclick="loadDemo()">📂 Demo</button>
+    <div class="config-area">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('hero')">Hero</div>
+        <div class="tab" onclick="switchTab('projects')">Projects</div>
+        <div class="tab" onclick="switchTab('skills')">Skills</div>
+        <div class="tab" onclick="switchTab('experience')">Experience</div>
+        <div class="tab" onclick="switchTab('socials')">Social</div>
+      </div>
+      <div id="tab-hero" class="tab-content">
+        <div class="form-group"><label>Hero Title</label><input id="hero" value="Bartosz Osiej"></div>
+        <div class="form-group"><label>Description</label><input id="heroDesc" value="AI Systems Engineer"></div>
+      </div>
+      <div id="tab-projects" class="tab-content" style="display:none">
+        <div class="grid2"><input id="pName" placeholder="Name"><input id="pUrl" placeholder="URL"></div>
+        <input id="pDesc" placeholder="Description" style="margin:10px 0">
+        <button onclick="addProject()">+ Add Project</button>
+        <div class="item-list" id="projList"></div>
+      </div>
+      <div id="tab-skills" class="tab-content" style="display:none">
+        <input id="skillTitle" placeholder="Section Name" style="margin-bottom:10px">
+        <button onclick="addSkill()">+ Add Skill Section</button>
+        <div class="item-list" id="skillList"></div>
+      </div>
+      <div id="tab-experience" class="tab-content" style="display:none">
+        <input id="eDate" placeholder="Date (2024 — teraz)" style="margin-bottom:10px">
+        <div class="grid2"><input id="eRole" placeholder="Role"><input id="eCompany" placeholder="Company"></div>
+        <textarea id="eDesc" placeholder="Description" rows="3" style="margin-top:10px"></textarea>
+        <button onclick="addExp()" style="margin-top:10px">+ Add Experience</button>
+        <div class="item-list" id="expList"></div>
+      </div>
+      <div id="tab-socials" class="tab-content" style="display:none">
+        <div class="form-group"><label>GitHub URL</label><input id="socialGithub"></div>
+        <div class="form-group"><label>LinkedIn URL</label><input id="socialLinkedin"></div>
+        <div class="form-group"><label>Email</label><input id="socialEmail"></div>
+      </div>
+      <div class="preview"><div class="section-label">// live preview</div><div id="preview"></div></div>
+      <div id="msg"></div>
+      <div><button onclick="saveData()">💾 Save</button><button onclick="loadDemo()">📂 Demo</button><button onclick="exportJson()">📥 Export</button></div>
     </div>
   </div>
 </div>
 
 <script>
-const DEFAULTS={hero:'Bartosz Osiej',heroDesc:'AI Systems Engineer',projects:[{name:'LinkShort',url:'https://fastapiurl.onrender.com',desc:'JWT URL shortener'},{name:'AI Chat Proxy',url:'https://ai-chat-proxy.onrender.com',desc:'18+ AI models'}]};
-let data={...DEFAULTS};
-const out=document.getElementById('term-output');
-const lines=['$','$ whoami','bartosz_admin','','$ ls ./config','hero: '+data.hero,'heroDesc: '+data.heroDesc,'$ cat ./projects.json',''+JSON.stringify(data.projects,null,2),'','$ echo "Class: NETHER - LEVEL 1000000"','Class: NETHER - LEVEL 1000000 ✅','','$ ./apply_changes.sh','✓ Changes applied successfully','$'];
-function printLines(i=0){if(i>=lines.length)return;const l=document.createElement('div');l.innerHTML=lines[i];out.appendChild(l);setTimeout(()=>printLines(i+1),i%2?100:50)}
-setTimeout(printLines,500);
-function saveData(){localStorage.setItem('adminData',JSON.stringify(data));alert('Saved!');}
-function loadDemo(){data=DEFAULTS;localStorage.removeItem('adminData');location.reload();}
-function addProj(){const p={name:document.getElementById('pName').value,url:document.getElementById('pUrl').value,desc:document.getElementById('pDesc').value};data.projects.push(p);document.getElementById('pName').value='';}
-function addSkill(){const t=document.getElementById('sTitle').value;alert('Added: '+t);}
-function addExp(){const e={date:document.getElementById('eDate').value,role:document.getElementById('eRole').value,company:document.getElementById('eCompany').value};data.experience=[e,...(data.experience||[])];}
-window.addEventListener('keydown',e=>{if(e.key==='Enter'){const v=prompt('Command:')||'';if(v.startsWith('save')){saveData()}if(v==='demo'||v==='clear'){loadDemo()}})});
-</script>
+const DEFAULTS={hero:'Bartosz Osiej',heroDesc:'AI Systems Engineer',projects:[{name:'LinkShort',url:'https://fastapiurl.onrender.com',desc:'JWT URL shortener'},{name:'AI Chat Proxy',url:'https://ai-chat-proxy.onrender.com',desc:'18+ AI models'},{name:'GraphQL Blog',url:'https://graphql-blog-lxjy.onrender.com/graphql',desc:'Blog API'}]};
+let data=JSON.parse(localStorage.getItem('adminData'))||DEFAULTS;
+let currentTab='hero';
+const tabs=["hero","projects","skills","experience","socials"];
+
+function switchTab(t){currentTab=t;tabs.forEach(x=>document.getElementById('tab-'+x).style.display=x===t?'block':'none');document.querySelectorAll('.tab').forEach(el=>el.classList.toggle('active',el.textContent.toLowerCase().includes(t)));}
+function saveData(){localStorage.setItem('adminData',JSON.stringify(data));showMsg('Saved!','ok');renderAll();}
+function loadDemo(){localStorage.removeItem('adminData');location.reload();}
+function exportJson(){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='portfolio.json';a.click();}
+function showMsg(t,type='ok'){const m=document.getElementById('msg');m.innerHTML=`<div class="msg ${type}">${t}</div>`;setTimeout(()=>m.innerHTML='',3000);}
+
+function addProject(){const p={name:document.getElementById('pName').value,url:document.getElementById('pUrl').value,desc:document.getElementById('pDesc').value};if(p.name){data.projects.push(p);renderAll();}}}
+function addSkill(){const t=document.getElementById('skillTitle').value;if(t){data.skills=(data.skills||[]);data.skills.push({title:t,skills:[]});renderAll();}}
+function addExp(){const e={date:document.getElementById('eDate').value,role:document.getElementById('eRole').value,company:document.getElementById('eCompany').value,desc:document.getElementById('eDesc').value};if(e.role){data.experience=data.experience||[];data.experience.push(e);renderAll();}}
+
+function renderAll(){
+  document.getElementById('hero').value=data.hero||'';
+  document.getElementById('heroDesc').value=data.heroDesc||'';
+  if(data.socials){document.getElementById('socialGithub').value=data.socials.github||'';document.getElementById('socialLinkedin').value=data.socials.linkedin||'';document.getElementById('socialEmail').value=data.socials.email||'';}
+  const pl=document.getElementById('projList');if(pl){pl.innerHTML=data.projects.map((p,i)=>`<div class="item">${p.name}<button class="remove" onclick="removeProject(${i})">×</button></div>`).join('');}
+}
+function removeProject(i){data.projects.splice(i,1);renderAll();}
+
+window.addEventListener('keydown',e=>{if(e.key==='/'||e.key==='Enter'){const cmd=prompt('$')||'';if(cmd.toLowerCase()==='clear'){document.getElementById('term-body').innerHTML='';}if(cmd.startsWith('save')){saveData();}}});
+switchTab('hero');renderAll();
+  </script>
 </body>
 </html>
