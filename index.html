@@ -1118,9 +1118,9 @@
 <body>
   <div id="shell">
     <div id="boot">
-      <div>BARTOSZ OSIJE :: PORTFOLIO</div>
+      <div>BARTOSZ OSIJE :: PORTFOLIO v1.0</div>
       <div id="err">ERROR 404 :: SYSTEM FAILURE</div>
-      <div style="color:#888">$ access denied</div>
+      <div style="color:#888">$ ./launch_portfolio.sh</div>
     </div>
   </div>
   <div id="site" style="display:none">
@@ -1950,17 +1950,17 @@
   // Terminal entrance animation
   setTimeout(() => {
     document.getElementById('err').style.opacity = 1;
-    document.getElementById('err').style.animation = 'flicker 0.4s step-end 6';
+    document.getElementById('err').style.animation = 'flicker 0.3s step-end 6';
     setTimeout(() => {
       document.getElementById('shell').style.opacity = 0;
-      document.getElementById('shell').style.transition = 'opacity 0.5s';
+      document.getElementById('shell').style.transition = 'opacity 0.3s';
       setTimeout(() => {
         document.getElementById('shell').style.display = 'none';
         document.getElementById('site').style.display = 'block';
         document.body.style.overflow = 'auto';
-      }, 500);
-    }, 800);
-  }, 1200);
+      }, 300);
+    }, 500);
+  }, 800);
   </script>
   </div>
 </body>
