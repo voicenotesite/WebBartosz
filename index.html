@@ -1993,12 +1993,13 @@ s0.parentNode.insertBefore(s1,s0);})();
 let chatVisible = false;
 function toggleChat() {
   const el = document.getElementById('chat-embedded');
+  const tawkFrame = el.querySelector('iframe');
   chatVisible = !chatVisible;
   el.classList.toggle('active', chatVisible);
-  if (chatVisible) {
-    Tawk_API.showWidget();
-  } else {
-    Tawk_API.hideWidget();
+  if (!chatVisible && tawkFrame) {
+    tawkFrame.style.display = 'none';
+  } else if (tawkFrame) {
+    tawkFrame.style.display = 'block';
   }
 }
 </script>
