@@ -1962,6 +1962,67 @@
     }, 500);
   }, 800);
   </script>
+
+<script>
+const BACKEND_URL = "https://webbartosz.onrender.com";
+
+function createChatWidget() {
+    const widget = document.createElement('div');
+    widget.id = 'chat-widget';
+    widget.innerHTML = `
+        <div id="chat-toggle" style="position:fixed;bottom:20px;right:20px;background:#00D4FF;color:#080C18;padding:12px 16px;border-radius:50px;cursor:pointer;font-weight:600;z-index:1000;">
+            💬 Chat
+        </div>
+        <div id="chat-box" style="display:none;position:fixed;bottom:20px;right:20px;width:320px;background:#1a1f2e;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3);z-index:1001;overflow:hidden;">
+            <div style="background:#00D4FF;color:#080C18;padding:12px 16px;font-weight:600;">Ghost Dev Chat</div>
+            <div id="chat-messages" style="height:200px;overflow-y:auto;padding:12px;font-size:14px;color:#fff;"></div>
+            <div style="padding:12px;border-top:1px solid #2a2f40;">
+                <input id="chat-name" placeholder="Twoje imię" style="width:100%;padding:8px;margin-bottom:8px;border-radius:4px;border:none;background:#2a2f40;color:#fff;">
+                <input id="chat-input" placeholder="Wiadomość..." style="width:100%;padding:8px;margin-bottom:8px;border-radius:4px;border:none;background:#2a2f40;color:#fff;">
+                <button onclick="sendChatMessage()" style="width:100%;padding:8px;background:#00D4FF;color:#080C18;border:none;border-radius:4px;cursor:pointer;font-weight:600;">Wyślij</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(widget);
+    
+    document.getElementById('chat-toggle').onclick = () => {
+        const box = document.getElementById('chat-box');
+        box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    };
+}
+
+async function sendChatMessage() {
+    const name = document.getElementById('chat-name').value || 'Anon';
+    const message = document.getElementById('chat-input').value;
+    if (!message) return;
+    
+    const messagesDiv = document.getElementById('chat-messages');
+    messagesDiv.innerHTML += `<div style="margin-bottom:8px;"><b>${name}:</b> ${message}</div>`;
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    document.getElementById('chat-input').value = '';
+    
+    try {
+        await fetch(`${BACKEND_URL}/send-message`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({name, message})
+        });
+        messagesDiv.innerHTML += `<div style="margin-bottom:8px;"><b>Ghost Dev:</b> Otrzymano! Odpowiedź w ciągu kilku minut.</div>`;
+    } catch (e) {
+        messagesDiv.innerHTML += `<div style="margin-bottom:8px;color:#ff6b6b;">Błąd połączenia</div>`;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', createChatWidget);
+document.getElementById('chat-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendChatMessage();
+});
+</script>
+
+<style>
+#chat-messages::-webkit-scrollbar {width:4px;}
+#chat-messages::-webkit-scrollbar-thumb {background:#00D4FF;border-radius:2px;}
+</style>`;
   </div>
 </body>
 </html>
