@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bartosz Osiej — AI Systems Engineer</title>
+  <title>Bartosz Osiej — Full-Stack Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -375,7 +375,7 @@
       font-family: var(--font-mono);
       font-size: 0.8rem;
       /* ── ZASTĄP TEN ELEMENT SWOIM ZDJĘCIEM ── */
-      /* np. <img src="./moje-zdjecie.jpg" alt="Jan Kowalski" /> */
+      /* np. <img src="./moje-zdjecie.jpg" alt="Bartosz Osiej" /> */
     }
     .about-photo-placeholder svg {
       opacity: 0.3;
@@ -1094,20 +1094,21 @@
   </style>
 </head>
 <body>
-  <div id="site" style="display:none">
 
   <!-- ============================================================
        NAV
   ============================================================ -->
   <nav>
     <div class="nav-logo">
-        <span>&lt;</span>BARTOSZ<span>/&gt;</span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="#projects">Projekty</a></li>
-        <li><a href="#skills">Umiejętności</a></li>
-        <li><a href="#experience">Doświadczenie</a></li>
-      </ul>
+      <span>&lt;</span>BARTOSZ<span>/&gt;</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">O mnie</a></li>
+      <li><a href="#projects">Projekty</a></li>
+      <li><a href="#skills">Umiejętności</a></li>
+      <li><a href="#experience">Doświadczenie</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
     <div style="display:flex;align-items:center;gap:12px;">
       <div class="nav-avail"><div class="avail-dot"></div>Dostępny do pracy</div>
       <a href="#contact" class="nav-cta">Zatrudnij mnie</a>
@@ -1141,7 +1142,7 @@
       <div class="hero-eyebrow">Full-Stack Developer</div>
       <h1>
         Cześć, jestem<br/>
-        <span class="h1-sub" id="hero-name">Jan Kowalski</span>
+        <span class="h1-sub" id="hero-name">Bartosz Osiej</span>
         <!-- ── ZMIEŃ SWOJE IMIĘ TUTAJ I W ID "hero-name" ── -->
       </h1>
       <p class="hero-desc">
@@ -1221,7 +1222,7 @@
     <div class="about-img-wrap reveal">
       <!--
         ── TWOJE ZDJĘCIE ──
-        Zamień ten div na: <img src="./zdjecie.jpg" alt="Jan Kowalski" style="border-radius:20px;" />
+        Zamień ten div na: <img src="./zdjecie.jpg" alt="Bartosz Osiej" style="border-radius:20px;" />
       -->
       <div class="about-photo-placeholder">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1284,108 +1285,101 @@
     <div class="project-grid" id="project-grid">
       <!-- wypełniane przez JS z tablicy projectData -->
     </div>
+</section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+         COUNTER STRIP
+  ============================================================ -->
+  <section id="counter-strip">
+    <div class="counter-item reveal">
+      <span class="counter-num"><span class="count-up" data-target="5">0</span><span class="counter-suffix">+</span></span>
+      <span class="counter-label">years experience</span>
+    </div>
+    <div class="counter-item reveal">
+      <span class="counter-num"><span class="count-up" data-target="20">0</span><span class="counter-suffix">+</span></span>
+      <span class="counter-label">projects shipped</span>
+    </div>
+    <div class="counter-item reveal">
+      <span class="counter-num"><span class="count-up" data-target="99">0</span><span class="counter-suffix">%</span></span>
+      <span class="counter-label">uptime</span>
+    </div>
   </section>
 
   <div class="divider"></div>
 
   <!-- ============================================================
-       WHY ME — powody żeby mnie zatrudnić
-       ── ZMIEŃ SWOJE ATUTY ──
+         WHY ME
   ============================================================ -->
   <section id="why-me">
     <div class="reveal">
-      <div class="section-label">// dlaczego ja</div>
-      <h2 class="section-title">Co dostajesz<br/>zatrudniając mnie</h2>
-      <p class="section-sub">Nie tylko kod — dostajesz partnera, który rozumie produkt i biznes.</p>
+      <div class="section-label">// why me</div>
+      <h2 class="section-title">AI Systems & Web Solutions</h2>
+      <p class="section-sub">Building the future, one line of code at a time.</p>
     </div>
     <div class="why-grid">
       <div class="why-card reveal">
         <span class="why-icon">⚡</span>
-        <div class="why-title">Szybka dostawa</div>
-        <p class="why-desc">Działam zwinnie — MVP w 2 tygodnie, pełny produkt bez opóźnień. Każdy sprint kończy się działającym kodem.</p>
-        <span class="why-highlight">średnio 30% szybciej niż estymacja</span>
+        <div class="why-title">AI-first approach</div>
+        <p class="why-desc">Leveraging LLMs, Whisper, and vector databases for intelligent applications.</p>
+        <span class="why-highlight">VoiceNote AI, RAG pipelines</span>
       </div>
       <div class="why-card reveal">
         <span class="why-icon">🔍</span>
-        <div class="why-title">Obsesja na punkcie jakości</div>
-        <p class="why-desc">Testy, code review, performance budgets. Dostarczam kod, który nie wraca jako bug po tygodniu na produkcji.</p>
-        <span class="why-highlight">zero regresji w ostatnich 12 miesiącach</span>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">💬</span>
-        <div class="why-title">Proaktywna komunikacja</div>
-        <p class="why-desc">Aktualizacje bez przypominania. Piszę do klienta zanim on napisze do mnie. Slack, email, Jira — jak wolisz.</p>
-        <span class="why-highlight">odpowiedź &lt; 2h w godzinach pracy</span>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">🏗️</span>
-        <div class="why-title">Myślenie architekturą</div>
-        <p class="why-desc">Projektuję systemy, które rosną razem z biznesem. Nie buduję na dziś — buduję na 3 lata do przodu.</p>
-        <span class="why-highlight">skalowalność od dnia pierwszego</span>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">🎨</span>
-        <div class="why-title">Oko na design</div>
-        <p class="why-desc">Potrafię zamienić figmę w piksel-perfect UI. Rozumiem UX, accessibility i Core Web Vitals.</p>
-        <span class="why-highlight">Lighthouse score 95+ na każdym projekcie</span>
+        <div class="why-title">Quality obsession</div>
+        <p class="why-desc">Production-tested code with automated testing and monitoring.</p>
+        <span class="why-highlight">Zero bugs in production</span>
       </div>
       <div class="why-card reveal">
         <span class="why-icon">🚀</span>
         <div class="why-title">Full ownership</div>
-        <p class="why-desc">Biorę odpowiedzialność za efekt końcowy, nie tylko za swoje zadania. Jeśli coś jest nie tak — naprawiam.</p>
-        <span class="why-highlight">od designu po deploy i monitoring</span>
+        <p class="why-desc">From architecture to deployment — I own the entire stack.</p>
+        <span class="why-highlight">End-to-end delivery</span>
       </div>
     </div>
-  </section>
+</section>
 
   <div class="divider"></div>
 
   <!-- ============================================================
-       TESTIMONIALS — opinie klientów
-       ── ZMIEŃ NA PRAWDZIWE OPINIE ──
+         TESTIMONIALS
   ============================================================ -->
   <section id="testimonials">
     <div class="reveal">
-      <div class="section-label">// opinie</div>
-      <h2 class="section-title">Co mówią klienci</h2>
-      <p class="section-sub">Najlepsza rekomendacja to zadowolony klient.</p>
+      <div class="section-label">// testimonials</div>
+      <h2 class="section-title">What people say</h2>
+      <p class="section-sub">Some kind words from collaborators and friends.</p>
     </div>
-    <div class="testi-grid" id="testi-grid">
-      <!-- wypełniane przez JS z tablicy testimonialsData -->
-    </div>
+    <div class="testi-grid" id="testi-grid"></div>
   </section>
 
   <div class="divider"></div>
 
   <!-- ============================================================
-       SKILLS
+         SKILLS
   ============================================================ -->
   <section id="skills">
     <div class="reveal">
-      <div class="section-label">// umiejętności</div>
-      <h2 class="section-title">Stack technologiczny</h2>
-      <p class="section-sub">Narzędzia i technologie, których używam na co dzień.</p>
+      <div class="section-label">// skills</div>
+      <h2 class="section-title">Technical stack</h2>
+      <p class="section-sub">Tools and technologies I use daily.</p>
     </div>
-    <div class="skills-grid" id="skills-grid">
-      <!-- wypełniane przez JS z tablicy skillsData -->
-    </div>
+    <div class="skills-grid" id="skills-grid"></div>
   </section>
 
   <div class="divider"></div>
 
   <!-- ============================================================
-       EXPERIENCE
-       ── EDYTUJ DOŚWIADCZENIE W TABLICY experienceData PONIŻEJ ──
+         EXPERIENCE
   ============================================================ -->
   <section id="experience">
     <div class="reveal">
-      <div class="section-label">// doświadczenie</div>
-      <h2 class="section-title">Historia pracy</h2>
-      <p class="section-sub">Gdzie budowałem produkty i zdobywałem wiedzę.</p>
+      <div class="section-label">// experience</div>
+      <h2 class="section-title">Work history</h2>
+      <p class="section-sub">Where I built products and gained experience.</p>
     </div>
-    <div class="timeline" id="timeline">
-      <!-- wypełniane przez JS -->
-    </div>
+    <div class="timeline" id="timeline"></div>
   </section>
 
   <div class="divider"></div>
@@ -1403,26 +1397,6 @@
       </p>
 
       <div class="contact-links">
-        <!-- ── ZMIEŃ SWOJE LINKI SPOŁECZNOŚCIOWE ── -->
-        <a href="https://github.com/TWOJ_LOGIN" target="_blank" class="contact-link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>
-          GitHub
-        </a>
-        <a href="https://linkedin.com/in/TWOJ_PROFIL" target="_blank" class="contact-link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-9 14H7v-7h3v7zm-1.5-8.25a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5zM18 17h-3v-3.5c0-1-.9-1.5-1.5-1.5S12 12.5 12 13.5V17H9v-7h3v1c.5-.75 1.5-1 2.5-1 1.93 0 3.5 1.57 3.5 3.5V17z"/></svg>
-          LinkedIn
-        </a>
-        <a href="https://twitter.com/TWOJ_LOGIN" target="_blank" class="contact-link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          Twitter
-        </a>
-      </div>
-
-      <!-- ── ZMIEŃ SWÓJ EMAIL ── -->
-      <a href="mailto:bartosz@osiej.dev" class="contact-email-big">
-        bartosz@osiej.dev
-      </a>
-      <div class="contact-links">
         <a href="https://github.com/voicenotesite" target="_blank" class="contact-link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>
           GitHub
@@ -1432,6 +1406,25 @@
           LinkedIn
         </a>
       </div>
+
+      <!-- ── ZMIEŃ SWÓJ EMAIL ── -->
+      <a href="mailto:jan@example.com" class="contact-email-big">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m2 7 10 7 10-7"/></svg>
+        jan@example.com
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+<footer>
+    <span class="footer-copy">© 2025 Bartosz Osiej · Built with AI & code</span>
+    <div class="footer-links">
+      <a href="#hero">↑ Home</a>
+      <a href="https://github.com/voicenotesite" target="_blank">GitHub</a>
+    </div>
+  </footer>
 
   <!-- ============================================================
        JAVASCRIPT
@@ -1453,44 +1446,15 @@
   ──────────────────────────────────────────────────────────── */
   const projectData = [
     {
-      title:  "NEON ABYSS — Space Shooter",
-      desc:   "Przeglądarkowa gra kosmiczna z mechaniką roguelite, bossami i systemem power-upów. Canvas + React.",
-      tags:   ["React", "Canvas API", "Game Dev"],
-      img:    null, // → np. "./img/neon-abyss.jpg"
-      live:   "https://twoja-gra.itch.io",
-      github: "https://github.com/TWOJ_LOGIN/neon-abyss",
-    },
-    {
-      title:  "SaaS Dashboard",
-      desc:   "Panel analityczny z real-time charts, role-based access i eksportem do PDF.",
-      tags:   ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
+      title:  "VoiceNote AI",
+      desc:   "AI-powered voice notes with Whisper transcription and semantic search.",
+      tags:   ["Python", "OpenAI", "React", "FastAPI"],
       img:    null,
-      live:   null,
-      github: "https://github.com/TWOJ_LOGIN/saas-dashboard",
+      live:   "https://voicenotesite.github.io/WebBartosz/",
+      github: "https://github.com/voicenotesite/WebBartosz",
     },
-    {
-      title:  "E-commerce Platform",
-      desc:   "Sklep z integracją Stripe, koszykiem i panelem admina. Zoptymalizowany pod Core Web Vitals.",
-      tags:   ["React", "Node.js", "Stripe", "MongoDB"],
-      img:    null,
-      live:   "https://twoj-sklep.pl",
-      github: "https://github.com/TWOJ_LOGIN/ecommerce",
-    },
-    /* ── DODAJ KOLEJNY PROJEKT ──
-    {
-      title:  "Nazwa projektu",
-      desc:   "Opis projektu",
-      tags:   ["Tech1", "Tech2"],
-      img:    null,
-      live:   null,
-      github: null,
-    },
-    */
   ];
 
-  /* ────────────────────────────────────────────────────────────
-     UMIEJĘTNOŚCI — zmień wartości procentowe i nazwy
-  ──────────────────────────────────────────────────────────── */
   const skillsData = [
     {
       title: "Frontend",
@@ -1544,8 +1508,8 @@
   const experienceData = [
     {
       date:    "2023 — obecnie",
-      role:    "Senior Full-Stack Developer",
-      company: "Acme Corp · Gdańsk",
+      role:    "AI Systems Engineer",
+      company: "Self-employed · Remote",
       desc:    "Liderowanie migracją monolitu do mikroserwisów, wdrożenie CI/CD, redukcja czasu deployu o 70%.",
     },
     {
@@ -1827,111 +1791,197 @@
       a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--cyan)' : '';
     });
   }, { passive: true });
-// ── 404 INTRO ANIMATION ──
-   // Shows ERROR 404 animation before site loads (always)
-   (function() {
-     const ov = document.createElement('div');
-     ov.id = 'err-overlay';
-     ov.innerHTML = `
-       <div id="err-scanlines"></div>
-       <div id="err-inner">
-         <div id="err-code">404</div>
-         <div id="err-msg">NOT FOUND</div>
-         <div id="err-terminal">
-           <div id="err-lines"></div>
-           <span class="cursor"></span>
-         </div>
-       </div>`;
-     document.body.appendChild(ov);
-     const style = document.createElement('style');
-     style.textContent = `
-       #err-overlay {
-         position:fixed;inset:0;z-index:9999;background:#000;
-         display:flex;align-items:center;justify-content:center;
-         font-family:'JetBrains Mono',monospace;
-         animation: err-out 0.3s ease 3.8s forwards;
-       }
-       @keyframes err-out { to { opacity:0; pointer-events:none; } }
-       #err-scanlines {
-         position:absolute;inset:0;
-         background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,80,0.03) 2px,rgba(0,255,80,0.03) 4px);
-         pointer-events:none;
-         animation:scan 8s linear infinite;
-       }
-       @keyframes scan { from{background-position:0 0} to{background-position:0 100%} }
-       #err-inner { text-align:center; position:relative; }
-       #err-code {
-         font-family:'Space Grotesk',sans-serif;
-         font-size:clamp(6rem,20vw,14rem);
-         font-weight:700;
-         color:#00FF41;
-         line-height:1;
-         letter-spacing:-0.05em;
-         text-shadow:0 0 40px #00FF41, 0 0 80px rgba(0,255,65,0.4);
-         animation:glitch 0.15s infinite alternate;
-       }
-       @keyframes glitch {
-         0%  { text-shadow:0 0 40px #00FF41, -2px 0 #FF003C, 2px 0 #00D4FF; transform:skew(-0.3deg); }
-         100%{ text-shadow:0 0 40px #00FF41,  2px 0 #FF003C,-2px 0 #00D4FF; transform:skew(0.3deg); }
-       }
-       #err-msg {
-         font-size:clamp(0.9rem,3vw,1.4rem);
-         color:#00FF41;
-         letter-spacing:0.3em;
-         margin-top:8px;
-         opacity:0.8;
-       }
-       #err-terminal {
-         margin-top:32px;
-         text-align:left;
-         display:inline-block;
-         min-width:340px;
-         font-size:0.82rem;
-         color:#00FF41;
-         line-height:2;
-       }
-     `;
-     document.head.appendChild(style);
-     setTimeout(() => { document.body.removeChild(ov); }, 4200);
-     const errLines = [
-       '> GET /admin HTTP/1.1',
-       '< HTTP/1.1 404 Not Found',
-       '> Redirecting to public site...',
-       '> Loading portfolio.html ✓',
-     ];
-     const el = document.getElementById('err-lines');
-     let idx = 0;
-     function printErrLine() {
-       if (idx >= errLines.length) return;
-       const d = document.createElement('div');
-       el.appendChild(d);
-       let i = 0;
-       const iv = setInterval(() => {
-         d.textContent = errLines[idx].slice(0, i++);
-         if (i > errLines[idx].length) { clearInterval(iv); idx++; setTimeout(printErrLine, 220); }
-       }, 22);
-     }
-setTimeout(printErrLine, 300);
-      setTimeout(() => {
-        document.getElementById('site').style.display = 'block';
-        document.body.style.overflow = 'auto';
-      }, 4200);
-    })();
+  // ── 404 INTRO ANIMATION ──
+  // Czyta flagę z localStorage ustawianą przez /admin
+  // Jeśli admin zapisał dane, pokazujemy krótki flash "ACCESS DENIED" zanim strona się załaduje
+  (function() {
+    const flag = sessionStorage.getItem('from_admin_redirect');
+    if (!flag) return;
+    sessionStorage.removeItem('from_admin_redirect');
+    const ov = document.createElement('div');
+    ov.id = 'err-overlay';
+    ov.innerHTML = `
+      <div id="err-scanlines"></div>
+      <div id="err-inner">
+        <div id="err-code">404</div>
+        <div id="err-msg">NOT FOUND</div>
+        <div id="err-terminal">
+          <div id="err-lines"></div>
+          <span class="cursor"></span>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    const style = document.createElement('style');
+    style.textContent = `
+      #err-overlay {
+        position:fixed;inset:0;z-index:9999;background:#000;
+        display:flex;align-items:center;justify-content:center;
+        font-family:'JetBrains Mono',monospace;
+        animation: err-out 0.3s ease 3.8s forwards;
+      }
+      @keyframes err-out { to { opacity:0; pointer-events:none; } }
+      #err-scanlines {
+        position:absolute;inset:0;
+        background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,80,0.03) 2px,rgba(0,255,80,0.03) 4px);
+        pointer-events:none;
+        animation:scan 8s linear infinite;
+      }
+      @keyframes scan { from{background-position:0 0} to{background-position:0 100%} }
+      #err-inner { text-align:center; position:relative; }
+      #err-code {
+        font-family:'Space Grotesk',sans-serif;
+        font-size:clamp(6rem,20vw,14rem);
+        font-weight:700;
+        color:#00FF41;
+        line-height:1;
+        letter-spacing:-0.05em;
+        text-shadow:0 0 40px #00FF41, 0 0 80px rgba(0,255,65,0.4);
+        animation:glitch 0.15s infinite alternate;
+      }
+      @keyframes glitch {
+        0%  { text-shadow:0 0 40px #00FF41, -2px 0 #FF003C, 2px 0 #00D4FF; transform:skew(-0.3deg); }
+        100%{ text-shadow:0 0 40px #00FF41,  2px 0 #FF003C,-2px 0 #00D4FF; transform:skew(0.3deg); }
+      }
+      #err-msg {
+        font-size:clamp(0.9rem,3vw,1.4rem);
+        color:#00FF41;
+        letter-spacing:0.3em;
+        margin-top:8px;
+        opacity:0.8;
+      }
+      #err-terminal {
+        margin-top:32px;
+        text-align:left;
+        display:inline-block;
+        min-width:340px;
+        font-size:0.82rem;
+        color:#00FF41;
+        line-height:2;
+      }
+    `;
+    document.head.appendChild(style);
+    setTimeout(() => { document.body.removeChild(ov); }, 4200);
+    const errLines = [
+      '> GET /admin HTTP/1.1',
+      '< HTTP/1.1 404 Not Found',
+      '> Redirecting to public site...',
+      '> Loading portfolio.html ✓',
+    ];
+    const el = document.getElementById('err-lines');
+    let idx = 0;
+    function printErrLine() {
+      if (idx >= errLines.length) return;
+      const d = document.createElement('div');
+      el.appendChild(d);
+      let i = 0;
+      const iv = setInterval(() => {
+        d.textContent = errLines[idx].slice(0, i++);
+        if (i > errLines[idx].length) { clearInterval(iv); idx++; setTimeout(printErrLine, 220); }
+      }, 22);
+    }
+    setTimeout(printErrLine, 300);
   })();
-</script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a2992e0135ef41c3064cd41/1jqp6bfgt';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
-<!--End of Tawk.to Script-->
+  </script>
+
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a2992e0135ef41c3064cd41/1jqp6bfgt';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+
+  <!-- 404 INTRO ANIMATION -->
+  <script>
+  (function() {
+    const ov = document.createElement('div');
+    ov.id = 'err-overlay';
+    ov.innerHTML = `
+      <div id="err-scanlines"></div>
+      <div id="err-inner">
+        <div id="err-code">404</div>
+        <div id="err-msg">NOT FOUND</div>
+        <div id="err-terminal">
+          <div id="err-lines"></div>
+          <span class="cursor"></span>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    const style = document.createElement('style');
+    style.textContent = `
+      #err-overlay {
+        position:fixed;inset:0;z-index:9999;background:#000;
+        display:flex;align-items:center;justify-content:center;
+        font-family:'JetBrains Mono',monospace;
+        animation: err-out 0.3s ease 3.8s forwards;
+      }
+      @keyframes err-out { to { opacity:0; pointer-events:none; } }
+      #err-scanlines {
+        position:absolute;inset:0;
+        background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,80,0.03) 2px,rgba(0,255,80,0.03) 4px);
+        pointer-events:none;
+        animation:scan 8s linear infinite;
+      }
+      @keyframes scan { from{background-position:0 0} to{background-position:0 100%} }
+      #err-inner { text-align:center; position:relative; }
+      #err-code {
+        font-family:'Space Grotesk',sans-serif;
+        font-size:clamp(6rem,20vw,14rem);
+        font-weight:700;
+        color:#00FF41;
+        line-height:1;
+        letter-spacing:-0.05em;
+        text-shadow:0 0 40px #00FF41, 0 0 80px rgba(0,255,65,0.4);
+        animation:glitch 0.15s infinite alternate;
+      }
+      @keyframes glitch {
+        0%  { text-shadow:0 0 40px #00FF41, -2px 0 #FF003C, 2px 0 #00D4FF; transform:skew(-0.3deg); }
+        100%{ text-shadow:0 0 40px #00FF41,  2px 0 #FF003C,-2px 0 #00D4FF; transform:skew(0.3deg); }
+      }
+      #err-msg {
+        font-size:clamp(0.9rem,3vw,1.4rem);
+        color:#00FF41;
+        letter-spacing:0.3em;
+        margin-top:8px;
+        opacity:0.8;
+      }
+      #err-terminal {
+        margin-top:32px;
+        text-align:left;
+        display:inline-block;
+        min-width:340px;
+        font-size:0.82rem;
+        color:#00FF41;
+        line-height:2;
+      }
+    `;
+    document.head.appendChild(style);
+    setTimeout(() => { document.body.removeChild(ov); }, 4000);
+    const errLines = [
+      '> GET /admin HTTP/1.1',
+      '< HTTP/1.1 404 Not Found',
+      '> Loading portfolio.html ✓',
+    ];
+    const el = document.getElementById('err-lines');
+    let idx = 0;
+    function printErrLine() {
+      if (idx >= errLines.length) return;
+      const d = document.createElement('div');
+      el.appendChild(d);
+      let i = 0;
+      const iv = setInterval(() => {
+        d.textContent = errLines[idx].slice(0, i++);
+        if (i > errLines[idx].length) { clearInterval(iv); idx++; setTimeout(printErrLine, 220); }
+      }, 22);
+    }
+    setTimeout(printErrLine, 300);
+  })();
+  </script>
 </body>
 </html>
