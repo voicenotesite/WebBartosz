@@ -495,6 +495,17 @@
       padding: 0 12px;
       font-weight: 600;
     }
+    .not-web-label {
+      color: var(--accent);
+      font-size: 0.75rem;
+      display: block;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+    .special-project {
+      border-color: var(--accent);
+      box-shadow: 0 0 30px rgba(0,212,255,0.25);
+    }
     .project-thumb-img {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
@@ -1480,6 +1491,7 @@ const projectData = [
       img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/novactorio.png",
       live:   "https://factoryworld.mmc29213.workers.dev/",
       github: "https://github.com/voicenotesite/Factorio-web-game",
+      special: true,
     },
     {
       title:  "Task Queue",
@@ -1504,6 +1516,7 @@ const projectData = [
       img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/cliniguard.png",
       live:   "https://cliniguard.pl",
       github: "https://github.com/voicenotesite/cliniguard",
+      special: true,
     },
     {
       title:  "Reports",
@@ -1519,6 +1532,7 @@ const projectData = [
       tags:   ["eBPF", "Rust", "C", "Linux", "System"],
       img:    null,
       nameplate: true,
+      notWeb: true,
       live:   null,
       github: "https://github.com/voicenotesite/halcyon-process-monitor",
     },
@@ -1753,13 +1767,13 @@ const projectData = [
   const grid = document.getElementById('project-grid');
   projectData.forEach(p => {
     const card = document.createElement('div');
-    card.className = 'project-card reveal';
+    card.className = 'project-card reveal' + (p.special ? ' special-project' : '');
     card.innerHTML = `
       <div class="project-thumb">
         ${p.img
           ? `<img class="project-thumb-img" src="${p.img}" alt="${p.title}" loading="lazy"/>`
           : p.nameplate
-          ? `<div class="project-nameplate">${p.title}</div>`
+          ? `<div class="project-nameplate">${p.title}${p.notWeb ? ' <span class="not-web-label">Program nie jest Webowy</span>' : ''}</div>`
           : `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m9 9 6 6m0-6-6 6"/></svg>`
         }
       </div>
