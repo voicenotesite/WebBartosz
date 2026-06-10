@@ -1993,6 +1993,45 @@
   </script>
   <!--End of Tawk.to Script-->
 
+  <!-- Custom Chat Toggle Button -->
+  <button id="chatToggle" class="chat-toggle-btn" onclick="Tawk_API.toggle()" title="Open Chat">
+    <svg viewBox="0 0 24 24" width="24" height="24">
+      <path fill="#fff" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-4 4V4c0-.83.67-1.5 1.5-1.5h15c.83 0 1.5.67 1.5 1.5v12c0 .83-.67 1.5-1.5 1.5z"/>
+    </svg>
+  </button>
+
+  <style>
+  .chat-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #00D4FF, #0099cc);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 4px 20px rgba(0,212,255,0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .chat-toggle-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(0,212,255,0.6);
+  }
+  @media (max-width: 768px) {
+    .chat-toggle-btn {
+      bottom: 15px;
+      right: 15px;
+      width: 48px;
+      height: 48px;
+    }
+  }
+  </style>
+
   <!-- 404 INTRO ANIMATION -->
   <script>
   (function() {
