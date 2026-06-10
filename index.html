@@ -1981,12 +1981,8 @@
 
   <!--Start of Tawk.to Script-->
   <script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  Tawk_API.customStyle = {
-    widget: { backgroundColor: "#080C18", fontWeight: "500" },
-    header: { backgroundColor: "#00D4FF", color: "#080C18" },
-    buttons: { backgroundColor: "#00D4FF", color: "#080C18" }
-  };
+  var Tawk_API=Tawk_API||={}, Tawk_LoadStart=new Date();
+  Tawk_API.customStyle = { widget: { backgroundColor: "#080C18", primaryColor: "#00D4FF", secondaryColor: "#080C18" } };
   Tawk_API.visibility = { statusBar: false, contentWindow: false };
   (function(){
   var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -1997,6 +1993,11 @@
   s0.parentNode.insertBefore(s1,s0);
   })();
   </script>
+  <style>
+  #TAwkApi { background:#080C18 !important; }
+  #TAwkApi * { background:#080C18 !important; color:#eee !important; }
+  .tawk-monitor-container { background:#080C18 !important; }
+  </style>
   <!--End of Tawk.to Script-->
 
   <!-- 404 INTRO ANIMATION -->
