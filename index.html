@@ -1995,11 +1995,23 @@ s0.parentNode.insertBefore(s1,s0);})();
 <!--End of Tawk.to Script-->
 
   <!-- Custom Chat Toggle Button -->
-  <button id="chatToggle" class="chat-toggle-btn" onclick="Tawk_API.toggle()" title="Open Chat">
+  <button id="chatToggle" class="chat-toggle-btn" onclick="toggleChat()" title="Open Chat">
     <svg viewBox="0 0 24 24" width="24" height="24">
       <path fill="#fff" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-4 4V4c0-.83.67-1.5 1.5-1.5h15c.83 0 1.5.67 1.5 1.5v12c0 .83-.67 1.5-1.5 1.5z"/>
     </svg>
   </button>
+
+  <script>
+  function toggleChat() {
+    const chatEl = document.getElementById('tawk_6a2992e0135ef41c3064cd41');
+    if (chatEl && chatEl.style.display !== 'none') {
+      Tawk_API.hideWidget();
+    } else {
+      Tawk_API.visibility = { statusBar: true, contentWindow: true };
+      Tawk_API.showWidget();
+    }
+  }
+  </script>
 
   <style>
   .chat-toggle-btn {
