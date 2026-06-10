@@ -1,0 +1,24 @@
+{
+  "name": "webbartosz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/voicenotesite/WebBartosz"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/voicenotesite/WebBartosz/issues"
+  },
+  "homepage": "https://github.com/voicenotesite/WebBartosz#readme",
+  "dependencies": {
+    "playwright": "^1.60.0"
+  }
+}
