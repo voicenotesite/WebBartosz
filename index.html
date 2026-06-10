@@ -1970,11 +1970,7 @@
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||={}, Tawk_LoadStart=new Date();
-Tawk_API.onLoad = function() {
-  document.getElementById('chat-embedded').style.display = 'none';
-};
-Tawk_API.position = { h: { right: '20px', bottom: '80px' } };
-Tawk_API.visibility = { statusBar: false, contentWindow: true };
+Tawk_API.embedded='chat-embedded';
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;
@@ -1994,13 +1990,15 @@ s0.parentNode.insertBefore(s1,s0);})();
 </button>
 
 <script>
+let chatVisible = false;
 function toggleChat() {
-  if (typeof Tawk_API !== 'undefined') {
-    if (Tawk_API.isVisible()) {
-      Tawk_API.hideWidget();
-    } else {
-      Tawk_API.showWidget();
-    }
+  const el = document.getElementById('chat-embedded');
+  chatVisible = !chatVisible;
+  el.classList.toggle('active', chatVisible);
+  if (chatVisible) {
+    Tawk_API.showWidget();
+  } else {
+    Tawk_API.hideWidget();
   }
 }
 </script>
