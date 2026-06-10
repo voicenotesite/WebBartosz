@@ -1091,38 +1091,9 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
-    #shell {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background: #000;
-      font-family: 'JetBrains Mono', monospace;
-      color: #00ff88;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-    }
-    #err {
-      color: #ff4444;
-      opacity: 0;
-      font-size: 2rem;
-      margin-top: 20px;
-    }
-    @keyframes flicker {
-      0%, 12% { opacity: 1; }
-      6% { opacity: 0; }
-    }
   </style>
 </head>
 <body>
-  <div id="shell">
-    <div id="boot">
-      <div>BARTOSZ OSIJE :: PORTFOLIO v1.0</div>
-      <div id="err">ERROR 404 :: SYSTEM FAILURE</div>
-      <div style="color:#888">$ ./launch_portfolio.sh</div>
-    </div>
-  </div>
   <div id="site" style="display:none">
 
   <!-- ============================================================
@@ -1940,17 +1911,14 @@
          if (i > errLines[idx].length) { clearInterval(iv); idx++; setTimeout(printErrLine, 220); }
        }, 22);
      }
-     setTimeout(printErrLine, 300);
-     setTimeout(() => {
-       document.getElementById('shell').style.opacity = 0;
-       document.getElementById('shell').style.transition = 'opacity 0.3s';
-       setTimeout(() => {
-         document.getElementById('shell').style.display = 'none';
-         document.getElementById('site').style.display = 'block';
-         document.body.style.overflow = 'auto';
-       }, 300);
-     }, 500);
-   })();
+setTimeout(printErrLine, 300);
+      setTimeout(() => {
+        document.getElementById('site').style.display = 'block';
+        document.body.style.overflow = 'auto';
+      }, 4200);
+    })();
+  })();
+</script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -1963,6 +1931,7 @@ s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
+<!--End of Tawk.to Script-->
 <!--End of Tawk.to Script-->
 </body>
 </html>
