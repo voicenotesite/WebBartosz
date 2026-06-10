@@ -33,26 +33,11 @@ def detect_gender(name: str) -> str:
 
 @app.post("/send-message")
 async def send_message(msg: Message):
-    gender = detect_gender(msg.name)
-    if gender == "male":
-        greeting = f"👨 Ghost Dev połączył się z Panem <b>{msg.name}</b>"
-    elif gender == "female":
-        greeting = f"👩 Ghost Dev połączyła się z Panią <b>{msg.name}</b>"
-    else:
-        greeting = f"✨ Ghost Dev: <b>{msg.name}</b>"
-    
-    text = f"{greeting}\n\n📝 {msg.message}"
-    
     resp = requests.post(f"{TELEGRAM_API}/sendMessage", data={
         "chat_id": YOUR_TELEGRAM_CHAT_ID,
-        "text": text,
-        "parse_mode": "HTML"
-    })
-    
-    if resp.status_code != 200:
-        raise HTTPException(status_code=500, detail="Telegram send failed")
-    
-    return {"status": "sent"}
+        "text": f"Test: {msg.message}"
+    }, timeout=10)
+    return {"status": resp.status_code, "ok": resp.json().get("ok", False)}
 
 @app.post("/telegram-webhook")
 async def telegram_webhook(update: dict):
