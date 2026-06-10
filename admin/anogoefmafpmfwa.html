@@ -109,13 +109,18 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; } }
     .msg.success { background: rgba(74, 222, 128, 0.1); color: #4ADE80; border: 1px solid rgba(74, 222, 128, 0.3); }
     .msg.error { background: rgba(255, 68, 68, 0.1); color: #ff4444; border: 1px solid rgba(255, 68, 68, 0.3); }
+    .t-prompt { color: var(--cyan); }
+    .t-out { color: var(--gray-1); }
+    .t-ok { color: #4ADE80; }
+    @keyframes blink { 50% { opacity: 0; } }
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   </style>
 </head>
 <body>
   <div id="auth-screen">
     <div class="auth-box">
-      <h2>🔐 Admin Panel</h2>
+      <h2>🔐 Admin Panel v1.0</h2>
+      <div id="term-auth" style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#00ff88;margin-bottom:16px;min-height:80px"></div>
       <input type="password" id="pwd" placeholder="password" autofocus />
       <button onclick="checkPwd()">Enter</button>
     </div>
@@ -124,6 +129,7 @@
   <div id="admin-screen" style="display:none">
     <div class="admin-box" style="min-width: 600px; max-width: 900px;">
       <h2>⚙️ Konfiguracja Portfolio</h2>
+      <div id="term-admin" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#00ff88;margin-bottom:16px;min-height:60px"></div>
       <div class="tabs">
         <div class="tab active" onclick="switchTab('hero')">Hero</div>
         <div class="tab" onclick="switchTab('projects')">Projekty</div>
@@ -202,6 +208,26 @@
   <script>
     const PASS = 'host';
     let currentTab = 'hero';
+    let termAuth = document.getElementById('term-auth');
+    let termAdmin = document.getElementById('term-admin');
+
+    function tOut(el, lines, idx) {
+      if (idx >= lines.length) return;
+      const d = document.createElement('div');
+      el.appendChild(d);
+      let i = 0;
+      const iv = setInterval(() => {
+        d.innerHTML = lines[idx].replace('{cursor}', '<span class="cursor" style="opacity:1">|</span>');
+        i++;
+        if (i >= lines[idx].length) {
+          clearInterval(iv);
+          setTimeout(() => tOut(el, lines, idx + 1), 300);
+        }
+      }, 25);
+    }
+    const authLines = ['> ./auth.sh', '<span class="t-prompt">$ </span>authenticate --level 1000000', '> ACCESS GRANTED', '<span class="t-out">Welcome back, Administrator.</span>', '<span class="t-out">Class: NETHER - LEVEL 1000000 ✓</span>'];
+    setTimeout(() => tOut(termAuth, authLines, 0), 300);
+
     let data = {
       hero: 'Bartosz Osiej',
       heroDesc: 'AI Systems Engineer',
@@ -223,10 +249,14 @@
 
     function checkPwd() {
       if (document.getElementById('pwd').value === PASS) {
-        document.getElementById('auth-screen').style.display = 'none';
-        document.getElementById('admin-screen').style.display = 'block';
-        loadData();
-        renderLists();
+        termAdmin.innerHTML = '<span class="t-prompt">$ </span>admin_panel.login()';
+        setTimeout(() => {
+          termAdmin.innerHTML += '<br><span class="t-ok">✓ Session started. Welcome, Legend.</span>';
+          document.getElementById('auth-screen').style.display = 'none';
+          document.getElementById('admin-screen').style.display = 'block';
+          loadData();
+          renderLists();
+        }, 500);
       } else {
         showMsg('Wrong password', 'error');
       }
