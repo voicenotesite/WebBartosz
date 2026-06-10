@@ -1,0 +1,25 @@
+name: Telegram Reply Handler
+on:
+  workflow_dispatch:
+jobs:
+  handle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests python-dotenv
+      - run: |
+          python3 << 'EOF'
+import requests
+import os
+
+# To be set as secrets in GitHub repo
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8444958704:AAGkwFMh5IApceI61uipnmXjXWbvQWbDgXc")
+CHAT_ID = os.getenv("CHAT_ID", "8444958704")
+
+# Get updates
+updates = requests.get(f"https://api.telegram.org/bottest{TELEGRAM_BOT_TOKEN}/getUpdates").json()
+print(updates)
+EOF

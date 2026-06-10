@@ -95,7 +95,7 @@
         </div>
         <div class="preview"><div class="section-label">// live preview</div><div id="preview"></div></div>
         <div id="msg"></div>
-        <div><button onclick="saveData()">💾 Save</button><button onclick="loadDemo()">📂 Demo</button><button onclick="exportJson()">📥 Export</button></div>
+        <div><button onclick="saveData()">💾 Save</button><button onclick="loadDemo()">📂 Demo</button><button onclick="exportJson()">📥 Export</button><button onclick="viewSite()">🌐 View Site</button></div>
       </div>
     </div>
   </div>
@@ -114,6 +114,7 @@
     function addSkill(){const t=document.getElementById('skillTitle').value;if(t){data.skills=data.skills||[];data.skills.push({title:t,skills:[]});renderAll();}}
     function addExp(){const e={date:document.getElementById('eDate').value,role:document.getElementById('eRole').value,company:document.getElementById('eCompany').value,desc:document.getElementById('eDesc').value};if(e.role){data.experience=data.experience||[];data.experience.push(e);renderAll();}}
     function renderAll(){document.getElementById('hero').value=data.hero||'';document.getElementById('heroDesc').value=data.heroDesc||'';}
+    function viewSite(){sessionStorage.setItem('from_admin_redirect','1');window.location.href='../index.html';}
 
     // Background terminal animation
     const bgLines=['sudo ./portal','Loading...',`Welcome back, ADMIN`,'Class: NETHER - LEVEL 1000000 ✓','Status: ONLINE ✈️','uptime','1000000 days, 0 hours, 0 minutes','whoami','bartosz_admin','cat /proc/system/status','Perfect. Running at peak.','df -h','/dev/mem: 100% legendary','ps aux | grep legend','1 x legend','free -h','               total        used        free      shared  buff/cache   available','Mem:           100G        0G      100G        0G        0G      100G','top -b -n1','Legend: no process found','tail -f /var/log/system.log','System stable.','echo "sexy terminal animation"','Sexy? Very sexy. ✨'];
