@@ -9,7 +9,7 @@ app = FastAPI()
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "YOUR_BOT_TOKEN")
 YOUR_TELEGRAM_CHAT_ID = os.getenv("YOUR_TELEGRAM_CHAT_ID", "YOUR_CHAT_ID")
-TELEGRAM_API = "https://api.telegram.org/bottesttelegramchatbotbot"
+TELEGRAM_API = "https://api.telegram.org/bottestgtamchatbotbot"
 
 app.add_middleware(
     CORSMiddleware,
