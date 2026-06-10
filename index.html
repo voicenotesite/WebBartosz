@@ -475,6 +475,15 @@
       position: relative;
     }
     .project-thumb svg { opacity: 0.15; width: 48px; height: 48px; }
+    .comments-container { max-width: 600px; margin: 0 auto; }
+    .comment-form input, .comment-form textarea {
+      width: 100%; padding: 12px; margin-bottom: 12px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--white); border-radius: 6px; font-family: inherit;
+    }
+    .comment-form button { padding: 10px 24px; background: var(--cyan); color: var(--bg); border: none; border-radius: 6px; cursor: pointer; }
+    .comment-item { background: var(--bg-card); padding: 16px; border-radius: 8px; margin-bottom: 12px; border: 1px solid var(--border); }
+
     .project-nameplate {
       font-family: var(--font-mono);
       font-size: 0.9rem;
@@ -1357,26 +1366,6 @@
      Każdy projekt to obiekt z polami:
        title   – nazwa projektu
 
-  <section id="contact">
-    <div class="contact-container reveal">
-      <div class="section-label">// kontakt</div>
-      <h2 class="section-title">Skontaktuj się ze mną</h2>
-      <div class="contact-grid">
-        <div class="contact-item">
-          <div class="contact-label">Email</div>
-          <a href="mailto:mmc29213@gmail.com" class="contact-link">mmc29213@gmail.com</a>
-        </div>
-        <div class="contact-item">
-          <div class="contact-label">LinkedIn</div>
-          <a href="https://www.linkedin.com/in/bartosz-osiej-29095a409" target="_blank" class="contact-link">linkedin.com/in/bartosz-osiej</a>
-        </div>
-        <div class="contact-item">
-          <div class="contact-label">GitHub</div>
-          <a href="https://github.com/voicenotesite" target="_blank" class="contact-link">github.com/voicenotesite</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
        desc    – krótki opis (1–2 zdania)
        tags    – tablica stringów z technologiami
@@ -2080,5 +2069,60 @@ function toggleChat() {
     setTimeout(printErrLine, 300);
   })();
   </script>
+  <div class="divider"></div>
+
+  <!-- =============================================================
+       CONTACT </body> COMMENTS
+  ============================================================== -->
+  <section id="contact">
+    <div class="contact-container reveal">
+      <div class="section-label">// kontakt</div>
+      <h2 class="section-title">Skontaktuj się ze mną</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <a href="mailto:mmc29213@gmail.com" class="contact-link">mmc29213@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/bartosz-osiej-29095a409" target="_blank" class="contact-link">linkedin.com/in/bartosz-osiej</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">GitHub</div>
+          <a href="https://github.com/voicenotesite" target="_blank" class="contact-link">github.com/voicenotesite</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="comments">
+    <div class="comments-container reveal">
+      <div class="section-label">// komentarze</div>
+      <h2 class="section-title">Dodaj komentarz</h2>
+      <form id="comment-form" class="comment-form">
+        <input type="text" id="comment-name" placeholder="Twoje imię" required />
+        <textarea id="comment-text" placeholder="Twoj komentarz..." required></textarea>
+        <button type="submit">Wyślij</button>
+      </form>
+      <div id="comments-list"></div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('comment-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('comment-name').value;
+      const text = document.getElementById('comment-text').value;
+      const list = document.getElementById('comments-list');
+      const div = document.createElement('div');
+      div.className = 'comment-item';
+      div.innerHTML = '<strong>' + name + '</strong><p>' + text + '</p';
+      list.prepend(div);
+      this.reset();
+    });
+  </script>
+
 </body>
 </html>
