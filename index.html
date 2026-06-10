@@ -1979,11 +1979,14 @@
   })();
   </script>
 
-  <div id='tawk_6a2992e0135ef41c3064cd41'></div>
+<div id='tawk_6a2992e0135ef41c3064cd41'></div>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+var Tawk_API=Tawk_API||={}, Tawk_LoadStart=new Date();
 Tawk_API.embedded='tawk_6a2992e0135ef41c3064cd41';
+Tawk_API.onLoad = function() {
+  document.getElementById('tawk_6a2992e0135ef41c3064cd41').style.display = 'none';
+};
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;
@@ -2004,11 +2007,12 @@ s0.parentNode.insertBefore(s1,s0);})();
   <script>
   function toggleChat() {
     const chatEl = document.getElementById('tawk_6a2992e0135ef41c3064cd41');
-    if (chatEl && chatEl.style.display !== 'none') {
+    if (chatEl.style.display !== 'none') {
       Tawk_API.hideWidget();
+      chatEl.style.display = 'none';
     } else {
-      Tawk_API.visibility = { statusBar: true, contentWindow: true };
       Tawk_API.showWidget();
+      chatEl.style.display = 'block';
     }
   }
   </script>
