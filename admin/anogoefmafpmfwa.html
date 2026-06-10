@@ -33,6 +33,15 @@
       justify-content: center;
       background: linear-gradient(135deg, var(--bg), var(--bg-2));
     }
+    #auth-screen::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 80, 0.03) 2px, rgba(0, 255, 80, 0.03) 4px);
+      pointer-events: none;
+      animation: scan 8s linear infinite;
+    }
+    @keyframes scan { from { background-position: 0 0; } to { background-position: 0 100%; } }
     .auth-box, .admin-box {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -40,12 +49,24 @@
       padding: 30px;
       min-width: 320px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      position: relative;
     }
+    .auth-box::before, .admin-box::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 18px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet), var(--cyan));
+      z-index: -1;
+      animation: border-move 3s linear infinite;
+    }
+    @keyframes border-move { 0% { background-position: 0 50%; } 100% { background-position: 200% 50%; } }
     .auth-box h2, .admin-box h2 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.5rem;
       margin-bottom: 20px;
       color: var(--cyan);
+      text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
     }
     input {
       width: 100%;
@@ -57,7 +78,9 @@
       border-radius: 8px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 1rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
+    input:focus { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0, 212, 255, 0.2); outline: none; }
     button {
       padding: 12px 20px;
       background: linear-gradient(135deg, var(--cyan), var(--violet));
@@ -66,20 +89,24 @@
       border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
-    .tab { padding: 10px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; color: var(--gray-1); }
-    .tab.active { color: var(--cyan); border-color: var(--cyan); }
+    button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 212, 255, 0.3); }
+    .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab { padding: 10px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; color: var(--gray-1); transition: all 0.2s; }
+    .tab:hover { border-color: var(--cyan); }
+    .tab.active { color: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 20px rgba(0, 212, 255, 0.2); }
     .form-group { margin-bottom: 16px; }
     .form-group label { display: block; margin-bottom: 6px; color: var(--gray-1); font-size: 0.85rem; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--white); font-family: inherit; font-size: 0.9rem; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--white); font-family: inherit; font-size: 0.9rem; transition: border-color 0.3s; }
     .item-list { max-height: 200px; overflow-y: auto; margin-bottom: 10px; }
-    .item { display: flex; gap: 8px; margin-bottom: 8px; }
+    .item { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
     .item input { flex: 1; }
     .remove-btn { background: none; border: none; color: #ff4444; cursor: pointer; padding: 0 8px; }
     .preview { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 20px; max-height: 300px; overflow-y: auto; }
     .preview h4 { color: var(--cyan); margin-bottom: 10px; font-size: 0.9rem; }
-    .msg { padding: 10px; border-radius: 6px; margin-bottom: 16px; text-align: center; }
+    .msg { padding: 10px; border-radius: 6px; margin-bottom: 16px; text-align: center; animation: fadeIn 0.3s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; } }
     .msg.success { background: rgba(74, 222, 128, 0.1); color: #4ADE80; border: 1px solid rgba(74, 222, 128, 0.3); }
     .msg.error { background: rgba(255, 68, 68, 0.1); color: #ff4444; border: 1px solid rgba(255, 68, 68, 0.3); }
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
