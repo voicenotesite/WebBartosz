@@ -1982,8 +1982,9 @@
   <!--Start of Tawk.to Script-->
   <script type="text/javascript">
   var Tawk_API=Tawk_API||={}, Tawk_LoadStart=new Date();
-  Tawk_API.customStyle = { widget: { backgroundColor: "#080C18", primaryColor: "#00D4FF", secondaryColor: "#080C18" } };
+  Tawk_API.customStyle = { widget: { primaryColor: "#00D4FF", backgroundColor: "#080C18" } };
   Tawk_API.visibility = { statusBar: false, contentWindow: false };
+  Tawk_API.position = { h: { right: "20px", bottom: "20px" } };
   (function(){
   var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
   s1.async=true;
@@ -1994,11 +1995,78 @@
   })();
   </script>
   <style>
-  #TAwkApi { background:#080C18 !important; }
-  #TAwkApi * { background:#080C18 !important; color:#eee !important; }
-  .tawk-monitor-container { background:#080C18 !important; }
+  #TAwkApi { display:none !important; }
+  .tawk-monitor-container { 
+    background: #080C18 !important; 
+    border-radius: 12px !important; 
+    box-shadow: 0 4px 20px rgba(0,212,255,0.3) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(0,212,255,0.3) !important;
+  }
+  .tawk-button { 
+    background: linear-gradient(135deg, #00D4FF, #0099cc) !important; 
+    border-radius: 50% !important;
+    width: 56px !important;
+    height: 56px !important;
+  }
+  .tawk-popup { 
+    background: #080C18 !important; 
+    color: #fff !important; 
+    border: 1px solid #00D4FF !important;
+    border-radius: 12px !important;
+  }
   </style>
   <!--End of Tawk.to Script-->
+
+  <!-- Custom Hire Me Button -->
+  <a href="#contact" class="hire-btn" id="hireBtn">
+    <span class="hire-text">Hire Me</span>
+    <svg class="hire-icon" viewBox="0 0 24 24" width="20" height="20">
+      <path fill="#080C18" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+    </svg>
+  </a>
+
+  <style>
+  .hire-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #00D4FF, #0099cc);
+    color: #080C18;
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 20px rgba(0,212,255,0.4);
+    z-index: 9999;
+    transition: all 0.3s ease;
+    border: 2px solid #00D4FF;
+  }
+  .hire-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,212,255,0.6);
+    background: linear-gradient(135deg, #00e0ff, #00aaff);
+  }
+  .hire-btn:active {
+    transform: translateY(0);
+  }
+  .hire-text {
+    display: inline;
+  }
+  @media (max-width: 768px) {
+    .hire-btn {
+      bottom: 15px;
+      right: 15px;
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+  }
+  </style>
 
   <!-- 404 INTRO ANIMATION -->
   <script>
