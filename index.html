@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jan Kowalski — Full-Stack Developer</title>
+  <title>Bartosz Osiej — Full-Stack Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ============================================================
-       DESIGN TOKENS
-    ============================================================ */
     :root {
       --bg:        #080C18;
       --bg-2:      #0D1221;
@@ -30,9 +27,6 @@
       --font-mono:    'JetBrains Mono', monospace;
     }
 
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -47,9 +41,6 @@
     img { display: block; max-width: 100%; }
     ::selection { background: var(--cyan); color: var(--bg); }
 
-    /* ============================================================
-       GRID BACKGROUND
-    ============================================================ */
     body::before {
       content: '';
       position: fixed;
@@ -62,9 +53,6 @@
       z-index: 0;
     }
 
-    /* ============================================================
-       NAV
-    ============================================================ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -375,7 +363,7 @@
       font-family: var(--font-mono);
       font-size: 0.8rem;
       /* ── ZASTĄP TEN ELEMENT SWOIM ZDJĘCIEM ── */
-      /* np. <img src="./moje-zdjecie.jpg" alt="Jan Kowalski" /> */
+      /* np. <img src="./moje-zdjecie.jpg" alt="Bartosz Osiej" /> */
     }
     .about-photo-placeholder svg {
       opacity: 0.3;
@@ -487,6 +475,34 @@
       position: relative;
     }
     .project-thumb svg { opacity: 0.15; width: 48px; height: 48px; }
+    .comments-container { max-width: 600px; margin: 0 auto; }
+    .comment-form input, .comment-form textarea {
+      width: 100%; padding: 12px; margin-bottom: 12px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--white); border-radius: 6px; font-family: inherit;
+    }
+    .comment-form button { padding: 10px 24px; background: var(--cyan); color: var(--bg); border: none; border-radius: 6px; cursor: pointer; }
+    .comment-item { background: var(--bg-card); padding: 16px; border-radius: 8px; margin-bottom: 12px; border: 1px solid var(--border); }
+
+    .project-nameplate {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--gray-1);
+      text-align: center;
+      padding: 0 12px;
+      font-weight: 600;
+    }
+    .not-web-label {
+      color: var(--accent);
+      font-size: 0.75rem;
+      display: block;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+    .special-project {
+      border-color: var(--accent);
+      box-shadow: 0 0 30px rgba(0,212,255,0.25);
+    }
     .project-thumb-img {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
@@ -550,6 +566,19 @@
       color: var(--white);
       border-color: var(--gray-2);
     }
+
+    #contact { background: var(--bg-2); padding: 80px clamp(24px, 8vw, 120px); }
+    .contact-container { max-width: 700px; margin: 0 auto; text-align: center; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .contact-item { padding: 20px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); }
+    .contact-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gray-2); margin-bottom: 8px; }
+    .contact-link { font-size: 1.1rem; font-weight: 500; color: var(--white); display: block; }
+    .contact-link:hover { color: var(--cyan); }
 
     /* ============================================================
        SKILLS
@@ -672,60 +701,6 @@
       line-height: 1.7;
     }
 
-    /* ============================================================
-       CONTACT
-    ============================================================ */
-    #contact {
-      text-align: center;
-    }
-    .contact-inner {
-      max-width: 640px;
-      margin: 0 auto;
-    }
-    #contact .section-sub {
-      margin: 0 auto 48px;
-    }
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 56px;
-    }
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--bg-card);
-      color: var(--white);
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: border-color 0.2s, background 0.2s, transform 0.2s;
-    }
-    .contact-link:hover {
-      border-color: var(--cyan);
-      background: rgba(0,212,255,0.06);
-      transform: translateY(-2px);
-      color: var(--cyan);
-    }
-    .contact-link svg { flex-shrink: 0; }
-    .contact-email-big {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 4vw, 2.2rem);
-      font-weight: 700;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      transition: color 0.2s;
-    }
-    .contact-email-big:hover { color: var(--cyan); }
-
-    /* ============================================================
        FOOTER
     ============================================================ */
     footer {
@@ -1109,23 +1084,11 @@
       <li><a href="#experience">Doświadczenie</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div class="nav-avail"><div class="avail-dot"></div>Dostępny do pracy</div>
-      <a href="#contact" class="nav-cta">Zatrudnij mnie</a>
-    </div>
+    <div class="nav-avail"><div class="avail-dot"></div>Dostępny do pracy</div>
   </nav>
 
   <!-- Cursor glow effect -->
   <div class="cursor-glow" id="cursor-glow"></div>
-
-  <!-- Floating CTA -->
-  <div class="float-cta hidden" id="float-cta">
-    <div class="float-bubble">Szukasz developera? Jestem dostępny od zaraz 👇</div>
-    <a href="#contact" class="float-btn" style="position:relative;">
-      <div class="float-ping"></div>
-      ✉ Zatrudnij mnie
-    </a>
-  </div>
 
   <!-- ============================================================
        HERO
@@ -1143,6 +1106,7 @@
       <h1>
         Cześć, jestem<br/>
         <span class="h1-sub" id="hero-name">Bartosz Osiej</span>
+        
       </h1>
       <p class="hero-desc">
         Buduję szybkie, skalowalne i piękne aplikacje webowe.
@@ -1189,7 +1153,7 @@
        COUNTER STRIP — liczby mówią same za siebie
   ============================================================ -->
   <section id="counter-strip">
-    <!-- ── ZMIEŃ SWOJE LICZBY ── -->
+    
     <div class="counter-item reveal">
       <span class="counter-num"><span class="count-up" data-target="30">0</span><span class="counter-suffix">+</span></span>
       <span class="counter-label">projektów ukończonych</span>
@@ -1221,7 +1185,7 @@
     <div class="about-img-wrap reveal">
       <!--
         ── TWOJE ZDJĘCIE ──
-        Zamień ten div na: <img src="./zdjecie.jpg" alt="Jan Kowalski" style="border-radius:20px;" />
+        Zamień ten div na: <img src="./zdjecie.jpg" alt="Bartosz Osiej" style="border-radius:20px;" />
       -->
       <div class="about-photo-placeholder">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1236,30 +1200,25 @@
     <div class="about-text reveal">
       <div class="section-label">// o mnie</div>
       <h2 class="section-title">Programista<br/>z pasją do UX</h2>
-      <p>
-        Mam <strong>5 lat doświadczenia</strong> w budowaniu produktów webowych
-        — od startupów po korporacyjne platformy SaaS.
-        <!-- ── ZMIEŃ SWÓJ OPIS ── -->
+<p>
+        Mam <strong>13 projektów</strong> w budowie — od AI systems po monitoring tools.
       </p>
       <p>
         Kiedy nie koduję, eksperymentuję z open-source, gram w szachy
-        i piję za dużo kawy w trójmiejskich kawiarniach.
-        <!-- ── ZMIEŃ SWOJE HOBBY ── -->
+        i piję kawę w szczecińskich kawiarniach.
       </p>
       <div class="about-stats">
-        <!-- ── ZMIEŃ SWOJE STATYSTYKI ── -->
-        <div class="stat"><span class="stat-num">30+</span><span class="stat-label">projektów</span></div>
-        <div class="stat"><span class="stat-num">5</span><span class="stat-label">lat exp.</span></div>
-        <div class="stat"><span class="stat-num">12</span><span class="stat-label">klientów</span></div>
+        <div class="stat"><span class="stat-num">13</span><span class="stat-label">projektów</span></div>
+        <div class="stat"><span class="stat-num">5+</span><span class="stat-label">lat exp.</span></div>
+        <div class="stat"><span class="stat-num">5</span><span class="stat-label">klientów</span></div>
       </div>
       <div class="tag-row">
-        <!-- ── ZMIEŃ TAGI ── -->
         <span class="tag">React</span>
         <span class="tag">TypeScript</span>
-        <span class="tag">Node.js</span>
+        <span class="tag">Python</span>
+        <span class="tag">AI</span>
+        <span class="tag">eBPF</span>
         <span class="tag">PostgreSQL</span>
-        <span class="tag">AWS</span>
-        <span class="tag">Docker</span>
       </div>
     </div>
   </section>
@@ -1268,7 +1227,6 @@
 
   <!-- ============================================================
        PROJECTS
-       ── DODAJ / EDYTUJ PROJEKTY W TABLICY projectData PONIŻEJ ──
   ============================================================ -->
   <section id="projects">
     <div class="projects-header reveal">
@@ -1276,116 +1234,11 @@
         <div class="section-label">// projekty</div>
         <h2 class="section-title">Wybrane prace</h2>
       </div>
-      <a href="https://github.com/TWOJ_LOGIN" target="_blank" class="btn-secondary" style="white-space:nowrap">
-        <!-- ── ZMIEŃ LINK DO GITHUB ── -->
+      <a href="https://github.com/voicenotesite" target="_blank" class="btn-secondary" style="white-space:nowrap">
         GitHub →
       </a>
     </div>
-    <div class="project-grid" id="project-grid">
-      <!-- wypełniane przez JS z tablicy projectData -->
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ============================================================
-       WHY ME — powody żeby mnie zatrudnić
-       ── ZMIEŃ SWOJE ATUTY ──
-  ============================================================ -->
-  <section id="why-me">
-    <div class="reveal">
-      <div class="section-label">// dlaczego ja</div>
-      <h2 class="section-title">Co dostajesz<br/>zatrudniając mnie</h2>
-      <p class="section-sub">Nie tylko kod — dostajesz partnera, który rozumie produkt i biznes.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <span class="why-icon">⚡</span>
-        <div class="why-title">Szybka dostawa</div>
-        <p class="why-desc">Działam zwinnie — MVP w 2 tygodnie, pełny produkt bez opóźnień. Każdy sprint kończy się działającym kodem.</p>
-        <span class="why-highlight">średnio 30% szybciej niż estymacja</span>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">🔍</span>
-        <div class="why-title">Obsesja na punkcie jakości</div>
-        <p class="why-desc">Testy, code review, performance budgets. Dostarczam kod, który nie wraca jako bug po tygodniu na produkcji.</p>
-        <span class="why-highlight">zero regresji w ostatnich 12 miesiącach</span>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">💬</span>
-        <div class="why-title">Proaktywna komunikacja</div>
-        <p class="why-desc">Aktualizacje bez przypominania. Piszę do klienta zanim on napisze do mnie. Slack, email, Jira — jak wolisz.</p>
-        <span class="why-highlight">odpowiedź &lt; 2h w godzinach pracy</span>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">🏗️</span>
-        <div class="why-title">Myślenie architekturą</div>
-        <p class="why-desc">Projektuję systemy, które rosną razem z biznesem. Nie buduję na dziś — buduję na 3 lata do przodu.</p>
-        <span class="why-highlight">skalowalność od dnia pierwszego</span>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">🎨</span>
-        <div class="why-title">Oko na design</div>
-        <p class="why-desc">Potrafię zamienić figmę w piksel-perfect UI. Rozumiem UX, accessibility i Core Web Vitals.</p>
-        <span class="why-highlight">Lighthouse score 95+ na każdym projekcie</span>
-      </div>
-      <div class="why-card reveal">
-        <span class="why-icon">🚀</span>
-        <div class="why-title">Full ownership</div>
-        <p class="why-desc">Biorę odpowiedzialność za efekt końcowy, nie tylko za swoje zadania. Jeśli coś jest nie tak — naprawiam.</p>
-        <span class="why-highlight">od designu po deploy i monitoring</span>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ============================================================
-       TESTIMONIALS — opinie klientów
-       ── ZMIEŃ NA PRAWDZIWE OPINIE ──
-  ============================================================ -->
-  <section id="testimonials">
-    <div class="reveal">
-      <div class="section-label">// opinie</div>
-      <h2 class="section-title">Co mówią klienci</h2>
-      <p class="section-sub">Najlepsza rekomendacja to zadowolony klient.</p>
-    </div>
-    <div class="testi-grid" id="testi-grid">
-      <!-- wypełniane przez JS z tablicy testimonialsData -->
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ============================================================
-       SKILLS
-  ============================================================ -->
-  <section id="skills">
-    <div class="reveal">
-      <div class="section-label">// umiejętności</div>
-      <h2 class="section-title">Stack technologiczny</h2>
-      <p class="section-sub">Narzędzia i technologie, których używam na co dzień.</p>
-    </div>
-    <div class="skills-grid" id="skills-grid">
-      <!-- wypełniane przez JS z tablicy skillsData -->
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ============================================================
-       EXPERIENCE
-       ── EDYTUJ DOŚWIADCZENIE W TABLICY experienceData PONIŻEJ ──
-  ============================================================ -->
-  <section id="experience">
-    <div class="reveal">
-      <div class="section-label">// doświadczenie</div>
-      <h2 class="section-title">Historia pracy</h2>
-      <p class="section-sub">Gdzie budowałem produkty i zdobywałem wiedzę.</p>
-    </div>
-    <div class="timeline" id="timeline">
-      <!-- wypełniane przez JS -->
-    </div>
+    <div class="project-grid" id="project-grid"></div>
   </section>
 
   <div class="divider"></div>
@@ -1393,36 +1246,106 @@
   <!-- ============================================================
        CONTACT
   ============================================================ -->
-  <section id="contact">
-    <div class="contact-inner reveal">
-      <div class="section-label">// kontakt</div>
-      <h2 class="section-title">Porozmawiajmy</h2>
-      <p class="section-sub">
-        Szukasz developera do projektu lub chcesz porozmawiać o współpracy?
-        Napisz — odpiszę w ciągu 24h.
-      </p>
 
-      <div class="contact-grid">
-        <div class="contact-item">
-          <div class="contact-label">Email</div>
-          <a href="mailto:mmc29213@gmail.com" class="contact-link">mmc29213@gmail.com</a>
-        </div>
-        <div class="contact-item">
-          <div class="contact-label">LinkedIn</div>
-          <a href="https://www.linkedin.com/in/bartosz-osiej-29095a409" target="_blank" class="contact-link">linkedin.com/in/bartosz-osiej</a>
-        </div>
-        <div class="contact-item">
-          <div class="contact-label">GitHub</div>
-          <a href="https://github.com/voicenotesite" target="_blank" class="contact-link">github.com/voicenotesite</a>
-        </div>
-      </div>
+  <div class="divider"></div>
+
+  <!-- ============================================================
+       COUNTER STRIP
+  ============================================================ -->
+  <section id="counter-strip">
+    <div class="counter-item reveal">
+      <span class="counter-num"><span class="count-up" data-target="5">0</span><span class="counter-suffix">+</span></span>
+      <span class="counter-label">years experience</span>
+    </div>
+    <div class="counter-item reveal">
+      <span class="counter-num"><span class="count-up" data-target="20">0</span><span class="counter-suffix">+</span></span>
+      <span class="counter-label">projects shipped</span>
+    </div>
+    <div class="counter-item reveal">
+      <span class="counter-num"><span class="count-up" data-target="99">0</span><span class="counter-suffix">%</span></span>
+      <span class="counter-label">uptime</span>
     </div>
   </section>
 
+  <div class="divider"></div>
+
   <!-- ============================================================
-       FOOTER
+         WHY ME
   ============================================================ -->
-  <footer>
+  <section id="why-me">
+    <div class="reveal">
+      <div class="section-label">// why me</div>
+      <h2 class="section-title">AI Systems & Web Solutions</h2>
+      <p class="section-sub">Building the future, one line of code at a time.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <span class="why-icon">⚡</span>
+        <div class="why-title">AI-first approach</div>
+        <p class="why-desc">Leveraging LLMs, Whisper, and vector databases for intelligent applications.</p>
+        <span class="why-highlight">VoiceNote AI, RAG pipelines</span>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">🔍</span>
+        <div class="why-title">Quality obsession</div>
+        <p class="why-desc">Production-tested code with automated testing and monitoring.</p>
+        <span class="why-highlight">Zero bugs in production</span>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">🚀</span>
+        <div class="why-title">Full ownership</div>
+        <p class="why-desc">From architecture to deployment — I own the entire stack.</p>
+        <span class="why-highlight">End-to-end delivery</span>
+      </div>
+    </div>
+</section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+         TESTIMONIALS
+  ============================================================ -->
+  <section id="testimonials">
+    <div class="reveal">
+      <div class="section-label">// testimonials</div>
+      <h2 class="section-title">What people say</h2>
+      <p class="section-sub">Some kind words from collaborators and friends.</p>
+    </div>
+    <div class="testi-grid" id="testi-grid"></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+         SKILLS
+  ============================================================ -->
+  <section id="skills">
+    <div class="reveal">
+      <div class="section-label">// skills</div>
+      <h2 class="section-title">Technical stack</h2>
+      <p class="section-sub">Tools and technologies I use daily.</p>
+    </div>
+    <div class="skills-grid" id="skills-grid"></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+         EXPERIENCE
+  ============================================================ -->
+  <section id="experience">
+    <div class="reveal">
+      <div class="section-label">// experience</div>
+      <h2 class="section-title">Work history</h2>
+      <p class="section-sub">Where I built products and gained experience.</p>
+    </div>
+<div class="timeline" id="timeline"></div>
+  </section>
+
+  <!-- ============================================================
+     FOOTER
+  ============================================================ -->
+<footer>
     <span class="footer-copy">© 2025 Bartosz Osiej · Built with AI & code</span>
     <div class="footer-links">
       <a href="#hero">↑ Home</a>
@@ -1442,52 +1365,125 @@
      ██████████████████████████████████████████████████████████
      Każdy projekt to obiekt z polami:
        title   – nazwa projektu
+
+
        desc    – krótki opis (1–2 zdania)
        tags    – tablica stringów z technologiami
        img     – ścieżka do screenshota LUB null
        live    – URL strony / demo  LUB null
        github  – URL repo           LUB null
   ──────────────────────────────────────────────────────────── */
-  const projectData = [
+const projectData = [
     {
-      title:  "NEON ABYSS — Space Shooter",
-      desc:   "Przeglądarkowa gra kosmiczna z mechaniką roguelite, bossami i systemem power-upów. Canvas + React.",
-      tags:   ["React", "Canvas API", "Game Dev"],
-      img:    null, // → np. "./img/neon-abyss.jpg"
-      live:   "https://twoja-gra.itch.io",
-      github: "https://github.com/TWOJ_LOGIN/neon-abyss",
+      title:  "VoiceNote AI",
+      desc:   "AI-powered voice notes with Whisper transcription and semantic search.",
+      tags:   ["Python", "OpenAI", "React", "FastAPI"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/portfolio.png",
+      live:   "https://voicenotesite.github.io/WebBartosz/",
+      github: "https://github.com/voicenotesite/WebBartosz",
     },
     {
-      title:  "SaaS Dashboard",
-      desc:   "Panel analityczny z real-time charts, role-based access i eksportem do PDF.",
-      tags:   ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
+      title:  "AI Chat Proxy",
+      desc:   "OpenAI/Anthropic proxy with streaming, rate limiting, and usage tracking.",
+      tags:   ["Python", "FastAPI", "LLM"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/ai-chat-proxy.png",
+      live:   "https://ai-chat-proxy-twj4.onrender.com",
+      github: "https://github.com/voicenotesite/ai-chat-proxy",
+    },
+    {
+      title:  "Portfolio API",
+      desc:   "Unified Python backend with FastAPI, eBPF monitoring, and PostgreSQL analytics.",
+      tags:   ["Python", "FastAPI", "PostgreSQL"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/portfolio-api.png",
+      live:   "https://python-portfolio-y0z8.onrender.com",
+      github: "https://github.com/voicenotesite/portfolio-daemon",
+    },
+    {
+      title:  "CV Maker",
+      desc:   "AI-powered resume generator with LaTeX output. Create professional CVs in seconds.",
+      tags:   ["Python", "LLM", "LaTeX"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/cv-maker.png",
+      live:   null,
+      github: "https://github.com/voicenotesite/CV-MAKER",
+    },
+    {
+      title:  "Novactorio",
+      desc:   "Browser port of Factorio-like factory simulation game - TypeScript, React, Canvas.",
+      tags:   ["JavaScript", "TypeScript", "Game"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/novactorio.png",
+      live:   "https://factoryworld.mmc29213.workers.dev/",
+      github: "https://github.com/voicenotesite/Factorio-web-game",
+      special: true,
+    },
+    {
+      title:  "Task Queue",
+      desc:   "Distributed task queue with priority and retry logic. Continued as part of Portfolio API.",
+      tags:   ["Python", "Redis", "Queue"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/portfolio-api.png",
+      live:   "https://python-portfolio-y0z8.onrender.com",
+      github: "https://github.com/voicenotesite/portfolio-daemon",
+    },
+    {
+      title:  "RAG QA",
+      desc:   "Question answering over custom knowledge bases. Continued as part of Portfolio API.",
+      tags:   ["Python", "RAG", "VectorDB"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/portfolio-api.png",
+      live:   "https://python-portfolio-y0z8.onrender.com",
+      github: "https://github.com/voicenotesite/portfolio-daemon",
+    },
+    {
+      title:  "Cliniguard",
+      desc:   "Clinical decision support system - standout project. Built with AI/ML for medical diagnostics.",
+      tags:   ["Python", "AI", "Healthcare"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/cliniguard.png",
+      live:   "https://cliniguard.pl",
+      github: "https://github.com/voicenotesite/cliniguard",
+      special: true,
+    },
+    {
+      title:  "Reports",
+      desc:   "AI-Generated Documentation - 280+ PDF/MD reports for 7 projects.",
+      tags:   ["Python", "Reports"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/reports.png",
+      live:   "https://voicenotesite.github.io/reports/",
+      github: "https://github.com/voicenotesite/reports",
+    },
+    {
+      title:  "Halcyon Process Monitor",
+      desc:   "System-level eBPF monitor. Desktop/application CLI tool for real-time process and file operation monitoring.",
+      tags:   ["eBPF", "Rust", "C", "Linux", "System"],
+      img:    null,
+      nameplate: true,
+      notWeb: true,
+      live:   null,
+      github: "https://github.com/voicenotesite/halcyon-process-monitor",
+    },
+    {
+      title:  "Search Engine",
+      desc:   "Darksearch - Clearnet + darknet search engine with illegal content filter.",
+      tags:   ["Python", "Search", "Indexing"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/search-engine.png",
+      live:   "https://search-engine-l2zt.onrender.com",
+      github: "https://github.com/voicenotesite/search-engine",
+    },
+    {
+      title:  "GraphQL Blog",
+      desc:   "GraphQL blog with JWT auth, posts, comments, and interactive playground.",
+      tags:   ["GraphQL", "React", "CMS"],
       img:    null,
       live:   null,
-      github: "https://github.com/TWOJ_LOGIN/saas-dashboard",
+      github: "https://github.com/voicenotesite/graphql-blog",
     },
     {
-      title:  "E-commerce Platform",
-      desc:   "Sklep z integracją Stripe, koszykiem i panelem admina. Zoptymalizowany pod Core Web Vitals.",
-      tags:   ["React", "Node.js", "Stripe", "MongoDB"],
-      img:    null,
-      live:   "https://twoj-sklep.pl",
-      github: "https://github.com/TWOJ_LOGIN/ecommerce",
+      title:  "FastAPI URL Shortener",
+      desc:   "URL shortener with JWT auth, click tracking, and dark UI. Full REST API + React SPA.",
+      tags:   ["FastAPI", "PostgreSQL"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/link-shortener.png",
+      live:   "https://fastapiurl.onrender.com",
+      github: "https://github.com/voicenotesite/FastAPI-url",
     },
-    /* ── DODAJ KOLEJNY PROJEKT ──
-    {
-      title:  "Nazwa projektu",
-      desc:   "Opis projektu",
-      tags:   ["Tech1", "Tech2"],
-      img:    null,
-      live:   null,
-      github: null,
-    },
-    */
   ];
 
-  /* ────────────────────────────────────────────────────────────
-     UMIEJĘTNOŚCI — zmień wartości procentowe i nazwy
-  ──────────────────────────────────────────────────────────── */
   const skillsData = [
     {
       title: "Frontend",
@@ -1538,33 +1534,13 @@
   /* ────────────────────────────────────────────────────────────
      DOŚWIADCZENIE — dodaj / zmień wpisy
   ──────────────────────────────────────────────────────────── */
-  const experienceData = [
+const experienceData = [
     {
-      date:    "2023 — obecnie",
-      role:    "Senior Full-Stack Developer",
-      company: "Acme Corp · Gdańsk",
-      desc:    "Liderowanie migracją monolitu do mikroserwisów, wdrożenie CI/CD, redukcja czasu deployu o 70%.",
+      date:    "2023 — 2026",
+      role:    "Full-stack Developer & Owner",
+      company: "Ghost Development",
+      desc:    "Building and maintaining all 13 portfolio projects including AI systems, monitoring tools, and web applications.",
     },
-    {
-      date:    "2021 — 2023",
-      role:    "Frontend Developer",
-      company: "StartupXYZ · Remote",
-      desc:    "Budowa dashboardu SaaS od zera (React + TypeScript). 40 000 aktywnych użytkowników.",
-    },
-    {
-      date:    "2020 — 2021",
-      role:    "Junior Developer",
-      company: "WebAgency · Gdynia",
-      desc:    "Tworzenie stron i sklepów dla lokalnych klientów. WordPress, PHP, WooCommerce.",
-    },
-    /* ── DODAJ KOLEJNE DOŚWIADCZENIE ──
-    {
-      date:    "XXXX — XXXX",
-      role:    "Stanowisko",
-      company: "Firma · Miasto",
-      desc:    "Opis obowiązków",
-    },
-    */
   ];
 
   /* ────────────────────────────────────────────────────────────
@@ -1693,11 +1669,13 @@
   const grid = document.getElementById('project-grid');
   projectData.forEach(p => {
     const card = document.createElement('div');
-    card.className = 'project-card reveal';
+    card.className = 'project-card reveal' + (p.special ? ' special-project' : '');
     card.innerHTML = `
       <div class="project-thumb">
         ${p.img
           ? `<img class="project-thumb-img" src="${p.img}" alt="${p.title}" loading="lazy"/>`
+          : p.nameplate
+          ? `<div class="project-nameplate">${p.title}${p.notWeb ? ' <span class="not-web-label">Program nie jest Webowy</span>' : ''}</div>`
           : `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m9 9 6 6m0-6-6 6"/></svg>`
         }
       </div>
@@ -1914,6 +1892,205 @@
     }
     setTimeout(printErrLine, 300);
   })();
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||={}, Tawk_LoadStart=new Date();
+Tawk_API.embedded='chat-embedded';
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a2992e0135ef41c3064cd41/1jqpcifst';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);})();
+</script>
+<!--End of Tawk.to Script-->
+
+<div id="chat-embedded" class="chat-embedded"></div>
+
+<button id="chatBtn" class="chat-btn" onclick="toggleChat()" title="Chat">
+  <svg viewBox="0 0 24 24" width="24" height="24">
+    <path fill="#fff" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-4 4V4c0-.83.67-1.5 1.5-1.5h15c.83 0 1.5.67 1.5 1.5v12c0 .83-.67 1.5-1.5 1.5z"/>
+  </svg>
+</button>
+
+<script>
+let chatVisible = false;
+function toggleChat() {
+  try {
+    if (Tawk_API && typeof Tawk_API.toggle === 'function') {
+      Tawk_API.toggle();
+      chatVisible = !chatVisible;
+    } else {
+      const el = document.getElementById('chat-embedded');
+      const tawkFrame = el.querySelector('iframe');
+      chatVisible = !chatVisible;
+      el.classList.toggle('active', chatVisible);
+      if (tawkFrame) {
+        tawkFrame.style.display = chatVisible ? 'block' : 'none';
+      }
+    }
+  } catch(e) {
+    console.log('Chat toggle error:', e);
+  }
+}
+</script>
+
+<style>
+.chat-embedded {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 340px;
+  height: 400px;
+  background: #080C18;
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0,212,255,0.5);
+  border: 1px solid rgba(0,212,255,0.4);
+  z-index: 10000;
+  display: none;
+  overflow: hidden;
+}
+.chat-embedded.active { display: block; }
+.chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #00D4FF, #0099cc);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(0,212,255,0.5);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-btn:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(0,212,255,0.7); }
+</style>
+
+<script>
+function toggleChat() {
+  const el = document.getElementById('chat-embedded');
+  el.classList.toggle('active');
+  if (el.classList.contains('active')) Tawk_API.showWidget();
+  else Tawk_API.hideWidget();
+}
+</script>
+
+<!-- 404 INTRO ANIMATION -->
+  <script>
+  (function() {
+    const ov = document.createElement('div');
+    ov.id = 'err-overlay';
+    ov.innerHTML = `
+      <div id="err-scanlines"></div>
+      <div id="err-inner">
+        <div id="err-code">404</div>
+        <div id="err-msg">NOT FOUND</div>
+        <div id="err-terminal">
+          <div id="err-lines"></div>
+          <span class="cursor"></span>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    const style = document.createElement('style');
+    style.textContent = `
+      #err-overlay {
+        position:fixed;inset:0;z-index:9999;background:#000;
+        display:flex;align-items:center;justify-content:center;
+        font-family:'JetBrains Mono',monospace;
+        animation: err-out 0.3s ease 3.8s forwards;
+      }
+      @keyframes err-out { to { opacity:0; pointer-events:none; } }
+      #err-scanlines {
+        position:absolute;inset:0;
+        background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,80,0.03) 2px,rgba(0,255,80,0.03) 4px);
+        pointer-events:none;
+        animation:scan 8s linear infinite;
+      }
+      @keyframes scan { from{background-position:0 0} to{background-position:0 100%} }
+      #err-inner { text-align:center; position:relative; }
+      #err-code {
+        font-family:'Space Grotesk',sans-serif;
+        font-size:clamp(6rem,20vw,14rem);
+        font-weight:700;
+        color:#00FF41;
+        line-height:1;
+        letter-spacing:-0.05em;
+        text-shadow:0 0 40px #00FF41, 0 0 80px rgba(0,255,65,0.4);
+        animation:glitch 0.15s infinite alternate;
+      }
+      @keyframes glitch {
+        0%  { text-shadow:0 0 40px #00FF41, -2px 0 #FF003C, 2px 0 #00D4FF; transform:skew(-0.3deg); }
+        100%{ text-shadow:0 0 40px #00FF41,  2px 0 #FF003C,-2px 0 #00D4FF; transform:skew(0.3deg); }
+      }
+      #err-msg {
+        font-size:clamp(0.9rem,3vw,1.4rem);
+        color:#00FF41;
+        letter-spacing:0.3em;
+        margin-top:8px;
+        opacity:0.8;
+      }
+      #err-terminal {
+        margin-top:32px;
+        text-align:left;
+        display:inline-block;
+        min-width:340px;
+        font-size:0.82rem;
+        color:#00FF41;
+        line-height:2;
+      }
+    `;
+    document.head.appendChild(style);
+    setTimeout(() => { document.body.removeChild(ov); }, 4000);
+    const errLines = [
+      '> GET /admin HTTP/1.1',
+      '< HTTP/1.1 404 Not Found',
+      '> Loading portfolio.html ✓',
+    ];
+    const el = document.getElementById('err-lines');
+    let idx = 0;
+    function printErrLine() {
+      if (idx >= errLines.length) return;
+      const d = document.createElement('div');
+      el.appendChild(d);
+      let i = 0;
+      const iv = setInterval(() => {
+        d.textContent = errLines[idx].slice(0, i++);
+        if (i > errLines[idx].length) { clearInterval(iv); idx++; setTimeout(printErrLine, 220); }
+      }, 22);
+    }
+    setTimeout(printErrLine, 300);
+  })();
   </script>
-</body>
-</html>
+  <div class="divider"></div>
+
+  <!-- =============================================================
+       CONTACT </body> COMMENTS
+  ============================================================== -->
+  <section id="contact">
+    <div class="contact-container reveal">
+      <div class="section-label">// kontakt</div>
+      <h2 class="section-title">Skontaktuj się ze mną</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <a href="mailto:mmc29213@gmail.com" class="contact-link">mmc29213@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/bartosz-osiej-29095a409" target="_blank" class="contact-link">linkedin.com/in/bartosz-osiej</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">GitHub</div>
+          <a href="https://github.com/voicenotesite" target="_blank" class="contact-link">github.com/voicenotesite</a>
+        </div>
+      </div>
+    </div>
+  </section>
