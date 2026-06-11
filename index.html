@@ -589,6 +589,18 @@
       color: var(--white);
       border-color: var(--gray-2);
     }
+    #toggle-projects {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--cyan);
+    }
+    #toggle-projects:hover {
+      background: rgba(0, 212, 255, 0.1);
+      border-color: var(--cyan);
+    }
+    #toggle-icon {
+      transition: transform 0.3s ease;
+    }
 
     #contact { background: var(--bg-2); padding: 120px clamp(24px, 8vw, 120px); }
     .contact-container { max-width: 880px; margin: 0 auto; text-align: center; }
@@ -1571,6 +1583,17 @@
       </a>
     </div>
     <div class="project-grid" id="project-grid"></div>
+    
+    <div style="text-align:center; margin-top: 32px;">
+      <button id="toggle-projects" style="background:none; border:none; color:var(--cyan); font-family:var(--font-mono); font-size:0.85rem; cursor:pointer; padding: 10px 20px; border: 1px solid var(--border); border-radius: 8px;">
+        <span>Pokaż wszystkie projekty</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:8px; transition:transform 0.3s;" id="toggle-icon"><path d="M6 9l6 6 6-6"></path></svg>
+      </button>
+    </div>
+    
+    <div id="other-projects" style="display:none; margin-top: 32px;">
+      <div class="project-grid" id="other-project-grid"></div>
+    </div>
   </section>
 
   <div class="divider"></div>
@@ -1688,6 +1711,7 @@ const projectData = [
       img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/portfolio.png",
       live:   "https://voicenotesite.github.io/WebBartosz/",
       github: "https://github.com/voicenotesite/WebBartosz",
+      featured: true,
     },
     {
       title:  "AI Chat Proxy",
@@ -1696,6 +1720,17 @@ const projectData = [
       img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/ai-chat-proxy.png",
       live:   "https://ai-chat-proxy-twj4.onrender.com",
       github: "https://github.com/voicenotesite/ai-chat-proxy",
+      featured: true,
+    },
+    {
+      title:  "Cliniguard",
+      desc:   "Clinical decision support system - standout project. Built with AI/ML for medical diagnostics.",
+      tags:   ["Python", "AI", "Healthcare"],
+      img:    "https://raw.githubusercontent.com/voicenotesite/WebBartosz/master/screenshots/cliniguard.png",
+      live:   "https://cliniguard.pl",
+      github: "https://github.com/voicenotesite/cliniguard",
+      special: true,
+      featured: true,
     },
     {
       title:  "Portfolio API",
@@ -1937,9 +1972,15 @@ const experienceData = [
 
 
 
-  // Projects
+  // Projects - Featured
   const grid = document.getElementById('project-grid');
-  projectData.forEach(p => {
+  const otherGrid = document.getElementById('other-project-grid');
+  const otherProjects = document.getElementById('other-projects');
+  
+  const featured = projectData.filter(p => p.featured);
+  const others = projectData.filter(p => !p.featured);
+  
+  featured.forEach(p => {
     const card = document.createElement('div');
     card.className = 'project-card reveal' + (p.special ? ' special-project' : '');
     card.innerHTML = `
@@ -1962,6 +2003,43 @@ const experienceData = [
       </div>`;
     grid.appendChild(card);
   });
+  
+  // Other projects (hidden by default)
+  others.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'project-card reveal' + (p.special ? ' special-project' : '');
+    card.innerHTML = `
+      <div class="project-thumb">
+        ${p.img
+          ? `<img class="project-thumb-img" src="${p.img}" alt="${p.title}" loading="lazy"/>`
+          : p.nameplate
+          ? `<div class="project-nameplate">${p.title}${p.notWeb ? ' <span class="not-web-label">Program nie jest Webowy</span>' : ''}</div>`
+          : `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m9 9 6 6m0-6-6 6"/></svg>`
+        }
+      </div>
+      <div class="project-body">
+        <div class="project-tags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join('')}</div>
+        <div class="project-title">${p.title}</div>
+        <p class="project-desc">${p.desc}</p>
+        <div class="project-links">
+          ${p.live   ? `<a href="${p.live}"   target="_blank" class="plink">↗ Demo</a>` : ''}
+          ${p.github ? `<a href="${p.github}" target="_blank" class="plink ghost">GitHub</a>` : ''}
+        </div>
+      </div>`;
+    otherGrid.appendChild(card);
+  });
+  
+  // Toggle functionality
+  const toggleBtn = document.getElementById('toggle-projects');
+  const toggleIcon = document.getElementById('toggle-icon');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = otherProjects.style.display === 'none';
+      otherProjects.style.display = isHidden ? 'block' : 'none';
+      toggleBtn.querySelector('span').textContent = isHidden ? 'Schowaj projekty' : 'Pokaż wszystkie projekty';
+      toggleIcon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+    });
+  }
 
   // Skills
   const sg = document.getElementById('skills-grid');
