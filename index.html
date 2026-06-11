@@ -1651,9 +1651,9 @@
     </div>
     <div id="opinions-container" style="margin-top: 40px;"></div>
     <div style="text-align:center; margin-top: 24px;">
-      <a href="submit" class="cta-btn" style="display: inline-flex; align-items: center; gap: 8px;">
+<a href="submit" class="cta-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; border-radius: 9999px; background: linear-gradient(135deg, var(--cyan), var(--violet)); color: var(--bg); font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2); transition: all 0.2s;">
         <span>Dodaj opinię</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14m-7-7l7 7 7-7"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14m-7-7l7 7 7-7"></path></svg>
       </a>
     </div>
   </section>
@@ -2238,5 +2238,12 @@ function toggleChat() {
   </footer>
 
   <script src="/js/opinions.js"></script>
+  <script>
+    const btn = document.querySelector('a[href="submit"]');
+    if (btn) {
+      btn.addEventListener('mouseenter', () => btn.style.transform = 'translateY(-2px)');
+      btn.addEventListener('mouseleave', () => btn.style.transform = 'translateY(0)');
+    }
+  </script>
 </body>
 </html>
