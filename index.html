@@ -850,6 +850,169 @@
       line-height: 1.7;
     }
 
+    /* ============================================================
+       OPINIONS
+    ============================================================ */
+    .opinions-section {
+      padding: 80px 0;
+    }
+
+    .opinions-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--gray-2);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .opinions-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .opinions-desc {
+      color: var(--gray-1);
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+
+    .opinions-slider {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .opinions-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .opinions-slide {
+      min-width: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .opinions-slide.active {
+      opacity: 1;
+    }
+
+    .opinions-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .opinions-rating {
+      color: #FBB040;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+
+    .opinions-content {
+      font-size: 1.05rem;
+      color: var(--gray-1);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .opinions-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .opinions-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(124, 58, 237, 0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--cyan);
+      flex-shrink: 0;
+    }
+
+    .opinions-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .opinions-role {
+      font-size: 0.75rem;
+      color: var(--gray-2);
+    }
+
+    .opinions-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--cyan);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .opinions-nav:hover {
+      background: var(--cyan);
+      color: var(--dark);
+    }
+
+    .opinions-nav.prev {
+      left: -16px;
+    }
+
+    .opinions-nav.next {
+      right: -16px;
+    }
+
+    .opinions-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .opinions-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gray-3);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .opinions-dot:hover,
+    .opinions-dot.active {
+      background: var(--cyan);
+    }
+
+    .opinions-error {
+      text-align: center;
+      color: var(--gray-1);
+      padding: 40px;
+    }
+
+    /* ============================================================
        FOOTER
     ============================================================ */
     footer {
@@ -1017,67 +1180,6 @@
       margin-top: 8px;
       font-family: var(--font-mono);
       letter-spacing: 0.05em;
-    }
-
-    /* ============================================================
-       TESTIMONIALS
-    ============================================================ */
-    #testimonials {
-      background: var(--bg-2);
-    }
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-    }
-    .testi-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      transition: border-color 0.3s;
-    }
-    .testi-card:hover { border-color: rgba(124,58,237,0.4); }
-    .testi-stars {
-      display: flex;
-      gap: 4px;
-      color: #FBB040;
-      font-size: 1rem;
-    }
-    .testi-quote {
-      font-size: 0.925rem;
-      color: var(--gray-1);
-      line-height: 1.75;
-      font-style: italic;
-      flex: 1;
-    }
-    .testi-quote::before { content: '"'; color: var(--cyan); font-size: 1.5em; line-height: 0; vertical-align: -0.3em; margin-right: 2px; }
-    .testi-quote::after  { content: '"'; color: var(--cyan); font-size: 1.5em; line-height: 0; vertical-align: -0.3em; margin-left: 2px; }
-    .testi-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .testi-avatar {
-      width: 40px; height: 40px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .testi-name {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--white);
-    }
-    .testi-role {
-      font-size: 0.75rem;
-      color: var(--gray-2);
-      margin-top: 1px;
     }
 
     /* ============================================================
@@ -1508,23 +1610,11 @@
 
   <div class="divider"></div>
 
-  <!-- ============================================================
-         TESTIMONIALS
-  ============================================================ -->
-  <section id="testimonials">
-    <div class="reveal">
-      <div class="section-label">// testimonials</div>
-      <h2 class="section-title">What people say</h2>
-      <p class="section-sub">Some kind words from collaborators and friends.</p>
-    </div>
-    <div class="testi-grid" id="testi-grid"></div>
-  </section>
+<div class="divider"></div>
 
-  <div class="divider"></div>
-
-  <!-- ============================================================
-         SKILLS
-  ============================================================ -->
+   <!-- ============================================================
+          SKILLS
+   ============================================================ -->
   <section id="skills">
     <div class="reveal">
       <div class="section-label">// skills</div>
@@ -1547,6 +1637,23 @@
     </div>
 <div class="timeline" id="timeline"></div>
   </section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+         OPINIONS
+  ============================================================ -->
+  <section id="opinions" class="opinions-section">
+    <div class="container reveal">
+      <div class="section-label">// opinie</div>
+      <h2 class="section-title">Co mówią o mnie</h2>
+      <p class="section-sub">Prawdziwe recommnedacje od klientów i kolegów.</p>
+    </div>
+    <div id="opinions-container" style="margin-top: 40px;"></div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- ============================================================
        JAVASCRIPT
   ============================================================ -->
@@ -1725,8 +1832,8 @@ const projectData = [
     },
   ];
 
-  /* ────────────────────────────────────────────────────────────
-     DOŚWIADCZENIE — dodaj / zmień wpisy
+/* ────────────────────────────────────────────────────────────
+   DOŚWIADCZENIE — dodaj / zmień wpisy
   ──────────────────────────────────────────────────────────── */
 const experienceData = [
     {
@@ -1737,50 +1844,33 @@ const experienceData = [
     },
   ];
 
-  /* ────────────────────────────────────────────────────────────
-     OPINIE KLIENTÓW
-     ── ZMIEŃ NA SWOJE PRAWDZIWE TESTIMONIALE ──
+/* ────────────────────────────────────────────────────────────
+   OPINIONS
   ──────────────────────────────────────────────────────────── */
-  const testimonialsData = [
+  const opinionsData = [
     {
-      stars: 5,
-      quote: "Jan dostarczył MVP w 10 dni. Kod czysty, dokumentacja kompletna. Wrócimy do niego przy kolejnym projekcie bez zastanowienia.",
-      name: "Marek Nowak",
+      author: "Marek Nowak",
       role: "CTO · TechStartup Gdańsk",
-      initials: "MN",
-      color: "rgba(0,212,255,0.15)",
+      content: "Jan dostarczył MVP w 10 dni. Kod czysty, dokumentacja kompletna. Wrócimy do niego przy kolejnym projekcie bez zastanowienia.",
+      rating: 5
     },
     {
-      stars: 5,
-      quote: "Profesjonalizm na każdym kroku — od estymacji, przez komunikację, po deployment. Lighthouse 98/100 na starcie. Polecam wszystkim.",
-      name: "Anna Wiśniewska",
+      author: "Anna Wiśniewska",
       role: "Founder · E-commerce Brand",
-      initials: "AW",
-      color: "rgba(124,58,237,0.15)",
+      content: "Profesjonalizm na każdym kroku — od estymacji, przez komunikację, po deployment. Lighthouse 98/100 na starcie. Polecam wszystkim.",
+      rating: 5
     },
     {
-      stars: 5,
-      quote: "Pracowałam z wieloma developerami — Jan wyróżnia się tym, że myśli o produkcie, nie tylko o ticketach. Rare skill.",
-      name: "Karolina Brzezińska",
+      author: "Karolina Brzezińska",
       role: "Product Manager · SaaS Co.",
-      initials: "KB",
-      color: "rgba(0,212,255,0.12)",
-    },
+      content: "Pracowałam z wieloma developerami — Jan wyróżnia się tym, że myśli o produkcie, nie tylko o ticketach. Rare skill.",
+      rating: 5
+    }
   ];
-  /* ── DODAJ WIĘCEJ OPINII ──
-  {
-    stars: 5,
-    quote: "Treść opinii",
-    name: "Imię Nazwisko",
-    role: "Stanowisko · Firma",
-    initials: "AB",
-    color: "rgba(0,212,255,0.12)",
-  },
-  */
 
-  /* ────────────────────────────────────────────────────────────
-     MARQUEE BRANDS
-     ── ZMIEŃ NA TECHNOLOGIE / FIRMY Z TWOJEGO CV ──
+/* ────────────────────────────────────────────────────────────
+   MARQUEE BRANDS
+   ── ZMIEŃ NA TECHNOLOGIE / FIRMY Z TWOJEGO CV ──
   ──────────────────────────────────────────────────────────── */
   const brands = [
     "React", "Next.js", "TypeScript", "Node.js", "PostgreSQL",
@@ -1797,24 +1887,6 @@ const experienceData = [
     s.className = 'marquee-item';
     s.textContent = b;
     mt.appendChild(s);
-  });
-
-  /* ── Testimonials render ── */
-  const tg = document.getElementById('testi-grid');
-  testimonialsData.forEach(t => {
-    const el = document.createElement('div');
-    el.className = 'testi-card reveal';
-    el.innerHTML = `
-      <div class="testi-stars">${'★'.repeat(t.stars)}</div>
-      <p class="testi-quote">${t.quote}</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:${t.color};color:var(--cyan)">${t.initials}</div>
-        <div>
-          <div class="testi-name">${t.name}</div>
-          <div class="testi-role">${t.role}</div>
-        </div>
-      </div>`;
-    tg.appendChild(el);
   });
 
   /* ── Animated counters ── */
@@ -2158,5 +2230,7 @@ function toggleChat() {
       <a href="#hero">↑ Góra</a>
     </div>
   </footer>
+
+  <script src="/js/opinions.js"></script>
 </body>
 </html>
