@@ -82,6 +82,7 @@
       };
       
       localStorage.setItem('pendingOpinion', JSON.stringify(opinion));
+      sessionStorage.setItem('pendingOpinion', JSON.stringify(opinion));
       document.getElementById('opinion-form').style.display = 'none';
       document.getElementById('success').style.display = 'block';
       

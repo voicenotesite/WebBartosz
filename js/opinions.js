@@ -20,10 +20,21 @@ const opinionsData = [
 ];
 
 function getPendingOpinion() {
-  const pending = localStorage.getItem('pendingOpinion');
-  if (pending) {
-    localStorage.removeItem('pendingOpinion');
-    return JSON.parse(pending);
+  try {
+    let pending = localStorage.getItem('pendingOpinion');
+    console.log('localStorage pending:', pending);
+    if (pending) {
+      localStorage.removeItem('pendingOpinion');
+      return JSON.parse(pending);
+    }
+    pending = sessionStorage.getItem('pendingOpinion');
+    console.log('sessionStorage pending:', pending);
+    if (pending) {
+      sessionStorage.removeItem('pendingOpinion');
+      return JSON.parse(pending);
+    }
+  } catch (e) {
+    console.error('Error reading opinion:', e);
   }
   return null;
 }
@@ -34,9 +45,17 @@ const OpinionsSlider = {
   allOpinions: [...opinionsData],
 
   init() {
+    console.log('OpinionsSlider.init called');
     const pending = getPendingOpinion();
     if (pending) {
+      console.log('Adding pending opinion:', pending);
       this.allOpinions.unshift(pending);
+    }
+    console.log('Total opinions:', this.allOpinions.length);
+    if (!this.container) {
+      console.error('Container not found');
+      document.getElementById('opinions-error')?.style.setProperty('display', 'block');
+      return;
     }
     this.render();
     this.startAutoSlide();

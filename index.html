@@ -1673,6 +1673,9 @@
       <p class="section-sub">Prawdziwe recommnedacje od klientów i kolegów.</p>
     </div>
     <div id="opinions-container" style="margin-top: 40px;"></div>
+    <div id="opinions-error" style="display:none; text-align:center; color:var(--gray-1); margin-top: 20px;">
+      Nie udało się wczytać opinii. Spróbuj ponownie.
+    </div>
     <div style="text-align:center; margin-top: 24px;">
 <a href="submit" class="cta-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; border-radius: 9999px; background: linear-gradient(135deg, var(--cyan), var(--violet)); color: var(--bg); font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2); transition: all 0.2s;">
         <span>Dodaj opinię</span>
@@ -2317,6 +2320,7 @@ function toggleChat() {
 
   <script src="js/opinions.js"></script>
   <script>
+    console.log('Script loaded');
     const btn = document.querySelector('a[href="submit"]');
     if (btn) {
       btn.addEventListener('mouseenter', () => btn.style.transform = 'translateY(-2px)');
