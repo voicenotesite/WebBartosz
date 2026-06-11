@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dodaj opinię - Bartosz Osiej</title>
+  <link rel="stylesheet" href="/css/main.css" />
+  <style>
+    .submit-container { max-width: 600px; margin: 0 auto; padding: 80px 20px; }
+    .submit-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); }
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-family: var(--font-mono); font-size: 0.7rem; color: var(--gray-2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .form-input, .form-textarea { width: 100%; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-2); color: var(--white); font-family: var(--font-body); font-size: 1rem; }
+    .form-textarea { min-height: 120px; resize: vertical; }
+  </style>
+</head>
+<body>
+  <div class="submit-container">
+    <div class="submit-form">
+      <div class="section-label">// opinie</div>
+      <h2 class="section-title">Dodaj swoją opinię</h2>
+      <p class="section-sub">Pomóż mi poprawić stronę - podziel się swoim doświadczeniem.</p>
+      
+      <form id="opinion-form" style="margin-top: 30px;">
+        <div class="form-group">
+          <label class="form-label" for="name">Twoje imię</label>
+          <input type="text" id="name" class="form-input" placeholder="Jan Kowalski" required />
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="role">Stanowisko / Firma</label>
+          <input type="text" id="role" class="form-input" placeholder="Frontend Developer · Company" required />
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="content">Twoja opinia</label>
+          <textarea id="content" class="form-textarea" placeholder="Napisz swoją opinię..." required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="rating">Ocena</label>
+          <select id="rating" class="form-input">
+            <option value="5">5 ★ - Bardzo dobre</option>
+            <option value="4">4 ★ - Dobre</option>
+            <option value="3">3 ★ - Przeciągnięte</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="cta-btn" style="width: 100%; justify-content: center;">
+          Wyślij opinię
+        </button>
+      </form>
+      
+      <div id="success" style="display:none; text-align: center; margin-top: 20px; color: var(--cyan);">
+        Dziękuję za opinię! Została ona dodana do listy.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('opinion-form').addEventListener('submit', e => {
+      e.preventDefault();
+      
+      const opinion = {
+        author: document.getElementById('name').value,
+        role: document.getElementById('role').value,
+        content: document.getElementById('content').value,
+        rating: parseInt(document.getElementById('rating').value)
+      };
+      
+      localStorage.setItem('pendingOpinion', JSON.stringify(opinion));
+      document.getElementById('opinion-form').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+      
+      setTimeout(() => { window.location.href = '/'; }, 2000);
+    });
+  </script>
+</body>
+</html>

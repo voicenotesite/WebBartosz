@@ -19,11 +19,25 @@ const opinionsData = [
   }
 ];
 
+function getPendingOpinion() {
+  const pending = localStorage.getItem('pendingOpinion');
+  if (pending) {
+    localStorage.removeItem('pendingOpinion');
+    return JSON.parse(pending);
+  }
+  return null;
+}
+
 const OpinionsSlider = {
   current: 0,
   container: null,
+  allOpinions: [...opinionsData],
 
   init() {
+    const pending = getPendingOpinion();
+    if (pending) {
+      this.allOpinions.unshift(pending);
+    }
     this.render();
     this.startAutoSlide();
   },
@@ -44,7 +58,7 @@ const OpinionsSlider = {
   },
 
   renderSlides() {
-    return opinionsData.map((op, i) => `
+    return this.allOpinions.map((op, i) => `
       <div class="opinions-slide ${i === 0 ? 'active' : ''}" data-index="${i}">
         <div class="opinions-card">
           <div class="opinions-rating">${'★'.repeat(op.rating)}</div>
@@ -62,7 +76,7 @@ const OpinionsSlider = {
   },
 
   renderDots() {
-    return opinionsData.map((_, i) => `<button class="opinions-dot ${i === 0 ? 'active' : ''}" onclick="OpinionsSlider.goTo(${i})"></button>`).join('');
+    return this.allOpinions.map((_, i) => `<button class="opinions-dot ${i === 0 ? 'active' : ''}" onclick="OpinionsSlider.goTo(${i})"></button>`).join('');
   },
 
   goTo(index) {
@@ -72,7 +86,7 @@ const OpinionsSlider = {
     slides.forEach(s => s.classList.remove('active'));
     dots.forEach(d => d.classList.remove('active'));
     
-    this.current = (index + opinionsData.length) % opinionsData.length;
+    this.current = (index + this.allOpinions.length) % this.allOpinions.length;
     slides[this.current].classList.add('active');
     dots[this.current].classList.add('active');
   },
