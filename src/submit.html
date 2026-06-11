@@ -3,57 +3,125 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
   <title>Dodaj opinię - Bartosz Osiej</title>
-  <link rel="stylesheet" href="css/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --bg: #080C18;
+      --bg-2: #0D1221;
+      --bg-card: #111827;
+      --cyan: #00D4FF;
+      --violet: #7C3AED;
+      --white: #F0F4FF;
+      --gray-1: #94A3B8;
+      --gray-2: #475569;
+      --border: rgba(0, 212, 255, 0.12);
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--cyan); color: var(--bg); }
+    
     .submit-container { max-width: 600px; margin: 0 auto; padding: 80px 20px; }
-    .submit-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); }
+    .submit-form { 
+      background: var(--bg-card); 
+      border: 1px solid var(--border); 
+      border-radius: 20px; 
+      padding: 40px; 
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); 
+    }
+    .section-label { font-family: var(--font-mono); font-size: 0.68rem; color: var(--gray-2); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.12em; }
+    .section-title { font-size: 2rem; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+    .section-sub { color: var(--gray-1); margin-bottom: 30px; }
+    
     .form-group { margin-bottom: 20px; }
     .form-label { display: block; font-family: var(--font-mono); font-size: 0.7rem; color: var(--gray-2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
-    .form-input, .form-textarea { width: 100%; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-2); color: var(--white); font-family: var(--font-body); font-size: 1rem; }
+    .form-input, .form-textarea { 
+      width: 100%; 
+      padding: 14px 16px; 
+      border-radius: 10px; 
+      border: 1px solid var(--border); 
+      background: var(--bg-2); 
+      color: var(--white); 
+      font-family: var(--font-body); 
+      font-size: 1rem; 
+    }
+    .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--cyan); }
     .form-textarea { min-height: 120px; resize: vertical; }
+    
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: linear-gradient(135deg, var(--cyan), #0099cc);
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      width: 100%;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 212, 255, 0.5); }
+    
+    .success { color: var(--cyan); text-align: center; margin-top: 20px; display: none; }
   </style>
 </head>
 <body>
   <div class="submit-container">
-    <div class="submit-form">
+    <form id="opinion-form" class="submit-form">
       <div class="section-label">// opinie</div>
       <h2 class="section-title">Dodaj swoją opinię</h2>
       <p class="section-sub">Pomóż mi poprawić stronę - podziel się swoim doświadczeniem.</p>
       
-      <form id="opinion-form" style="margin-top: 30px;">
-        <div class="form-group">
-          <label class="form-label" for="name">Twoje imię</label>
-          <input type="text" id="name" class="form-input" placeholder="Jan Kowalski" required />
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label" for="role">Stanowisko / Firma</label>
-          <input type="text" id="role" class="form-input" placeholder="Frontend Developer · Company" required />
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label" for="content">Twoja opinia</label>
-          <textarea id="content" class="form-textarea" placeholder="Napisz swoją opinię..." required></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label" for="rating">Ocena</label>
-          <select id="rating" class="form-input">
-            <option value="5">5 ★ - Bardzo dobre</option>
-            <option value="4">4 ★ - Dobre</option>
-            <option value="3">3 ★ - Przeciągnięte</option>
-          </select>
-        </div>
-        
-        <button type="submit" class="cta-btn" style="width: 100%; justify-content: center;">
-          Wyślij opinię
-        </button>
-      </form>
-      
-      <div id="success" style="display:none; text-align: center; margin-top: 20px; color: var(--cyan);">
-        Dziękuję za opinię! Została ona dodana do listy.
+      <div class="form-group">
+        <label class="form-label" for="name">Twoje imię</label>
+        <input type="text" id="name" class="form-input" placeholder="Jan Kowalski" required />
       </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="role">Stanowisko / Firma</label>
+        <input type="text" id="role" class="form-input" placeholder="Frontend Developer · Company" required />
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="content">Twoja opinia</label>
+        <textarea id="content" class="form-textarea" placeholder="Napisz swoją opinię..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="rating">Ocena</label>
+        <select id="rating" class="form-input">
+          <option value="5">5 ★ - Bardzo dobre</option>
+          <option value="4">4 ★ - Dobre</option>
+          <option value="3">3 ★ - Przeciągnięte</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="cta-btn">Wyślij opinię</button>
+    </form>
+    
+    <div id="success" class="success">
+      Dziękuję! Opinia została dodana.
     </div>
   </div>
 
