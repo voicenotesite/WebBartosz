@@ -87,6 +87,28 @@
       
       setTimeout(() => { window.location.href = '/'; }, 2000);
     });
+
+    // Background terminal animation
+    const bgLines = [
+      'sudo ./portal', 'Loading...', 'Welcome back, USER',
+      'Status: ONLINE ✈️', 'uptime', '100 days, 0 hours, 0 minutes',
+      'whoami', 'visitor', 'cat /proc/system/status',
+      'System ready.', 'df -h', '/dev/mem: 100% legend',
+      'ps aux | grep legend', '1 x legend', 'free -h',
+      'System stable.', 'echo "terminal background"', 'Ready.'
+    ];
+    let bgIdx = 0;
+    const bgTerm = document.getElementById('bg-term');
+    function bgAnim() {
+      if (bgIdx >= bgLines.length) bgIdx = 0;
+      const l = document.createElement('div');
+      l.className = 'bg-line';
+      l.innerHTML = bgLines[bgIdx].replace(/^[a-z]/, m => '<span class="bg-prompt">$ </span><span class="t-cmd">' + m + '</span>');
+      bgTerm.appendChild(l);
+      bgIdx++;
+      setTimeout(bgAnim, Math.random() * 1200 + 800);
+    }
+    setTimeout(bgAnim, 1000);
   </script>
 </body>
 </html>
